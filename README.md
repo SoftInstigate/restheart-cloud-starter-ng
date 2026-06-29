@@ -1,6 +1,6 @@
 # RESTHeart Cloud Starter — Angular
 
-An Angular starter built on [`@restheart-cloud/kit-ng`](../restheart-cloud-kit/packages/kit-ng). Implements all RESTHeart Cloud auth and multi-tenancy flows out of the box — fork it, set your backend URL, and start building your app.
+An Angular starter built on [`@restheart-cloud/kit-ng`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit-ng). Implements all RESTHeart Cloud auth and multi-tenancy flows out of the box — fork it, point it at your RESTHeart Cloud service, and start building your app.
 
 Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth only).
 
@@ -13,29 +13,31 @@ Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth 
 - Authenticated shell with placeholder for your app content
 - SSR for public routes, CSR for the authenticated shell
 
+## Prerequisites
+
+1. **A RESTHeart Cloud service** — [create one at restheart.org/cloud](https://restheart.org/cloud). Use a **free** service for development, a **shared** service for production.
+2. Angular CLI (`npm install -g @angular/cli`)
+
 ## Setup
 
-### 1. Prerequisites
-
-- Node.js 20+
-- RESTHeart Cloud (or self-hosted RESTHeart 9.4+ with `restheart-accounts`)
-
-### 2. Install dependencies
+### 1. Fork and clone
 
 ```bash
+git clone https://github.com/your-org/restheart-cloud-starter-ng.git
+cd restheart-cloud-starter-ng
 npm install
 ```
 
-### 3. Configure the environment
+### 2. Point to your RESTHeart Cloud service
 
 ```typescript
 // src/environments/environment.ts
 export const environment = {
-  apiUrl: 'http://localhost:8080',
+  apiUrl: 'https://your-service.restheart.cloud',
 };
 ```
 
-### 4. Start
+### 3. Start
 
 ```bash
 ng serve
@@ -58,9 +60,8 @@ src/app/
 - **Style**: UnoCSS (Tailwind preset). Edit pages under `pages/auth/`.
 - **Shell**: replace `pages/shell/shell.component.ts` with your layout.
 - **Routing**: add your routes inside the authenticated shell.
-- **Backend**: set `environment.apiUrl` and adjust `app.config.ts`.
 
 ## Packages used
 
-- [`@restheart-cloud/kit`](../restheart-cloud-kit/packages/kit) — TypeScript auth logic
-- [`@restheart-cloud/kit-ng`](../restheart-cloud-kit/packages/kit-ng) — Angular adapter
+- [`@restheart-cloud/kit`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit) — TypeScript auth logic
+- [`@restheart-cloud/kit-ng`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit-ng) — Angular adapter
