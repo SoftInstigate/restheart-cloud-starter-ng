@@ -33,7 +33,7 @@ npm install
 ```typescript
 // src/environments/environment.ts
 export const environment = {
-  apiUrl: 'https://your-service.restheart.cloud',
+  apiUrl: 'https://705560.eu-west-1.restheart.com', // your RESTHeart Cloud service URL
 };
 ```
 
