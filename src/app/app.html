@@ -1,0 +1,25 @@
+@if (apiConfigured) {
+  <router-outlet />
+} @else {
+  <main class="config-page">
+    <div class="config-card">
+      <h1>Welcome to RESTHeart Cloud</h1>
+      <p>
+        Nice choice — you've just saved yourself months of backend work.
+        Signup, login, email verification, password reset, invitations,
+        and team management are already built and wired up in this starter.
+      </p>
+      <p>One last step: tell it which RESTHeart Cloud service to talk to.</p>
+      <p>
+        Set <code>apiUrl</code> in
+        <code>src/environments/environment.ts</code> (and
+        <code>environment.dev.ts</code> for local development).
+      </p>
+      <p>
+        Don't have a service yet?
+        <a href="https://cloud.restheart.com" target="_blank" rel="noopener">Create one for free</a>
+        — it takes less than a minute.
+      </p>
+    </div>
+  </main>
+}

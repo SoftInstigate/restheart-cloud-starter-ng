@@ -1,0 +1,8 @@
+<main class="shell">
+  <header class="shell-header">
+    <span>Welcome, {{ auth.user()?.profile?.firstName || auth.user()?._id }}</span>
+    <button type="button" (click)="logout()">Log out</button>
+  </header>
+
+  <p>Replace this with your app content — see <code>pages/shell/shell.ts</code>.</p>
+</main>

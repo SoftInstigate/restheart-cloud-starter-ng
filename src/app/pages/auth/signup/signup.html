@@ -1,0 +1,48 @@
+<main class="auth-page">
+  @if (submitted()) {
+    <div class="auth-card">
+      <h1>Check your email</h1>
+      <p>We sent a verification link to confirm your account. Click it to finish signing up.</p>
+    </div>
+  } @else {
+    <form class="auth-card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <h1>Create an account</h1>
+
+      @if (error()) {
+        <p class="form-error" role="alert">{{ error() }}</p>
+      }
+
+      <label for="teamName">Team name</label>
+      <input id="teamName" type="text" formControlName="teamName" autocomplete="organization" />
+      @if (form.controls.teamName.invalid && form.controls.teamName.touched) {
+        <p class="field-error">Team name is required.</p>
+      }
+
+      <label for="firstName">First name</label>
+      <input id="firstName" type="text" formControlName="firstName" autocomplete="given-name" />
+
+      <label for="lastName">Last name</label>
+      <input id="lastName" type="text" formControlName="lastName" autocomplete="family-name" />
+
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" autocomplete="email" />
+      @if (form.controls.email.invalid && form.controls.email.touched) {
+        <p class="field-error">Enter a valid email address.</p>
+      }
+
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" autocomplete="new-password" />
+      @if (form.controls.password.invalid && form.controls.password.touched) {
+        <p class="field-error">Password must be at least 8 characters.</p>
+      }
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Creating account…' : 'Create account' }}
+      </button>
+
+      <p class="auth-links">
+        Already have an account? <a routerLink="/auth/login">Log in</a>
+      </p>
+    </form>
+  }
+</main>

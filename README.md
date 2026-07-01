@@ -15,7 +15,7 @@ Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth 
 
 ## Prerequisites
 
-1. **A RESTHeart Cloud service** — [create one at restheart.org/cloud](https://restheart.org/cloud). Use a **free** service for development, a **shared** service for production.
+1. **A RESTHeart Cloud service** — [create one at cloud.restheart.com](https://cloud.restheart.com). Use a **free** service for development, a **shared** service (or higher) for production.
 2. Angular CLI (`npm install -g @angular/cli`)
 
 ## Setup
@@ -30,12 +30,23 @@ npm install
 
 ### 2. Point to your RESTHeart Cloud service
 
+Two environments, two services:
+
 ```typescript
-// src/environments/environment.ts
+// src/environments/environment.dev.ts — used by `ng serve`
 export const environment = {
-  apiUrl: 'https://705560.eu-west-1.restheart.com', // your RESTHeart Cloud service URL
+  apiUrl: 'https://<srvid>.eu-central-1-free-1.restheart.com', // a free service
 };
 ```
+
+```typescript
+// src/environments/environment.ts — used by `ng build`
+export const environment = {
+  apiUrl: 'https://<srvid>.eu-central-1-shared-1.restheart.com', // a shared (or higher) service
+};
+```
+
+If `apiUrl` is left empty, the app shows a "configure your service" screen instead of starting.
 
 ### 3. Start
 
@@ -57,7 +68,7 @@ src/app/
 
 ## Customization
 
-- **Style**: UnoCSS (Tailwind preset). Edit pages under `pages/auth/`.
+- **Style**: plain CSS, no framework. This is a starter, not an opinionated app — we don't want to lock you into a UI component library (Material, Spartan, PrimeNG...) or a utility-CSS framework (Tailwind, UnoCSS...). The auth pages use plain HTML and hand-written CSS with a small set of custom properties for theming (`src/styles.css`), so you can restyle freely or swap in your framework of choice without fighting existing markup or class conventions. `@restheart-cloud/kit-ng` itself ships no UI at all — just services, guards, and an interceptor — so the pages under `pages/auth/` are the only place styling choices live. Edit them directly under `pages/auth/`.
 - **Shell**: replace `pages/shell/shell.component.ts` with your layout.
 - **Routing**: add your routes inside the authenticated shell.
 
