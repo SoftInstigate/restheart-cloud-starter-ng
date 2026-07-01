@@ -1,9 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import { environment } from '../../../../environments/environment';
 import { OauthButtons } from '../oauth-buttons/oauth-buttons';
+
+const ERROR_MESSAGES: Record<string, string> = {
+  invalid_token: 'This link is invalid or has expired.',
+};
 
 @Component({
   selector: 'app-login',
@@ -15,6 +19,7 @@ export class Login {
   private readonly fb = inject(FormBuilder);
   private readonly auth = inject(RhAuthService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   protected readonly features = environment.features;
 
@@ -24,7 +29,11 @@ export class Login {
   });
 
   readonly loading = signal(false);
-  readonly error = signal<string | null>(null);
+  // The backend redirects here with ?error=... when a link it handled
+  // directly (e.g. email verification) fails — surface that up front.
+  readonly error = signal<string | null>(
+    ERROR_MESSAGES[this.route.snapshot.queryParamMap.get('error') ?? ''] ?? null
+  );
 
   submit(): void {
     if (this.form.invalid) {

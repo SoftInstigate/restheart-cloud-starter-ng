@@ -1,0 +1,11 @@
+<main class="auth-page">
+  <div class="auth-card">
+    @if (missingParams) {
+      <h1>Invalid link</h1>
+      <p>This verification link is missing required information.</p>
+      <p class="auth-links"><a routerLink="/auth/login">Back to log in</a></p>
+    } @else {
+      <h1>Verifying your email…</h1>
+    }
+  </div>
+</main>

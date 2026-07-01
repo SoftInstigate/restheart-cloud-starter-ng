@@ -21,12 +21,6 @@
 
       @if (features.emailRegistration) {
         <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-          <label for="teamName">Team name</label>
-          <input id="teamName" type="text" formControlName="teamName" autocomplete="organization" />
-          @if (form.controls.teamName.invalid && form.controls.teamName.touched) {
-            <p class="field-error">Team name is required.</p>
-          }
-
           <label for="firstName">First name</label>
           <input id="firstName" type="text" formControlName="firstName" autocomplete="given-name" />
 

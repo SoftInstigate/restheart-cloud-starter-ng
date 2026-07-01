@@ -15,9 +15,9 @@
   --color-primary: #f8a839;
   --color-primary-hover: #d38f30;
   --color-on-primary: #1a1d23;
-  /* Darker, accessible variant of --color-primary for text links on white
-     (the bright brand yellow fails contrast for text — fine as a button fill). */
-  --color-link: #8a5a1f;
+  /* RESTHeart Cloud's teal-green accent, darkened for readable text-link
+     contrast on white (also part of the same brand palette). */
+  --color-link: #2c7f61;
   --color-error: #b91c1c;
   --color-error-bg: #fef2f2;
 
@@ -43,8 +43,12 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  /* Falls back to plain "center" on browsers that don't support "safe" —
+     prevents the top of a tall form from being pushed off-screen when it
+     doesn't fit the viewport. */
+  align-items: safe center;
   justify-content: center;
-  padding: var(--spacing);
+  padding: var(--spacing) var(--spacing) calc(var(--spacing) * 2);
 }
 
 .auth-card {
@@ -158,6 +162,30 @@ body {
 
 .auth-links a:hover {
   text-decoration: underline;
+}
+
+/* Tighten spacing on small screens so longer forms (e.g. signup) need
+   less scrolling to reach the submit button. */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: calc(var(--spacing) * 1.25);
+  }
+
+  .auth-card label {
+    margin-top: 0.625rem;
+  }
+
+  .divider {
+    margin: 0.625rem 0;
+  }
+
+  .auth-card button {
+    margin-top: var(--spacing);
+  }
+
+  .auth-card .auth-links {
+    margin-top: var(--spacing);
+  }
 }
 
 /* Shown instead of the app when environment.apiUrl is not set */

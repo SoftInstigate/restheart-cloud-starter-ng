@@ -18,7 +18,6 @@ export class Signup {
   protected readonly features = environment.features;
 
   readonly form = this.fb.nonNullable.group({
-    teamName: ['', [Validators.required]],
     firstName: [''],
     lastName: [''],
     email: ['', [Validators.required, Validators.email]],
@@ -37,8 +36,16 @@ export class Signup {
 
     this.loading.set(true);
     this.error.set(null);
+    const { firstName, lastName, email, password } = this.form.getRawValue();
 
-    this.auth.register(this.form.getRawValue()).subscribe({
+    // restheart-accounts requires a teamName, but there's no dedicated
+    // "rename team" endpoint — so rather than ask for a name upfront
+    // (one more field, more friction), generate a reasonable default.
+    // Users can still change it later via a direct API call if you wire
+    // that up in your app.
+    const teamName = firstName ? `${firstName}'s Team` : `${email.split('@')[0]}'s Team`;
+
+    this.auth.register({ teamName, firstName, lastName, email, password }).subscribe({
       next: () => this.submitted.set(true),
       error: (err: unknown) => {
         this.loading.set(false);

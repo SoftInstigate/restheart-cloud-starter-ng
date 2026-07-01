@@ -9,6 +9,17 @@ const signupRoutes: ServerRoute[] = emailRegistration || oauthLogin
   ? [{ path: 'auth/signup', renderMode: RenderMode.Prerender }]
   : [];
 
+const verifyRoutes: ServerRoute[] = emailRegistration
+  ? [
+      {
+        // Calls verify() (live API call) with the token from query params
+        // on init, and can auto-login — cannot be prerendered.
+        path: 'auth/verify',
+        renderMode: RenderMode.Client,
+      },
+    ]
+  : [];
+
 const passwordResetRoutes: ServerRoute[] = passwordReset
   ? [
       { path: 'auth/forgot-password', renderMode: RenderMode.Prerender },
@@ -33,6 +44,7 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
   },
   ...signupRoutes,
+  ...verifyRoutes,
   ...passwordResetRoutes,
   ...invitationRoutes,
   {

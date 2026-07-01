@@ -19,6 +19,15 @@ export const routes: Routes = [
         },
       ]
     : []),
+  ...(emailRegistration
+    ? [
+        {
+          path: 'auth/verify',
+          canActivate: [publicGuard],
+          loadComponent: () => import('./pages/auth/verify/verify').then(m => m.Verify),
+        },
+      ]
+    : []),
   ...(passwordReset
     ? [
         {
