@@ -4,5 +4,59 @@
     <button type="button" (click)="logout()">Log out</button>
   </header>
 
+  @if (features.teamInvitations) {
+    @if (auth.hasMultipleTeams()) {
+      <section class="team-switcher">
+        <h2>Your teams</h2>
+        <ul>
+          @for (team of auth.teams(); track team.id.$oid) {
+            <li>
+              <button
+                type="button"
+                class="team-option"
+                [class.active]="team.active"
+                [disabled]="team.active"
+                (click)="switchTeam(team)"
+              >
+                {{ team.name || team.id.$oid }} ({{ team.role }})
+                @if (team.active) {
+                  — current
+                }
+              </button>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
+    @if (auth.teams().find(t => t.active)?.role === 'owner') {
+      <section class="invite-member">
+        <h2>Invite a team member</h2>
+
+        @if (inviteSent()) {
+          <p>Invitation sent.</p>
+        }
+        @if (inviteError()) {
+          <p class="form-error" role="alert">{{ inviteError() }}</p>
+        }
+
+        <form [formGroup]="inviteForm" (ngSubmit)="sendInvite()" novalidate>
+          <label for="invite-email">Email</label>
+          <input id="invite-email" type="email" formControlName="email" />
+
+          <label for="invite-role">Role</label>
+          <select id="invite-role" formControlName="role">
+            <option value="member">Member</option>
+            <option value="owner">Owner</option>
+          </select>
+
+          <button type="submit" [disabled]="inviteSending()">
+            {{ inviteSending() ? 'Sending…' : 'Send invite' }}
+          </button>
+        </form>
+      </section>
+    }
+  }
+
   <p>Replace this with your app content — see <code>pages/shell/shell.ts</code>.</p>
 </main>

@@ -1,14 +1,40 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
+import { environment } from '../environments/environment';
+
+// Must mirror the conditional routes in app.routes.ts — every entry here
+// has to match an actual client route, or SSR route extraction fails.
+const { emailRegistration, passwordReset, oauthLogin, teamInvitations } = environment.features;
+
+const signupRoutes: ServerRoute[] = emailRegistration || oauthLogin
+  ? [{ path: 'auth/signup', renderMode: RenderMode.Prerender }]
+  : [];
+
+const passwordResetRoutes: ServerRoute[] = passwordReset
+  ? [
+      { path: 'auth/forgot-password', renderMode: RenderMode.Prerender },
+      { path: 'auth/reset-password', renderMode: RenderMode.Prerender },
+    ]
+  : [];
+
+const invitationRoutes: ServerRoute[] = teamInvitations
+  ? [
+      {
+        // Reads the invitation (live API call) and the current session on
+        // init — cannot be prerendered or server-rendered on request.
+        path: 'invitations/accept',
+        renderMode: RenderMode.Client,
+      },
+    ]
+  : [];
 
 export const serverRoutes: ServerRoute[] = [
   {
     path: 'auth/login',
     renderMode: RenderMode.Prerender,
   },
-  {
-    path: 'auth/signup',
-    renderMode: RenderMode.Prerender,
-  },
+  ...signupRoutes,
+  ...passwordResetRoutes,
+  ...invitationRoutes,
   {
     // Authenticated shell — needs the live session cookie, cannot be
     // prerendered or server-rendered on request.

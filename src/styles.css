@@ -12,8 +12,12 @@
   --color-border: #dde1e6;
   --color-text: #1a1d23;
   --color-text-muted: #6b7280;
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
+  --color-primary: #f8a839;
+  --color-primary-hover: #d38f30;
+  --color-on-primary: #1a1d23;
+  /* Darker, accessible variant of --color-primary for text links on white
+     (the bright brand yellow fails contrast for text — fine as a button fill). */
+  --color-link: #8a5a1f;
   --color-error: #b91c1c;
   --color-error-bg: #fef2f2;
 
@@ -64,13 +68,33 @@ body {
   margin: 0;
 }
 
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: var(--spacing) 0;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
 .auth-card label {
+  display: block;
   font-size: 0.875rem;
   font-weight: 500;
   margin-top: var(--spacing);
 }
 
 .auth-card input {
+  display: block;
+  width: 100%;
   font: inherit;
   padding: 0.5rem 0.625rem;
   margin-top: 0.25rem;
@@ -93,7 +117,7 @@ body {
   border: none;
   border-radius: var(--radius);
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   cursor: pointer;
 }
 
@@ -120,15 +144,15 @@ body {
   margin: 0.25rem 0 0;
 }
 
-.auth-links {
-  margin-top: var(--spacing);
+.auth-card .auth-links {
+  margin-top: calc(var(--spacing) * 1.5);
   font-size: 0.875rem;
   color: var(--color-text-muted);
   text-align: center;
 }
 
 .auth-links a {
-  color: var(--color-primary);
+  color: var(--color-link);
   text-decoration: none;
 }
 
@@ -172,5 +196,5 @@ body {
 }
 
 .config-card a {
-  color: var(--color-primary);
+  color: var(--color-link);
 }

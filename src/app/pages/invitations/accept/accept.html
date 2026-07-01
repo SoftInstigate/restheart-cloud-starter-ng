@@ -1,0 +1,64 @@
+<main class="auth-page">
+  @if (missingParams) {
+    <div class="auth-card">
+      <h1>Invalid invitation link</h1>
+      <p>This link is missing required information.</p>
+    </div>
+  } @else if (loading()) {
+    <div class="auth-card">
+      <p>Loading invitation…</p>
+    </div>
+  } @else if (done()) {
+    <div class="auth-card">
+      <h1>You're in</h1>
+      <p>Redirecting…</p>
+    </div>
+  } @else if (invitation(); as inv) {
+    @if (inv.isNewUser) {
+      <form class="auth-card" [formGroup]="newUserForm" (ngSubmit)="submitNewUser()" novalidate>
+        <h1>Join {{ inv.teamName }}</h1>
+        <p>Set a password to activate your account.</p>
+
+        @if (error()) {
+          <p class="form-error" role="alert">{{ error() }}</p>
+        }
+
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" autocomplete="new-password" />
+        @if (newUserForm.controls.password.invalid && newUserForm.controls.password.touched) {
+          <p class="field-error">Password must be at least 8 characters.</p>
+        }
+
+        <button type="submit">Join team</button>
+      </form>
+    } @else if (auth.isAuthenticated()) {
+      <div class="auth-card">
+        <h1>Join {{ inv.teamName }}</h1>
+        <p>You're signed in as {{ email }}.</p>
+        @if (error()) {
+          <p class="form-error" role="alert">{{ error() }}</p>
+        }
+        <button type="button" (click)="acceptForLoggedInUser()">Join team</button>
+      </div>
+    } @else {
+      <form class="auth-card" [formGroup]="loginForm" (ngSubmit)="submitLoginAndAccept()" novalidate>
+        <h1>Log in to join {{ inv.teamName }}</h1>
+        <p>{{ email }}</p>
+
+        @if (error()) {
+          <p class="form-error" role="alert">{{ error() }}</p>
+        }
+
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" autocomplete="current-password" />
+
+        <button type="submit">Log in and join</button>
+      </form>
+    }
+  } @else {
+    <div class="auth-card">
+      <h1>Invitation problem</h1>
+      <p class="form-error" role="alert">{{ error() }}</p>
+    </div>
+  }
+</main>

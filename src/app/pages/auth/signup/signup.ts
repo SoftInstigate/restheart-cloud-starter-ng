@@ -2,16 +2,20 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
+import { environment } from '../../../../environments/environment';
+import { OauthButtons } from '../oauth-buttons/oauth-buttons';
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, OauthButtons],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
 export class Signup {
   private readonly fb = inject(FormBuilder);
   private readonly auth = inject(RhAuthService);
+
+  protected readonly features = environment.features;
 
   readonly form = this.fb.nonNullable.group({
     teamName: ['', [Validators.required]],
