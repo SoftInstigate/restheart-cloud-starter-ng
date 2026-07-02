@@ -12,8 +12,8 @@ const signupRoutes: ServerRoute[] = emailRegistration || oauthLogin
 const verifyRoutes: ServerRoute[] = emailRegistration
   ? [
       {
-        // Calls verify() (live API call) with the token from query params
-        // on init, and can auto-login — cannot be prerendered.
+        // Calls verify() via API, then shows result — cannot be prerendered.
+        
         path: 'auth/verify',
         renderMode: RenderMode.Client,
       },
@@ -48,7 +48,7 @@ export const serverRoutes: ServerRoute[] = [
   ...passwordResetRoutes,
   ...invitationRoutes,
   {
-    // Authenticated shell — needs the live session cookie, cannot be
+    // Authenticated shell — uses in-memory token, cannot be
     // prerendered or server-rendered on request.
     path: '',
     renderMode: RenderMode.Client,

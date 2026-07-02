@@ -4,6 +4,14 @@
       <h1>Invalid link</h1>
       <p>This verification link is missing required information.</p>
       <p class="auth-links"><a routerLink="/auth/login">Back to log in</a></p>
+    } @else if (error) {
+      <h1>Verification failed</h1>
+      <p>The verification link is invalid or has expired.</p>
+      <p class="auth-links"><a routerLink="/auth/login">Back to log in</a></p>
+    } @else if (verified) {
+      <h1>Email verified!</h1>
+      <p>Your email has been verified. You can now log in.</p>
+      <p class="auth-links"><a routerLink="/auth/login">Go to log in</a></p>
     } @else {
       <h1>Verifying your email…</h1>
     }
