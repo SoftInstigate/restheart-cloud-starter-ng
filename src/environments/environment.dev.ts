@@ -12,7 +12,7 @@ export const environment = {
     emailRegistration: true, // Registration & Verification
     passwordReset: true, // Password Reset
     oauthLogin: true, // OAuth Social Login
-    oauthProviders: ['google', 'github'] as const, // must match what's configured server-side
+    oauthProviders: ['google'] as const, // must match what's configured server-side
     teamInvitations: true, // Team Invitations
   },
 };
