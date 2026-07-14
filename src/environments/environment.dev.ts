@@ -2,7 +2,7 @@ export const environment = {
   // Local development — point this at a free RESTHeart Cloud service,
   // e.g. 'https://<srvid>.eu-central-1-free-1.restheart.com'. Leave empty
   // to show the "configure your service" screen instead of the app.
-  apiUrl: 'https://acac36.eu-central-1-free-1.restheart.com',
+  apiUrl: '',
 
   // Match these to the "Features" toggles of your RESTHeart Cloud service
   // (Your Service → Sign-up Mgmt → Features). A feature that's off on the
