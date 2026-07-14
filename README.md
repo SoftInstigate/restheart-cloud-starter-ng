@@ -30,23 +30,14 @@ npm install
 
 ### 2. Point to your RESTHeart Cloud service
 
-Two environments, two services:
+After cloning, tell git to ignore local changes to the dev environment file:
 
-```typescript
-// src/environments/environment.dev.ts — used by `ng serve`
-export const environment = {
-  apiUrl: 'https://<srvid>.eu-central-1-free-1.restheart.com', // a free service
-};
+```bash
+git update-index --assume-unchanged src/environments/environment.dev.ts
 ```
 
-```typescript
-// src/environments/environment.ts — used by `ng build`
-export const environment = {
-  apiUrl: 'https://<srvid>.eu-central-1-shared-1.restheart.com', // a shared (or higher) service
-};
-```
+Then edit `src/environments/environment.dev.ts` and set `apiUrl` to your free RESTHeart Cloud service URL. Your changes will not show up in `git status`.
 
-If `apiUrl` is left empty, the app shows a "configure your service" screen instead of starting.
 
 ### 3. Start
 
