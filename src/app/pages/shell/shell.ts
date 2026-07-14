@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, PLATFORM_ID, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
@@ -26,6 +27,20 @@ export class Shell {
   protected readonly inviteSending = signal(false);
   protected readonly inviteError = signal<string | null>(null);
   protected readonly inviteSent = signal(false);
+
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+  /** True when the user just verified their email — shows a welcome banner. */
+  protected readonly justVerified = signal(
+    this.isBrowser && sessionStorage.getItem('rh_just_verified') === '1'
+  );
+
+  dismissWelcome(): void {
+    if (this.isBrowser) {
+      sessionStorage.removeItem('rh_just_verified');
+    }
+    this.justVerified.set(false);
+  }
 
   logout(): void {
     this.auth.logout().subscribe(() => this.router.navigateByUrl('/auth/login'));

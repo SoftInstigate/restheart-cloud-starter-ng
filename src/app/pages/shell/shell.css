@@ -72,6 +72,44 @@
   background: var(--color-error-bg);
 }
 
+/* ── Welcome banner (post-verification) ─────────────────────────────────── */
+
+.welcome-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  background: color-mix(in srgb, var(--color-link) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-link) 25%, transparent);
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+.welcome-banner p {
+  margin: 0;
+}
+
+.btn-dismiss {
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius);
+}
+
+.btn-dismiss:hover {
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-text) 8%, transparent);
+}
+
 /* ── Hero ───────────────────────────────────────────────────────────────── */
 
 .hero {

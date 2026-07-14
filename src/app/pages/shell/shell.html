@@ -19,6 +19,13 @@
     </button>
   </header>
 
+  @if (justVerified()) {
+    <div class="welcome-banner">
+      <p>🎉 Your email has been verified — welcome aboard!</p>
+      <button type="button" class="btn-dismiss" (click)="dismissWelcome()">✕</button>
+    </div>
+  }
+
   <section class="hero">
     <img src="https://placekittens.com/300/300" alt="Cute kittens" class="hero-img" />
   </section>
