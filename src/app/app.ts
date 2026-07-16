@@ -1,7 +1,7 @@
 import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { isValidApiBaseUrl, setToken, scheduleRefresh } from '@restheart-cloud/kit';
+import { isValidApiBaseUrl, setToken, scheduleRefresh } from '@restheart-cloud/kit-ng';
 import { environment } from '../environments/environment';
 import { justSignedUp } from './just-signed-up';
 

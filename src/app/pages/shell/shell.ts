@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
-import type { TeamMembership } from '@restheart-cloud/kit';
+import type { TeamMembership } from '@restheart-cloud/kit-ng';
 import { environment } from '../../../environments/environment';
 import { justSignedUp as justSignedUpFlag } from '../../just-signed-up';
 

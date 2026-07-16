@@ -1,7 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideRhAuth } from '@restheart-cloud/kit-ng';
-import { isValidApiBaseUrl } from '@restheart-cloud/kit';
+import { provideRhAuth, isValidApiBaseUrl } from '@restheart-cloud/kit-ng';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
