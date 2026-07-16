@@ -1,10 +1,10 @@
-import { Component, PLATFORM_ID, inject, signal } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import type { TeamMembership } from '@restheart-cloud/kit';
 import { environment } from '../../../environments/environment';
+import { justSignedUp as justSignedUpFlag } from '../../just-signed-up';
 
 @Component({
   selector: 'app-shell',
@@ -28,17 +28,16 @@ export class Shell {
   protected readonly inviteError = signal<string | null>(null);
   protected readonly inviteSent = signal(false);
 
-  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  /** True on the one load right after a fresh signup — shows a welcome banner. */
+  protected readonly justVerified = signal(justSignedUpFlag());
 
-  /** True when the user just verified their email — shows a welcome banner. */
-  protected readonly justVerified = signal(
-    this.isBrowser && sessionStorage.getItem('rh_just_verified') === '1'
-  );
+  constructor() {
+    // Consume the shared one-shot flag now so it can't leak into a later navigation
+    // back to the shell (e.g. after switching teams) or a future login.
+    justSignedUpFlag.set(false);
+  }
 
   dismissWelcome(): void {
-    if (this.isBrowser) {
-      sessionStorage.removeItem('rh_just_verified');
-    }
     this.justVerified.set(false);
   }
 

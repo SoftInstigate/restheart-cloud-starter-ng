@@ -23,11 +23,6 @@ export class Verify {
 
   constructor() {
     if (!this.missingParams && !this.error && this.isBrowser) {
-      // Flag so the Shell can show a "welcome" banner after email verification.
-      // Must be set *before* the redirect, since sessionStorage survives
-      // a full-page navigation but not a new tab / session.
-      sessionStorage.setItem('rh_just_verified', '1');
-
       // Build the verify URL with fragment delivery (Bearer token mode).
       // The backend verifies the token, then 302-redirects the browser
       // back to the frontend with #access_token=... in the URL hash.

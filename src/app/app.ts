@@ -3,24 +3,38 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { isValidApiBaseUrl, setToken, scheduleRefresh } from '@restheart-cloud/kit';
 import { environment } from '../environments/environment';
+import { justSignedUp } from './just-signed-up';
 
 /**
  * Read a URL fragment like #access_token=...&token_type=Bearer&expires_in=900
- * and store the token if found. Clears the fragment from the URL bar.
+ * and store the token if found, and a `?flow=signup` query param — present only on the
+ * one redirect that follows a fresh signup (email verification or OAuth) — used as a
+ * one-shot signal for the "welcome" banner, no client-side guessing needed.
+ * Clears both from the URL bar.
  */
 function consumeFragmentToken(): void {
   const hash = window.location.hash;
-  if (!hash) return;
-
-  const params = new URLSearchParams(hash.substring(1));
-  const accessToken = params.get('access_token');
-  if (accessToken) {
-    setToken(accessToken);
-    scheduleRefresh({ apiBaseUrl: environment.apiUrl });
+  if (hash) {
+    const params = new URLSearchParams(hash.substring(1));
+    const accessToken = params.get('access_token');
+    if (accessToken) {
+      setToken(accessToken);
+      scheduleRefresh({ apiBaseUrl: environment.apiUrl });
+    }
   }
 
-  // Clear the fragment so the token doesn't linger in browser history
-  history.replaceState(null, '', window.location.pathname + window.location.search);
+  const search = new URLSearchParams(window.location.search);
+  const isSignup = search.get('flow') === 'signup';
+  if (isSignup) {
+    justSignedUp.set(true);
+    search.delete('flow');
+  }
+
+  if (!hash && !isSignup) return;
+
+  // Clear the fragment and the one-shot `flow` marker so neither lingers in browser history
+  const query = search.toString();
+  history.replaceState(null, '', window.location.pathname + (query ? `?${query}` : ''));
 }
 
 @Component({
