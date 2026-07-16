@@ -1,8 +1,7 @@
 import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { buildVerifyUrl } from '@restheart-cloud/kit';
-import { environment } from '../../../../environments/environment';
+import { RhAuthService } from '@restheart-cloud/kit-ng';
 
 @Component({
   selector: 'app-verify',
@@ -12,6 +11,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class Verify {
   private readonly route = inject(ActivatedRoute);
+  private readonly auth = inject(RhAuthService);
 
   readonly email = this.route.snapshot.queryParamMap.get('email') ?? '';
   readonly token = this.route.snapshot.queryParamMap.get('token') ?? '';
@@ -31,11 +31,9 @@ export class Verify {
       // Build the verify URL with fragment delivery (Bearer token mode).
       // The backend verifies the token, then 302-redirects the browser
       // back to the frontend with #access_token=... in the URL hash.
-      window.location.href = buildVerifyUrl(
-        { apiBaseUrl: environment.apiUrl },
-        this.email,
-        this.token
-      );
+      this.auth.verify(this.email, this.token).subscribe(url => {
+        window.location.href = url;
+      });
     }
   }
 }
