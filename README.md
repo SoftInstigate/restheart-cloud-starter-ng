@@ -8,7 +8,7 @@ Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth 
 
 - Signup, login, logout — email/password and Google/GitHub OAuth
 - Email verification, password reset
-- Team invitations — new user flow (`/auth/activate`) and existing user flow (`/invitations/accept`)
+- Team invitations — one page (`/invitations/accept`) branching into a new-user "set password" form (calls `PATCH /auth/activate`) or an existing-user "log in and accept" form
 - Team switcher — shown only when the user belongs to more than one team
 - Authenticated shell with placeholder for your app content
 - SSR for public routes, CSR for the authenticated shell
@@ -50,8 +50,10 @@ ng serve
 ```
 src/app/
   pages/
-    auth/        ← login, signup, verify, activate, reset-password,
-    │               forgot-password, accept-invite
+    auth/        ← login, signup, verify, reset-password, forgot-password
+    invitations/ ← accept — one page, branches into the new-user
+    │               "set password" form or the existing-user "log in
+    │               and accept" form depending on the invitation
     shell/       ← authenticated shell (replace with your content)
   app.routes.ts
   app.config.ts  ← provideRhAuth() configured here
@@ -95,15 +97,15 @@ directly in that same request's response.
 - [ ] Network tab: `PATCH /auth/reset-password?delivery=body` returns `access_token` directly — no follow-up `POST /token`
 - [ ] Old password stops working after reset; new password works
 
-### Team invitations — new user (`/auth/activate`)
+### Team invitations — new user (`/invitations/accept`, invitee has no account yet)
 
 - [ ] Inviting a new email sends an invitation
-- [ ] Invite link shows the "set password" form with the correct org name/role
+- [ ] Invite link (`/invitations/accept?email=...&token=...`) shows the "set password" form with the correct org name/role — no separate `/auth/activate` page, it's the same route as the existing-user flow below
 - [ ] Setting the password activates the account and logs the user straight in
 - [ ] Network tab: `PATCH /auth/activate?delivery=body` returns `access_token` directly — no follow-up `POST /token`
 - [ ] An invalid/expired invite link shows the correct error
 
-### Team invitations — existing user (`/invitations/accept`)
+### Team invitations — existing user (`/invitations/accept`, invitee already has an account)
 
 - [ ] Inviting an already-registered email sends an invite
 - [ ] Accepting while logged out prompts login first, then accepts
