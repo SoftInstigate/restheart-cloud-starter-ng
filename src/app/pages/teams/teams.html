@@ -1,0 +1,24 @@
+<section class="card">
+  <div class="card-header">
+    <h2>Your teams</h2>
+    <a routerLink="/teams/new" class="btn-secondary">+ New team</a>
+  </div>
+
+  <ul class="team-list">
+    @for (team of auth.teams(); track team.id.$oid) {
+      <li>
+        <div class="team-row" [class.active]="team.active">
+          <a [routerLink]="['/teams', team.id.$oid]" class="team-link">
+            <span class="team-name">{{ team.name || team.id.$oid }}</span>
+            <span class="team-role">{{ team.role }}</span>
+          </a>
+          @if (team.active) {
+            <span class="team-badge">current</span>
+          } @else {
+            <button type="button" class="btn-switch" (click)="switchTeam(team)">Switch</button>
+          }
+        </div>
+      </li>
+    }
+  </ul>
+</section>

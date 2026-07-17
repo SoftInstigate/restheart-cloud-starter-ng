@@ -1,40 +1,56 @@
-import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, signal, ElementRef, HostListener } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
-import type { TeamMembership } from '@restheart-cloud/kit-ng';
-import { environment } from '../../../environments/environment';
 import { justSignedUp as justSignedUpFlag } from '../../just-signed-up';
 
 @Component({
   selector: 'app-shell',
-  imports: [ReactiveFormsModule],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './shell.html',
   styleUrl: './shell.css',
 })
 export class Shell {
   private readonly router = inject(Router);
-  private readonly fb = inject(FormBuilder);
+  private readonly el = inject(ElementRef);
   protected readonly auth = inject(RhAuthService);
 
-  protected readonly features = environment.features;
-
-  protected readonly inviteForm = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
-    role: ['member' as 'owner' | 'member', [Validators.required]],
-  });
-
-  protected readonly inviteSending = signal(false);
-  protected readonly inviteError = signal<string | null>(null);
-  protected readonly inviteSent = signal(false);
-
-  /** True on the one load right after a fresh signup — shows a welcome banner. */
   protected readonly justVerified = signal(justSignedUpFlag());
+  protected readonly menuOpen = signal(false);
 
   constructor() {
-    // Consume the shared one-shot flag now so it can't leak into a later navigation
-    // back to the shell (e.g. after switching teams) or a future login.
     justSignedUpFlag.set(false);
+  }
+
+  protected initials(): string {
+    const user = this.auth.user();
+    if (!user) return '?';
+    const first = user.profile?.firstName?.charAt(0) ?? '';
+    const last = user.profile?.lastName?.charAt(0) ?? '';
+    const fallback = user._id?.charAt(0) ?? '?';
+    return (first + last || fallback).toUpperCase();
+  }
+
+  protected displayName(): string {
+    const user = this.auth.user();
+    if (!user) return '';
+    const fn = user.profile?.firstName;
+    const ln = user.profile?.lastName;
+    if (fn || ln) return [fn, ln].filter(Boolean).join(' ');
+    return user._id;
+  }
+
+  protected activeTeamName(): string {
+    const teams = this.auth.teams();
+    const active = teams.find(t => t.active);
+    return active?.name ?? '';
+  }
+
+  protected toggleMenu(): void {
+    this.menuOpen.update(v => !v);
+  }
+
+  protected closeMenu(): void {
+    this.menuOpen.set(false);
   }
 
   dismissWelcome(): void {
@@ -42,39 +58,16 @@ export class Shell {
   }
 
   logout(): void {
+    this.closeMenu();
     this.auth.logout().subscribe(() => this.router.navigateByUrl('/auth/login'));
   }
 
-  switchTeam(team: TeamMembership): void {
-    if (team.active) return;
-    this.auth.switchTeam(team.id).subscribe();
-  }
-
-  sendInvite(): void {
-    if (this.inviteForm.invalid) {
-      this.inviteForm.markAllAsTouched();
-      return;
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.menuOpen()) return;
+    const target = event.target as Node;
+    if (!this.el.nativeElement.contains(target)) {
+      this.closeMenu();
     }
-
-    this.inviteSending.set(true);
-    this.inviteError.set(null);
-    const { email, role } = this.inviteForm.getRawValue();
-
-    this.auth.invite(email, role).subscribe({
-      next: () => {
-        this.inviteSending.set(false);
-        this.inviteSent.set(true);
-        this.inviteForm.reset({ email: '', role: 'member' });
-      },
-      error: (err: unknown) => {
-        this.inviteSending.set(false);
-        const e = err as { status?: number; message?: string };
-        this.inviteError.set(
-          e?.status === 409
-            ? 'This person is already a member of your team.'
-            : (e?.message ?? 'Something went wrong. Please try again.')
-        );
-      },
-    });
   }
 }

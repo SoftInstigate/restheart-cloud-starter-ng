@@ -1,0 +1,55 @@
+<section class="card">
+  <h2>Profile</h2>
+
+  @if (profileSaved()) {
+    <p class="success-msg">Profile updated!</p>
+  }
+  @if (profileError()) {
+    <p class="form-error" role="alert">{{ profileError() }}</p>
+  }
+
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" novalidate class="account-form">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="first-name">First name</label>
+        <input id="first-name" type="text" formControlName="firstName" />
+      </div>
+      <div class="form-field">
+        <label for="last-name">Last name</label>
+        <input id="last-name" type="text" formControlName="lastName" />
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Email</label>
+      <input type="email" [value]="auth.user()?._id" disabled />
+    </div>
+    <button type="submit" class="btn-primary" [disabled]="!profileForm.dirty || profileSaving()">
+      {{ profileSaving() ? 'Saving…' : 'Save changes' }}
+    </button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Change password</h2>
+
+  @if (passwordSaved()) {
+    <p class="success-msg">Password changed!</p>
+  }
+  @if (passwordError()) {
+    <p class="form-error" role="alert">{{ passwordError() }}</p>
+  }
+
+  <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" novalidate class="account-form">
+    <div class="form-field">
+      <label for="current-password">Current password</label>
+      <input id="current-password" type="password" formControlName="currentPassword" autocomplete="current-password" />
+    </div>
+    <div class="form-field">
+      <label for="new-password">New password</label>
+      <input id="new-password" type="password" formControlName="newPassword" autocomplete="new-password" />
+    </div>
+    <button type="submit" class="btn-primary" [disabled]="!passwordForm.valid || passwordSaving()">
+      {{ passwordSaving() ? 'Changing…' : 'Change password' }}
+    </button>
+  </form>
+</section>

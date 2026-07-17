@@ -1,0 +1,107 @@
+<section class="card">
+  <a routerLink="/teams" class="back-link">← Back to teams</a>
+  <h2>{{ team()?.name || team()?.id?.$oid }}</h2>
+</section>
+
+<section class="card">
+  <h2>Members</h2>
+  @if (membersLoading()) {
+    <p class="muted">Loading members…</p>
+  } @else {
+    <ul class="member-list">
+      @for (member of members(); track member.email) {
+        <li class="member-row">
+          <div class="member-info">
+            <span class="member-name">{{ member.name || member.email }}</span>
+            <span class="member-email">{{ member.email }}</span>
+          </div>
+          @if (isOwner()) {
+            <div class="member-actions">
+              <select class="role-select" [value]="member.role" [disabled]="memberActionPending() === member.email" (change)="changeRole(member, $any($event.target).value)">
+                <option value="member">Member</option>
+                <option value="owner">Owner</option>
+              </select>
+              <button type="button" class="btn-danger-text" [disabled]="memberActionPending() === member.email" (click)="removeMember(member)">Remove</button>
+            </div>
+          } @else {
+            <span class="team-role">{{ member.role }}</span>
+          }
+        </li>
+      }
+    </ul>
+  }
+</section>
+
+@if (isOwner()) {
+  <section class="card">
+    <h2>Invite a team member</h2>
+    @if (inviteSent()) {
+      <p class="success-msg">Invitation sent!</p>
+    }
+    @if (inviteError()) {
+      <p class="form-error" role="alert">{{ inviteError() }}</p>
+    }
+    <form [formGroup]="inviteForm" (ngSubmit)="sendInvite()" novalidate class="invite-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="invite-email">Email</label>
+          <input id="invite-email" type="email" formControlName="email" placeholder="colleague@example.com" />
+        </div>
+        <div class="form-field form-field-sm">
+          <label for="invite-role">Role</label>
+          <select id="invite-role" formControlName="role">
+            <option value="member">Member</option>
+            <option value="owner">Owner</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn-primary" [disabled]="inviteSending()">
+        {{ inviteSending() ? 'Sending…' : 'Send invite' }}
+      </button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Team settings</h2>
+    @if (teamSaved()) {
+      <p class="success-msg">Team updated!</p>
+    }
+    @if (teamError()) {
+      <p class="form-error" role="alert">{{ teamError() }}</p>
+    }
+    <form [formGroup]="teamForm" (ngSubmit)="saveTeam()" novalidate class="invite-form">
+      <div class="form-field">
+        <label for="team-name">Team name</label>
+        <input id="team-name" type="text" formControlName="name" />
+      </div>
+      <div class="form-field">
+        <label for="team-description">Description</label>
+        <input id="team-description" type="text" formControlName="description" placeholder="Optional" />
+      </div>
+      <button type="submit" class="btn-primary" [disabled]="teamSaving()">
+        {{ teamSaving() ? 'Saving…' : 'Save changes' }}
+      </button>
+    </form>
+
+    <div class="danger-zone">
+      <div class="danger-zone-text">
+        <strong>Delete this team</strong>
+        <p class="muted">Only possible while no other members remain.</p>
+      </div>
+      @if (!deleteConfirming()) {
+        <button type="button" class="btn-danger" (click)="confirmDelete()">Delete team</button>
+      } @else {
+        <div class="delete-confirm">
+          <span>Are you sure?</span>
+          <button type="button" class="btn-danger" [disabled]="deleting()" (click)="deleteTeam()">
+            {{ deleting() ? 'Deleting…' : 'Yes, delete' }}
+          </button>
+          <button type="button" class="btn-secondary" (click)="cancelDelete()">Cancel</button>
+        </div>
+      }
+      @if (deleteError()) {
+        <p class="form-error" role="alert">{{ deleteError() }}</p>
+      }
+    </div>
+  </section>
+}

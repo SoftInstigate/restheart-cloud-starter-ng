@@ -47,8 +47,6 @@ export const routes: Routes = [
   ...(teamInvitations
     ? [
         {
-          // Accessible whether logged in or not — the page itself branches
-          // on isNewUser / isAuthenticated, so it has no route guard.
           path: 'invitations/accept',
           loadComponent: () =>
             import('./pages/invitations/accept/accept').then(m => m.Accept),
@@ -59,6 +57,29 @@ export const routes: Routes = [
     path: '',
     canActivate: [authGuard],
     loadComponent: () => import('./pages/shell/shell').then(m => m.Shell),
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'home',
+        loadComponent: () => import('./pages/home/home').then(m => m.Home),
+      },
+      {
+        path: 'teams',
+        loadComponent: () => import('./pages/teams/teams').then(m => m.Teams),
+      },
+      {
+        path: 'teams/new',
+        loadComponent: () => import('./pages/teams/new/new-team').then(m => m.NewTeam),
+      },
+      {
+        path: 'teams/:id',
+        loadComponent: () => import('./pages/teams/detail/team-detail').then(m => m.TeamDetail),
+      },
+      {
+        path: 'account',
+        loadComponent: () => import('./pages/account/account').then(m => m.Account),
+      },
+    ],
   },
   { path: '**', redirectTo: '' },
 ];

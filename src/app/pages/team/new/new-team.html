@@ -1,0 +1,27 @@
+<section class="card">
+  <a routerLink="/team" class="back-link">← Back to team</a>
+  <h2>Create a new team</h2>
+
+  @if (created(); as team) {
+    <p class="success-msg">
+      "{{ team.name }}" created — you're the owner.
+      <br />
+      <em class="muted">Demo note: this mock team won't appear in the switcher until restheart#643 lands server-side.</em>
+    </p>
+    <a routerLink="/team" class="btn-primary link-btn">Back to team</a>
+  } @else {
+    @if (error()) {
+      <p class="form-error" role="alert">{{ error() }}</p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="createTeam()" novalidate class="account-form">
+      <div class="form-field">
+        <label for="team-name">Team name</label>
+        <input id="team-name" type="text" formControlName="teamName" placeholder="Acme Corp" />
+      </div>
+      <button type="submit" class="btn-primary" [disabled]="saving()">
+        {{ saving() ? 'Creating…' : 'Create team' }}
+      </button>
+    </form>
+  }
+</section>

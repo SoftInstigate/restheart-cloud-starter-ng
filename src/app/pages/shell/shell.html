@@ -1,22 +1,26 @@
-<main class="shell">
-  <header class="shell-header">
-    <div class="shell-header-left">
-      <div class="avatar">
-        {{ auth.user()?.profile?.firstName?.charAt(0) || auth.user()?._id?.charAt(0) || '?' }}
-      </div>
-      <div class="user-info">
-        <span class="user-name">{{ auth.user()?.profile?.firstName || auth.user()?._id }}</span>
-        <span class="user-email">{{ auth.user()?._id }}</span>
-      </div>
+<div class="layout">
+  <header class="header">
+    <a routerLink="/" class="logo">RESTHeart Cloud</a>
+
+    <div class="user-menu">
+      <button type="button" class="avatar-btn" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">
+        {{ initials() }}
+      </button>
+
+      @if (menuOpen()) {
+        <div class="dropdown" (click)="$event.stopPropagation()">
+          <div class="dropdown-header">
+            <span class="dropdown-name">{{ displayName() }}</span>
+            <span class="dropdown-email">{{ activeTeamName() }}</span>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a routerLink="/account" class="dropdown-item" (click)="closeMenu()">Account</a>
+          <a routerLink="/teams" class="dropdown-item" (click)="closeMenu()">Teams</a>
+          <div class="dropdown-divider"></div>
+          <button type="button" class="dropdown-item dropdown-item-danger" (click)="logout()">Logout</button>
+        </div>
+      }
     </div>
-    <button type="button" class="btn-logout" (click)="logout()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        <polyline points="16 17 21 12 16 7"/>
-        <line x1="21" y1="12" x2="9" y2="12"/>
-      </svg>
-      Log out
-    </button>
   </header>
 
   @if (justVerified()) {
@@ -26,66 +30,7 @@
     </div>
   }
 
-  <section class="hero">
-    <img src="https://placekittens.com/300/300" alt="Cute kittens" class="hero-img" />
-  </section>
-
-  @if (features.teamInvitations) {
-    @if (auth.hasMultipleTeams()) {
-      <section class="card">
-        <h2>Your teams</h2>
-        <ul class="team-list">
-          @for (team of auth.teams(); track team.id.$oid) {
-            <li>
-              <button
-                type="button"
-                class="team-option"
-                [class.active]="team.active"
-                [disabled]="team.active"
-                (click)="switchTeam(team)"
-              >
-                <span class="team-name">{{ team.name || team.id.$oid }}</span>
-                <span class="team-role">{{ team.role }}</span>
-                @if (team.active) {
-                  <span class="team-badge">current</span>
-                }
-              </button>
-            </li>
-          }
-        </ul>
-      </section>
-    }
-
-    @if (auth.teams().find(t => t.active)?.role === 'owner') {
-      <section class="card">
-        <h2>Invite a team member</h2>
-
-        @if (inviteSent()) {
-          <p class="success-msg">Invitation sent!</p>
-        }
-        @if (inviteError()) {
-          <p class="form-error" role="alert">{{ inviteError() }}</p>
-        }
-
-        <form [formGroup]="inviteForm" (ngSubmit)="sendInvite()" novalidate class="invite-form">
-          <div class="form-row">
-            <div class="form-field">
-              <label for="invite-email">Email</label>
-              <input id="invite-email" type="email" formControlName="email" placeholder="colleague@example.com" />
-            </div>
-            <div class="form-field form-field-sm">
-              <label for="invite-role">Role</label>
-              <select id="invite-role" formControlName="role">
-                <option value="member">Member</option>
-                <option value="owner">Owner</option>
-              </select>
-            </div>
-          </div>
-          <button type="submit" class="btn-primary" [disabled]="inviteSending()">
-            {{ inviteSending() ? 'Sending…' : 'Send invite' }}
-          </button>
-        </form>
-      </section>
-    }
-  }
-</main>
+  <main class="main">
+    <router-outlet />
+  </main>
+</div>
