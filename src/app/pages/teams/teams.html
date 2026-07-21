@@ -10,6 +10,9 @@
         <div class="team-row" [class.active]="team.active">
           <a [routerLink]="['/teams', team.id.$oid]" class="team-link">
             <span class="team-name">{{ team.name || team.id.$oid }}</span>
+            @if (team.description) {
+              <span class="team-desc">{{ team.description }}</span>
+            }
             <span class="team-role">{{ team.role }}</span>
           </a>
           @if (team.active) {

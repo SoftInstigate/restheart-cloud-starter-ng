@@ -83,6 +83,14 @@
   font-size: 0.9375rem;
 }
 
+.team-desc {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .team-role {
   font-size: 0.75rem;
   color: var(--color-text-muted);

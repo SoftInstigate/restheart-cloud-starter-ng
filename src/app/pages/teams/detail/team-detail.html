@@ -1,6 +1,9 @@
 <section class="card">
   <a routerLink="/teams" class="back-link">← Back to teams</a>
   <h2>{{ team()?.name || team()?.id?.$oid }}</h2>
+  @if (team()?.description) {
+    <p class="muted">{{ team()?.description }}</p>
+  }
 </section>
 
 <section class="card">
@@ -60,6 +63,35 @@
       </button>
     </form>
   </section>
+
+  @if (!invitationsLoading() && invitations().length > 0) {
+    <section class="card">
+      <h2>Pending invitations</h2>
+      <ul class="member-list">
+        @for (invite of invitations(); track invite.email) {
+          <li class="member-row" [class.expired]="invite.expired">
+            <div class="member-info">
+              <span class="member-name">{{ invite.email }}</span>
+              <span class="member-email">
+                {{ invite.role }}
+                @if (invite.expired) {
+                  · expired
+                }
+              </span>
+            </div>
+            <button
+              type="button"
+              class="btn-secondary"
+              [disabled]="resendingEmail() === invite.email"
+              (click)="resendInvite(invite)"
+            >
+              {{ resendingEmail() === invite.email ? 'Sending…' : 'Resend' }}
+            </button>
+          </li>
+        }
+      </ul>
+    </section>
+  }
 
   <section class="card">
     <h2>Team settings</h2>

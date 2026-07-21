@@ -2,7 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
-import type { TeamMembership, TeamMember } from '@restheart-cloud/kit-ng';
+import type { TeamMembership, TeamMember, PendingInvitation } from '@restheart-cloud/kit-ng';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -26,6 +26,10 @@ export class TeamDetail implements OnInit {
   protected readonly membersLoading = signal(true);
   protected readonly memberActionPending = signal<string | null>(null);
 
+  protected readonly invitations = signal<PendingInvitation[]>([]);
+  protected readonly invitationsLoading = signal(true);
+  protected readonly resendingEmail = signal<string | null>(null);
+
   protected readonly inviteForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     role: ['member' as 'owner' | 'member', [Validators.required]],
@@ -48,9 +52,15 @@ export class TeamDetail implements OnInit {
 
   ngOnInit(): void {
     this.teamId = this.route.snapshot.paramMap.get('id') ?? '';
-    this.team.set(this.auth.teams().find(t => t.id.$oid === this.teamId));
-    this.teamForm.patchValue({ name: this.team()?.name ?? '' });
+    this.auth.loadTeams().subscribe(() => {
+      this.team.set(this.auth.teams().find(t => t.id.$oid === this.teamId));
+      this.teamForm.patchValue({
+        name: this.team()?.name ?? '',
+        description: this.team()?.description ?? '',
+      });
+    });
     this.loadMembers();
+    this.loadInvitations();
   }
 
   private loadMembers(): void {
@@ -61,6 +71,17 @@ export class TeamDetail implements OnInit {
         this.membersLoading.set(false);
       },
       error: () => this.membersLoading.set(false),
+    });
+  }
+
+  private loadInvitations(): void {
+    this.invitationsLoading.set(true);
+    this.auth.listInvitations().subscribe({
+      next: invitations => {
+        this.invitations.set(invitations);
+        this.invitationsLoading.set(false);
+      },
+      error: () => this.invitationsLoading.set(false),
     });
   }
 
@@ -101,6 +122,14 @@ export class TeamDetail implements OnInit {
     });
   }
 
+  resendInvite(invite: PendingInvitation): void {
+    this.resendingEmail.set(invite.email);
+    this.auth.resendInvite(invite.email).subscribe({
+      next: () => this.resendingEmail.set(null),
+      error: () => this.resendingEmail.set(null),
+    });
+  }
+
   changeRole(member: TeamMember, role: 'owner' | 'member'): void {
     if (member.role === role) return;
     this.memberActionPending.set(member.email);
@@ -122,7 +151,7 @@ export class TeamDetail implements OnInit {
     this.teamError.set(null);
     this.teamSaved.set(false);
     const { name, description } = this.teamForm.getRawValue();
-    this.auth.updateTeam(t.id, { name, description }).subscribe({
+    this.auth.updateTeam({ name, description }).subscribe({
       next: () => {
         this.teamSaving.set(false);
         this.teamSaved.set(true);
@@ -143,7 +172,7 @@ export class TeamDetail implements OnInit {
     if (!t) return;
     this.deleting.set(true);
     this.deleteError.set(null);
-    this.auth.deleteTeam(t.id).subscribe({
+    this.auth.deleteTeam().subscribe({
       next: () => {
         this.deleting.set(false);
         this.deleteConfirming.set(false);

@@ -125,6 +125,10 @@
   border-radius: var(--radius);
 }
 
+.member-row.expired {
+  opacity: 0.6;
+}
+
 .member-info {
   display: flex;
   flex-direction: column;

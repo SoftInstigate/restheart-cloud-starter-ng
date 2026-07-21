@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 
@@ -8,14 +8,14 @@ import { RhAuthService } from '@restheart-cloud/kit-ng';
   templateUrl: './account.html',
   styleUrl: './account.css',
 })
-export class Account {
+export class Account implements OnInit {
   private readonly fb = inject(FormBuilder);
   protected readonly auth = inject(RhAuthService);
 
   // ── Profile ────────────────────────────────────────────────────────────
   protected readonly profileForm = this.fb.nonNullable.group({
-    firstName: [this.auth.user()?.profile?.firstName ?? '', [Validators.required]],
-    lastName: [this.auth.user()?.profile?.lastName ?? '', [Validators.required]],
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
   });
   protected readonly profileSaving = signal(false);
   protected readonly profileSaved = signal(false);
@@ -29,6 +29,17 @@ export class Account {
   protected readonly passwordSaving = signal(false);
   protected readonly passwordSaved = signal(false);
   protected readonly passwordError = signal<string | null>(null);
+
+  ngOnInit(): void {
+    this.auth.checkSession().subscribe(user => {
+      if (user) {
+        this.profileForm.patchValue({
+          firstName: user.profile?.name ?? '',
+          lastName: user.profile?.surname ?? '',
+        });
+      }
+    });
+  }
 
   saveProfile(): void {
     if (this.profileForm.invalid) {

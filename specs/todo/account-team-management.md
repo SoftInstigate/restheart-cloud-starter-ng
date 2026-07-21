@@ -1,7 +1,8 @@
 # Account & Team Management
 
-**Status:** Backend work tracked on GitHub — [restheart#648](https://github.com/SoftInstigate/restheart/issues/648) (milestone 9.6.0). Blocked on that landing before kit/starter work begins.
+**Status:** Backend complete (restheart 9.6.0). Ready for kit + starter work.
 **Date:** 2026-07-17
+**Updated:** 2026-07-20 — all backend issues closed, spec refreshed.
 
 ## Goal
 
@@ -56,81 +57,45 @@ No profile page, no member list, no password-change UI, no team-creation UI.
 These two just need a kit wrapper + kit-ng method, mirroring the existing pattern
 (`invite`/`resendInvite` etc.) — no server-side work.
 
-### No backend support at all — tracked as GitHub issues (restheart, milestone 9.6.0)
+### New in restheart 9.6.0 — backend ready, needs kit wrappers + UI
 
-**a. List a team's members (name, email, role)** — [restheart#642](https://github.com/SoftInstigate/restheart/issues/642)
-`teams` documents store `members: [{ userId, role, joinedAt }]` — no denormalized
-name/email, and no endpoint returns it. `GET /auth/teams` only lists the caller's own
-memberships. Building requirement #2 (member list) needs a new read endpoint that joins
-`teams.members[].userId` against `users.profile` for the caller's active team — members
-can't read arbitrary `/users/{id}` docs themselves.
+All items below were tracked under [restheart#648](https://github.com/SoftInstigate/restheart/issues/648) (milestone 9.6.0) and are now implemented.
 
-**b. Update profile (firstName/lastName/etc.)** — [restheart#646](https://github.com/SoftInstigate/restheart/issues/646)
-No dedicated `restheart-accounts` endpoint. Generic `PATCH /users/{email}` is *vetoed*
-down to `profile.*` fields only (`AccountsInitializer.java`), but that only stops
-*unsafe* writes — it doesn't itself grant a user permission to write their own document.
-Whether an ACL allow rule for "a user may PATCH their own `/users/{id}`" exists depends
-on what each tenant configures; it's not guaranteed out of the box, and the kit has no
-`updateProfile()` wrapper today. **Decided:** dedicated `PATCH /auth/profile` endpoint
-that self-registers its own ACL allow rule at startup, same pattern as every other
-accounts endpoint — consistent with how the rest of the plugin works, instead of relying
-on generic Mongo REST + tenant-configured ACL.
+| # | Feature | Endpoint | Service | Notes |
+|---|---|---|---|---|
+| [#642](https://github.com/SoftInstigate/restheart/issues/642) | List team members | `GET /auth/team/members` | `ListTeamMembersService` | Returns `[{ email, name, role, joinedAt }]` for the caller's active team. Joins `teams.members[].userId` against `users.profile`. |
+| [#643](https://github.com/SoftInstigate/restheart/issues/643) | Create additional team | `POST /auth/teams` | `GetTeamsService` | Creates a new team, assigns caller as `owner`, reissues JWT with new active team. Returns 201 `{ id, name, role }`. |
+| [#644](https://github.com/SoftInstigate/restheart/issues/644) | Rename/edit team | `PATCH /auth/team` | `TeamService` | Partial update of `name` and/or `description`. Owner only. |
+| [#645](https://github.com/SoftInstigate/restheart/issues/645) | Delete team | `DELETE /auth/team` | `TeamService` | Atomic "only if no other members" check via `findOneAndDelete` + `$expr` size guard. Returns 409 if other members remain. |
+| [#646](https://github.com/SoftInstigate/restheart/issues/646) | Update profile | `PATCH /auth/profile` | `UpdateProfileService` | Accepts `{ firstName, lastName }`. Writes to `profile.name` / `profile.surname`. Self-registers ACL allow rule. |
+| [#647](https://github.com/SoftInstigate/restheart/issues/647) | Change password | `PATCH /auth/change-password` | `ChangePasswordService` | Accepts `{ currentPassword, newPassword }`. BCrypt verify + min-length 8. Session-authenticated, no email round-trip. |
+| [#650](https://github.com/SoftInstigate/restheart/issues/650) | `user.team` as `{_id, role}` | — | `DbHelper`, `DefaultMembershipProvider` | `team` field is now `{ _id, role }` with backward compat for legacy scalar format. JWT `team` claim mirrors the same shape. |
 
-**c. Change password while logged in (current password → new password)** — [restheart#647](https://github.com/SoftInstigate/restheart/issues/647)
-`resetPasswordService` (`PATCH /auth/reset-password`) is a **public, unauthenticated**
-endpoint — it validates only `email + token + password`, no session check. So a logged-in
-user *can* change their password today, but only by going through the email round-trip:
-call `forgotPassword(ownEmail)` from Settings, receive the email, open the link, submit
-the token via `resetPassword()`. There is no direct "current password + new password"
-in-session action. **Decided:** new `PATCH /auth/change-password { currentPassword,
-newPassword }` endpoint, session-authenticated — matches expected settings-page UX
-instead of an email round-trip for a deliberate in-session change.
+**Kit work needed:** add wrappers for all 7 endpoints above, plus the two pre-existing
+`removeMember` / `updateMemberRole` — total of 9 new kit functions + kit-ng methods.
 
-**d. Team lifecycle: create / update / delete** — [restheart#643](https://github.com/SoftInstigate/restheart/issues/643) (create), [restheart#644](https://github.com/SoftInstigate/restheart/issues/644) (update), [restheart#645](https://github.com/SoftInstigate/restheart/issues/645) (delete)
-No capability exists anywhere, and it's a deeper gap than a missing endpoint — the
-`MembershipProvider` SPI itself (`org.restheart.plugins.accounts.MembershipProvider`)
-has no `updateTeam` or `deleteTeam` method at all. Its full method set is:
-`createInitialTeam`, `isMember`, `addMember`, `activeMembership`, `listMemberships`,
-`setActiveMembership`, `removeMember`, `updateMemberRole`, `activateViaOAuth`. Compare
-to `removeMember`/`updateMemberRole`, which at least have SPI methods + endpoints
-already (just missing from the kit, see above) — team create/update/delete has *nothing*
-at any layer:
-- **Create**: `createInitialTeam()` only runs once, inside `RegisterService`'s signup
-  flow. No way to call it again for an existing user.
-- **Update** (name/description): no SPI method, no endpoint, no ACL.
-- **Delete**: no SPI method, no endpoint. "Only if empty" (no other members) must be
-  enforced server-side, atomically — a client-side pre-check would be a race condition
-  (another member could be mid-invite-accept when the delete fires).
-
-This is the largest item in this spec — new `MembershipProvider` SPI methods, new
-service classes/endpoints (`restheart-accounts`), ACL wiring, and — since multi-team is
-presumably a Cloud pricing/plan dimension — possibly a tier-limit check (flagged as an
-open question on restheart#643, not blocking the rest).
-
-## Proposed information architecture (pending decisions above)
-
-Sketch only — not final until (a)-(d) above are resolved:
+## Proposed information architecture
 
 ```
 /account                     — profile view/edit, change password
 /team                        — current team: member list, invite form, role mgmt, remove,
                                 rename/edit, delete (if empty)
-/team/new                    — BLOCKED on (d)
+/team/new                    — create a new team
 (nav) team switcher          — promote existing switcher out of shell into persistent layout
 ```
 
-Likely a settings-style layout with a persistent side-nav (Account / Team) rather than
+Settings-style layout with a persistent side-nav (Account / Team) rather than
 today's single stacked page — matches common SaaS conventions (GitHub org settings,
 Linear workspace settings, etc.) and scales better once team member management (list +
 remove + role change) is added.
 
 ## Sequencing
 
-1. **Backend** — implement [restheart#642](https://github.com/SoftInstigate/restheart/issues/642)–[#647](https://github.com/SoftInstigate/restheart/issues/647), tracked under [restheart#648](https://github.com/SoftInstigate/restheart/issues/648), milestone 9.6.0.
-2. **Kit** — once the above land, extend `@restheart-cloud/kit` + `kit-ng` with matching
-   client functions: `listTeamMembers`, `createTeam`, `updateTeam`, `deleteTeam`,
-   `updateProfile`, `changePassword`, plus the two already-backend-ready
-   `removeMember`/`updateMemberRole` wrappers.
+1. ~~**Backend** — implement [restheart#642](https://github.com/SoftInstigate/restheart/issues/642)–[#647](https://github.com/SoftInstigate/restheart/issues/647), tracked under [restheart#648](https://github.com/SoftInstigate/restheart/issues/648), milestone 9.6.0.~~ **Done** (2026-07-20).
+2. **Kit** — extend `@restheart-cloud/kit` + `kit-ng` with client functions for the 9
+   new endpoints: `listTeamMembers`, `createTeam`, `updateTeam`, `deleteTeam`,
+   `updateProfile`, `changePassword`, `removeMember`, `updateMemberRole`, plus verify
+   existing `getTeams` / `switchTeam` cover the updated `team: {_id, role}` shape.
 3. **Starter app** — build the account/team settings area in
    `restheart-cloud-starter-ng` on top of the extended kit.
 
@@ -139,6 +104,3 @@ remove + role change) is added.
 Single settings area with a persistent side-nav (Account / Team tabs, as sketched
 above), or something else? Everything else in this document is now sequenced via the
 GitHub issues above rather than an open design choice.
-
-No frontend or `restheart-accounts` code has been implemented yet — this document is
-audit + proposed shape + tracking links only.

@@ -19,6 +19,9 @@
             (click)="switchTeam(team)"
           >
             <span class="team-name">{{ team.name || team.id.$oid }}</span>
+            @if (team.description) {
+              <span class="team-desc">{{ team.description }}</span>
+            }
             <span class="team-role">{{ team.role }}</span>
             @if (team.active) {
               <span class="team-badge">current</span>
@@ -102,6 +105,35 @@
         </button>
       </form>
     </section>
+
+    @if (!invitationsLoading() && invitations().length > 0) {
+      <section class="card">
+        <h2>Pending invitations</h2>
+        <ul class="member-list">
+          @for (invite of invitations(); track invite.email) {
+            <li class="member-row" [class.expired]="invite.expired">
+              <div class="member-info">
+                <span class="member-name">{{ invite.email }}</span>
+                <span class="member-email">
+                  {{ invite.role }}
+                  @if (invite.expired) {
+                    · expired
+                  }
+                </span>
+              </div>
+              <button
+                type="button"
+                class="btn-secondary"
+                [disabled]="resendingEmail() === invite.email"
+                (click)="resendInvite(invite)"
+              >
+                {{ resendingEmail() === invite.email ? 'Sending…' : 'Resend' }}
+              </button>
+            </li>
+          }
+        </ul>
+      </section>
+    }
 
     <section class="card">
       <h2>Team settings</h2>

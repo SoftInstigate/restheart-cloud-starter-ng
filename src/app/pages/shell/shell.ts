@@ -24,8 +24,8 @@ export class Shell {
   protected initials(): string {
     const user = this.auth.user();
     if (!user) return '?';
-    const first = user.profile?.firstName?.charAt(0) ?? '';
-    const last = user.profile?.lastName?.charAt(0) ?? '';
+    const first = user.profile?.name?.charAt(0) ?? '';
+    const last = user.profile?.surname?.charAt(0) ?? '';
     const fallback = user._id?.charAt(0) ?? '?';
     return (first + last || fallback).toUpperCase();
   }
@@ -33,8 +33,8 @@ export class Shell {
   protected displayName(): string {
     const user = this.auth.user();
     if (!user) return '';
-    const fn = user.profile?.firstName;
-    const ln = user.profile?.lastName;
+    const fn = user.profile?.name;
+    const ln = user.profile?.surname;
     if (fn || ln) return [fn, ln].filter(Boolean).join(' ');
     return user._id;
   }
