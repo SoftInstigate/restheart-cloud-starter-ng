@@ -48,22 +48,103 @@ ng serve
 ## Structure
 
 ```
-src/app/
-  pages/
-    auth/        ← login, signup, verify, reset-password, forgot-password
-    invitations/ ← accept — one page, branches into the new-user
-    │               "set password" form or the existing-user "log in
-    │               and accept" form depending on the invitation
-    shell/       ← authenticated shell (replace with your content)
-  app.routes.ts
-  app.config.ts  ← provideRhAuth() configured here
+src/
+  styles.css              ← design tokens + the DISPOSABLE default skin
+  environments/
+    environment.ts        ← production apiUrl + feature flags
+    environment.dev.ts    ← the file `ng serve` actually uses
+  app/
+    app.routes.ts         ← route map, titles, feature-flag gating
+    app.config.ts         ← provideRhAuth() configured here
+    theme.service.ts      ← light/dark toggle, persisted
+    ui/alert/             ← the one shared feedback component
+    pages/
+      shell/              ← authenticated frame: header, nav, user menu
+      home/               ← PLACEHOLDER showcase — replace with your content
+      auth/               ← login, signup, verify, forgot/reset password
+      invitations/accept/ ← one page, three flows (see below)
+      teams/              ← list, detail (members/invites/settings), new
+      account/            ← profile + change password
 ```
+
+### Route map
+
+| Path | Guard | Shown when |
+|---|---|---|
+| `/auth/login` | public only | always |
+| `/auth/signup` | public only | `emailRegistration \|\| oauthLogin` |
+| `/auth/verify` | public only | `emailRegistration` |
+| `/auth/forgot-password`, `/auth/reset-password` | public only | `passwordReset` |
+| `/invitations/accept` | **none** — works signed-in or out | `teamInvitations` |
+| `/home`, `/teams`, `/teams/new`, `/teams/:id`, `/account` | authenticated | always |
+
+Feature flags live in `src/environments/environment*.ts` and must match your service's
+**Sign-up Mgmt → Features** toggles. A flag that's off removes the route *and* the UI that
+links to it.
 
 ## Customization
 
-- **Style**: plain CSS, no framework. This is a starter, not an opinionated app — we don't want to lock you into a UI component library (Material, Spartan, PrimeNG...) or a utility-CSS framework (Tailwind, UnoCSS...). The auth pages use plain HTML and hand-written CSS with a small set of custom properties for theming (`src/styles.css`), so you can restyle freely or swap in your framework of choice without fighting existing markup or class conventions. `@restheart-cloud/kit-ng` itself ships no UI at all — just services, guards, and an interceptor — so the pages under `pages/auth/` are the only place styling choices live. Edit them directly under `pages/auth/`.
-- **Shell**: replace `pages/shell/shell.component.ts` with your layout.
-- **Routing**: add your routes inside the authenticated shell.
+### The default skin is meant to be thrown away
+
+`src/styles.css` holds two things: **design tokens** (section 1) and a **disposable
+default skin** (sections 3–5). The look is deliberately a *mockup* — cohesive and
+intentional, but obviously a scaffold. `@restheart-cloud/kit-ng` ships no UI at all, so
+the templates and this one stylesheet are the only places styling lives.
+
+Two ways forward. Pick one:
+
+**A. Tweak the skin** — fastest, roughly an hour to something that looks like yours:
+
+1. Change the tokens in `styles.css` section 1 — colours, type scale, spacing, radii. Every
+   component reads them, so this re-themes the whole app including dark mode.
+2. Adjust the skin classes in section 3 if you want different shapes.
+3. Replace the shell layout in `pages/shell/`.
+4. Replace `pages/home/` with your own landing content.
+
+**B. Adopt a UI framework** — Material, Spartan, PrimeNG, Tailwind, your own:
+
+1. Delete sections 3–5 of `styles.css` (they are marked). Keep section 1 if you want the
+   tokens; drop it too if your framework brings its own.
+2. Reskin the templates using the swap map below.
+3. See `TEMPLATE_API.md` for what each template binds to, so you can rewrite the markup
+   without reading the component classes.
+
+### Swap map
+
+Templates reference a small, stable vocabulary of semantic class hooks. Restyle them, or
+replace each element with your framework's component:
+
+| Class hook | Used for | Tailwind (example) | Material (example) |
+|---|---|---|---|
+| `.card` / `.card-header` | Section container + its title row | `rounded border p-6 mb-6` | `<mat-card>` |
+| `.btn-primary` | The one accented action per form | `px-6 py-2 rounded bg-amber-400 font-semibold` | `<button mat-flat-button color="primary">` |
+| `.btn-secondary` | Quiet bordered action | `px-3 py-2 rounded border text-xs uppercase` | `<button mat-stroked-button>` |
+| `.btn-danger` / `.btn-danger-text` | Destructive action / inline variant | `… text-red-700 border-red-700` | `<button mat-stroked-button color="warn">` |
+| `.form-field` / `.form-field-sm` / `.form-row` | Label+control stack; `-sm` is narrow; `-row` lays fields side by side | `flex flex-col gap-1` / `flex gap-3` | `<mat-form-field>` |
+| `.password-field` / `.btn-toggle-password` | Password input with a Show/Hide toggle | `relative` / `absolute right-2` | `<mat-form-field>` + suffix `<button mat-icon-button>` |
+| `.form-error` / `.field-error` | Form-level / per-field error | `rounded border border-red-300 bg-red-50 p-3` | `<mat-error>` |
+| `.success-msg` | Success feedback | `rounded border border-emerald-300 bg-emerald-50 p-3` | — (usually a snackbar) |
+| `.muted` | Secondary/caption text | `text-sm text-gray-500` | `class="mat-caption"` |
+| `.badge` | Small status pill | `rounded-full px-2 text-xs uppercase` | `<mat-chip>` |
+| `.back-link` / `.eyebrow` | Back navigation / label above a title | `text-xs uppercase tracking-wide` | — |
+| `.placeholder` / `.skeleton` | Empty-slot outline / loading block | `border border-dashed p-6` / `animate-pulse bg-gray-200` | `<mat-progress-bar mode="query">` |
+| `.auth-page` / `.auth-card` / `.auth-links` / `.divider` | Centred auth layout | `min-h-screen grid place-items-center` / `w-90 rounded border p-8` | `<mat-card>` |
+| `.config-page` / `.config-card` / `.config-status` / `.config-steps` | "Connect your service" screen | — | — |
+
+Feedback is rendered through one component — `src/app/ui/alert/alert.ts` — which carries no
+styles of its own, only the `.success-msg` / `.form-error` hooks plus the correct ARIA
+roles. Swap that one component and every success/error message in the app follows.
+
+Page-specific layout (`.team-row`, `.member-row`, `.feature-grid`, …) stays in the
+component's own `.css` file and is not part of this contract.
+
+### Documentation map
+
+| File | Purpose |
+|---|---|
+| `README.md` | Setup, structure, and the swap map above. |
+| `TEMPLATE_API.md` | What each template binds to: signals, methods, inputs, form controls. |
+| `PORTING.md` | Framework-neutral behaviour spec — for building React/Vue versions at parity. |
 
 ## Manual testing checklist
 
