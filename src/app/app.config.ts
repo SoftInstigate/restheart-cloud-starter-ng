@@ -1,8 +1,8 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, TitleStrategy } from '@angular/router';
 import { provideRhAuth, isValidApiBaseUrl } from '@restheart-cloud/kit-ng';
 
-import { routes } from './app.routes';
+import { routes, AppTitleStrategy } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 
@@ -19,5 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(activeRoutes),
     provideClientHydration(withEventReplay()),
     provideRhAuth({ apiBaseUrl: environment.apiUrl }),
+    { provide: TitleStrategy, useClass: AppTitleStrategy },
   ],
 };
