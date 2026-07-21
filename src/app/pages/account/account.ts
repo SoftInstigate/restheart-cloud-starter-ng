@@ -31,6 +31,8 @@ export class Account implements OnInit {
   protected readonly passwordSaving = signal(false);
   protected readonly passwordSaved = signal(false);
   protected readonly passwordError = signal<string | null>(null);
+  protected readonly showCurrentPassword = signal(false);
+  protected readonly showNewPassword = signal(false);
 
   ngOnInit(): void {
     // Subscribe BEFORE patchValue so the clear-on-edit handler is in place

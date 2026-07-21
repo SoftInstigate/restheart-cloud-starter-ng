@@ -42,11 +42,21 @@
   <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" novalidate class="account-form">
     <div class="form-field">
       <label for="current-password">Current password</label>
-      <input id="current-password" type="password" formControlName="currentPassword" autocomplete="new-password" />
+      <div class="password-field">
+        <input id="current-password" [type]="showCurrentPassword() ? 'text' : 'password'" formControlName="currentPassword" autocomplete="new-password" />
+        <button type="button" class="btn-toggle-password" (click)="showCurrentPassword.update(v => !v)">
+          {{ showCurrentPassword() ? 'Hide' : 'Show' }}
+        </button>
+      </div>
     </div>
     <div class="form-field">
       <label for="new-password">New password</label>
-      <input id="new-password" type="password" formControlName="newPassword" autocomplete="new-password" />
+      <div class="password-field">
+        <input id="new-password" [type]="showNewPassword() ? 'text' : 'password'" formControlName="newPassword" autocomplete="new-password" />
+        <button type="button" class="btn-toggle-password" (click)="showNewPassword.update(v => !v)">
+          {{ showNewPassword() ? 'Hide' : 'Show' }}
+        </button>
+      </div>
     </div>
     <button type="submit" class="btn-primary" [disabled]="!passwordForm.valid || passwordSaving()">
       {{ passwordSaving() ? 'Changing…' : 'Change password' }}
