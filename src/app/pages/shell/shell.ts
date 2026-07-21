@@ -24,7 +24,9 @@ export class Shell {
   private readonly el = inject(ElementRef);
   protected readonly auth = inject(RhAuthService);
 
-  protected readonly justVerified = signal(justSignedUpFlag());
+  /** Set for *any* fresh signup — email verification or OAuth — so the banner
+   *  copy must not claim an email was verified. */
+  protected readonly justSignedUp = signal(justSignedUpFlag());
   protected readonly menuOpen = signal(false);
 
   /** True while the router is resolving a route — drives the top progress bar.
@@ -101,7 +103,7 @@ export class Shell {
   }
 
   dismissWelcome(): void {
-    this.justVerified.set(false);
+    this.justSignedUp.set(false);
   }
 
   logout(): void {

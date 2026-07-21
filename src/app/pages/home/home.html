@@ -1,4 +1,113 @@
-<div class="home">
-  <h1>Here your app</h1>
-  <img src="https://placekittens.com/400/300" alt="A cute kitten" class="cat-img" />
-</div>
+<!-- ═════════════════════════════════════════════════════════════════════════
+     PLACEHOLDER SHOWCASE — replace this page with your app's own content.
+     See the note at the top of home.ts.
+     ═════════════════════════════════════════════════════════════════════════ -->
+
+<section class="card hero">
+  <p class="eyebrow">RESTHeart Cloud Starter</p>
+  <h1>
+    @if (firstName()) {
+      Welcome, {{ firstName() }}.
+    } @else {
+      Welcome.
+    }
+  </h1>
+  <p class="hero-pitch">
+    Sign-up, login, email verification, password reset, invitations and team
+    management are already built and wired up. Now make it yours.
+  </p>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>What's already working</h2>
+  </div>
+
+  <ul class="feature-grid">
+    @for (feature of capabilities; track feature.name) {
+      <li class="feature" [class.feature-off]="!feature.enabled">
+        <div class="feature-head">
+          @if (feature.target; as target) {
+            <a [routerLink]="routeFor(target)" class="feature-name">{{ feature.name }}</a>
+          } @else {
+            <span class="feature-name">{{ feature.name }}</span>
+          }
+          <span class="badge">{{ feature.enabled ? 'on' : 'off' }}</span>
+        </div>
+        <p class="muted">{{ feature.description }}</p>
+      </li>
+    }
+  </ul>
+
+  <p class="muted feature-note">
+    Toggle these in <code>src/environments/environment.ts</code> to match the
+    Features settings of your RESTHeart Cloud service.
+  </p>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Make it yours</h2>
+  </div>
+
+  <ol class="steps">
+    <li class="step step-done">
+      <span class="step-mark" aria-hidden="true">✓</span>
+      <div class="step-body">
+        <span class="step-title">Point the app at your RESTHeart Cloud service</span>
+        <p class="muted">
+          Done — you're signed in. Configured in
+          <code>src/environments/environment.ts</code>.
+        </p>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-mark" aria-hidden="true">2</span>
+      <div class="step-body">
+        <span class="step-title">Make it yours visually</span>
+        <p class="muted">
+          Either tweak the default skin — the tokens and skin classes in
+          <code>src/styles.css</code> — or delete that skin entirely and adopt
+          Material, Tailwind, Spartan or your own, following the swap map in
+          <code>README.md</code>. When rewriting a template, see
+          <code>TEMPLATE_API.md</code> for the signals and methods each
+          component exposes to bind to.
+        </p>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-mark" aria-hidden="true">3</span>
+      <div class="step-body">
+        <span class="step-title">Design your navigation and menu</span>
+        <p class="muted">
+          The app frame lives in <code>src/app/pages/shell/</code> — the header
+          has a marked slot for your section links.
+        </p>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-mark" aria-hidden="true">4</span>
+      <div class="step-body">
+        <span class="step-title">Replace this page</span>
+        <p class="muted">
+          Swap <code>src/app/pages/home/</code> for your app's landing content.
+        </p>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="step-mark" aria-hidden="true">5</span>
+      <div class="step-body">
+        <span class="step-title">Build your first feature screen</span>
+        <p class="muted">
+          Add the component under <code>src/app/pages/</code> and register its
+          route inside the authenticated shell in
+          <code>src/app/app.routes.ts</code>.
+        </p>
+      </div>
+    </li>
+  </ol>
+</section>

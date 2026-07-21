@@ -46,13 +46,17 @@ function consumeFragmentToken(): void {
 export class App {
   protected readonly apiConfigured = isValidApiBaseUrl(environment.apiUrl);
 
+  /** Surfaced on the config screen so a wrong value is distinguishable from
+   *  no value at all — otherwise the only clue is a console error. */
+  protected readonly apiUrl = environment.apiUrl;
+
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   constructor() {
     if (!this.apiConfigured) {
       console.error(
         `[app] apiUrl must point to a RESTHeart Cloud service (*.restheart.com), got "${environment.apiUrl}". ` +
-          'Set it in src/environments/environment.ts (and environment.dev.ts for local development).'
+          'Set it in src/environments/environment.dev.ts for `ng serve`, and in environment.ts for production builds.'
       );
       return;
     }

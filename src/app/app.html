@@ -1,25 +1,60 @@
 @if (apiConfigured) {
   <router-outlet />
 } @else {
+  <!-- Step zero of the getting-started plan: until apiUrl points at a
+       RESTHeart Cloud service there is nothing to log into, so this replaces
+       the whole app. The rest of the plan is on the home page after sign-in. -->
   <main class="config-page">
     <div class="config-card">
-      <h1>Welcome to RESTHeart Cloud</h1>
+      <p class="eyebrow">RESTHeart Cloud Starter</p>
+      <h1>Connect your service</h1>
+
       <p>
-        Nice choice — you've just saved yourself months of backend work.
-        Signup, login, email verification, password reset, invitations,
-        and team management are already built and wired up in this starter.
+        Sign-up, login, email verification, password reset, invitations and team
+        management are already built and wired up. One step to go: point the app
+        at a RESTHeart Cloud service.
       </p>
-      <p>One last step: tell it which RESTHeart Cloud service to talk to.</p>
-      <p>
-        Set <code>apiUrl</code> in
-        <code>src/environments/environment.ts</code> (and
-        <code>environment.dev.ts</code> for local development).
-      </p>
-      <p>
-        Don't have a service yet?
-        <a href="https://cloud.restheart.com" target="_blank" rel="noopener">Create one for free</a>
-        — it takes less than a minute.
-      </p>
+
+      <div class="config-status">
+        @if (apiUrl) {
+          <p>
+            <code>apiUrl</code> is set to <code>{{ apiUrl }}</code>, which isn't a
+            RESTHeart Cloud service — it must be a <code>.restheart.com</code> address.
+          </p>
+        } @else {
+          <p><code>apiUrl</code> isn't set yet.</p>
+        }
+      </div>
+
+      <ol class="config-steps">
+        <li>
+          <div>
+            <strong>Create a free service</strong>
+            <p>
+              At
+              <a href="https://cloud.restheart.com" target="_blank" rel="noopener">cloud.restheart.com</a>
+              — it takes less than a minute. Skip this if you already have one.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Copy its URL into your environment file</strong>
+            <p>
+              Running <code>ng serve</code>? Edit
+              <code>src/environments/environment.dev.ts</code> — that's the file the
+              development build uses. Set <code>src/environments/environment.ts</code>
+              too when you build for production.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Reload</strong>
+            <p>This screen is replaced by the sign-in page, and you're in.</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </main>
 }

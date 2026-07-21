@@ -6,7 +6,7 @@
     <app-alert type="success" (close)="created.set(null)">
       "{{ team.name }}" created — you're the owner.
       <br />
-      <em class="muted">Demo note: this mock team won't appear in the switcher until restheart#643 lands server-side.</em>
+      <em class="muted">Note: it won't show up in your team list yet — creating teams isn't fully supported server-side.</em>
     </app-alert>
     <a routerLink="/teams" class="btn-primary link-btn">Back to teams</a>
   } @else {
