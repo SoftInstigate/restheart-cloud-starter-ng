@@ -94,6 +94,9 @@
               <span class="member-name">{{ invite.email }}</span>
               <span class="member-email">
                 {{ invite.role }}
+                @if (invite.createdAt) {
+                  · invited {{ invite.createdAt | date:'mediumDate' }}
+                }
                 @if (invite.expired) {
                   · expired
                 }
@@ -102,10 +105,16 @@
             <button
               type="button"
               class="btn-secondary"
-              [disabled]="resendingEmail() === invite.email"
+              [disabled]="resendingEmail() === invite.email || !canResend(invite.email)"
               (click)="resendInvite(invite)"
             >
-              {{ resendingEmail() === invite.email ? 'Sending…' : 'Resend' }}
+              @if (resendingEmail() === invite.email) {
+                Sending…
+              } @else if (!canResend(invite.email)) {
+                Wait {{ resendCooldownLeft(invite.email) }}
+              } @else {
+                Resend
+              }
             </button>
           </li>
         }

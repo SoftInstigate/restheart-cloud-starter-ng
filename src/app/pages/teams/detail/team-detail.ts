@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import type { TeamMembership, TeamMember, PendingInvitation } from '@restheart-cloud/kit-ng';
@@ -8,7 +9,7 @@ import { Alert } from '../../../ui/alert/alert';
 
 @Component({
   selector: 'app-team-detail',
-  imports: [ReactiveFormsModule, RouterLink, Alert],
+  imports: [ReactiveFormsModule, RouterLink, Alert, DatePipe],
   templateUrl: './team-detail.html',
   styleUrl: './team-detail.css',
 })
@@ -31,6 +32,8 @@ export class TeamDetail implements OnInit {
   protected readonly invitationsLoading = signal(true);
   protected readonly resendingEmail = signal<string | null>(null);
   protected readonly resendSuccessEmail = signal<string | null>(null);
+  private readonly resendCooldowns = signal<Record<string, number>>({});
+  private static readonly RESEND_COOLDOWN_MS = 5 * 60 * 1000;
 
   protected readonly inviteForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -140,9 +143,26 @@ export class TeamDetail implements OnInit {
       next: () => {
         this.resendingEmail.set(null);
         this.resendSuccessEmail.set(invite.email);
+        this.resendCooldowns.update(cooldowns => ({ ...cooldowns, [invite.email]: Date.now() }));
       },
       error: () => this.resendingEmail.set(null),
     });
+  }
+
+  protected canResend(email: string): boolean {
+    const since = this.resendCooldowns()[email];
+    if (!since) return true;
+    return Date.now() - since >= TeamDetail.RESEND_COOLDOWN_MS;
+  }
+
+  protected resendCooldownLeft(email: string): string {
+    const since = this.resendCooldowns()[email];
+    if (!since) return '';
+    const elapsed = Date.now() - since;
+    const remaining = TeamDetail.RESEND_COOLDOWN_MS - elapsed;
+    if (remaining <= 0) return '';
+    const minutes = Math.ceil(remaining / 60000);
+    return `${minutes}m`;
   }
 
   changeRole(member: TeamMember, role: 'owner' | 'member'): void {
