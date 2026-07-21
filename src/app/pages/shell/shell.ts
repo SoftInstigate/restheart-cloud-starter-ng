@@ -1,11 +1,21 @@
 import { Component, inject, signal, ElementRef, HostListener } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import { justSignedUp as justSignedUpFlag } from '../../just-signed-up';
 
 @Component({
   selector: 'app-shell',
-  imports: [RouterLink, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './shell.html',
   styleUrl: './shell.css',
 })
@@ -17,8 +27,24 @@ export class Shell {
   protected readonly justVerified = signal(justSignedUpFlag());
   protected readonly menuOpen = signal(false);
 
+  /** True while the router is resolving a route — drives the top progress bar.
+   *  Lazy-loaded routes fetch a chunk, so without this the app looks frozen. */
+  protected readonly navigating = signal(false);
+
   constructor() {
     justSignedUpFlag.set(false);
+
+    this.router.events.pipe(takeUntilDestroyed()).subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.navigating.set(true);
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.navigating.set(false);
+      }
+    });
   }
 
   protected initials(): string {
@@ -37,6 +63,11 @@ export class Shell {
     const ln = user.profile?.surname;
     if (fn || ln) return [fn, ln].filter(Boolean).join(' ');
     return user._id;
+  }
+
+  /** The account's email — RESTHeart Cloud uses it as the user id. */
+  protected email(): string {
+    return this.auth.user()?._id ?? '';
   }
 
   protected activeTeamName(): string {

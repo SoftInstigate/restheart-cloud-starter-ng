@@ -1,6 +1,23 @@
 <div class="layout">
+  @if (navigating()) {
+    <div class="nav-progress" role="progressbar" aria-label="Loading page"></div>
+  }
+
   <header class="header">
     <a routerLink="/" class="logo">RESTHeart Cloud</a>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Your app's main navigation.
+
+         Add your own sections here — one <a> per route. `routerLinkActive`
+         highlights the current section automatically, so new links need no
+         extra wiring. Account-level actions live in the avatar menu below,
+         not here.
+         ══════════════════════════════════════════════════════════════════ -->
+    <nav class="nav" aria-label="Main">
+      <a routerLink="/home" routerLinkActive="active" class="nav-link">Home</a>
+      <a routerLink="/teams" routerLinkActive="active" class="nav-link">Teams</a>
+    </nav>
 
     <div class="user-menu">
       <button type="button" class="avatar-btn" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">
@@ -11,11 +28,15 @@
         <div class="dropdown" (click)="$event.stopPropagation()">
           <div class="dropdown-header">
             <span class="dropdown-name">{{ displayName() }}</span>
-            <span class="dropdown-email">{{ activeTeamName() }}</span>
+            @if (email() && email() !== displayName()) {
+              <span class="dropdown-email">{{ email() }}</span>
+            }
+            @if (activeTeamName()) {
+              <span class="dropdown-team">Team: {{ activeTeamName() }}</span>
+            }
           </div>
           <div class="dropdown-divider"></div>
           <a routerLink="/account" class="dropdown-item" (click)="closeMenu()">Account</a>
-          <a routerLink="/teams" class="dropdown-item" (click)="closeMenu()">Teams</a>
           <div class="dropdown-divider"></div>
           <button type="button" class="dropdown-item dropdown-item-danger" (click)="logout()">Logout</button>
         </div>
