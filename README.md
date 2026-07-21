@@ -13,6 +13,8 @@ Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth 
 - Authenticated shell with placeholder for your app content
 - SSR for public routes, CSR for the authenticated shell
 
+![RESTHeart Cloud Starter Home Page](./starter-home-page.png)
+
 ## Prerequisites
 
 1. **A RESTHeart Cloud service** — [create one at cloud.restheart.com](https://cloud.restheart.com). Use a **free** service for development, a **shared** service (or higher) for production.
