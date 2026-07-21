@@ -24,19 +24,24 @@
         }
 
         <label for="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          formControlName="password"
-          autocomplete="new-password"
-          [attr.aria-invalid]="newUserForm.controls.password.invalid && newUserForm.controls.password.touched"
-          [attr.aria-describedby]="newUserForm.controls.password.invalid && newUserForm.controls.password.touched ? 'error-password' : null"
-        />
+        <div class="password-field">
+          <input
+            id="password"
+            [type]="showNewUserPassword() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="new-password"
+            [attr.aria-invalid]="newUserForm.controls.password.invalid && newUserForm.controls.password.touched"
+            [attr.aria-describedby]="newUserForm.controls.password.invalid && newUserForm.controls.password.touched ? 'error-password' : null"
+          />
+          <button type="button" class="btn-toggle-password" (click)="showNewUserPassword.update(v => !v)">
+            {{ showNewUserPassword() ? 'Hide' : 'Show' }}
+          </button>
+        </div>
         @if (newUserForm.controls.password.invalid && newUserForm.controls.password.touched) {
           <p id="error-password" class="field-error">Password must be at least 8 characters.</p>
         }
 
-        <button type="submit">Join team</button>
+        <button type="submit" [disabled]="newUserForm.invalid">Join team</button>
       </form>
     } @else if (auth.isAuthenticated()) {
       <div class="auth-card">
@@ -57,9 +62,19 @@
         }
 
         <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password" autocomplete="current-password" />
+        <div class="password-field">
+          <input
+            id="password"
+            [type]="showLoginPassword() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="current-password"
+          />
+          <button type="button" class="btn-toggle-password" (click)="showLoginPassword.update(v => !v)">
+            {{ showLoginPassword() ? 'Hide' : 'Show' }}
+          </button>
+        </div>
 
-        <button type="submit">Log in and join</button>
+        <button type="submit" [disabled]="loginForm.invalid">Log in and join</button>
       </form>
     }
   } @else {

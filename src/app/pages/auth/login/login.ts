@@ -30,6 +30,7 @@ export class Login {
   });
 
   readonly loading = signal(false);
+  readonly showPassword = signal(false);
   // The backend redirects here with ?error=... when a link it handled
   // directly (e.g. email verification) fails — surface that up front.
   readonly error = signal<string | null>(

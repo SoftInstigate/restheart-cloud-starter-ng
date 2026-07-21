@@ -29,10 +29,12 @@ export class Accept {
   readonly newUserForm = this.fb.nonNullable.group({
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
+  readonly showNewUserPassword = signal(false);
 
   readonly loginForm = this.fb.nonNullable.group({
     password: ['', [Validators.required]],
   });
+  readonly showLoginPassword = signal(false);
 
   constructor() {
     if (!this.missingParams) {

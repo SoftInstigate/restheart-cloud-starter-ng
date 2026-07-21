@@ -26,6 +26,7 @@ export class ResetPassword {
   });
 
   readonly loading = signal(false);
+  readonly showPassword = signal(false);
   readonly error = signal<string | null>(null);
 
   submit(): void {

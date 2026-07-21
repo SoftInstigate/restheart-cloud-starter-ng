@@ -19,13 +19,14 @@ export class Signup {
   protected readonly features = environment.features;
 
   readonly form = this.fb.nonNullable.group({
-    firstName: [''],
-    lastName: [''],
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
   readonly loading = signal(false);
+  readonly showPassword = signal(false);
   readonly error = signal<string | null>(null);
   readonly submitted = signal(false);
 
