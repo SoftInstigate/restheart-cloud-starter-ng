@@ -24,9 +24,16 @@
         }
 
         <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password" autocomplete="new-password" />
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          autocomplete="new-password"
+          [attr.aria-invalid]="newUserForm.controls.password.invalid && newUserForm.controls.password.touched"
+          [attr.aria-describedby]="newUserForm.controls.password.invalid && newUserForm.controls.password.touched ? 'error-password' : null"
+        />
         @if (newUserForm.controls.password.invalid && newUserForm.controls.password.touched) {
-          <p class="field-error">Password must be at least 8 characters.</p>
+          <p id="error-password" class="field-error">Password must be at least 8 characters.</p>
         }
 
         <button type="submit">Join team</button>

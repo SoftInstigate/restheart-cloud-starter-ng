@@ -2,6 +2,25 @@
    Layout and rhythm only — all visual primitives come from the default skin
    in src/styles.css. Replace this with your own layout. */
 
+/* ── Skip link ──────────────────────────────────────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  z-index: 999;
+  text-decoration: none;
+  border: var(--border-width) solid var(--color-border);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 .layout {
   min-height: 100vh;
   display: flex;

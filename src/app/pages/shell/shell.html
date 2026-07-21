@@ -1,3 +1,5 @@
+<a class="skip-link" href="#main">Skip to content</a>
+
 <div class="layout">
   @if (navigating()) {
     <div class="nav-progress" role="progressbar" aria-label="Loading page"></div>
@@ -20,12 +22,20 @@
     </nav>
 
     <div class="user-menu">
-      <button type="button" class="avatar-btn" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">
+      <button
+        #avatarBtn
+        type="button"
+        class="avatar-btn"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-haspopup="menu"
+        aria-label="Account menu"
+      >
         {{ initials() }}
       </button>
 
       @if (menuOpen()) {
-        <div class="dropdown" (click)="$event.stopPropagation()">
+        <div class="dropdown" role="menu" (click)="$event.stopPropagation()" (keydown)="onMenuKeydown($event)">
           <div class="dropdown-header">
             <span class="dropdown-name">{{ displayName() }}</span>
             @if (email() && email() !== displayName()) {
@@ -36,9 +46,9 @@
             }
           </div>
           <div class="dropdown-divider"></div>
-          <a routerLink="/account" class="dropdown-item" (click)="closeMenu()">Account</a>
+          <a #firstMenuItem routerLink="/account" class="dropdown-item" role="menuitem" (click)="closeMenu()">Account</a>
           <div class="dropdown-divider"></div>
-          <button type="button" class="dropdown-item dropdown-item-danger" (click)="logout()">Logout</button>
+          <button type="button" class="dropdown-item dropdown-item-danger" role="menuitem" (click)="logout()">Logout</button>
         </div>
       }
     </div>
@@ -51,7 +61,7 @@
     </div>
   }
 
-  <main class="main">
+  <main id="main" class="main">
     <router-outlet />
   </main>
 </div>

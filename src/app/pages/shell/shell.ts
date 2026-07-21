@@ -1,4 +1,4 @@
-import { Component, inject, signal, ElementRef, HostListener } from '@angular/core';
+import { Component, inject, signal, ElementRef, HostListener, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   NavigationCancel,
@@ -30,6 +30,9 @@ export class Shell {
   /** True while the router is resolving a route — drives the top progress bar.
    *  Lazy-loaded routes fetch a chunk, so without this the app looks frozen. */
   protected readonly navigating = signal(false);
+
+  private readonly avatarBtn = viewChild<ElementRef<HTMLButtonElement>>('avatarBtn');
+  private readonly firstMenuItem = viewChild<ElementRef<HTMLElement>>('firstMenuItem');
 
   constructor() {
     justSignedUpFlag.set(false);
@@ -78,10 +81,23 @@ export class Shell {
 
   protected toggleMenu(): void {
     this.menuOpen.update(v => !v);
+    if (this.menuOpen()) {
+      // Move focus to first menu item on next tick
+      setTimeout(() => this.firstMenuItem()?.nativeElement?.focus(), 0);
+    }
   }
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
+    // Return focus to the avatar button
+    this.avatarBtn()?.nativeElement?.focus();
+  }
+
+  protected onMenuKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.closeMenu();
+    }
   }
 
   dismissWelcome(): void {
