@@ -192,7 +192,15 @@ textarea:disabled {
   cursor: not-allowed;
 }
 
-input::placeholder {
+textarea {
+  /* Only vertical resize — horizontal dragging breaks the form layout. */
+  resize: vertical;
+  min-height: 4.5rem;
+  line-height: var(--leading-normal);
+}
+
+input::placeholder,
+textarea::placeholder {
   color: var(--color-text-muted);
   opacity: 0.7;
 }
@@ -404,7 +412,8 @@ input::placeholder {
 }
 
 .form-field input,
-.form-field select {
+.form-field select,
+.form-field textarea {
   width: 100%;
 }
 

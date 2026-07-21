@@ -108,7 +108,7 @@
       </div>
       <div class="form-field">
         <label for="team-description">Description</label>
-        <input id="team-description" type="text" formControlName="description" placeholder="Optional" />
+        <textarea id="team-description" rows="3" formControlName="description" placeholder="Optional"></textarea>
       </div>
       <button type="submit" class="btn-primary" [disabled]="teamSaving()">
         {{ teamSaving() ? 'Saving…' : 'Save changes' }}
