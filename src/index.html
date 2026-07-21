@@ -6,6 +6,17 @@
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="favicon.png" />
+    <script>
+      // Apply a stored dark preference before first paint, otherwise the page
+      // renders light and flips once Angular bootstraps ThemeService.
+      // The key must stay in sync with STORAGE_KEY in src/app/theme.service.ts.
+      // Wrapped because localStorage throws when storage is blocked.
+      try {
+        if (localStorage.getItem('rh-theme') === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch {}
+    </script>
   </head>
   <body>
     <app-root></app-root>

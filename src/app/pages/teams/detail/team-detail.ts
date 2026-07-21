@@ -1,4 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { interval } from 'rxjs';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -34,6 +36,22 @@ export class TeamDetail implements OnInit {
   protected readonly resendSuccessEmail = signal<string | null>(null);
   private readonly resendCooldowns = signal<Record<string, number>>({});
   private static readonly RESEND_COOLDOWN_MS = 5 * 60 * 1000;
+
+  /** Ticking clock for the resend cooldown.
+   *
+   *  `Date.now()` is not a reactive source, and this app is zoneless — change
+   *  detection only reruns when a signal changes. Reading the wall clock
+   *  directly would freeze the "Wait 3m" label and leave the button disabled
+   *  after the cooldown expired, until some unrelated update happened to
+   *  trigger a render. Ticking a signal instead makes the countdown real. */
+  private readonly now = signal(Date.now());
+
+  constructor() {
+    // The label is minute-granular, so 30s is a generous enough resolution.
+    interval(30_000)
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.now.set(Date.now()));
+  }
 
   protected readonly inviteForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -141,9 +159,13 @@ export class TeamDetail implements OnInit {
     this.resendSuccessEmail.set(null);
     this.auth.resendInvite(invite.email).subscribe({
       next: () => {
+        // Same timestamp for both, so the countdown starts at a clean 5m
+        // instead of rounding up against a clock that ticked 30s ago.
+        const at = Date.now();
         this.resendingEmail.set(null);
         this.resendSuccessEmail.set(invite.email);
-        this.resendCooldowns.update(cooldowns => ({ ...cooldowns, [invite.email]: Date.now() }));
+        this.resendCooldowns.update(cooldowns => ({ ...cooldowns, [invite.email]: at }));
+        this.now.set(at);
       },
       error: () => this.resendingEmail.set(null),
     });
@@ -152,14 +174,13 @@ export class TeamDetail implements OnInit {
   protected canResend(email: string): boolean {
     const since = this.resendCooldowns()[email];
     if (!since) return true;
-    return Date.now() - since >= TeamDetail.RESEND_COOLDOWN_MS;
+    return this.now() - since >= TeamDetail.RESEND_COOLDOWN_MS;
   }
 
   protected resendCooldownLeft(email: string): string {
     const since = this.resendCooldowns()[email];
     if (!since) return '';
-    const elapsed = Date.now() - since;
-    const remaining = TeamDetail.RESEND_COOLDOWN_MS - elapsed;
+    const remaining = TeamDetail.RESEND_COOLDOWN_MS - (this.now() - since);
     if (remaining <= 0) return '';
     const minutes = Math.ceil(remaining / 60000);
     return `${minutes}m`;
