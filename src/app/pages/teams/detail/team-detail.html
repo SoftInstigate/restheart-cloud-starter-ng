@@ -10,6 +10,8 @@
   <h2>Members</h2>
   @if (membersLoading()) {
     <p class="muted">Loading members…</p>
+  } @else if (members().length === 0) {
+    <p class="muted">No members yet.</p>
   } @else {
     <ul class="member-list">
       @for (member of members(); track member.email) {
@@ -74,7 +76,12 @@
     </form>
   </section>
 
-  @if (!invitationsLoading() && invitations().length > 0) {
+  @if (invitationsLoading()) {
+    <section class="card">
+      <h2>Pending invitations</h2>
+      <p class="muted">Loading invitations…</p>
+    </section>
+  } @else if (invitations().length > 0) {
     <section class="card">
       <h2>Pending invitations</h2>
       @if (resendSuccessEmail()) {
