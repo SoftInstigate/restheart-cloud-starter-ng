@@ -143,6 +143,34 @@
 
 /* ── Avatar & dropdown ──────────────────────────────────────────────────── */
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: none;
+}
+
+.btn-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition:
+    color var(--transition),
+    background var(--transition);
+}
+
+.btn-icon:hover {
+  color: var(--color-text);
+  background: var(--color-surface-sunken);
+}
+
 .user-menu {
   position: relative;
   flex: none;

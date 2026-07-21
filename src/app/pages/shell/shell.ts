@@ -12,6 +12,7 @@ import {
 } from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import { justSignedUp as justSignedUpFlag } from '../../just-signed-up';
+import { ThemeService } from '../../theme.service';
 
 @Component({
   selector: 'app-shell',
@@ -23,6 +24,7 @@ export class Shell {
   private readonly router = inject(Router);
   private readonly el = inject(ElementRef);
   protected readonly auth = inject(RhAuthService);
+  protected readonly theme = inject(ThemeService);
 
   /** Set for *any* fresh signup — email verification or OAuth — so the banner
    *  copy must not claim an email was verified. */

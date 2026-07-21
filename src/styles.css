@@ -120,6 +120,44 @@
 }
 
 /* ============================================================================
+   Dark mode — class-based override (.dark on :root).
+   Since every colour flows through a token, no per-component changes needed.
+
+   The ThemeService in shell.ts toggles this class and persists the choice
+   in localStorage. Default is light.
+   ========================================================================== */
+
+:root.dark {
+  /* ── Colour ─────────────────────────────────────────────────────────── */
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-surface-sunken: #0d1117;
+  --color-border: #30363d;
+  --color-border-strong: #484f58;
+  --color-text: #e6edf3;
+  --color-text-muted: #8b949e;
+
+  /* Amber accent — slightly brighter for dark-bg contrast. */
+  --color-primary: #f8a839;
+  --color-primary-hover: #fbb85c;
+  --color-on-primary: #14171c;
+
+  /* Teal link/success — lightened for readability on dark. */
+  --color-link: #3fb68b;
+  --color-success: #3fb68b;
+
+  --color-error: #f87171;
+  --color-error-bg: #2d1216;
+  --color-on-error: #14171c;
+
+  /* Grid barely visible on dark. */
+  --color-grid: rgba(230, 237, 243, 0.03);
+
+  /* ── Elevation ──────────────────────────────────────────────────────── */
+  --shadow-popup: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================================
    2. Base — element-level defaults. These reach every component, including the
       page-specific ones, so the whole app inherits the design language.
    ========================================================================== */
