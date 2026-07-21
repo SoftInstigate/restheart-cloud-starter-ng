@@ -16,39 +16,6 @@
   max-height: 240px;
 }
 
-/* ── Cards ──────────────────────────────────────────────────────────────── */
-
-.card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.card h2 {
-  margin: 0 0 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.card-header h2 {
-  margin: 0;
-}
-
-.muted {
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-  margin: 0;
-}
-
 /* ── Team switcher ──────────────────────────────────────────────────────── */
 
 .team-list {
@@ -163,27 +130,6 @@
   color: var(--color-text);
 }
 
-.btn-danger-text {
-  font: inherit;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  padding: 0.3rem 0.5rem;
-  border: none;
-  background: transparent;
-  color: var(--color-error);
-  cursor: pointer;
-  border-radius: var(--radius);
-}
-
-.btn-danger-text:hover:not(:disabled) {
-  background: var(--color-error-bg);
-}
-
-.btn-danger-text:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 /* ── Forms (invite, team settings) ─────────────────────────────────────── */
 
 .invite-form {
@@ -191,96 +137,6 @@
   flex-direction: column;
   gap: 0.75rem;
 }
-
-.form-row {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.form-field {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-field-sm {
-  flex: 0 0 140px;
-}
-
-.form-field label {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-}
-
-.form-field input,
-.form-field select {
-  font: inherit;
-  padding: 0.5rem 0.625rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-}
-
-.form-field input:focus-visible,
-.form-field select:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 1px;
-}
-
-.btn-primary {
-  align-self: flex-start;
-  font: inherit;
-  font-weight: 600;
-  padding: 0.5rem 1.25rem;
-  border: none;
-  border-radius: var(--radius);
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: var(--color-primary-hover);
-}
-
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  font: inherit;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: border-color 0.15s ease;
-}
-
-.btn-secondary:hover {
-  border-color: var(--color-primary);
-}
-
-.success-msg {
-  color: var(--color-link);
-  background: color-mix(in srgb, var(--color-link) 8%, transparent);
-  border-radius: var(--radius);
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  margin: 0 0 0.75rem;
-}
-
-/* .form-error is defined globally in styles.css, shared with the auth pages */
 
 /* ── Danger zone ────────────────────────────────────────────────────────── */
 
@@ -299,28 +155,6 @@
   display: block;
   font-size: 0.9375rem;
   margin-bottom: 0.125rem;
-}
-
-.btn-danger {
-  font: inherit;
-  font-weight: 600;
-  font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--color-error);
-  border-radius: var(--radius);
-  background: var(--color-error-bg);
-  color: var(--color-error);
-  cursor: pointer;
-}
-
-.btn-danger:hover:not(:disabled) {
-  background: var(--color-error);
-  color: white;
-}
-
-.btn-danger:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 .delete-confirm {
