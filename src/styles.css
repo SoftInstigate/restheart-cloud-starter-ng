@@ -1,30 +1,128 @@
-/* Global styles.
- *
- * Plain CSS, no framework — this is a starter, not an opinionated app.
- * Everything below is a small set of custom properties plus the minimum
- * rules the auth pages need. Restyle freely, or swap in your own
- * UI/CSS framework of choice without fighting existing conventions.
- */
+/* ============================================================================
+   RESTHeart Cloud Starter — global stylesheet
+   ============================================================================
+
+   THIS IS A DISPOSABLE DEFAULT SKIN.
+
+   Plain CSS, no framework — this is a starter, not an opinionated app. The look
+   below is deliberately a *mockup*: a cohesive, high-craft placeholder, not a
+   finished product. It is meant to be thrown away.
+
+   Two ways to make it yours:
+
+     1. Tweak it — change the tokens in section 1, then the skin classes in
+        section 3. Everything flows from the tokens, so re-theming is one edit.
+
+     2. Replace it — adopt Material / Spartan / Tailwind / your own: delete
+        sections 3-5 below and reskin the templates using the swap map in
+        README.md. Templates only reference a small, stable vocabulary of
+        semantic class hooks (.card, .btn-primary, .form-field, …), so this is a
+        mechanical find-&-replace.
+
+   The design language ("blueprint"):
+     - flat, crisp surfaces — borders and typography carry the design, not
+       shadows or gradients;
+     - squared-off radii and a faint dot grid, so it reads as a drafting sheet
+       rather than a finished consumer app;
+     - UI chrome (form labels, back links, secondary actions) set in small
+       uppercase monospace — a spec-sheet motif applied only to chrome, never
+       to user data;
+     - one accent (RESTHeart amber) for primary actions, teal for links and
+       success. Everything else is neutral.
+
+   Page stylesheets under src/app/pages/** hold only page-specific layout.
+   ========================================================================== */
+
+/* ============================================================================
+   1. Design tokens — the single source of colour, type, space and shape.
+      Re-theme the whole app from here. Every colour is a token so dark mode
+      can be added by overriding this block alone.
+   ========================================================================== */
 
 :root {
-  --color-bg: #f6f7f9;
+  /* ── Colour ─────────────────────────────────────────────────────────── */
+  --color-bg: #f4f6f8;
   --color-surface: #ffffff;
-  --color-border: #dde1e6;
-  --color-text: #1a1d23;
-  --color-text-muted: #6b7280;
+  /* Recessed surface: skeletons, code chips, disabled fields. */
+  --color-surface-sunken: #eef1f4;
+  --color-border: #d8dde4;
+  --color-border-strong: #b6bfcb;
+  --color-text: #14171c;
+  --color-text-muted: #656d7a;
+
+  /* RESTHeart Cloud amber — the one accent. Paired with dark text. */
   --color-primary: #f8a839;
-  --color-primary-hover: #d38f30;
-  --color-on-primary: #1a1d23;
-  /* RESTHeart Cloud's teal-green accent, darkened for readable text-link
-     contrast on white (also part of the same brand palette). */
-  --color-link: #2c7f61;
+  --color-primary-hover: #e0942b;
+  --color-on-primary: #14171c;
+
+  /* RESTHeart Cloud's teal-green, darkened for readable text-link contrast
+     on white (also part of the same brand palette). Doubles as "success". */
+  --color-link: #1f6f54;
+  --color-success: #1f6f54;
+
   --color-error: #b91c1c;
   --color-error-bg: #fef2f2;
+  --color-on-error: #ffffff;
 
-  --radius: 8px;
-  --spacing: 1rem;
+  /* Faint drafting-paper grid painted on the page background. */
+  --color-grid: rgba(20, 23, 28, 0.045);
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
   --font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-md: 0.9375rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.55;
+
+  /* Tracking for the uppercase monospace micro-label motif. */
+  --tracking-label: 0.09em;
+
+  /* ── Space ──────────────────────────────────────────────────────────── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* ── Shape ──────────────────────────────────────────────────────────── */
+  --radius-sm: 3px;
+  --radius: 5px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+
+  --border-width: 1px;
+
+  /* ── Motion & elevation ─────────────────────────────────────────────── */
+  --transition: 0.15s ease;
+  /* The only shadow in the system: popups need elevation to be usable. */
+  --shadow-popup: 0 8px 24px rgba(20, 23, 28, 0.12);
+
+  /* ── Focus ──────────────────────────────────────────────────────────── */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* ── Legacy alias ───────────────────────────────────────────────────── */
+  /* Kept so existing page CSS using var(--spacing) keeps working. Prefer the
+     --space-* scale in new code. */
+  --spacing: 1rem;
 }
+
+/* ============================================================================
+   2. Base — element-level defaults. These reach every component, including the
+      page-specific ones, so the whole app inherits the design language.
+   ========================================================================== */
 
 * {
   box-sizing: border-box;
@@ -33,11 +131,378 @@
 body {
   margin: 0;
   font-family: var(--font-family);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
   color: var(--color-text);
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  /* Drafting-paper dot grid — the "this is a mockup" signal. Delete this
+     background-image pair to get a plain surface. */
+  background-image: radial-gradient(var(--color-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Auth pages (login, signup, forgot/reset password, activate, accept-invite) */
+h1,
+h2,
+h3 {
+  line-height: var(--leading-tight);
+  letter-spacing: -0.011em;
+  text-wrap: balance;
+}
+
+p {
+  line-height: var(--leading-normal);
+}
+
+a {
+  color: var(--color-link);
+}
+
+/* Form controls inherit the app's typography instead of the browser's. */
+input,
+select,
+textarea,
+button {
+  font: inherit;
+  color: inherit;
+}
+
+input,
+select,
+textarea {
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color var(--transition);
+}
+
+input:hover:not(:disabled),
+select:hover:not(:disabled),
+textarea:hover:not(:disabled) {
+  border-color: var(--color-border-strong);
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  color: var(--color-text-muted);
+  background: var(--color-surface-sunken);
+  cursor: not-allowed;
+}
+
+input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+/* One consistent focus ring for every interactive element in the app. */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-primary);
+  outline-offset: var(--focus-ring-offset);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+/* ============================================================================
+   3. Default skin — DELETE ME when you adopt a UI framework
+   ============================================================================
+   The semantic class hooks the templates depend on. Restyle them, or delete
+   them and swap the hooks in the templates (see the swap map in README.md).
+   ========================================================================== */
+
+/* ── Cards ─────────────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.card > :last-child {
+  margin-bottom: 0;
+}
+
+/* Section headings carry the accent tick — the second half of the motif. */
+.card h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.card h2::before {
+  content: '';
+  flex: none;
+  width: 3px;
+  align-self: stretch;
+  min-height: 1.1em;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.card-header h2 {
+  margin: 0;
+}
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+
+/* Primary — the one confident, accented action. Set in sentence case so it
+   stands apart from the monospace chrome. */
+.btn-primary {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  padding: var(--space-2) var(--space-5);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Secondary — quiet, bordered, and set in the monospace chrome style. */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--color-border-strong);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-error);
+  border-radius: var(--radius);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    color var(--transition);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--color-error);
+  color: var(--color-on-error);
+}
+
+.btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-danger-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  padding: var(--space-1) var(--space-2);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-error);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.btn-danger-text:hover:not(:disabled) {
+  background: var(--color-error-bg);
+}
+
+.btn-danger-text:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Forms ─────────────────────────────────────────────────────────────── */
+
+.form-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.form-field-sm {
+  flex: 0 0 140px;
+}
+
+/* The motif: labels are spec-sheet micro-labels. */
+.form-field label,
+.auth-card label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+}
+
+/* ── Feedback ──────────────────────────────────────────────────────────── */
+
+.success-msg {
+  color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 8%, transparent);
+  border: var(--border-width) solid
+    color-mix(in srgb, var(--color-success) 30%, transparent);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-3);
+}
+
+.form-error {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+  border: var(--border-width) solid
+    color-mix(in srgb, var(--color-error) 25%, transparent);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-base);
+}
+
+.field-error {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+  margin: var(--space-1) 0 0;
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  margin: 0;
+}
+
+/* ── Small UI ──────────────────────────────────────────────────────────── */
+
+.back-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-bottom: var(--space-3);
+  transition: color var(--transition);
+}
+
+.back-link:hover {
+  color: var(--color-text);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-primary) 16%, transparent);
+  color: var(--color-text);
+}
+
+/* ── Placeholder & loading utilities ───────────────────────────────────── */
+
+/* A dashed outline marks a genuine placeholder — an empty region or a slot
+   waiting for your content. Solid borders mean real content. */
+.placeholder {
+  border: var(--border-width) dashed var(--color-border-strong);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Skeleton block for loading states. */
+.skeleton {
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-sunken);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* ============================================================================
+   4. Auth pages — login, signup, forgot/reset password, verify, accept-invite
+   ========================================================================== */
 
 .auth-page {
   min-height: 100vh;
@@ -48,37 +513,78 @@ body {
      doesn't fit the viewport. */
   align-items: safe center;
   justify-content: center;
-  padding: var(--spacing) var(--spacing) calc(var(--spacing) * 2);
+  padding: var(--space-4) var(--space-4) var(--space-6);
 }
 
 .auth-card {
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius);
-  padding: calc(var(--spacing) * 2);
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-1);
 }
 
 .auth-card h1 {
-  margin: 0 0 var(--spacing);
-  font-size: 1.25rem;
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-lg);
+  font-weight: 600;
 }
 
 .auth-card p {
   margin: 0;
 }
 
+.auth-card label {
+  display: block;
+  margin-top: var(--space-4);
+}
+
+.auth-card input {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-1);
+}
+
+/* The auth submit is the page's primary action — same treatment as
+   .btn-primary, full width. */
+.auth-card button[type='submit'],
+.auth-card > button {
+  font-weight: 600;
+  margin-top: var(--space-5);
+  padding: var(--space-3);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.auth-card button[type='submit']:hover:not(:disabled),
+.auth-card > button:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.auth-card button[type='submit']:disabled,
+.auth-card > button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .divider {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin: var(--spacing) 0;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
   color: var(--color-text-muted);
-  font-size: 0.75rem;
 }
 
 .divider::before,
@@ -89,68 +595,9 @@ body {
   background: var(--color-border);
 }
 
-.auth-card label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-top: var(--spacing);
-}
-
-.auth-card input {
-  display: block;
-  width: 100%;
-  font: inherit;
-  padding: 0.5rem 0.625rem;
-  margin-top: 0.25rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-}
-
-.auth-card input:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 1px;
-}
-
-.auth-card button {
-  font: inherit;
-  font-weight: 600;
-  margin-top: calc(var(--spacing) * 1.5);
-  padding: 0.625rem;
-  border: none;
-  border-radius: var(--radius);
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  cursor: pointer;
-}
-
-.auth-card button:hover:not(:disabled) {
-  background: var(--color-primary-hover);
-}
-
-.auth-card button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.form-error {
-  color: var(--color-error);
-  background: var(--color-error-bg);
-  border-radius: var(--radius);
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-}
-
-.field-error {
-  color: var(--color-error);
-  font-size: 0.8125rem;
-  margin: 0.25rem 0 0;
-}
-
 .auth-card .auth-links {
-  margin-top: calc(var(--spacing) * 1.5);
-  font-size: 0.875rem;
+  margin-top: var(--space-5);
+  font-size: var(--text-base);
   color: var(--color-text-muted);
   text-align: center;
 }
@@ -164,267 +611,102 @@ body {
   text-decoration: underline;
 }
 
-/* Tighten spacing on small screens so longer forms (e.g. signup) need
-   less scrolling to reach the submit button. */
-@media (max-width: 480px) {
-  .auth-card {
-    padding: calc(var(--spacing) * 1.25);
-  }
-
-  .auth-card label {
-    margin-top: 0.625rem;
-  }
-
-  .divider {
-    margin: 0.625rem 0;
-  }
-
-  .auth-card button {
-    margin-top: var(--spacing);
-  }
-
-  .auth-card .auth-links {
-    margin-top: var(--spacing);
-  }
-}
-
-/* Shown instead of the app when environment.apiUrl is not set */
+/* ============================================================================
+   5. Config page — shown instead of the app when environment.apiUrl is not set
+   ========================================================================== */
 
 .config-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing);
+  padding: var(--space-4);
 }
 
 .config-card {
   max-width: 480px;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius);
-  padding: calc(var(--spacing) * 2);
+  padding: var(--space-6);
 }
 
 .config-card h1 {
-  margin: 0 0 var(--spacing);
-  font-size: 1.25rem;
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-lg);
+  font-weight: 600;
 }
 
 .config-card p {
-  margin: 0 0 var(--spacing);
-  line-height: 1.5;
+  margin: 0 0 var(--space-4);
 }
 
 .config-card code {
-  background: var(--color-bg);
-  border-radius: 4px;
-  padding: 0.125rem 0.375rem;
+  font-family: var(--font-mono);
   font-size: 0.875em;
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-sm);
+  padding: 0.125rem var(--space-1);
 }
 
 .config-card a {
   color: var(--color-link);
 }
 
-/* ============================================================
-   Default skin — DELETE ME when you adopt a UI framework
-   ============================================================
-   This is the starter's default look. It's meant to be thrown
-   away when you adopt a UI framework — delete this section
-   (and swap the class hooks in the templates per the swap map
-   in the README).
+/* ============================================================================
+   6. Responsive
+   ========================================================================== */
 
-   All visual primitives live here as a single, self-contained
-   layer. Page CSS files contain only page-specific rules.
-   TASK 2B's mockup design language will also live here.
-   ============================================================ */
+@media (max-width: 560px) {
+  /* Side-by-side fields stack rather than squeeze. */
+  .form-row {
+    flex-direction: column;
+  }
 
-/* ── Cards ─────────────────────────────────────────────────── */
+  .form-field-sm {
+    flex: 1;
+  }
 
-.card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
+  .card {
+    padding: var(--space-4);
+  }
 }
 
-.card h2 {
-  margin: 0 0 1rem;
-  font-size: 1rem;
-  font-weight: 600;
+/* Tighten spacing on small screens so longer forms (e.g. signup) need
+   less scrolling to reach the submit button. */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: var(--space-5);
+  }
+
+  .auth-card label {
+    margin-top: var(--space-3);
+  }
+
+  .divider {
+    margin: var(--space-3) 0;
+  }
+
+  .auth-card button[type='submit'],
+  .auth-card > button {
+    margin-top: var(--space-4);
+  }
+
+  .auth-card .auth-links {
+    margin-top: var(--space-4);
+  }
 }
 
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
+/* ============================================================================
+   7. Reduced motion
+   ========================================================================== */
 
-.card-header h2 {
-  margin: 0;
-}
-
-/* ── Buttons ───────────────────────────────────────────────── */
-
-.btn-primary {
-  align-self: flex-start;
-  font: inherit;
-  font-weight: 600;
-  padding: 0.5rem 1.25rem;
-  border: none;
-  border-radius: var(--radius);
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: var(--color-primary-hover);
-}
-
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  font: inherit;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: border-color 0.15s ease;
-}
-
-.btn-secondary:hover {
-  border-color: var(--color-primary);
-}
-
-.btn-danger {
-  font: inherit;
-  font-weight: 600;
-  font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--color-error);
-  border-radius: var(--radius);
-  background: var(--color-error-bg);
-  color: var(--color-error);
-  cursor: pointer;
-}
-
-.btn-danger:hover:not(:disabled) {
-  background: var(--color-error);
-  color: white;
-}
-
-.btn-danger:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-danger-text {
-  font: inherit;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  padding: 0.3rem 0.5rem;
-  border: none;
-  background: transparent;
-  color: var(--color-error);
-  cursor: pointer;
-  border-radius: var(--radius);
-}
-
-.btn-danger-text:hover:not(:disabled) {
-  background: var(--color-error-bg);
-}
-
-.btn-danger-text:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* ── Forms ──────────────────────────────────────────────────── */
-
-.form-row {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.form-field {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.form-field-sm {
-  flex: 0 0 140px;
-}
-
-.form-field label {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-}
-
-.form-field input,
-.form-field select {
-  font: inherit;
-  padding: 0.5rem 0.625rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-}
-
-.form-field input:disabled {
-  color: var(--color-text-muted);
-  background: var(--color-bg);
-}
-
-.form-field input:focus-visible,
-.form-field select:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 1px;
-}
-
-/* ── Feedback ──────────────────────────────────────────────── */
-
-.success-msg {
-  color: var(--color-link);
-  background: color-mix(in srgb, var(--color-link) 8%, transparent);
-  border-radius: var(--radius);
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  margin: 0 0 0.75rem;
-}
-
-.muted {
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-  margin: 0;
-}
-
-/* ── Small UI ──────────────────────────────────────────────── */
-
-.back-link {
-  display: inline-block;
-  font-size: 0.8125rem;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  margin-bottom: 0.75rem;
-}
-
-.back-link:hover {
-  color: var(--color-text);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
