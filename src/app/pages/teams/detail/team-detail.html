@@ -20,11 +20,21 @@
           </div>
           @if (isOwner()) {
             <div class="member-actions">
-              <select class="role-select" [value]="member.role" [disabled]="memberActionPending() === member.email" (change)="changeRole(member, $any($event.target).value)">
-                <option value="member">Member</option>
-                <option value="owner">Owner</option>
-              </select>
-              <button type="button" class="btn-danger-text" [disabled]="memberActionPending() === member.email" (click)="removeMember(member)">Remove</button>
+              @if (member.email !== auth.user()?._id) {
+                <select class="role-select" [value]="member.role" [disabled]="memberActionPending() === member.email" (change)="changeRole(member, $any($event.target).value)">
+                  <option value="member">Member</option>
+                  <option value="owner">Owner</option>
+                </select>
+                @if (removingMemberEmail() === member.email) {
+                  <span class="muted">Remove?</span>
+                  <button type="button" class="btn-danger-text" [disabled]="memberActionPending() === member.email" (click)="removeMember(member)">Yes</button>
+                  <button type="button" class="btn-secondary" (click)="cancelRemove()">No</button>
+                } @else {
+                  <button type="button" class="btn-danger-text" [disabled]="memberActionPending() === member.email" (click)="confirmRemove(member.email)">Remove</button>
+                }
+              } @else {
+                <span class="team-role">{{ member.role }}</span>
+              }
             </div>
           } @else {
             <span class="team-role">{{ member.role }}</span>
@@ -39,10 +49,10 @@
   <section class="card">
     <h2>Invite a team member</h2>
     @if (inviteSent()) {
-      <p class="success-msg">Invitation sent!</p>
+      <app-alert type="success" (close)="inviteSent.set(false)">Invitation sent!</app-alert>
     }
     @if (inviteError()) {
-      <p class="form-error" role="alert">{{ inviteError() }}</p>
+      <app-alert type="error" (close)="inviteError.set(null)">{{ inviteError() }}</app-alert>
     }
     <form [formGroup]="inviteForm" (ngSubmit)="sendInvite()" novalidate class="invite-form">
       <div class="form-row">
@@ -58,7 +68,7 @@
           </select>
         </div>
       </div>
-      <button type="submit" class="btn-primary" [disabled]="inviteSending()">
+      <button type="submit" class="btn-primary" [disabled]="inviteSending() || inviteForm.invalid">
         {{ inviteSending() ? 'Sending…' : 'Send invite' }}
       </button>
     </form>
@@ -67,6 +77,9 @@
   @if (!invitationsLoading() && invitations().length > 0) {
     <section class="card">
       <h2>Pending invitations</h2>
+      @if (resendSuccessEmail()) {
+        <app-alert type="success" (close)="resendSuccessEmail.set(null)">Invitation resent to {{ resendSuccessEmail() }}!</app-alert>
+      }
       <ul class="member-list">
         @for (invite of invitations(); track invite.email) {
           <li class="member-row" [class.expired]="invite.expired">
@@ -96,21 +109,21 @@
   <section class="card">
     <h2>Team settings</h2>
     @if (teamSaved()) {
-      <p class="success-msg">Team updated!</p>
+      <app-alert type="success" (close)="teamSaved.set(false)">Team updated!</app-alert>
     }
     @if (teamError()) {
-      <p class="form-error" role="alert">{{ teamError() }}</p>
+      <app-alert type="error" (close)="teamError.set(null)">{{ teamError() }}</app-alert>
     }
     <form [formGroup]="teamForm" (ngSubmit)="saveTeam()" novalidate class="invite-form">
       <div class="form-field">
         <label for="team-name">Team name</label>
-        <input id="team-name" type="text" formControlName="name" />
+        <input id="team-name" type="text" formControlName="name" autocomplete="off" />
       </div>
       <div class="form-field">
         <label for="team-description">Description</label>
-        <textarea id="team-description" rows="3" formControlName="description" placeholder="Optional"></textarea>
+        <textarea id="team-description" rows="3" formControlName="description" placeholder="Optional" autocomplete="off"></textarea>
       </div>
-      <button type="submit" class="btn-primary" [disabled]="teamSaving()">
+      <button type="submit" class="btn-primary" [disabled]="teamSaving() || !teamForm.dirty">
         {{ teamSaving() ? 'Saving…' : 'Save changes' }}
       </button>
     </form>
@@ -132,7 +145,7 @@
         </div>
       }
       @if (deleteError()) {
-        <p class="form-error" role="alert">{{ deleteError() }}</p>
+        <app-alert type="error" (close)="deleteError.set(null)">{{ deleteError() }}</app-alert>
       }
     </div>
   </section>

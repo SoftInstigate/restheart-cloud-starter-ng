@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
+import { Alert } from '../../../ui/alert/alert';
 
 @Component({
   selector: 'app-reset-password',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, Alert],
   templateUrl: './reset-password.html',
   styleUrl: './reset-password.css',
 })

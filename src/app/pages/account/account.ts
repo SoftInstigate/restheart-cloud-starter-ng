@@ -1,10 +1,11 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
+import { Alert } from '../../ui/alert/alert';
 
 @Component({
   selector: 'app-account',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Alert],
   templateUrl: './account.html',
   styleUrl: './account.css',
 })
@@ -14,9 +15,10 @@ export class Account implements OnInit {
 
   // ── Profile ────────────────────────────────────────────────────────────
   protected readonly profileForm = this.fb.nonNullable.group({
-    firstName: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
+    firstName: [{ value: '', disabled: true }, [Validators.required]],
+    lastName: [{ value: '', disabled: true }, [Validators.required]],
   });
+  protected readonly profileLoading = signal(true);
   protected readonly profileSaving = signal(false);
   protected readonly profileSaved = signal(false);
   protected readonly profileError = signal<string | null>(null);
@@ -31,6 +33,11 @@ export class Account implements OnInit {
   protected readonly passwordError = signal<string | null>(null);
 
   ngOnInit(): void {
+    // Subscribe BEFORE patchValue so the clear-on-edit handler is in place
+    // when the initial data load triggers valueChanges.
+    this.profileForm.valueChanges.subscribe(() => this.profileSaved.set(false));
+    this.passwordForm.valueChanges.subscribe(() => this.passwordSaved.set(false));
+
     this.auth.checkSession().subscribe(user => {
       if (user) {
         this.profileForm.patchValue({
@@ -38,11 +45,13 @@ export class Account implements OnInit {
           lastName: user.profile?.surname ?? '',
         });
       }
+      this.profileForm.enable();
+      this.profileLoading.set(false);
     });
   }
 
   saveProfile(): void {
-    if (this.profileForm.invalid) {
+    if (this.profileForm.disabled || this.profileForm.invalid) {
       this.profileForm.markAllAsTouched();
       return;
     }
@@ -55,6 +64,7 @@ export class Account implements OnInit {
       next: () => {
         this.profileSaving.set(false);
         this.profileSaved.set(true);
+        this.profileForm.markAsPristine();
       },
       error: (err: unknown) => {
         this.profileSaving.set(false);

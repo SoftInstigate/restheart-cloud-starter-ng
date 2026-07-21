@@ -3,10 +3,11 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import type { TeamMembership } from '@restheart-cloud/kit-ng';
+import { Alert } from '../../../ui/alert/alert';
 
 @Component({
   selector: 'app-new-team',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, Alert],
   templateUrl: './new-team.html',
   styleUrl: './new-team.css',
 })
@@ -38,6 +39,7 @@ export class NewTeam {
       next: team => {
         this.saving.set(false);
         this.created.set(team);
+        this.form.markAsPristine();
       },
       error: (err: unknown) => {
         this.saving.set(false);

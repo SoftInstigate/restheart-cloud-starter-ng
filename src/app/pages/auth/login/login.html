@@ -3,7 +3,7 @@
     <h1>Log in</h1>
 
     @if (error()) {
-      <p class="form-error" role="alert">{{ error() }}</p>
+      <app-alert type="error" (close)="error.set(null)">{{ error() }}</app-alert>
     }
 
     @if (features.oauthLogin) {

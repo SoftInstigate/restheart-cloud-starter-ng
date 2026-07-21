@@ -20,7 +20,7 @@
         <p>Set a password to activate your account.</p>
 
         @if (error()) {
-          <p class="form-error" role="alert">{{ error() }}</p>
+          <app-alert type="error" (close)="error.set(null)">{{ error() }}</app-alert>
         }
 
         <label for="password">Password</label>
@@ -36,7 +36,7 @@
         <h1>Join {{ inv.teamName }}</h1>
         <p>You're signed in as {{ email }}.</p>
         @if (error()) {
-          <p class="form-error" role="alert">{{ error() }}</p>
+          <app-alert type="error" (close)="error.set(null)">{{ error() }}</app-alert>
         }
         <button type="button" (click)="acceptForLoggedInUser()">Join team</button>
       </div>
@@ -46,7 +46,7 @@
         <p>{{ email }}</p>
 
         @if (error()) {
-          <p class="form-error" role="alert">{{ error() }}</p>
+          <app-alert type="error" (close)="error.set(null)">{{ error() }}</app-alert>
         }
 
         <label for="password">Password</label>
@@ -58,7 +58,7 @@
   } @else {
     <div class="auth-card">
       <h1>Invitation problem</h1>
-      <p class="form-error" role="alert">{{ error() }}</p>
+      <app-alert type="error" (close)="error.set(null)">{{ error() }}</app-alert>
     </div>
   }
 </main>

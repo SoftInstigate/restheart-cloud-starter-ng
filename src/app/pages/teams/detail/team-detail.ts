@@ -4,10 +4,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import type { TeamMembership, TeamMember, PendingInvitation } from '@restheart-cloud/kit-ng';
 import { environment } from '../../../../environments/environment';
+import { Alert } from '../../../ui/alert/alert';
 
 @Component({
   selector: 'app-team-detail',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, Alert],
   templateUrl: './team-detail.html',
   styleUrl: './team-detail.css',
 })
@@ -29,6 +30,7 @@ export class TeamDetail implements OnInit {
   protected readonly invitations = signal<PendingInvitation[]>([]);
   protected readonly invitationsLoading = signal(true);
   protected readonly resendingEmail = signal<string | null>(null);
+  protected readonly resendSuccessEmail = signal<string | null>(null);
 
   protected readonly inviteForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -50,6 +52,8 @@ export class TeamDetail implements OnInit {
   protected readonly deleting = signal(false);
   protected readonly deleteError = signal<string | null>(null);
 
+  protected readonly removingMemberEmail = signal<string | null>(null);
+
   ngOnInit(): void {
     this.teamId = this.route.snapshot.paramMap.get('id') ?? '';
     this.auth.loadTeams().subscribe(() => {
@@ -61,6 +65,9 @@ export class TeamDetail implements OnInit {
     });
     this.loadMembers();
     this.loadInvitations();
+
+    this.inviteForm.valueChanges.subscribe(() => this.inviteSent.set(false));
+    this.teamForm.valueChanges.subscribe(() => this.teamSaved.set(false));
   }
 
   private loadMembers(): void {
@@ -113,6 +120,7 @@ export class TeamDetail implements OnInit {
 
   removeMember(member: TeamMember): void {
     this.memberActionPending.set(member.email);
+    this.removingMemberEmail.set(null);
     this.auth.removeMember(member.email).subscribe({
       next: () => {
         this.members.update(list => list.filter(m => m.email !== member.email));
@@ -122,10 +130,17 @@ export class TeamDetail implements OnInit {
     });
   }
 
+  confirmRemove(email: string): void { this.removingMemberEmail.set(email); }
+  cancelRemove(): void { this.removingMemberEmail.set(null); }
+
   resendInvite(invite: PendingInvitation): void {
     this.resendingEmail.set(invite.email);
+    this.resendSuccessEmail.set(null);
     this.auth.resendInvite(invite.email).subscribe({
-      next: () => this.resendingEmail.set(null),
+      next: () => {
+        this.resendingEmail.set(null);
+        this.resendSuccessEmail.set(invite.email);
+      },
       error: () => this.resendingEmail.set(null),
     });
   }
@@ -155,6 +170,7 @@ export class TeamDetail implements OnInit {
       next: () => {
         this.teamSaving.set(false);
         this.teamSaved.set(true);
+        this.teamForm.markAsPristine();
       },
       error: (err: unknown) => {
         this.teamSaving.set(false);

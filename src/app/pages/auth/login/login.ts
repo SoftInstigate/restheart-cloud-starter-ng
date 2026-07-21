@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import { environment } from '../../../../environments/environment';
 import { OauthButtons } from '../oauth-buttons/oauth-buttons';
+import { Alert } from '../../../ui/alert/alert';
 
 const ERROR_MESSAGES: Record<string, string> = {
   invalid_token: 'This link is invalid or has expired.',
@@ -11,7 +12,7 @@ const ERROR_MESSAGES: Record<string, string> = {
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink, OauthButtons],
+  imports: [ReactiveFormsModule, RouterLink, OauthButtons, Alert],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

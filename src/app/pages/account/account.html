@@ -2,10 +2,10 @@
   <h2>Profile</h2>
 
   @if (profileSaved()) {
-    <p class="success-msg">Profile updated!</p>
+    <app-alert type="success" (close)="profileSaved.set(false)">Profile updated!</app-alert>
   }
   @if (profileError()) {
-    <p class="form-error" role="alert">{{ profileError() }}</p>
+    <app-alert type="error" (close)="profileError.set(null)">{{ profileError() }}</app-alert>
   }
 
   <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" novalidate class="account-form">
@@ -23,7 +23,7 @@
       <label>Email</label>
       <input type="email" [value]="auth.user()?._id" disabled />
     </div>
-    <button type="submit" class="btn-primary" [disabled]="!profileForm.dirty || profileSaving()">
+    <button type="submit" class="btn-primary" [disabled]="profileLoading() || !profileForm.dirty || profileSaving()">
       {{ profileSaving() ? 'Saving…' : 'Save changes' }}
     </button>
   </form>
@@ -33,10 +33,10 @@
   <h2>Change password</h2>
 
   @if (passwordSaved()) {
-    <p class="success-msg">Password changed!</p>
+    <app-alert type="success" (close)="passwordSaved.set(false)">Password changed!</app-alert>
   }
   @if (passwordError()) {
-    <p class="form-error" role="alert">{{ passwordError() }}</p>
+    <app-alert type="error" (close)="passwordError.set(null)">{{ passwordError() }}</app-alert>
   }
 
   <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" novalidate class="account-form">

@@ -4,10 +4,11 @@ import { RouterLink } from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import { environment } from '../../../../environments/environment';
 import { OauthButtons } from '../oauth-buttons/oauth-buttons';
+import { Alert } from '../../../ui/alert/alert';
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, RouterLink, OauthButtons],
+  imports: [ReactiveFormsModule, RouterLink, OauthButtons, Alert],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })

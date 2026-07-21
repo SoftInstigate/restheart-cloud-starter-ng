@@ -3,10 +3,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import type { Invitation } from '@restheart-cloud/kit-ng';
+import { Alert } from '../../../ui/alert/alert';
 
 @Component({
   selector: 'app-accept',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Alert],
   templateUrl: './accept.html',
   styleUrl: './accept.css',
 })
