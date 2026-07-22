@@ -47,6 +47,23 @@ Then edit `src/environments/environment.dev.ts` and set `apiUrl` to your free RE
 ng serve
 ```
 
+## OpenWiki documentation
+
+For recurring project documentation, start from the OpenWiki entry point and follow links from there:
+
+- [openwiki/quickstart.md](openwiki/quickstart.md) — first stop, with navigation to all major topics
+- [openwiki/index.md](openwiki/index.md) — generated index of OpenWiki content
+
+Main OpenWiki topic pages:
+
+- [openwiki/architecture.md](openwiki/architecture.md)
+- [openwiki/domain-concepts.md](openwiki/domain-concepts.md)
+- [openwiki/workflows.md](openwiki/workflows.md)
+- [openwiki/operations.md](openwiki/operations.md)
+- [openwiki/integrations.md](openwiki/integrations.md)
+- [openwiki/testing.md](openwiki/testing.md)
+- [openwiki/source-map.md](openwiki/source-map.md)
+
 ## Structure
 
 ```
@@ -147,6 +164,14 @@ component's own `.css` file and is not part of this contract.
 | `README.md` | Setup, structure, and the swap map above. |
 | `TEMPLATE_API.md` | What each template binds to: signals, methods, inputs, form controls. |
 | `PORTING.md` | Framework-neutral behaviour spec — for building React/Vue versions at parity. |
+| `openwiki/quickstart.md` | OpenWiki entry point and navigation hub for recurring docs. |
+| `openwiki/architecture.md` | Architecture overview and key design choices. |
+| `openwiki/domain-concepts.md` | Domain model and conceptual vocabulary. |
+| `openwiki/workflows.md` | Development and contribution workflows. |
+| `openwiki/operations.md` | Operational guidance and runbook-style notes. |
+| `openwiki/integrations.md` | External services and integration points. |
+| `openwiki/testing.md` | Testing strategy and practical testing guidance. |
+| `openwiki/source-map.md` | Source navigation map for key modules and files. |
 
 ## Packages used
 
