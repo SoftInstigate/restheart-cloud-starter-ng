@@ -1,7 +1,17 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import { Alert } from '../../ui/alert/alert';
+
+/**
+ * `socialAuths` is present in the raw `/users/me` response (restheart-cloud-server's
+ * AmISignedIn strips `password`/`otp`/tokens but not this) — it's just not declared on
+ * `@restheart-cloud/kit`'s `UserInfo` type. Augmented locally here instead of changing
+ * the shared kit package for a single field used by only this page.
+ */
+interface UserWithSocialAuths {
+  socialAuths?: Array<{ provider: string }>;
+}
 
 @Component({
   selector: 'app-account',
@@ -24,8 +34,13 @@ export class Account implements OnInit {
   protected readonly profileError = signal<string | null>(null);
 
   // ── Change password ───────────────────────────────────────────────────
+  // currentPassword is intentionally NOT required at the form level: accounts
+  // that signed up via OAuth may never have set one. The backend only verifies
+  // it when the account actually has a password (PATCH /auth/change-password),
+  // so leaving it blank is valid for those accounts and correctly rejected as
+  // "Invalid current password" for everyone else.
   protected readonly passwordForm = this.fb.nonNullable.group({
-    currentPassword: ['', [Validators.required]],
+    currentPassword: [''],
     newPassword: ['', [Validators.required, Validators.minLength(8)]],
   });
   protected readonly passwordSaving = signal(false);
@@ -33,6 +48,12 @@ export class Account implements OnInit {
   protected readonly passwordError = signal<string | null>(null);
   protected readonly showCurrentPassword = signal(false);
   protected readonly showNewPassword = signal(false);
+  // True only for accounts linked to at least one OAuth provider — used solely to
+  // show a hint that current-password may never have been set. See UserWithSocialAuths above.
+  protected readonly isOAuthUser = computed(() => {
+    const socialAuths = (this.auth.user() as (UserWithSocialAuths | null))?.socialAuths;
+    return (socialAuths?.length ?? 0) > 0;
+  });
 
   ngOnInit(): void {
     // Subscribe BEFORE patchValue so the clear-on-edit handler is in place

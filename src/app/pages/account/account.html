@@ -48,6 +48,9 @@
           {{ showCurrentPassword() ? 'Hide' : 'Show' }}
         </button>
       </div>
+      @if (isOAuthUser()) {
+        <small class="form-hint">Leave blank if you've never set a password.</small>
+      }
     </div>
     <div class="form-field">
       <label for="new-password">New password</label>
