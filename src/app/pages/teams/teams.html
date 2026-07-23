@@ -13,7 +13,7 @@
       @for (team of auth.teams(); track team.id.$oid) {
         <li>
           <div class="team-row" [class.active]="team.active">
-            <a [routerLink]="['/teams', team.id.$oid]" class="team-link">
+            <a class="team-link" (click)="openTeam(team); $event.preventDefault()" [href]="['/teams', team.id.$oid]">
               <span class="team-name">{{ team.name || team.id.$oid }}</span>
               @if (team.description) {
                 <span class="team-desc">{{ team.description }}</span>
@@ -22,8 +22,8 @@
             </a>
             @if (team.active) {
               <span class="team-badge">current</span>
-            } @else {
-              <button type="button" class="btn-switch" (click)="switchTeam(team)">Switch</button>
+            } @else if (switchingTo() === team.id.$oid) {
+              <span class="muted">Switching…</span>
             }
           </div>
         </li>

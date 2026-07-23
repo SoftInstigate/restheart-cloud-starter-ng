@@ -13,6 +13,7 @@ export class Teams implements OnInit {
   private readonly router = inject(Router);
   protected readonly auth = inject(RhAuthService);
   protected readonly loading = signal(true);
+  protected readonly switchingTo = signal<string | null>(null);
 
   ngOnInit(): void {
     this.auth.loadTeams().subscribe({
@@ -21,8 +22,18 @@ export class Teams implements OnInit {
     });
   }
 
-  switchTeam(team: TeamMembership): void {
-    if (team.active) return;
-    this.auth.switchTeam(team.id).subscribe();
+  openTeam(team: TeamMembership): void {
+    if (team.active) {
+      this.router.navigate(['/teams', team.id.$oid]);
+      return;
+    }
+    this.switchingTo.set(team.id.$oid);
+    this.auth.switchTeam(team.id).subscribe({
+      next: () => {
+        this.switchingTo.set(null);
+        this.router.navigate(['/teams', team.id.$oid]);
+      },
+      error: () => this.switchingTo.set(null),
+    });
   }
 }

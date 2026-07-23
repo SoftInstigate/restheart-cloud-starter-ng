@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
@@ -17,6 +17,7 @@ import { Alert } from '../../../ui/alert/alert';
 })
 export class TeamDetail implements OnInit {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
   protected readonly auth = inject(RhAuthService);
 
@@ -231,9 +232,18 @@ export class TeamDetail implements OnInit {
     this.deleteError.set(null);
     this.auth.deleteTeam().subscribe({
       next: () => {
-        this.deleting.set(false);
-        this.deleteConfirming.set(false);
-        this.auth.checkSession().subscribe();
+        this.auth.loadTeams().subscribe(remaining => {
+          this.deleting.set(false);
+          this.deleteConfirming.set(false);
+          if (remaining.length > 0 && !remaining.some(m => m.active)) {
+            this.auth.switchTeam(remaining[0].id).subscribe({
+              next: () => this.router.navigate(['/teams']),
+              error: () => this.router.navigate(['/teams']),
+            });
+          } else {
+            this.router.navigate(['/teams']);
+          }
+        });
       },
       error: (err: unknown) => {
         this.deleting.set(false);
