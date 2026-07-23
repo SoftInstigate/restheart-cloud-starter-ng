@@ -1,8 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
-import type { TeamMembership } from '@restheart-cloud/kit-ng';
 import { Alert } from '../../../ui/alert/alert';
 
 @Component({
@@ -13,6 +12,7 @@ import { Alert } from '../../../ui/alert/alert';
 })
 export class NewTeam {
   private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
   protected readonly auth = inject(RhAuthService);
 
   protected readonly form = this.fb.nonNullable.group({
@@ -20,10 +20,6 @@ export class NewTeam {
   });
   protected readonly saving = signal(false);
   protected readonly error = signal<string | null>(null);
-  // Mock createTeam() doesn't update auth.teams() (no real backend to source
-  // it from yet, see restheart#643) — show the result inline instead of
-  // navigating away, so there's visible confirmation something happened.
-  protected readonly created = signal<TeamMembership | null>(null);
 
   createTeam(): void {
     if (this.form.invalid) {
@@ -36,10 +32,8 @@ export class NewTeam {
     const { teamName } = this.form.getRawValue();
 
     this.auth.createTeam(teamName).subscribe({
-      next: team => {
-        this.saving.set(false);
-        this.created.set(team);
-        this.form.markAsPristine();
+      next: () => {
+        this.router.navigate(['/teams']);
       },
       error: (err: unknown) => {
         this.saving.set(false);

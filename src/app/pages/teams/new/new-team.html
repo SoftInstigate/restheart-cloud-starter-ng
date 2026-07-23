@@ -2,26 +2,17 @@
   <a routerLink="/teams" class="back-link">← Back to teams</a>
   <h2>Create a new team</h2>
 
-  @if (created(); as team) {
-    <app-alert type="success" (close)="created.set(null)">
-      "{{ team.name }}" created — you're the owner.
-      <br />
-      <em class="muted">Note: it won't show up in your team list yet — creating teams isn't fully supported server-side.</em>
-    </app-alert>
-    <a routerLink="/teams" class="btn-primary link-btn">Back to teams</a>
-  } @else {
-    @if (error()) {
-      <app-alert type="error" (close)="error.set(null)">{{ error() }}</app-alert>
-    }
-
-    <form [formGroup]="form" (ngSubmit)="createTeam()" novalidate class="account-form">
-      <div class="form-field">
-        <label for="team-name">Team name</label>
-        <input id="team-name" type="text" formControlName="teamName" placeholder="Acme Corp" />
-      </div>
-      <button type="submit" class="btn-primary" [disabled]="saving()">
-        {{ saving() ? 'Creating…' : 'Create team' }}
-      </button>
-    </form>
+  @if (error()) {
+    <app-alert type="error" (close)="error.set(null)">{{ error() }}</app-alert>
   }
+
+  <form [formGroup]="form" (ngSubmit)="createTeam()" novalidate class="account-form">
+    <div class="form-field">
+      <label for="team-name">Team name</label>
+      <input id="team-name" type="text" formControlName="teamName" placeholder="Acme Corp" />
+    </div>
+    <button type="submit" class="btn-primary" [disabled]="saving()">
+      {{ saving() ? 'Creating…' : 'Create team' }}
+    </button>
+  </form>
 </section>
