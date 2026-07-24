@@ -52,6 +52,7 @@ The full checklist is in [`TEST-CASES.md`](../TEST-CASES.md). Key sections:
 - Resend cooldown timer (5 minutes)
 - Team settings save
 - Team delete (only when no other members — 409 otherwise)
+- Post-delete: if remaining teams exist with none active, auto-switches to first remaining team and navigates to `/teams`
 
 ### Account (`pages/account/*`)
 - Profile load and save
