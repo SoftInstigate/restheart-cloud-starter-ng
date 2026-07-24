@@ -83,9 +83,10 @@ resource: /src/app/pages/
 ## Team switching
 
 1. User sees team list at `/teams`
-2. Active team has a "current" badge; inactive teams have a "Switch" button
+2. Active team has a "current" badge; clicking a non-active team row switches to it and navigates to the detail page
 3. `auth.switchTeam(team.id)` → `POST /auth/switch-team?delivery=body` returns new token
 4. Session updates immediately with the new active team — no page reload
+5. While switching, a "Switching…" indicator replaces the team row actions
 
 **Note:** the team switcher in the Shell header is only visible when `auth.teams().length > 1`.
 
@@ -108,6 +109,7 @@ resource: /src/app/pages/
 - Name and description form → `auth.updateTeam({ name, description })`
 - Danger zone: delete team → confirmation dialog (`role="alertdialog"`) → `auth.deleteTeam()`
 - Delete only works when no other members remain (backend enforces with 409)
+- After successful deletion, the component reloads the team list. If remaining teams exist but none is active, it auto-switches to the first remaining team before navigating to `/teams`
 
 ## Account management
 
