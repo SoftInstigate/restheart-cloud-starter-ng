@@ -39,7 +39,7 @@ resource: /package.json
 provideRhAuth({ apiBaseUrl: environment.apiUrl })
 ```
 
-**Version:** currently `^0.4.0` (see `package.json`).
+**Version:** currently `^0.5.0` (see `package.json`).
 
 ## RESTHeart Cloud service
 
@@ -71,11 +71,11 @@ The `oauthProviders` array in `environment.features` must match what's configure
 
 The repository has an OpenWiki GitHub Actions workflow at [`.github/workflows/openwiki-update.yml`](../.github/workflows/openwiki-update.yml):
 
-- **Schedule:** daily at 08:00 UTC
+- **Schedule:** daily at 04:00 UTC
 - **Trigger:** also manual via `workflow_dispatch`
 - **Action:** runs `openwiki code --update --print`, creates a PR with documentation updates
-- **Model:** `z-ai/glm-5.2` via OpenRouter
-- **Tracing:** LangSmith tracing enabled
+- **Model:** `xiaomi/mimo-v2.5-pro` via OpenRouter
+- **Tracing:** disabled
 
 The workflow commits to branch `openwiki/update` and creates a PR via `peter-evans/create-pull-request`.
 
