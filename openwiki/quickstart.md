@@ -96,4 +96,3 @@ Feature flags in `src/environments/environment*.ts` must match your service's **
 
 - **Automated E2E tests** — Currently manual only (TEST-CASES.md). No Cypress/Playwright suite exists.
 - **Team list refresh after create** — `auth.createTeam()` doesn't update `auth.teams()` yet (restheart#643).
-- **SSR-safe ThemeService** — ThemeService touches `localStorage`/`document` without platform guard; safe today because only Shell injects it, but would break if injected into a prerendered page.

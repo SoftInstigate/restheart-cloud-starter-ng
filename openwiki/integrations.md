@@ -71,7 +71,7 @@ The `oauthProviders` array in `environment.features` must match what's configure
 
 The repository has an OpenWiki GitHub Actions workflow at [`.github/workflows/openwiki-update.yml`](../.github/workflows/openwiki-update.yml):
 
-- **Schedule:** daily at 04:00 UTC
+- **Schedule:** every 3 days at 04:29 UTC (`29 4 */3 * *`)
 - **Trigger:** also manual via `workflow_dispatch`
 - **Action:** runs `openwiki code --update --print`, creates a PR with documentation updates
 - **Model:** `xiaomi/mimo-v2.5-pro` via OpenRouter
