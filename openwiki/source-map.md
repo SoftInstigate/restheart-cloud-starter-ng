@@ -20,6 +20,7 @@ resource: /src/
 | [`.editorconfig`](../.editorconfig) | 2-space indent, single quotes for TS, no trailing whitespace trim for MD |
 | [`.prettierrc`](../.prettierrc) | Prettier formatting config |
 | [`.gitignore`](../.gitignore) | Standard Angular ignores + `.vscode` |
+| [`LICENSE`](../LICENSE) | MIT License — Copyright (c) 2026 SoftInstigate Srl SB |
 
 ## Environments
 
