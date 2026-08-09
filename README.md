@@ -235,14 +235,12 @@ An Angular interceptor only sees `HttpClient` traffic. The kit's own calls go ou
 paths the rule excludes, so they can never return `451` anyway. Only a **data** request can.
 
 This starter has none of its own yet, so `ConsentsService.probe()` makes one: a single `GET`
-on `PROBE_PATH` when the gate is created. Three things to know about it:
+on `PROBE_PATH` when the gate is created. Two things to know about it:
 
 - **It goes through `HttpClient`**, not `fetch` — otherwise the interceptor never sees it.
+  `rhAuthInterceptor` authenticates it on the way out, so there is no header to attach here.
 - **`PROBE_PATH` is `/demo` — change it** to a collection your service actually has. The
   server setup below creates one.
-- **It attaches the bearer token itself.** `rhAuthInterceptor` only clears the session on a
-  `401`; it does not authenticate outgoing requests. An unauthenticated probe gets `401`,
-  not `451`, and the gate stays down.
 
 Once your app reads data on its first screen, delete the probe — any real request raises the
 flag just as well.

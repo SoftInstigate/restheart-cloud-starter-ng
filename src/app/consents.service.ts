@@ -1,7 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
-import { getToken } from '@restheart-cloud/kit-ng';
 import { environment } from '../environments/environment';
 
 /**
@@ -36,29 +35,18 @@ export class ConsentsService {
    * whenever the app happens to need data.
    *
    * It goes through `HttpClient` on purpose — that is the only traffic the
-   * interceptor below can see. The response is thrown away; the interceptor
-   * already saw the status. The token has to be attached by hand:
-   * `rhAuthInterceptor` only clears the session on 401, it does not
-   * authenticate outgoing requests.
+   * interceptor below can see. `rhAuthInterceptor` authenticates it on the way
+   * out, so there is no token to attach here; the response is thrown away,
+   * because the interceptor already saw the status.
    *
    * Drop this once the app has data requests of its own on the first screen —
    * any one of them raises the flag just as well.
    */
   probe(): void {
-    const token = getToken();
-    if (!token) return;
-    this.http
-      .get(`${environment.apiUrl}${PROBE_PATH}?pagesize=1`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          // Suppress the browser's native Basic Auth popup on a 401.
-          'No-Auth-Challenge': 'true',
-        },
-      })
-      .subscribe({
-        next: () => {},
-        error: () => {},
-      });
+    this.http.get(`${environment.apiUrl}${PROBE_PATH}?pagesize=1`).subscribe({
+      next: () => {},
+      error: () => {},
+    });
   }
 }
 
