@@ -228,16 +228,24 @@ life of the token they hold.
 The overlay is user experience, not enforcement — remove it with the dev tools and every
 request still comes back `451`.
 
-### What the interceptor sees
+### What makes the gate fire
 
 An Angular interceptor only sees `HttpClient` traffic. The kit's own calls go out through
 `fetch` and never reach it — but they all target `/auth/*`, `/token` and `/users/me`, the
-paths the rule excludes, so they can never return `451` anyway.
+paths the rule excludes, so they can never return `451` anyway. Only a **data** request can.
 
-That has a consequence worth knowing before you go looking for a bug: **this starter makes
-no `HttpClient` requests of its own**, so with the server fully configured the overlay still
-never appears. It appears as soon as you add your first data request — a collection read on
-the home page, say. That is the request the gate is there to protect.
+This starter has none of its own yet, so `ConsentsService.probe()` makes one: a single `GET`
+on `PROBE_PATH` when the gate is created. Three things to know about it:
+
+- **It goes through `HttpClient`**, not `fetch` — otherwise the interceptor never sees it.
+- **`PROBE_PATH` is `/demo` — change it** to a collection your service actually has. The
+  server setup below creates one.
+- **It attaches the bearer token itself.** `rhAuthInterceptor` only clears the session on a
+  `401`; it does not authenticate outgoing requests. An unauthenticated probe gets `401`,
+  not `451`, and the gate stays down.
+
+Once your app reads data on its first screen, delete the probe — any real request raises the
+flag just as well.
 
 ### Server setup (required)
 
@@ -245,6 +253,8 @@ Enable the **Guards** plugin from *Service → Guards*, then create four documen
 console. Full walkthrough: [Gating an app on consents](https://cloud.restheart.com/blog) and
 the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gating_on_consents).
 
+0. **A collection to read**, so there is a request the rule can block:
+   `PUT /demo`, then `POST /demo` with `[{"n": 1}, {"n": 2}, {"n": 3}]`.
 1. **A schema** (`userConsentsSchema`) allowing `latestConsents` and `consents` on the user
    document — with neither in `required`, since registration does not write them.
 2. **A permission** on `PATCH /users/{userId}`, scoped with `bson-request-whitelist(consents)`

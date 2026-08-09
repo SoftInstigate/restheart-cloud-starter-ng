@@ -1,6 +1,17 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
+import { getToken } from '@restheart-cloud/kit-ng';
+import { environment } from '../environments/environment';
+
+/**
+ * A collection your service actually has — change it.
+ *
+ * It has to be a *data* path: every call the kit makes goes to `/auth/*`,
+ * `/token` or `/users/me`, and those are exactly the paths the rule excludes,
+ * so none of them can ever come back 451.
+ */
+const PROBE_PATH = '/demo';
 
 /**
  * The consents gate, client side.
@@ -16,7 +27,39 @@ import { catchError, throwError } from 'rxjs';
  */
 @Injectable({ providedIn: 'root' })
 export class ConsentsService {
+  private readonly http = inject(HttpClient);
+
   readonly blocked = signal(false);
+
+  /**
+   * One data request, so a blocked user is told so on arrival rather than
+   * whenever the app happens to need data.
+   *
+   * It goes through `HttpClient` on purpose — that is the only traffic the
+   * interceptor below can see. The response is thrown away; the interceptor
+   * already saw the status. The token has to be attached by hand:
+   * `rhAuthInterceptor` only clears the session on 401, it does not
+   * authenticate outgoing requests.
+   *
+   * Drop this once the app has data requests of its own on the first screen —
+   * any one of them raises the flag just as well.
+   */
+  probe(): void {
+    const token = getToken();
+    if (!token) return;
+    this.http
+      .get(`${environment.apiUrl}${PROBE_PATH}?pagesize=1`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          // Suppress the browser's native Basic Auth popup on a 401.
+          'No-Auth-Challenge': 'true',
+        },
+      })
+      .subscribe({
+        next: () => {},
+        error: () => {},
+      });
+  }
 }
 
 /**

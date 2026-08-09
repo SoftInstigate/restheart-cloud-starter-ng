@@ -22,6 +22,11 @@ export class ConsentsGate {
   protected readonly busy = signal(false);
   protected readonly error = signal<string | null>(null);
 
+  constructor() {
+    // Ask once on arrival, so a blocked user meets the form immediately.
+    this.consents.probe();
+  }
+
   protected accept(): void {
     this.busy.set(true);
     this.error.set(null);

@@ -109,7 +109,7 @@ host listener closes the menu on outside clicks.
 
 | State | Type | Meaning |
 |---|---|---|
-| `consents` | `ConsentsService` | `consents.blocked()` drives the whole template — nothing renders when false. |
+| `consents` | `ConsentsService` | `consents.blocked()` drives the whole template — nothing renders when false. `probe()` is fired once from the constructor. |
 | `busy()` | `Signal<boolean>` | True while the acceptance is in flight; disables the accept button. |
 | `error()` | `Signal<string \| null>` | Message shown in `.field-error` when the acceptance fails. |
 | `auth` | `RhAuthService` | Used for `acceptConsents()` and `logout()`. |
