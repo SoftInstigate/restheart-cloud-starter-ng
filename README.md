@@ -173,6 +173,45 @@ component's own `.css` file and is not part of this contract.
 | `openwiki/testing.md` | Testing strategy and practical testing guidance. |
 | `openwiki/source-map.md` | Source navigation map for key modules and files. |
 
+## Reading your own data
+
+Everything the starter does talks to `/auth/*`, `/token` and `/users/me` — the kit handles
+those. For your application's own collections, just use `HttpClient`:
+
+```typescript
+private readonly http = inject(HttpClient);
+
+load() {
+  return this.http.get(`${environment.apiUrl}/notes?pagesize=10`);
+}
+```
+
+`provideRhAuth()` registers `rhAuthInterceptor`, which applies the session to every
+`HttpClient` request bound for `apiUrl` — the bearer token, the challenge suppression that
+keeps the browser's Basic Auth popup away on a `401`, and the cookie credentials. So there is
+no header to attach here.
+
+Requests to any other host pass through untouched: the token is a credential, and attaching
+it everywhere would hand it to whatever third party the app happens to call.
+
+To add an interceptor of your own, make a second `provideHttpClient` call *after*
+`provideRhAuth` — `withInterceptors` registers each function as a `multi` provider, so the two
+add up. Do not list `rhAuthInterceptor` again there; it is already registered, and repeating
+it just runs it twice on every request.
+
+### Gating on consents
+
+A worked example — every user must accept the current Terms of Service and Privacy Policy
+before the app serves them anything — lives on the **`feat/consents-gate`** branch, with the
+server-side setup in [the tutorial](https://cloud.restheart.com/blog).
+
+```bash
+git checkout feat/consents-gate
+```
+
+It is a branch and not the default on purpose: which consents you collect, and when you
+re-ask, are product decisions.
+
 ## Packages used
 
 - [`@restheart-cloud/kit`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit) — TypeScript auth logic
