@@ -13,10 +13,11 @@ import {
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import { justSignedUp as justSignedUpFlag } from '../../just-signed-up';
 import { ThemeService } from '../../theme.service';
+import { ConsentsGate } from './consents-gate';
 
 @Component({
   selector: 'app-shell',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, ConsentsGate],
   templateUrl: './shell.html',
   styleUrl: './shell.css',
 })

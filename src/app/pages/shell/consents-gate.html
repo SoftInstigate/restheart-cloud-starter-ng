@@ -1,0 +1,19 @@
+@if (consents.blocked()) {
+  <div class="consents-overlay" role="dialog" aria-modal="true" aria-labelledby="consents-title">
+    <div class="consents-card">
+      <h1 id="consents-title">Before you continue</h1>
+      <p>
+        Please review our <a href="/terms" target="_blank" rel="noreferrer">Terms of Service</a> and
+        our <a href="/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>. You need to accept
+        them to use the application.
+      </p>
+      @if (error()) {
+        <p class="field-error">{{ error() }}</p>
+      }
+      <button type="button" class="btn-primary" (click)="accept()" [disabled]="busy()">
+        {{ busy() ? 'Saving…' : 'I accept' }}
+      </button>
+      <button type="button" class="btn-plain" (click)="signOut()">Sign out</button>
+    </div>
+  </div>
+}

@@ -104,6 +104,24 @@ one-shot `?flow=signup` marker, then clears both from the URL.
 Template refs: `#avatarBtn`, `#firstMenuItem` (focus management). A `document:click`
 host listener closes the menu on outside clicks.
 
+### `ConsentsGate` — `app-consents-gate`
+`src/app/pages/shell/consents-gate.ts` · blocking overlay shown while the API answers `451`.
+
+| State | Type | Meaning |
+|---|---|---|
+| `consents` | `ConsentsService` | `consents.blocked()` drives the whole template — nothing renders when false. |
+| `busy()` | `Signal<boolean>` | True while the acceptance is in flight; disables the accept button. |
+| `error()` | `Signal<string \| null>` | Message shown in `.field-error` when the acceptance fails. |
+| `auth` | `RhAuthService` | Used for `acceptConsents()` and `logout()`. |
+
+| Method | Returns | Behaviour |
+|---|---|---|
+| `accept()` | `void` | `auth.acceptConsents()` — PATCH, token renewal, user reload — then lowers `blocked`. On error sets `error()` and leaves the overlay up. |
+| `signOut()` | `void` | Lowers `blocked` (it outlives the session), then `auth.logout()` and navigates to `/auth/login`. |
+
+No close button and no backdrop click: the only ways out are accepting or signing out. The
+versions being accepted are never named here — the server's `mergeRequest` stamps them.
+
 ---
 
 ## Auth pages

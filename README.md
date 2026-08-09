@@ -76,6 +76,7 @@ src/
     app.routes.ts         ← route map, titles, feature-flag gating
     app.config.ts         ← provideRhAuth() configured here
     theme.service.ts      ← light/dark toggle, persisted
+    consents.service.ts   ← the 451 signal + the HTTP interceptor that raises it
     ui/alert/             ← the one shared feedback component
     pages/
       shell/              ← authenticated frame: header, nav, user menu
@@ -199,18 +200,64 @@ To add an interceptor of your own, make a second `provideHttpClient` call *after
 add up. Do not list `rhAuthInterceptor` again there; it is already registered, and repeating
 it just runs it twice on every request.
 
-### Gating on consents
 
-A worked example — every user must accept the current Terms of Service and Privacy Policy
-before the app serves them anything — lives on the **`feat/consents-gate`** branch, with the
-server-side setup in [the tutorial](https://cloud.restheart.com/blog).
+## Consents gate
 
-```bash
-git checkout feat/consents-gate
-```
+Every user must accept the current Terms of Service and Privacy Policy before they can use
+the app. The rule lives on the server, as a **Guards** rule, so it applies to this app, to a
+mobile client, to `curl`, and to any API integration — not just to the code below.
 
-It is a branch and not the default on purpose: which consents you collect, and when you
-re-ask, are product decisions.
+The client's only job is to react to a status code. Three files:
+
+| File | Job |
+|---|---|
+| `app/consents.service.ts` | `ConsentsService.blocked` signal + `consentsInterceptor`, which raises it on any `451`. |
+| `app/app.config.ts` | Registers the interceptor with `provideHttpClient(withInterceptors([…]))`. |
+| `app/pages/shell/consents-gate.*` | Renders the blocking overlay while the signal is up; calls `auth.acceptConsents()` on accept. |
+
+Nothing in the client knows which versions are current, and nothing reads `latestConsents`
+— the permission's `mergeRequest` stamps the versions and the timestamp server-side. Bump
+the versions in the console and every user meets the form again on their next request, with
+nothing to redeploy here.
+
+`RhAuthService.acceptConsents()` (kit ≥ 0.6.0) does the `PATCH`, then `GET /token?renew=true`,
+then `GET /users/me`, then updates the service's `user` signal. The renewal is not optional:
+a JWT is a snapshot, and without a fresh one the rule keeps blocking the user for the whole
+life of the token they hold.
+
+The overlay is user experience, not enforcement — remove it with the dev tools and every
+request still comes back `451`.
+
+### What the interceptor sees
+
+An Angular interceptor only sees `HttpClient` traffic. The kit's own calls go out through
+`fetch` and never reach it — but they all target `/auth/*`, `/token` and `/users/me`, the
+paths the rule excludes, so they can never return `451` anyway.
+
+That has a consequence worth knowing before you go looking for a bug: **this starter makes
+no `HttpClient` requests of its own**, so with the server fully configured the overlay still
+never appears. It appears as soon as you add your first data request — a collection read on
+the home page, say. That is the request the gate is there to protect.
+
+### Server setup (required)
+
+Enable the **Guards** plugin from *Service → Guards*, then create four documents in the
+console. Full walkthrough: [Gating an app on consents](https://cloud.restheart.com/blog) and
+the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gating_on_consents).
+
+1. **A schema** (`userConsentsSchema`) allowing `latestConsents` and `consents` on the user
+   document — with neither in `required`, since registration does not write them.
+2. **A permission** on `PATCH /users/{userId}`, scoped with `bson-request-whitelist(consents)`
+   and carrying the `mergeRequest` that stamps the versions. Without it the acceptance is a
+   `403` and the user is locked out for good.
+3. **Two JWT claims**: `latestConsents/tos` *and* `latestConsents/pp`. If either is missing,
+   the rule blocks every token-authenticated user permanently.
+4. **The rule**, blocking with `451` — and excluding `/auth`, `/token`, `/users/me` and the
+   acceptance `PATCH` itself, which are the requests a blocked user needs in order to stop
+   being blocked.
+
+Until those exist nothing ever returns `451`, the signal stays down, and the overlay never
+renders.
 
 ## Packages used
 

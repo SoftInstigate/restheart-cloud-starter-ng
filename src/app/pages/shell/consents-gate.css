@@ -1,0 +1,46 @@
+/* The host renders nothing of its own — no stray line box in <main>. */
+:host {
+  display: contents;
+}
+
+/* No close button and no backdrop click: the only ways out are accepting or
+   signing out. Above the header (100), the dropdown (200) and the navigation
+   progress bar (300). */
+.consents-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: rgb(0 0 0 / 0.55);
+}
+
+.consents-card {
+  width: min(32rem, 100%);
+  padding: var(--space-6);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-popup);
+}
+
+.consents-card h1 {
+  margin-top: 0;
+}
+
+.consents-card .btn-plain {
+  display: block;
+  margin-top: var(--space-3);
+  padding: 0;
+  font: inherit;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.consents-card .btn-plain:hover {
+  color: var(--color-text);
+}

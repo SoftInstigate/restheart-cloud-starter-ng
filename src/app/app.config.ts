@@ -1,8 +1,10 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter, TitleStrategy } from '@angular/router';
 import { provideRhAuth, isValidApiBaseUrl } from '@restheart-cloud/kit-ng';
 
 import { routes, AppTitleStrategy } from './app.routes';
+import { consentsInterceptor } from './consents.service';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 
@@ -19,6 +21,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(activeRoutes),
     provideClientHydration(withEventReplay()),
     provideRhAuth({ apiBaseUrl: environment.apiUrl }),
+    // Interceptors registered with `withInterceptors` accumulate, so this adds
+    // to the `rhAuthInterceptor` that `provideRhAuth` already brings — listing
+    // it again here would run it twice. Order follows declaration order.
+    provideHttpClient(withInterceptors([consentsInterceptor])),
     { provide: TitleStrategy, useClass: AppTitleStrategy },
   ],
 };
