@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { isValidApiBaseUrl, setToken, scheduleRefresh } from '@restheart-cloud/kit-ng';
 import { environment } from '../environments/environment';
 import { justSignedUp } from './just-signed-up';
+import { ConsentsGate } from './consents-gate';
 
 /**
  * Read a URL fragment like #access_token=...&token_type=Bearer&expires_in=900
@@ -39,7 +40,7 @@ function consumeFragmentToken(): void {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ConsentsGate],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

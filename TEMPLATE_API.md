@@ -105,19 +105,21 @@ Template refs: `#avatarBtn`, `#firstMenuItem` (focus management). A `document:cl
 host listener closes the menu on outside clicks.
 
 ### `ConsentsGate` — `app-consents-gate`
-`src/app/pages/shell/consents-gate.ts` · blocking overlay shown while the API answers `451`.
+`src/app/consents-gate.ts` · blocking overlay shown while the API answers `451`. Mounted in
+`app.html` at the **root**, outside the router outlet — a blocked user has no session, so
+`authGuard` fails and nothing inside the outlet renders.
 
 | State | Type | Meaning |
 |---|---|---|
-| `consents` | `ConsentsService` | `consents.blocked()` drives the whole template — nothing renders when false. `probe()` is fired once from the constructor. |
+| `blocked()` | `Signal<boolean>` | The `consentsBlocked` module signal; drives the whole template. |
 | `busy()` | `Signal<boolean>` | True while the acceptance is in flight; disables the accept button. |
 | `error()` | `Signal<string \| null>` | Message shown in `.field-error` when the acceptance fails. |
 | `auth` | `RhAuthService` | Used for `acceptConsents()` and `logout()`. |
 
 | Method | Returns | Behaviour |
 |---|---|---|
-| `accept()` | `void` | `auth.acceptConsents()` — PATCH, token renewal, user reload — then lowers `blocked`. On error sets `error()` and leaves the overlay up. |
-| `signOut()` | `void` | Lowers `blocked` (it outlives the session), then `auth.logout()` and navigates to `/auth/login`. |
+| `accept()` | `void` | `auth.acceptConsents()` — PATCH, token renewal, user reload — then reloads at `/`. The user id comes from the token, since `/users/me` is what is blocked. On error sets `error()` and leaves the overlay up. |
+| `signOut()` | `void` | Lowers `consentsBlocked` (it outlives the session), logs out, then goes to `/auth/login`. |
 
 No close button and no backdrop click: the only ways out are accepting or signing out. The
 versions being accepted are never named here — the server's `mergeRequest` stamps them.

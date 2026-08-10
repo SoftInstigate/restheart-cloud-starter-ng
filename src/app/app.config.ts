@@ -1,10 +1,9 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter, TitleStrategy } from '@angular/router';
 import { provideRhAuth, isValidApiBaseUrl } from '@restheart-cloud/kit-ng';
 
 import { routes, AppTitleStrategy } from './app.routes';
-import { consentsInterceptor } from './consents.service';
+import { consentsOnError } from './consents';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 
@@ -20,11 +19,10 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(activeRoutes),
     provideClientHydration(withEventReplay()),
-    provideRhAuth({ apiBaseUrl: environment.apiUrl }),
-    // Interceptors registered with `withInterceptors` accumulate, so this adds
-    // to the `rhAuthInterceptor` that `provideRhAuth` already brings — listing
-    // it again here would run it twice. Order follows declaration order.
-    provideHttpClient(withInterceptors([consentsInterceptor])),
+    // onError sees every failure the kit hits, including the ones no caller is
+    // waiting on — session restoration among them, which is what the consents
+    // rule blocks.
+    provideRhAuth({ apiBaseUrl: environment.apiUrl, onError: consentsOnError }),
     { provide: TitleStrategy, useClass: AppTitleStrategy },
   ],
 };
