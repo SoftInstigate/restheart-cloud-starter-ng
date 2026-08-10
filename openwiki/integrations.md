@@ -39,7 +39,7 @@ resource: /package.json
 provideRhAuth({ apiBaseUrl: environment.apiUrl })
 ```
 
-**Version:** currently `^0.5.0` (see `package.json`).
+**Version:** currently `^0.6.0` (see `package.json`).
 
 ## RESTHeart Cloud service
 
