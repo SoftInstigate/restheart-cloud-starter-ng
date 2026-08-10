@@ -2,15 +2,41 @@
   <div class="consents-overlay" role="dialog" aria-modal="true" aria-labelledby="consents-title">
     <div class="consents-card">
       <h1 id="consents-title">Before you continue</h1>
-      <p>
-        Please review our <a href="/terms" target="_blank" rel="noreferrer">Terms of Service</a> and
-        our <a href="/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>. You need to accept
-        them to use the application.
-      </p>
+      <p>Please review these documents and accept them to use the application.</p>
+
+      <label class="consents-check">
+        <input
+          type="checkbox"
+          [checked]="acceptedTos()"
+          (change)="acceptedTos.set($any($event.target).checked)"
+        />
+        <span>
+          I have read and accept the
+          <a href="/terms.html" target="_blank" rel="noreferrer">Terms of Service</a>
+        </span>
+      </label>
+
+      <label class="consents-check">
+        <input
+          type="checkbox"
+          [checked]="acceptedPp()"
+          (change)="acceptedPp.set($any($event.target).checked)"
+        />
+        <span>
+          I have read and accept the
+          <a href="/privacy.html" target="_blank" rel="noreferrer">Privacy Policy</a>
+        </span>
+      </label>
+
       @if (error()) {
         <p class="field-error">{{ error() }}</p>
       }
-      <button type="button" class="btn-primary" (click)="accept()" [disabled]="busy()">
+      <button
+        type="button"
+        class="btn-primary"
+        (click)="accept()"
+        [disabled]="busy() || !acceptedTos() || !acceptedPp()"
+      >
         {{ busy() ? 'Saving…' : 'I accept' }}
       </button>
       <button type="button" class="btn-plain" (click)="signOut()">Sign out</button>

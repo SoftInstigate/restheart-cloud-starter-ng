@@ -23,6 +23,11 @@ export class ConsentsGate {
   protected readonly blocked = consentsBlocked;
   protected readonly busy = signal(false);
   protected readonly error = signal<string | null>(null);
+  // Two boxes because there are two documents. They gate the button and
+  // nothing else: the request that follows carries no versions, and the server
+  // stamps both in one go — see the permission's mergeRequest.
+  protected readonly acceptedTos = signal(false);
+  protected readonly acceptedPp = signal(false);
 
   protected accept(): void {
     this.busy.set(true);

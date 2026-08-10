@@ -78,6 +78,8 @@ src/
     theme.service.ts      ← light/dark toggle, persisted
     consents.ts           ← the 451 signal + the onError handler that raises it
     consents-gate.ts      ← the blocking overlay, mounted at the app root
+public/
+  terms.html, privacy.html ← PLACEHOLDER legal documents — replace them
     ui/alert/             ← the one shared feedback component
     pages/
       shell/              ← authenticated frame: header, nav, user menu
@@ -215,6 +217,7 @@ The client's only job is to react to a status code. Three files:
 | `app/consents.ts` | `consentsBlocked` signal + `consentsOnError`, which raises it on any `451`. |
 | `app/app.config.ts` | Passes the handler to `provideRhAuth` as `config.onError`. |
 | `app/consents-gate.ts` | The blocking overlay, mounted in `app.html` — **at the root, outside the router outlet**. |
+| `public/terms.html`, `public/privacy.html` | Placeholder legal documents. Static, so a blocked user can read them. |
 
 Nothing in the client knows which versions are current, and nothing reads `latestConsents`
 — the permission's `mergeRequest` stamps the versions and the timestamp server-side. Bump
@@ -246,6 +249,20 @@ without the hook a blocked user and a signed-out user look identical to the app.
 If your own `HttpClient` requests should raise the flag too — say the terms change while
 someone is mid-session — add an interceptor that calls `consentsBlocked.set(true)` on a `451`.
 The starter does not, because it makes no data requests of its own.
+
+### The legal documents
+
+`public/terms.html` and `public/privacy.html` are **placeholders — replace them.** Plain HTML,
+no build step, no framework.
+
+They are static files rather than app routes on purpose: a blocked user has no session, so
+anything routed through the app would sit behind the gate they are trying to read their way
+out of. A file in `public/` is served to anyone, in any state, and opens in a new tab without
+booting the app at all.
+
+Each carries `Version 2026-07-01` at the top. That date has to match the one in the Guards rule
+and in the ACL permission — change it in all three places together, or users accept one version
+while the server records another.
 
 ### Server setup (required)
 

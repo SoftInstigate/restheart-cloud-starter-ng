@@ -25,6 +25,33 @@
   box-shadow: var(--shadow-popup);
 }
 
+.consents-card p {
+  color: var(--color-text-muted);
+}
+
+.consents-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.consents-check input {
+  /* Nudged down so the box aligns with the first line of text, not its box. */
+  margin-top: 0.15em;
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.consents-card .btn-primary:disabled {
+  cursor: not-allowed;
+}
+
 .consents-card h1 {
   margin-top: 0;
 }
