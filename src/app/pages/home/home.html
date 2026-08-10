@@ -111,3 +111,54 @@
     </li>
   </ol>
 </section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Fetch your data</h2>
+  </div>
+
+  <p class="muted">
+    The kit provides <code>apiFetch</code> — an authenticated <code>fetch</code> wrapper
+    that attaches the bearer token and handles errors. Here is how to use it.
+  </p>
+
+  <h3>1. Create the <code>demo</code> collection</h3>
+  <p class="muted">
+    In your RESTHeart Cloud dashboard, create a collection called <code>demo</code>
+    and add a permission so the signed-in user can read it:
+  </p>
+  <pre class="code-block">path(/demo) and method(GET)</pre>
+
+  <h3>2. Fetch from your component</h3>
+  <pre class="code-block">import &#123; Component, inject, signal &#125; from '@angular/core';
+import &#123; switchMap, map &#125; from 'rxjs';
+import &#123; RhAuthService &#125; from '@restheart-cloud/kit-ng';
+
+@Component(&#123; /* ... */ &#125;)
+export class DemoComponent &#123;
+  private auth = inject(RhAuthService);
+  items = signal&lt;unknown[]&gt;([]);
+
+  ngOnInit() &#123;
+    this.auth.api('/demo').pipe(
+      switchMap(res => res.json()),
+      map(json => Array.isArray(json) ? json : []),
+    ).subscribe(data => this.items.set(data));
+  &#125;
+&#125;</pre>
+
+  <h3>3. Try it now</h3>
+  <p class="muted">
+    Press the button to fetch <code>/demo</code> from your service.
+  </p>
+  <button class="btn btn-primary" (click)="fetchDemo()" [disabled]="demoLoading()">
+    {{ demoLoading() ? 'Loading…' : 'Fetch /demo' }}
+  </button>
+
+  @if (demoError()) {
+    <p class="demo-error">{{ demoError() }}</p>
+  }
+  @if (demoData()) {
+    <pre class="code-block">{{ demoData() | json }}</pre>
+  }
+</section>

@@ -7,8 +7,10 @@
    `home` route in app.routes.ts at it instead.
    ───────────────────────────────────────────────────────────────────────── */
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { JsonPipe } from '@angular/common';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { RhAuthService } from '@restheart-cloud/kit-ng';
 import { environment } from '../../../environments/environment';
 
@@ -26,12 +28,36 @@ interface StarterFeature {
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, JsonPipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
   protected readonly auth = inject(RhAuthService);
+
+  protected demoData = signal<unknown[] | null>(null);
+  protected demoError = signal<string | null>(null);
+  protected demoLoading = signal(false);
+
+  fetchDemo(): void {
+    this.demoLoading.set(true);
+    this.demoError.set(null);
+    this.demoData.set(null);
+
+    this.auth.api('/demo').pipe(
+      switchMap(res => res.json()),
+      map(json => Array.isArray(json) ? json : []),
+      tap(data => {
+        this.demoData.set(data);
+        this.demoLoading.set(false);
+      }),
+      catchError(err => {
+        this.demoError.set(err.message ?? `HTTP ${err.status ?? '?'}`);
+        this.demoLoading.set(false);
+        return of(null);
+      }),
+    ).subscribe();
+  }
 
   private readonly features = environment.features;
 
