@@ -5,9 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Terms of Service</title>
 <style>
-  :root { color-scheme: light dark; --fg: #14171c; --muted: #5a6470; --bg: #fff; --line: #e3e7ec; --warn-bg: #fff8e1; --warn-line: #f0d48a; }
-  @media (prefers-color-scheme: dark) {
-    :root { --fg: #e6edf3; --muted: #9aa7b4; --bg: #0d1117; --line: #26303b; --warn-bg: #2a2410; --warn-line: #5c4f1e; }
+  /* Mirrors the app: the theme is a choice stored in localStorage, not the OS
+     preference. The app never reads prefers-color-scheme, so neither does this
+     — otherwise someone on a dark desktop who picked light in the app would get
+     a dark document, which is the bug this replaced. Light is the default, as
+     it is there. */
+  :root {
+    color-scheme: light;
+    --fg: #14171c; --muted: #5a6470; --bg: #fff; --line: #e3e7ec;
+    --warn-bg: #fff8e1; --warn-line: #f0d48a;
+  }
+  :root.dark {
+    color-scheme: dark;
+    --fg: #e6edf3; --muted: #9aa7b4; --bg: #0d1117; --line: #26303b;
+    --warn-bg: #2a2410; --warn-line: #5c4f1e;
   }
   * { box-sizing: border-box; }
   body { margin: 0; padding: 3rem 1.25rem; background: var(--bg); color: var(--fg);
@@ -21,7 +32,26 @@
   footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
            color: var(--muted); font-size: .9rem; }
   a { color: inherit; }
+  ul { padding-left: 1.2rem; }
 </style>
+<script>
+  // Before first paint, so the page never flashes the wrong theme.
+  (function () {
+    function apply() {
+      try {
+        var dark = localStorage.getItem('rh-theme') === 'dark';
+        document.documentElement.classList.toggle('dark', dark);
+      } catch (e) {
+        /* storage blocked — light, same as the app's default */
+      }
+    }
+    apply();
+    // These open in a second tab: follow the toggle if it is used in the first.
+    window.addEventListener('storage', function (e) {
+      if (e.key === 'rh-theme') apply();
+    });
+  })();
+</script>
 </head>
 <body>
 <main>
