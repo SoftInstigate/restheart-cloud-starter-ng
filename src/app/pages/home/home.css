@@ -123,3 +123,22 @@ a.feature-name:hover {
 .step-body p {
   max-width: 70ch;
 }
+
+/* ── Fetch your data ─────────────────────────────────────────────────── */
+
+.code-block {
+  background: var(--color-surface-sunken, #f5f5f5);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  overflow-x: auto;
+  white-space: pre;
+  margin: var(--space-2) 0 var(--space-4);
+}
+
+.demo-error {
+  color: var(--color-error, #c00);
+  margin-top: var(--space-3);
+}
