@@ -123,5 +123,5 @@ resource: /src/app/pages/
 ### Change password
 - `currentPassword` is intentionally **not required** at the form level — OAuth users may never have set one
 - Backend verifies current password only when the account actually has one
-- `auth.changePassword({ currentPassword, newPassword })`
+- `auth.changePassword(currentPassword, newPassword)`
 - Hint shown for OAuth users: "Leave blank if you've never set a password"
