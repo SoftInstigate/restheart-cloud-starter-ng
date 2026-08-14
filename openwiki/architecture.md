@@ -75,6 +75,7 @@ Per-route titles use a custom `AppTitleStrategy` that appends `· RESTHeart Clou
 **Critical behavior:**
 - `checkSession()` also loads teams. It short-circuits to `null` with empty teams when there's no stored token (no HTTP call), otherwise fetches user then teams.
 - `login()` also loads teams in the same round trip.
+- `loadTeams()` explicitly refreshes teams and updates the `teams()` signal. Returns an Observable that emits the teams array. Used by `Teams` and `TeamDetail` components for manual refresh (e.g., after team deletion).
 - `switchTeam()` reissues the JWT with a new active team — no page reload needed.
 
 Get these wrong and team-dependent UI is intermittently empty.

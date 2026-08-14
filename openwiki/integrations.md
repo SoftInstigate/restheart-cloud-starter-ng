@@ -13,7 +13,7 @@ resource: /package.json
 [`@restheart-cloud/kit`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit) is the core TypeScript library. It provides:
 
 - **Auth functions:** `register`, `verify`, `login`, `logout`, `checkSession`, `forgotPassword`, `resetPassword`
-- **Team functions:** `getTeams`, `switchTeam`, `listTeamMembers`, `createTeam`, `updateTeam`, `deleteTeam`
+- **Team functions:** `loadTeams`, `switchTeam`, `listTeamMembers`, `createTeam`, `updateTeam`, `deleteTeam`
 - **Invitation functions:** `invite`, `resendInvite`, `getInvitation`, `activate`, `acceptInvite`, `listInvitations`
 - **Member functions:** `removeMember`, `updateMemberRole`
 - **Profile functions:** `updateProfile`, `changePassword`
@@ -39,7 +39,7 @@ resource: /package.json
 provideRhAuth({ apiBaseUrl: environment.apiUrl })
 ```
 
-**Version:** currently `^0.6.0` (see `package.json`).
+**Version:** currently `^0.7.0` (see `package.json`).
 
 ## RESTHeart Cloud service
 
