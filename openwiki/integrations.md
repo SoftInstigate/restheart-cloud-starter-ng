@@ -111,3 +111,29 @@ When RESTHeart Cloud adds new endpoints:
 3. **Starter** — wire the new method into the appropriate component
 
 See [`specs/done/account-team-management.md`](../specs/done/account-team-management.md) for an example of this process (9 new endpoints added for restheart 9.6.0).
+
+## Change navigation for integrations
+
+### For @restheart-cloud/kit changes
+- **Start with:** `@restheart-cloud/kit` package for TypeScript auth logic
+- **Check:** `@restheart-cloud/kit-ng` for Angular adapter updates
+- **Test with:** Manual API testing and `ng test`
+- **Validation:** New functions follow Promise-based API pattern
+
+### For @restheart-cloud/kit-ng changes
+- **Start with:** `@restheart-cloud/kit-ng` package for Angular adapter
+- **Check:** `src/app/app.config.ts` for provider configuration
+- **Test with:** `ng test` and manual flows from TEST-CASES.md
+- **Validation:** `RhAuthService` exposes new methods as Observables
+
+### For OAuth provider changes
+- **Start with:** `src/app/pages/auth/oauth-buttons/oauth-buttons.ts` for button rendering
+- **Check:** `src/app/oauth-url.ts` for URL construction
+- **Test with:** Manual OAuth flows from TEST-CASES.md
+- **Validation:** OAuth buttons appear only when `oauthLogin` flag is enabled
+
+### For CI/CD changes
+- **Start with:** `.github/workflows/openwiki-update.yml` for OpenWiki workflow
+- **Check:** Workflow schedule and model configuration
+- **Test with:** Manual workflow dispatch
+- **Validation:** PR is created with documentation updates
