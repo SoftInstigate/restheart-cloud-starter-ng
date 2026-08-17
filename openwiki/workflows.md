@@ -10,6 +10,42 @@ resource: /src/app/pages/
 
 ## Signup & email verification
 
+```mermaid
+sequenceDiagram
+    participant User as User
+    participant Signup as Signup Component
+    participant Auth as RhAuthService
+    participant Backend as RESTHeart Backend
+    participant Verify as Verify Component
+    participant App as App Component
+    
+    User->>Signup: Fill form name email password
+    Signup->>Auth: register teamName firstName lastName email password
+    Auth->>Backend: POST auth register
+    Backend-->>Auth: 202 Accepted
+    Auth-->>Signup: Registration successful
+    Signup-->>User: Show Check your email confirmation
+    
+    Note over User: User clicks verification link in email
+    
+    User->>Verify: auth verify email token
+    Verify->>Auth: verify email token
+    Auth->>Backend: POST auth verify
+    Backend-->>Auth: Redirect URL with access_token
+    Verify->>User: Browser redirects to app with access_token
+    
+    User->>App: Page load with URL hash
+    App->>App: consumeFragmentToken
+    App->>Auth: setToken access_token
+    App->>App: Read flow signup set justSignedUp signal
+    App->>App: Clear URL via history replaceState
+    
+    App->>App: authGuard runs checkSession
+    App->>Auth: Load user and teams
+    Auth-->>App: User authenticated
+    App-->>User: Show welcome banner in Shell
+```
+
 **Entry:** `/auth/signup` (gated by `emailRegistration` or `oauthLogin` flag)
 
 1. User fills first name, last name, email, password (min 8 chars)
@@ -23,6 +59,8 @@ resource: /src/app/pages/
 9. `authGuard` runs `checkSession()`, user is authenticated, welcome banner appears in Shell
 
 **Key detail:** the `?flow=signup` marker is a one-shot signal. It's set only on the redirect after a fresh signup (email verification or OAuth), consumed once by `App`, and never persisted. The welcome banner copy must not claim "email verified" because OAuth signups also trigger it.
+
+**Change navigation:** When modifying signup flow, edit `src/app/pages/auth/signup/signup.ts` for the registration form and `src/app/pages/auth/verify/verify.ts` for email verification. Test with `ng test` and manual flows from TEST-CASES.md. Verify the welcome banner appears only for fresh signups.
 
 ## Login / logout
 
@@ -38,6 +76,30 @@ resource: /src/app/pages/
 
 ## OAuth (Google / GitHub)
 
+```mermaid
+sequenceDiagram
+    participant User as User
+    participant OAuth as OAuth Buttons
+    participant Provider as Google GitHub
+    participant Backend as RESTHeart Backend
+    participant App as App Component
+    
+    User->>OAuth: Click Continue with Google GitHub
+    OAuth->>User: Navigate to apiUrl auth oauth authorize provider noauthchallenge
+    
+    User->>Provider: OAuth consent flow
+    Provider->>Backend: Redirect with auth code
+    Backend->>Backend: Exchange code for user info
+    Backend->>User: Redirect to app with access_token
+    
+    User->>App: Page load with URL hash
+    App->>App: consumeFragmentToken
+    App->>App: setToken access_token
+    App->>App: Clear URL via history replaceState
+    
+    Note over App: New user gets account and team created automatically
+```
+
 **Entry:** OAuth buttons on login/signup pages (gated by `oauthLogin` flag)
 
 1. User clicks "Continue with Google/GitHub"
@@ -48,6 +110,8 @@ resource: /src/app/pages/
 6. A new user via OAuth gets an account + team created automatically
 
 **`noauthchallenge` query param:** appended to the OAuth URL to skip the auth challenge step — the backend handles the full flow.
+
+**Change navigation:** When modifying OAuth flow, edit `src/app/pages/auth/oauth-buttons/oauth-buttons.ts` for button rendering and `src/app/oauth-url.ts` for URL construction. Test with `ng test` and manual flows from TEST-CASES.md. Verify OAuth buttons appear only when `oauthLogin` flag is enabled.
 
 ## Forgot / reset password
 
@@ -125,3 +189,23 @@ resource: /src/app/pages/
 - Backend verifies current password only when the account actually has one
 - `auth.changePassword(currentPassword, newPassword)`
 - Hint shown for OAuth users: "Leave blank if you've never set a password"
+
+## Change navigation for workflows
+
+### Auth flow changes
+- **Start with:** `src/app/pages/auth/` for component implementations
+- **Check:** `src/app/pages/auth/oauth-buttons/` for OAuth button rendering
+- **Test with:** Manual flows from TEST-CASES.md
+- **Important files:** `login.ts`, `signup.ts`, `verify.ts`, `forgot-password.ts`, `reset-password.ts`
+
+### Team management changes
+- **Start with:** `src/app/pages/teams/` for team list and detail components
+- **Check:** `src/app/pages/invitations/accept/` for invitation acceptance flow
+- **Test with:** Manual flows from TEST-CASES.md
+- **Important files:** `teams.ts`, `team-detail.ts`, `accept.ts`
+
+### Account management changes
+- **Start with:** `src/app/pages/account/account.ts` for profile and password changes
+- **Check:** `src/app/app.ts` for fragment token handling (affects account creation)
+- **Test with:** Manual flows from TEST-CASES.md
+- **Validation:** Verify OAuth users can change password without current password

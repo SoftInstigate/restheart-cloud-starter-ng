@@ -117,3 +117,29 @@ The `justSignedUp` signal (in [`just-signed-up.ts`](../src/app/just-signed-up.ts
 - **Shape:** `--radius-sm`, `--radius`, `--radius-lg`, `--border-width`
 
 Dark mode overrides these tokens under `html.dark`. The `ThemeService` toggles the `.dark` class on `<html>` and persists to `localStorage['rh-theme']`.
+
+## Change navigation for domain concepts
+
+### For auth model changes
+- **Start with:** `@restheart-cloud/kit` for core auth logic
+- **Check:** `src/app/pages/auth/` for UI implementations
+- **Test with:** Manual flows from TEST-CASES.md
+- **Validation:** Auth flows work correctly, no 403 errors
+
+### For team model changes
+- **Start with:** `@restheart-cloud/kit` for team functions
+- **Check:** `src/app/pages/teams/` for team management UI
+- **Test with:** Manual flows from TEST-CASES.md
+- **Validation:** Team switching works, team list updates correctly
+
+### For feature flag changes
+- **Start with:** `src/environments/environment.ts` and `src/environments/environment.dev.ts`
+- **Check:** `src/app/app.routes.ts` for route gating
+- **Test with:** `ng serve` and verify routes/UI appear/disappear
+- **Validation:** Flags match your RESTHeart Cloud service's **Sign-up Mgmt → Features** toggles
+
+### For token lifecycle changes
+- **Start with:** `@restheart-cloud/kit` for token management
+- **Check:** `src/app/app.ts` for fragment token handling
+- **Test with:** Manual flows from TEST-CASES.md
+- **Validation:** Token refresh works at ~80% of 15-minute TTL

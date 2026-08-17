@@ -97,3 +97,29 @@ Priority areas for future E2E tests:
 4. **Token lifecycle** — refresh, expiry, session restoration
 5. **Feature flag gating** — verify routes/UI appear/disappear correctly
 6. **SSR/CSR boundary** — prerendered pages render, authenticated pages don't break during hydration
+
+## Change navigation for testing
+
+### When modifying auth flows
+- **Run:** `ng test` for unit tests
+- **Check:** Manual flows from TEST-CASES.md, especially signup → verification → login cycle
+- **Validation:** Use browser DevTools Network tab to verify no extra `POST /token` calls
+- **Important files:** `src/app/pages/auth/**/*.ts`, `src/app/app.ts`
+
+### When modifying team management
+- **Run:** `ng test` for unit tests
+- **Check:** Manual flows from TEST-CASES.md, especially invitation acceptance and team switching
+- **Validation:** Verify team switcher appears only when user has >1 team
+- **Important files:** `src/app/pages/teams/**/*.ts`, `src/app/pages/invitations/**/*.ts`
+
+### When modifying SSR/CSR behavior
+- **Run:** `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs`
+- **Check:** View source on auth pages shows HTML (prerendered), authenticated routes are client-rendered only
+- **Validation:** No SSR errors from browser APIs (localStorage, document)
+- **Important files:** `src/app/app.routes.server.ts`, `src/server.ts`
+
+### When modifying feature flags
+- **Run:** `ng test` for unit tests
+- **Check:** Manual flows from TEST-CASES.md, especially feature flag gating
+- **Validation:** Disabled flag removes both route and UI link
+- **Important files:** `src/environments/environment.ts`, `src/environments/environment.dev.ts`, `src/app/app.routes.ts`
