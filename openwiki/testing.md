@@ -12,7 +12,7 @@ resource: /TEST-CASES.md
 
 **No automated E2E suite exists.** All flows are verified by hand using the checklist in [`TEST-CASES.md`](../TEST-CASES.md).
 
-**Unit tests:** minimal — `app.spec.ts` and `oauth-buttons.spec.ts` only verify component creation. No behavioral tests.
+**Unit tests:** minimal — all spec files (`app.spec.ts`, `login.spec.ts`, `signup.spec.ts`, `verify.spec.ts`, `forgot-password.spec.ts`, `reset-password.spec.ts`, `oauth-buttons.spec.ts`, `accept.spec.ts`, `account.spec.ts`, `shell.spec.ts`) only verify component creation. No behavioral tests.
 
 **Test runner:** Vitest (configured in `package.json`), run via `ng test`.
 
