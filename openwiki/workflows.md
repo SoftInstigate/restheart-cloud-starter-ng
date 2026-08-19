@@ -124,7 +124,7 @@ sequenceDiagram
 5. User clicks reset link → arrives at `/auth/reset-password?email=...&token=...`
 6. User enters new password (min 8 chars)
 7. Component calls `auth.resetPassword({ email, token, password })`
-8. `PATCH /auth/reset-password?delivery=body` returns `access_token` directly — no follow-up `POST /token`
+8. `PATCH /auth/reset-password?delivery=body` returns `access_token` directly in the response body — no follow-up `POST /token` (this is bearer-mode delivery; same pattern used by `activate` and `switch-team`)
 9. User is logged in automatically, redirected to home
 
 ## Team invitations — new user
