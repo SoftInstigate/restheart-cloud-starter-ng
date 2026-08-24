@@ -266,9 +266,33 @@ while the server records another.
 
 ### Server setup (required)
 
-Enable the **Guards** plugin from *Service → Guards*, then create four documents in the
-console. Full walkthrough: [Gating an app on consents](https://cloud.restheart.com/blog) and
-the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gating_on_consents).
+Four documents on the service. [`rhc.setup.ts`](./rhc.setup.ts) states all four, and
+[`rhc`](https://restheart.org/docs/cloud/cli) applies them:
+
+```bash
+npm install -g @restheart-cloud/cli    # the rhc command
+npm i -D @restheart-cloud/cli          # the setup file imports it
+
+rhc login
+rhc setup --srv <srvId> --dry-run      # what the service is missing
+rhc setup --srv <srvId>                # make it so
+```
+
+`<srvId>` is the six-character id of your service — the first label of its URL. Every step is a
+check and an apply, so re-running writes nothing.
+
+**The versions live in one place.** In the article the two version strings appear four times —
+twice in the permission's `mergeRequest`, twice in the rule's condition — and they have to agree
+exactly. In the setup file they are `TOS_VERSION` and `PP_VERSION` at the top, and everything is
+derived. Publishing new terms is editing two strings and re-running; the `Version 2026-07-01`
+line in `public/` is the third place, and the only one left to keep in step by hand.
+
+<details>
+<summary>What the four documents are, if you would rather create them by hand</summary>
+
+Enable the **Guards** plugin from *Service → Guards*, then create them in the console. Full
+walkthrough: [Add Terms and Privacy Policy Acceptance](https://cloud.restheart.com/blog/require-terms-and-privacy-acceptance)
+and the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gating_on_consents).
 
 1. **A schema** (`userConsentsSchema`) allowing `latestConsents` and `consents` on the user
    document — with neither in `required`, since registration does not write them.
@@ -282,6 +306,8 @@ the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gati
 
 Until those exist nothing ever returns `451`, the signal stays down, and the overlay never
 renders.
+
+</details>
 
 ## Packages used
 
