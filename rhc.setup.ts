@@ -100,6 +100,25 @@ const USER_SCHEMA = {
 };
 
 /**
+ * Paths the gate must leave alone, beyond the two it always excludes.
+ *
+ * **Every path your ACL grants to `$unauthenticated` belongs here.** The rule
+ * is keyed on a user's state, and a visitor who has no user cannot satisfy it:
+ * the comparison is false, the rule matches, and they are answered `451` and
+ * shown a form that asks them to accept — which they cannot, because accepting
+ * is a `PATCH` on a user document they do not have.
+ *
+ * Everything else is already safe without being listed. Authorization runs
+ * *before* guards, so a path the ACL does not open to anonymous callers is
+ * refused with `401` and never reaches this rule at all. The list is therefore
+ * exactly as long as your public surface, and no longer.
+ *
+ * Empty here because this starter has no public pages. A shop does — see the
+ * ecommerce starter, where `/catalog` and `/orders` are on it.
+ */
+const PUBLIC_PREFIXES: string[] = [];
+
+/**
  * Blocked when *either* acceptance is missing — `not (A and B)`, never
  * `not A and not B`, which would block only the users who accepted neither.
  *
@@ -110,10 +129,16 @@ const USER_SCHEMA = {
  * `/users/me` is deliberately **not** excluded. Blocking it is what makes the
  * gate work with no probing on the client's side: reading the user document is
  * the first thing any app does.
+ *
+ * Public paths come from {@link PUBLIC_PREFIXES}. There is no way to write "only
+ * when authenticated" here: a condition sees `@user`, `@team` and `@request`,
+ * and no roles — so anonymity is excluded by naming the paths, the same way
+ * `/auth` and `/token` are.
  */
 const CONDITION = [
   "not path-prefix('/auth')",
   "not path-prefix('/token')",
+  ...PUBLIC_PREFIXES.map(p => `not path-prefix('${p}')`),
   "not (method(PATCH) and path-template('/users/{userId}') and bson-request-whitelist(consents))",
   `not (equals(@user.latestConsents.tos, '${TOS_VERSION}') and equals(@user.latestConsents.pp, '${PP_VERSION}'))`,
 ].join(' and ');
