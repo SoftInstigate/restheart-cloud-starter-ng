@@ -143,6 +143,17 @@ The token has a 15-minute TTL with silent refresh at ~80%. If refresh fails (net
 ### SSR build breaks with ThemeService
 ThemeService touches `localStorage` and `document` — safe only in client-rendered contexts. If injected into a prerendered page, it will break the SSR build. The `isPlatformBrowser` guard is already in place.
 
+### Demo fetch feature not working
+The home page's "Fetch your data" demo requires:
+1. A RESTHeart Cloud service with a `/demo` collection
+2. A permission allowing the signed-in user to read it: `path(/demo) and method(GET)`
+3. The user must be authenticated (the demo uses `auth.api()` which requires a valid session)
+
+If the demo button shows an error, check:
+- Network tab for the `/demo` request — verify it's being sent with the bearer token
+- RESTHeart Cloud dashboard — verify the `/demo` collection exists and has the correct permission
+- Console for any CORS or authentication errors
+
 ## Change navigation for operations
 
 ### For environment configuration changes

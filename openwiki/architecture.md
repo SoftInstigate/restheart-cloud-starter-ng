@@ -147,6 +147,13 @@ stateDiagram-v2
 | `teams()` | `TeamMembership[]` | Each has `id.$oid`, `name`, `description`, `role`, `active` |
 | `isAuthenticated()` | `boolean` | Derived from `user` |
 
+**Key methods:**
+- `auth.api(endpoint)` — authenticated `fetch` wrapper that attaches the bearer token. Returns `Observable<Response>`. Use for custom API calls to your RESTHeart Cloud service.
+- `checkSession()` — loads user and teams. Short-circuits to `null` with empty teams when there's no stored token.
+- `login(email, password)` — authenticates and loads teams in the same round trip.
+- `loadTeams()` — explicitly refreshes teams and updates the `teams()` signal.
+- `switchTeam(teamId)` — reissues the JWT with a new active team — no page reload needed.
+
 **Critical behavior:**
 - `checkSession()` also loads teams. It short-circuits to `null` with empty teams when there's no stored token (no HTTP call), otherwise fetches user then teams.
 - `login()` also loads teams in the same round trip.

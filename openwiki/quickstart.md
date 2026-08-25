@@ -22,6 +22,7 @@ Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth 
 - **SSR for public routes**, CSR for the authenticated shell
 - **Account management** — profile editing and password change
 - **Dark/light mode** — persisted to localStorage
+- **Demo fetch feature** — shows how to use `auth.api()` for authenticated API calls to your RESTHeart Cloud service
 
 ## Quick setup
 
@@ -110,7 +111,7 @@ Use this table to find the right starting point for common changes:
 | **Build and deployment** | [Operations](operations.md) | `package.json`, `angular.json` | Build scripts, SSR server | Build success | `ng build` |
 | **Dependencies** | [Integrations](integrations.md) | `package.json` | `@restheart-cloud/kit`, `@restheart-cloud/kit-ng` | Dependency audit | `npm audit` |
 | **Testing** | [Testing](testing.md) | `src/app/**/*.spec.ts`, `TEST-CASES.md` | Vitest configuration, test cases | Test execution | `ng test` |
-| **New API endpoints** | [Integrations](integrations.md) | `@restheart-cloud/kit`, `@restheart-cloud/kit-ng` | `RhAuthService`, kit functions | Manual API test | `ng serve` and test API calls |
+| **New API endpoints** | [Integrations](integrations.md) | `@restheart-cloud/kit`, `@restheart-cloud/kit-ng` | `RhAuthService`, `auth.api()`, kit functions | Manual API test | `ng serve` and test API calls |
 | **Porting to other frameworks** | [Operations](operations.md) | `PORTING.md`, `TEMPLATE_API.md` | Portable layers, reactive auth layer | Manual parity test | Compare with Angular original |
 
 ## Backlog
