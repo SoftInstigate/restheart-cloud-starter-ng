@@ -13,7 +13,7 @@ resource: /package.json
 [`@restheart-cloud/kit`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit) is the core TypeScript library. It provides:
 
 - **Auth functions:** `register`, `verify`, `login`, `logout`, `checkSession`, `forgotPassword`, `resetPassword`
-- **Team functions:** `getTeams`, `switchTeam`, `listTeamMembers`, `createTeam`, `updateTeam`, `deleteTeam`
+- **Team functions:** `loadTeams`, `switchTeam`, `listTeamMembers`, `createTeam`, `updateTeam`, `deleteTeam`
 - **Invitation functions:** `invite`, `resendInvite`, `getInvitation`, `activate`, `acceptInvite`, `listInvitations`
 - **Member functions:** `removeMember`, `updateMemberRole`
 - **Profile functions:** `updateProfile`, `changePassword`
@@ -39,7 +39,28 @@ resource: /package.json
 provideRhAuth({ apiBaseUrl: environment.apiUrl })
 ```
 
-**Version:** currently `^0.6.0` (see `package.json`).
+**Version:** currently `^0.8.0` (see `package.json`).
+
+**`auth.api()` method:** provides an authenticated `fetch` wrapper that attaches the bearer token and handles errors. Returns an `Observable<Response>`. Use it for custom API calls to your RESTHeart Cloud service:
+
+```typescript
+this.auth.api('/demo').pipe(
+  switchMap(res => res.json()),
+  map(json => Array.isArray(json) ? json : []),
+).subscribe(data => this.items.set(data));
+```
+
+**Key features of `auth.api()`:**
+- Automatically attaches the bearer token to the request
+- Handles authentication errors (401/expiry) by clearing the session
+- Returns an `Observable<Response>` for reactive programming
+- Simpler than using `HttpClient` directly for authenticated calls
+- The home page includes a working demo of this pattern
+
+**When to use `auth.api()` vs `HttpClient`:**
+- Use `auth.api()` for simple authenticated calls to your RESTHeart Cloud service
+- Use `HttpClient` when you need more control over headers, interceptors, or request configuration
+- Both approaches work — `auth.api()` is recommended for most cases
 
 ## RESTHeart Cloud service
 
@@ -111,3 +132,29 @@ When RESTHeart Cloud adds new endpoints:
 3. **Starter** — wire the new method into the appropriate component
 
 See [`specs/done/account-team-management.md`](../specs/done/account-team-management.md) for an example of this process (9 new endpoints added for restheart 9.6.0).
+
+## Change navigation for integrations
+
+### For @restheart-cloud/kit changes
+- **Start with:** `@restheart-cloud/kit` package for TypeScript auth logic
+- **Check:** `@restheart-cloud/kit-ng` for Angular adapter updates
+- **Test with:** Manual API testing and `ng test`
+- **Validation:** New functions follow Promise-based API pattern
+
+### For @restheart-cloud/kit-ng changes
+- **Start with:** `@restheart-cloud/kit-ng` package for Angular adapter
+- **Check:** `src/app/app.config.ts` for provider configuration
+- **Test with:** `ng test` and manual flows from TEST-CASES.md
+- **Validation:** `RhAuthService` exposes new methods as Observables
+
+### For OAuth provider changes
+- **Start with:** `src/app/pages/auth/oauth-buttons/oauth-buttons.ts` for button rendering
+- **Check:** `src/app/oauth-url.ts` for URL construction
+- **Test with:** Manual OAuth flows from TEST-CASES.md
+- **Validation:** OAuth buttons appear only when `oauthLogin` flag is enabled
+
+### For CI/CD changes
+- **Start with:** `.github/workflows/openwiki-update.yml` for OpenWiki workflow
+- **Check:** Workflow schedule and model configuration
+- **Test with:** Manual workflow dispatch
+- **Validation:** PR is created with documentation updates

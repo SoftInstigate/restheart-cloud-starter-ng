@@ -41,7 +41,38 @@ git update-index --assume-unchanged src/environments/environment.dev.ts
 Then edit `src/environments/environment.dev.ts` and set `apiUrl` to your free RESTHeart Cloud service URL. Your changes will not show up in `git status`.
 
 
-### 3. Start
+### 3. Configure the service
+
+The app expects things of its service: the `accounts` plugin installed, its feature toggles
+matching the app's, and your origin allowed to call it. `rhc.setup.ts` states all of that as
+code, and `rhc` applies it.
+
+> **On this branch** `rhc.setup.ts` states the [consents gate](#server-setup-required) instead —
+> the two setup files are merged when the gate lands on `main`. Until then, configure the
+> `accounts` plugin, its toggles and the origin allowlist from the console.
+
+```bash
+npm install -g @restheart-cloud/cli    # the rhc command; the setup file's own copy is a devDependency
+
+rhc login                              # a personal access token, from cloud.restheart.com
+rhc setup --srv <srvId> --dry-run      # what the service is missing
+rhc setup --srv <srvId>                # make it so
+```
+
+`<srvId>` is the six-character id of your service — the first label of its URL.
+
+Every step is a check and an apply, so running it against a service already configured writes
+nothing and reports each step satisfied. `--dry-run` runs the checks only, which is the honest
+answer to "what is this service missing".
+
+**The setup file imports ``src/environments/environment.dev.ts``**, the same one the app imports, and derives the
+service's feature toggles from it. So the flags are stated once: turn `passwordReset` off in the
+app, re-run the setup, and it goes off on the service too. There is no second list to forget —
+and a feature that is off on the server answers unauthenticated callers with `403`, which is a
+confusing way to find out they had drifted.
+
+### 4. Start
+
 
 ```bash
 ng serve

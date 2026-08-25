@@ -22,6 +22,7 @@ Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth 
 - **SSR for public routes**, CSR for the authenticated shell
 - **Account management** — profile editing and password change
 - **Dark/light mode** — persisted to localStorage
+- **Demo fetch feature** — shows how to use `auth.api()` for authenticated API calls to your RESTHeart Cloud service
 
 ## Quick setup
 
@@ -91,6 +92,27 @@ Feature flags in `src/environments/environment*.ts` must match your service's **
 3. **Porting to React/Vue?** Read [`PORTING.md`](../PORTING.md) first — it covers what's portable and what you must rebuild.
 4. **Restyling?** The [swap map in README.md](../README.md#swap-map) maps every semantic class hook to framework equivalents. [`TEMPLATE_API.md`](../TEMPLATE_API.md) documents what each template binds to.
 5. **Running tests?** See [Testing](testing.md) for the manual checklist and automated test status.
+
+## Task routing table
+
+Use this table to find the right starting point for common changes:
+
+| Change area / User intent | Relevant wiki page | Source entry points | Important symbols / types | Focused tests | Minimal validation command |
+|---|---|---|---|---|---|
+| **Auth flows** (signup, login, OAuth, verification, password reset) | [Workflows](workflows.md) | `src/app/pages/auth/*` | `Login`, `Signup`, `Verify`, `ForgotPassword`, `ResetPassword`, `OauthButtons` | `login.spec.ts`, `signup.spec.ts`, `verify.spec.ts`, `forgot-password.spec.ts`, `reset-password.spec.ts` | `ng test` |
+| **Team management** (invitations, switching, members, settings) | [Workflows](workflows.md) | `src/app/pages/teams/*`, `src/app/pages/invitations/accept/` | `Teams`, `TeamDetail`, `NewTeam`, `Accept` | `accept.spec.ts`, `shell.spec.ts` | `ng test` |
+| **Account management** (profile, password change) | [Workflows](workflows.md) | `src/app/pages/account/account.ts` | `Account` | `account.spec.ts` | `ng test` |
+| **Routing and guards** | [Architecture](architecture.md) | `src/app/app.routes.ts` | `authGuard`, `publicGuard`, `AppTitleStrategy` | `app.spec.ts` | `ng test` |
+| **SSR/CSR split** | [Architecture](architecture.md) | `src/app/app.routes.server.ts`, `src/server.ts` | `Prerender`, `Client` render modes | Manual SSR test | `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs` |
+| **Feature flags** | [Domain Concepts](domain-concepts.md) | `src/environments/environment*.ts` | `environment.features` | Manual flag toggle test | `ng serve` and verify routes/UI |
+| **Environment configuration** | [Operations](operations.md) | `src/environments/environment.ts`, `src/environments/environment.dev.ts` | `apiUrl`, `features` | Manual config test | `ng serve` and check "Connect your service" screen |
+| **CSS theming** | [Operations](operations.md) | `src/styles.css` | CSS custom properties, `.dark` class | Visual inspection | `ng serve` and toggle theme |
+| **Component styling** | [Operations](operations.md) | `src/app/pages/**/*.css` | Page-specific CSS classes | Visual inspection | `ng serve` |
+| **Build and deployment** | [Operations](operations.md) | `package.json`, `angular.json` | Build scripts, SSR server | Build success | `ng build` |
+| **Dependencies** | [Integrations](integrations.md) | `package.json` | `@restheart-cloud/kit`, `@restheart-cloud/kit-ng` | Dependency audit | `npm audit` |
+| **Testing** | [Testing](testing.md) | `src/app/**/*.spec.ts`, `TEST-CASES.md` | Vitest configuration, test cases | Test execution | `ng test` |
+| **New API endpoints** | [Integrations](integrations.md) | `@restheart-cloud/kit`, `@restheart-cloud/kit-ng` | `RhAuthService`, `auth.api()`, kit functions | Manual API test | `ng serve` and test API calls |
+| **Porting to other frameworks** | [Operations](operations.md) | `PORTING.md`, `TEMPLATE_API.md` | Portable layers, reactive auth layer | Manual parity test | Compare with Angular original |
 
 ## Backlog
 

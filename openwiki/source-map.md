@@ -104,7 +104,7 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 
 | File | Purpose |
 |---|---|
-| [`src/app/pages/home/home.ts`](../src/app/pages/home/home.ts) | **Placeholder showcase** — displays feature list driven by `environment.features`. Replace with your app's landing content. |
+| [`src/app/pages/home/home.ts`](../src/app/pages/home/home.ts) | **Placeholder showcase** — displays feature list driven by `environment.features`, plus a "Fetch your data" demo section showing how to use `auth.api()` for authenticated API calls. Replace with your app's landing content. |
 
 ## Specs and documentation
 

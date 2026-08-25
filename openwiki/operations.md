@@ -142,3 +142,40 @@ The token has a 15-minute TTL with silent refresh at ~80%. If refresh fails (net
 
 ### SSR build breaks with ThemeService
 ThemeService touches `localStorage` and `document` — safe only in client-rendered contexts. If injected into a prerendered page, it will break the SSR build. The `isPlatformBrowser` guard is already in place.
+
+### Demo fetch feature not working
+The home page's "Fetch your data" demo requires:
+1. A RESTHeart Cloud service with a `/demo` collection
+2. A permission allowing the signed-in user to read it: `path(/demo) and method(GET)`
+3. The user must be authenticated (the demo uses `auth.api()` which requires a valid session)
+
+If the demo button shows an error, check:
+- Network tab for the `/demo` request — verify it's being sent with the bearer token
+- RESTHeart Cloud dashboard — verify the `/demo` collection exists and has the correct permission
+- Console for any CORS or authentication errors
+
+## Change navigation for operations
+
+### For environment configuration changes
+- **Start with:** `src/environments/environment.ts` and `src/environments/environment.dev.ts`
+- **Check:** `src/app/app.routes.ts` for feature flag usage
+- **Test with:** `ng serve` and verify "Connect your service" screen appears for invalid URLs
+- **Validation:** Feature flags match your RESTHeart Cloud service's **Sign-up Mgmt → Features** toggles
+
+### For SSR deployment changes
+- **Start with:** `src/server.ts` for Express server configuration
+- **Check:** `src/app/app.routes.server.ts` for render mode assignments
+- **Test with:** `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs`
+- **Validation:** Server starts on PORT or defaults to 4000, auth pages are prerendered
+
+### For CSS theming changes
+- **Start with:** `src/styles.css` for design tokens and default skin
+- **Check:** `src/app/pages/**/*.css` for page-specific styles
+- **Test with:** `ng serve` and toggle theme (dark/light)
+- **Validation:** Design tokens are applied correctly, dark mode works
+
+### For build and deployment changes
+- **Start with:** `package.json` for scripts, `angular.json` for build configuration
+- **Check:** Build budgets (500kB warning, 1MB error for initial bundle)
+- **Test with:** `ng build` and verify no budget warnings
+- **Validation:** Build succeeds, SSR server starts without errors

@@ -12,7 +12,7 @@ resource: /TEST-CASES.md
 
 **No automated E2E suite exists.** All flows are verified by hand using the checklist in [`TEST-CASES.md`](../TEST-CASES.md).
 
-**Unit tests:** minimal — `app.spec.ts` and `oauth-buttons.spec.ts` only verify component creation. No behavioral tests.
+**Unit tests:** minimal — all spec files (`app.spec.ts`, `login.spec.ts`, `signup.spec.ts`, `verify.spec.ts`, `forgot-password.spec.ts`, `reset-password.spec.ts`, `oauth-buttons.spec.ts`, `accept.spec.ts`, `account.spec.ts`, `shell.spec.ts`) only verify component creation. No behavioral tests.
 
 **Test runner:** Vitest (configured in `package.json`), run via `ng test`.
 
@@ -66,6 +66,14 @@ The full checklist is in [`TEST-CASES.md`](../TEST-CASES.md). Key sections:
 - Theme toggle (dark/light, persisted)
 - Progress bar during lazy route loading
 
+### Home page demo fetch (`pages/home/*`)
+- Demo button appears and is clickable when authenticated
+- Clicking "Fetch /demo" sends a request to `/demo` with bearer token
+- Loading state shows "Loading..." while request is in progress
+- Success: displays JSON data in a code block
+- Error: displays error message (e.g., 404 if `/demo` collection doesn't exist)
+- Network tab: verify the request includes `Authorization: Bearer ...` header
+
 ### Routing and guards
 - Auth guard: unauthenticated → redirect to login
 - Public guard: authenticated → redirect into app
@@ -97,3 +105,29 @@ Priority areas for future E2E tests:
 4. **Token lifecycle** — refresh, expiry, session restoration
 5. **Feature flag gating** — verify routes/UI appear/disappear correctly
 6. **SSR/CSR boundary** — prerendered pages render, authenticated pages don't break during hydration
+
+## Change navigation for testing
+
+### When modifying auth flows
+- **Run:** `ng test` for unit tests
+- **Check:** Manual flows from TEST-CASES.md, especially signup → verification → login cycle
+- **Validation:** Use browser DevTools Network tab to verify no extra `POST /token` calls
+- **Important files:** `src/app/pages/auth/**/*.ts`, `src/app/app.ts`
+
+### When modifying team management
+- **Run:** `ng test` for unit tests
+- **Check:** Manual flows from TEST-CASES.md, especially invitation acceptance and team switching
+- **Validation:** Verify team switcher appears only when user has >1 team
+- **Important files:** `src/app/pages/teams/**/*.ts`, `src/app/pages/invitations/**/*.ts`
+
+### When modifying SSR/CSR behavior
+- **Run:** `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs`
+- **Check:** View source on auth pages shows HTML (prerendered), authenticated routes are client-rendered only
+- **Validation:** No SSR errors from browser APIs (localStorage, document)
+- **Important files:** `src/app/app.routes.server.ts`, `src/server.ts`
+
+### When modifying feature flags
+- **Run:** `ng test` for unit tests
+- **Check:** Manual flows from TEST-CASES.md, especially feature flag gating
+- **Validation:** Disabled flag removes both route and UI link
+- **Important files:** `src/environments/environment.ts`, `src/environments/environment.dev.ts`, `src/app/app.routes.ts`
