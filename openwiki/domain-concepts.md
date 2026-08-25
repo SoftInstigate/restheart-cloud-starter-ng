@@ -33,6 +33,8 @@ RESTHeart Cloud uses **bearer token authentication**:
 - SSR cannot access the token — authenticated routes must be client-rendered
 - Token is passed in the `Authorization: Bearer ...` header
 
+**Authenticated API calls:** use `auth.api(endpoint)` for custom API calls to your RESTHeart Cloud service. This method automatically attaches the bearer token and handles authentication errors. See [Integrations](integrations.md#restheart-cloudkit-ng) for details and examples.
+
 ## Teams
 
 A team has:

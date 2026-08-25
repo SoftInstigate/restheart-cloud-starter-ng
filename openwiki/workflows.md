@@ -190,6 +190,38 @@ sequenceDiagram
 - `auth.changePassword(currentPassword, newPassword)`
 - Hint shown for OAuth users: "Leave blank if you've never set a password"
 
+## Home page demo fetch
+
+**Entry:** `/home` (authenticated)
+
+The home page includes a "Fetch your data" section that demonstrates how to use `auth.api()` for authenticated API calls:
+
+1. User clicks "Fetch /demo" button
+2. Component calls `auth.api('/demo')` — an authenticated `fetch` wrapper that attaches the bearer token
+3. Response is parsed as JSON and displayed in a code block
+4. Errors are caught and displayed with appropriate messaging
+
+**Key implementation details:**
+- Uses `auth.api()` instead of `HttpClient` — simpler syntax, automatic token attachment
+- Handles loading state with `demoLoading` signal
+- Catches and displays errors with `demoError` signal
+- Shows parsed JSON data with `demoData` signal
+
+**To use this pattern in your own components:**
+```typescript
+import { RhAuthService } from '@restheart-cloud/kit-ng';
+
+private readonly auth = inject(RhAuthService);
+
+fetchData() {
+  this.auth.api('/your-endpoint').pipe(
+    switchMap(res => res.json()),
+  ).subscribe(data => this.items.set(data));
+}
+```
+
+**Change navigation:** When modifying the home page demo, edit `src/app/pages/home/home.ts` for the fetch logic and `src/app/pages/home/home.html` for the template. Test with `ng serve` and verify the demo button works when connected to a RESTHeart Cloud service with a `/demo` collection.
+
 ## Change navigation for workflows
 
 ### Auth flow changes

@@ -39,7 +39,28 @@ resource: /package.json
 provideRhAuth({ apiBaseUrl: environment.apiUrl })
 ```
 
-**Version:** currently `^0.7.0` (see `package.json`).
+**Version:** currently `^0.8.0` (see `package.json`).
+
+**`auth.api()` method:** provides an authenticated `fetch` wrapper that attaches the bearer token and handles errors. Returns an `Observable<Response>`. Use it for custom API calls to your RESTHeart Cloud service:
+
+```typescript
+this.auth.api('/demo').pipe(
+  switchMap(res => res.json()),
+  map(json => Array.isArray(json) ? json : []),
+).subscribe(data => this.items.set(data));
+```
+
+**Key features of `auth.api()`:**
+- Automatically attaches the bearer token to the request
+- Handles authentication errors (401/expiry) by clearing the session
+- Returns an `Observable<Response>` for reactive programming
+- Simpler than using `HttpClient` directly for authenticated calls
+- The home page includes a working demo of this pattern
+
+**When to use `auth.api()` vs `HttpClient`:**
+- Use `auth.api()` for simple authenticated calls to your RESTHeart Cloud service
+- Use `HttpClient` when you need more control over headers, interceptors, or request configuration
+- Both approaches work — `auth.api()` is recommended for most cases
 
 ## RESTHeart Cloud service
 

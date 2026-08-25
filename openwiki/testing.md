@@ -66,6 +66,14 @@ The full checklist is in [`TEST-CASES.md`](../TEST-CASES.md). Key sections:
 - Theme toggle (dark/light, persisted)
 - Progress bar during lazy route loading
 
+### Home page demo fetch (`pages/home/*`)
+- Demo button appears and is clickable when authenticated
+- Clicking "Fetch /demo" sends a request to `/demo` with bearer token
+- Loading state shows "Loading..." while request is in progress
+- Success: displays JSON data in a code block
+- Error: displays error message (e.g., 404 if `/demo` collection doesn't exist)
+- Network tab: verify the request includes `Authorization: Bearer ...` header
+
 ### Routing and guards
 - Auth guard: unauthenticated → redirect to login
 - Public guard: authenticated → redirect into app
