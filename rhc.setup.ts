@@ -28,7 +28,8 @@
  * service too, because there is no second place to forget.
  */
 import { defineSetup, step, fromEnv, isRedacted } from '@restheart-cloud/cli';
-import type { PluginConfig } from '@restheart-cloud/cli';
+import { isApiError } from '@restheart-cloud/cli';
+import type { AdminClient, PluginConfig } from '@restheart-cloud/cli';
 import { environment } from './src/environments/environment.dev.ts';
 
 /** Where the app is served from, no trailing slash. */
@@ -61,10 +62,26 @@ const features = {
   oauth: f.oauthLogin,
 };
 
+/**
+ * Install a plugin, treating "already installed" as the success it is.
+ *
+ * The step's desired state is that the plugin is there. `409 Plugin already
+ * installed` says it is, so failing on it reports a problem that does not
+ * exist — which is exactly what a forced run does, since the apply then runs
+ * against a service where the check would have said yes.
+ */
+const install = async (admin: AdminClient, srvId: string, pluginId: string) => {
+  try {
+    await admin.installPlugin(srvId, pluginId);
+  } catch (err) {
+    if (!isApiError(err) || err.status !== 409) throw err;
+  }
+};
+
 export default defineSetup('Angular starter', [
   step('accounts plugin installed', {
     check: ({ admin, srvId }) => admin.isPluginInstalled(srvId, 'accounts'),
-    apply: ({ admin, srvId }) => admin.installPlugin(srvId, 'accounts'),
+    apply: ({ admin, srvId }) => install(admin, srvId, 'accounts'),
   }),
 
   step('accounts configured to match the app', {
@@ -152,7 +169,7 @@ export default defineSetup('Angular starter', [
     },
     apply: async ({ admin, srvId }) => {
       if (!(await admin.isPluginInstalled(srvId, 'origin-allowlist'))) {
-        await admin.installPlugin(srvId, 'origin-allowlist');
+        await install(admin, srvId, 'origin-allowlist');
       }
       const config = await admin.getPluginConfig(srvId, 'origin-allowlist');
       const origins = (config['allowed-origins'] as string[] | undefined) ?? [];
