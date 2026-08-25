@@ -111,9 +111,9 @@ const USER_SCHEMA = {
  * gate work with no probing on the client's side: reading the user document is
  * the first thing any app does.
  *
- * Anonymous callers are excluded with `@roles`, not by naming every public path.
- * The list version had to be kept complete by hand and was invisible until it
- * was wrong — twice, on one service.
+ * Anonymous callers are excluded with `@authenticated`, not by naming every
+ * public path. The list version had to be kept complete by hand and was
+ * invisible until it was wrong — twice, on one service.
  */
 const CONDITION = [
   // Nobody signed in, nothing to guard. This one line replaces a list of every
@@ -122,9 +122,14 @@ const CONDITION = [
   // consents form they could not complete, and then /stripe/webhook, so
   // customers paid and their orders never moved.
   //
-  // `@roles` is a RESTHeart 9.8 built-in and carries `$unauthenticated` when
-  // there is no account, the same name the ACL uses.
-  "not in(value='$unauthenticated', array=@roles)",
+  // `@authenticated` is a RESTHeart 9.8 built-in: the string 'true' when the
+  // request carries an account, 'false' when it does not. Not `@roles` — that
+  // one does carry `$unauthenticated`, but `$` is Undertow's sigil for an
+  // exchange attribute, so `in(value='$unauthenticated', array=@roles)` reads
+  // the value as an attribute, resolves it to nothing, and is false for
+  // everybody. Negated, as it would be here, it is true for everybody: the
+  // gate would apply to anonymous callers exactly as if the line were absent.
+  "equals(@authenticated, 'true')",
 
   // Still needed, and not about anonymity: signing in and fetching a token are
   // authenticated requests made by someone who has not accepted yet. Guard
