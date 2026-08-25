@@ -48,8 +48,7 @@ matching the app's, and your origin allowed to call it. `rhc.setup.ts` states al
 code, and `rhc` applies it.
 
 ```bash
-npm install -g @restheart-cloud/cli    # the rhc command
-npm i -D @restheart-cloud/cli          # the setup file imports it
+npm install -g @restheart-cloud/cli    # the rhc command; the setup file's own copy is a devDependency
 
 rhc login                              # a personal access token, from cloud.restheart.com
 rhc setup --srv <srvId> --dry-run      # what the service is missing
