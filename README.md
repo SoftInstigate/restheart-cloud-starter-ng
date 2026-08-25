@@ -270,8 +270,7 @@ Four documents on the service. [`rhc.setup.ts`](./rhc.setup.ts) states all four,
 [`rhc`](https://restheart.org/docs/cloud/cli) applies them:
 
 ```bash
-npm install -g @restheart-cloud/cli    # the rhc command
-npm i -D @restheart-cloud/cli          # the setup file imports it
+npm install -g @restheart-cloud/cli    # the rhc command; the setup file's own copy is a devDependency
 
 rhc login
 rhc setup --srv <srvId> --dry-run      # what the service is missing
