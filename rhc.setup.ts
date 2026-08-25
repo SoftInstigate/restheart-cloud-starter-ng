@@ -100,25 +100,6 @@ const USER_SCHEMA = {
 };
 
 /**
- * Paths the gate must leave alone, beyond the two it always excludes.
- *
- * **Every path your ACL grants to `$unauthenticated` belongs here.** The rule
- * is keyed on a user's state, and a visitor who has no user cannot satisfy it:
- * the comparison is false, the rule matches, and they are answered `451` and
- * shown a form that asks them to accept — which they cannot, because accepting
- * is a `PATCH` on a user document they do not have.
- *
- * Everything else is already safe without being listed. Authorization runs
- * *before* guards, so a path the ACL does not open to anonymous callers is
- * refused with `401` and never reaches this rule at all. The list is therefore
- * exactly as long as your public surface, and no longer.
- *
- * Empty here because this starter has no public pages. A shop does — see the
- * ecommerce starter, where `/catalog` and `/orders` are on it.
- */
-const PUBLIC_PREFIXES: string[] = [];
-
-/**
  * Blocked when *either* acceptance is missing — `not (A and B)`, never
  * `not A and not B`, which would block only the users who accepted neither.
  *
@@ -130,16 +111,30 @@ const PUBLIC_PREFIXES: string[] = [];
  * gate work with no probing on the client's side: reading the user document is
  * the first thing any app does.
  *
- * Public paths come from {@link PUBLIC_PREFIXES}. There is no way to write "only
- * when authenticated" here: a condition sees `@user`, `@team` and `@request`,
- * and no roles — so anonymity is excluded by naming the paths, the same way
- * `/auth` and `/token` are.
+ * Anonymous callers are excluded with `@roles`, not by naming every public path.
+ * The list version had to be kept complete by hand and was invisible until it
+ * was wrong — twice, on one service.
  */
 const CONDITION = [
+  // Nobody signed in, nothing to guard. This one line replaces a list of every
+  // public path, which had to be remembered and was invisible until it was
+  // wrong — it missed a shop's catalogue, so anonymous visitors were shown a
+  // consents form they could not complete, and then /stripe/webhook, so
+  // customers paid and their orders never moved.
+  //
+  // `@roles` is a RESTHeart 9.8 built-in and carries `$unauthenticated` when
+  // there is no account, the same name the ACL uses.
+  "not in(value='$unauthenticated', array=@roles)",
+
+  // Still needed, and not about anonymity: signing in and fetching a token are
+  // authenticated requests made by someone who has not accepted yet. Guard
+  // those and a blocked user cannot get back in — you included.
   "not path-prefix('/auth')",
   "not path-prefix('/token')",
-  ...PUBLIC_PREFIXES.map(p => `not path-prefix('${p}')`),
+
+  // The acceptance itself, made while still blocked.
   "not (method(PATCH) and path-template('/users/{userId}') and bson-request-whitelist(consents))",
+
   `not (equals(@user.latestConsents.tos, '${TOS_VERSION}') and equals(@user.latestConsents.pp, '${PP_VERSION}'))`,
 ].join(' and ');
 
