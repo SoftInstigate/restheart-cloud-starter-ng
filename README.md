@@ -47,9 +47,9 @@ The app expects things of its service: the `accounts` plugin installed, its feat
 matching the app's, and your origin allowed to call it. `rhc.setup.ts` states all of that as
 code, and `rhc` applies it.
 
-> **On this branch** `rhc.setup.ts` states the [consents gate](#server-setup-required) instead —
-> the two setup files are merged when the gate lands on `main`. Until then, configure the
-> `accounts` plugin, its toggles and the origin allowlist from the console.
+The [consents gate](#consents-gate) is **not** part of this file. It is a second setup,
+`rhc.setup.consents.ts`, and choosing it is how you decide whether your app asks for acceptance
+at all — see [Server setup](#server-setup).
 
 ```bash
 npm install -g @restheart-cloud/cli    # the rhc command; the setup file's own copy is a devDependency
@@ -295,21 +295,26 @@ Each carries `Version 2026-07-01` at the top. That date has to match the one in 
 and in the ACL permission — change it in all three places together, or users accept one version
 while the server records another.
 
-### Server setup (required)
+### Server setup
 
-Four documents on the service. [`rhc.setup.ts`](./rhc.setup.ts) states all four, and
-[`rhc`](https://restheart.org/docs/cloud/cli) applies them:
+The gate is four documents on the service, and it is **opt-in**: whether your app asks for
+acceptance is decided by which setup file you apply, not by a flag in the app.
+
+[`rhc.setup.consents.ts`](./rhc.setup.consents.ts) is [`rhc.setup.ts`](./rhc.setup.ts) with those
+four appended — it imports it, so the accounts steps have one definition and cannot drift:
 
 ```bash
-npm install -g @restheart-cloud/cli    # the rhc command; the setup file's own copy is a devDependency
-
-rhc login
-rhc setup --srv <srvId> --dry-run      # what the service is missing
-rhc setup --srv <srvId>                # make it so
+rhc setup --srv <srvId> --file rhc.setup.consents.ts --dry-run   # what is missing
+rhc setup --srv <srvId> --file rhc.setup.consents.ts             # make it so
 ```
 
 `<srvId>` is the six-character id of your service — the first label of its URL. Every step is a
-check and an apply, so re-running writes nothing.
+check and an apply, so re-running writes nothing, and applying this file to a service already set
+up with `rhc.setup.ts` adds the gate and touches nothing else.
+
+**Leave it out and the gate is simply not there.** With no rule on the service nothing is ever
+answered `451`, so the dialog never opens and nobody is asked to accept anything. The client code
+below ships either way; it is waiting for a status code that never arrives.
 
 **The versions live in one place.** In the article the two version strings appear four times —
 twice in the permission's `mergeRequest`, twice in the rule's condition — and they have to agree
