@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:efd570fb4b0d54d45af8547e8dc0f8a9e0c360fbada5651eff50c81218c032f1",
+  "claims": [
+    {
+      "id": "claim_d1629cfaa9c04935b09eea9372ed4b3f",
+      "statement": "RESTHeart Cloud identifies users by email (user._id), stores profile at user.profile.name/surname, organizes users into teams with owner/member roles, and embeds the active team in the JWT's team claim.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/shell/shell.ts#L57-L78",
+          "version": "repo-lines-v1:sha256:2361841ba3608206d0ab04ca4126d2cb1158b09259c7b20d7cfd6e98bd06221c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjNWM3ZDU3YTkzZGUxOTQzZDE3NDE5NGE3OTVjNzJlOTQ4MzMwYzE4MmQ2NGE3YWNhMjNhYTcyY2FkOTQ5NDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMTJiNjExODk0M2UzMGMwMDY4MzNlNzgxNjMwYTUzYjMyZjQxN2VmNWY5Nzk1YzNmMTJmMzMwODAyNGM1ZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4ZDhjYjgyNTk1ZTNmMDZlNmVlZTRiMDY1YzM5ZWQyNTcwYTAwMWEyNGQ2NGM0YzZkMzgzODg0OWE5OGQ2NjQifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L28-L28",
+          "version": "repo-lines-v1:sha256:370aa3f316cb9946c3b209294c435739eb5ba06a902a292c9523b0992700cdff:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzcwYWEzZjMxNmNiOTk0NmMzYjIwOTI5NGM0MzU3MzllYjViYTA2YTkwMmEyOTJjOTUyM2IwOTkyNzAwY2RmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzcwYWEzZjMxNmNiOTk0NmMzYjIwOTI5NGM0MzU3MzllYjViYTA2YTkwMmEyOTJjOTUyM2IwOTkyNzAwY2RmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzg1ZDU4YzA4OWUwODFhZDZmYjgyZDViOTc4NzA0OWE1MzMwYWZjOTNhMGNjMDRiYTA2OWY0YjliNzRlYmZkZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDg5YjE5NDcyODM3YjM0ZGJjN2UwMTFhYzJhMjdmMTRjNzM0ZDhlODlmNmMwYWU5YzJjMWIwZjBjYmY5NGIzOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c6e86175c3654cae90e9d221c80133cd",
+      "statement": "The app uses bearer token authentication with tokens stored in localStorage, a 15-minute TTL, silent renewal at ~80% via scheduleRefresh, and an HTTP interceptor that attaches the token to all API calls and clears the session on 401.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.config.ts#L25-L25",
+          "version": "repo-lines-v1:sha256:4c78ca43499657839882a147f83ae3e682211992a94c0e0e18200eb0c1f1bc99:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGM3OGNhNDM0OTk2NTc4Mzk4ODJhMTQ3ZjgzYWUzZTY4MjIxMTk5MmE5NGMwZTBlMTgyMDBlYjBjMWYxYmM5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGM3OGNhNDM0OTk2NTc4Mzk4ODJhMTQ3ZjgzYWUzZTY4MjIxMTk5MmE5NGMwZTBlMTgyMDBlYjBjMWYxYmM5OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzczZGEwYWJhZDRkN2Q3OGM2NDRkNDliYjMzODhmYjYwMmU3NzMwNmNiZDVkYmQ1NmY1MGZhMzViZjEyM2IyOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODAwMTU5YTJiYzE4ZGMyNThiMGNlN2FmMGE1NzlhYzcxODk5NjE3ZGI0YzJhMjM5MDU5MGZmNGNjYWZlZmJkZSJ9"
+        },
+        {
+          "resource": "repo://src/app/app.ts#L16-L39",
+          "version": "repo-lines-v1:sha256:0b346056ea53486288503bc368b0b08662825c83edf531b57abba56e0cb99c25:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjN2Q0ODQ4ODQ3OWQ4MWQ1NTg5NzhmZDk5MWM1M2Y3MjdhZTJhMzlmMGIxYjFiZTMzYTk5Y2IxMWM0YjY3ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MjVlNDEzOTk5Y2VhMzIyMTgxYTQzNDIxY2VlN2Q0Mzk5ZmQxM2M5MmY1YTA3NWZjZWJiYzEyN2ExZTAwYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJjMzM5MjNiZTE4ZTdhMjhmODJjZDNiYTNkNWI4ZjI3YTdjMjBkOTk5MjRhM2YzMWZmMjUxYzZlYjhjNTgxYjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5f494858f28c4186b9e05d18223d9c79",
+      "statement": "A team has id.$oid (MongoDB ObjectId), name, description, role (owner|member), and active flag. Team creation happens on signup with \"{firstName}'s Team\" as the name. Team deletion is only possible when no other members remain, enforced by the backend with a 409 response.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L228-L254",
+          "version": "repo-lines-v1:sha256:baa86b2226da2470375200bc4d81c649d0bf6c2aa054150ab63a68bcf8d2e4c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzNjFkNTJmOWUwODA5ZDVkNTgyMjc2N2IzZWZlYzc4OWY5ZWU2NTY1Y2Y3ZGQ0ODhlYzc1ODNhZmUzMzFkZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhOTg0ZGI0ZGE3ZWYxYjYwY2Y2OThkZWI2M2U5NzdjZmM5NjM3NzMzNjk0ZmM5YjY3NmU1NTY2ZGViZGQ1MmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L27-L28",
+          "version": "repo-lines-v1:sha256:8b2ad0feabc0056ff8bd6f3ed618ae3b68b84f59be958afbf9632e20eef1fe25:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTdlNzU0OTUyZDU2OGEwNTIzZDk3YTdjZTIyMTU2NDUyNmJmNjIxYTJiMjE2MWFkNDEzMmFiYzhiYWZmNjkxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzcwYWEzZjMxNmNiOTk0NmMzYjIwOTI5NGM0MzU3MzllYjViYTA2YTkwMmEyOTJjOTUyM2IwOTkyNzAwY2RmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTNiMDVkMGI3OTRiNTAzYTI4MjBmYmFkOTAzNmZiNDhiYjc4MzNhYzljMDljMTA0ZjYzYjI3ZjI3MzJjNDRmZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDg5YjE5NDcyODM3YjM0ZGJjN2UwMTFhYzJhMjdmMTRjNzM0ZDhlODlmNmMwYWU5YzJjMWIwZjBjYmY5NGIzOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_40f2d2359b2349bd87b972f60d9eb984",
+      "statement": "The invitation flow at /invitations/accept handles three scenarios: new users (set password then activate), existing logged-out users (login then acceptInvite), and existing logged-in users (acceptInvite directly). Invitations carry email + token as query params validated by getInvitation().",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.routes.ts#L68-L77",
+          "version": "repo-lines-v1:sha256:a0e08cf0f6bf26fcb69e2b38c7c3a7c6e63fea38c2f2c3661070a13babd2f995:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlZjAxMDRhNzk0MTgyMTA5ZTlmNzEzZDVhY2Q5NmE0Njg4ZDdkZTY4NWU1OTMxNjgzODY2ZTVlOWYzYmM5YjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMTFlMDg5MDA4OGYzMThmZTMzMGFiOGE2MThlYjRlOTI5NmNhN2RkYzA4NDY0NzFmM2I2ZTVkZjc2MWI4N2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1MjI4YTlkNzY0ZDhhOWIwM2E4MmY0MWJmNGE3ZTE0YWQ2NWU0YjI2M2RmNDU1MWExNzVlYzA2MTFiNTNhODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0ZDM4ZjQ3MjY5NjE1MDQxMDVhZDVlYzhjN2ZiOTQwODQ1YjZmNmIzMmNhNWIzMjY0NzkzNTk5ODQxYTUwMDgifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/invitations/accept/accept.ts#L39-L86",
+          "version": "repo-lines-v1:sha256:8770c62d1723f06ab27ddf5bfb197ded0b8bc8c35ca1aeba940b01ee2f4194a8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1NGIzM2QwZjI1YmQ5NDQ3ZjQyNDVjZmI4MTFhNTY4YTc4ZDRlNGMzMWJhMTg4OGU0Y2UyNmMzMWM0ZjBiZjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNkMmI0ODhmYWE5ZTgzZjg0ZTI4ZmY3OThhNDIxZmE4NzQ0NDdhODE4MmMxOGE2YjgzZDJkZjRlMWIzNGJiNDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkODUyMzgwYWVjOGI4MjhhYjFkZDI4ZjBhOGU3MjEwMzUxZDY1MTQ5ZGRjN2QwYzMxMDUxY2U5NDY3MjdiNmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5cb0f26fc8b146a1b2d932c86fb5d0e0",
+      "statement": "Invitation resend has a 5-minute cooldown implemented with a reactive now signal ticking every 30 seconds to keep the countdown accurate in zoneless Angular.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L158-L188",
+          "version": "repo-lines-v1:sha256:a4d15686169da987145d2187dda0d88676c490998626ebdfca34c25661f6a387:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2MWQ1ZjY3YjZhMTkyYWRmNDEwM2JlZDM1ODQ2MjAwMTFkMzJlMTc0OWZmMTgyZGE4ZTFmZGQ0ZDg1ZjJiOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlMzU4ZDQ0MTNiODJlOWNhMTlkOTZjMjBmNjFhNDc3MTk5MjVhYjRmMTc0ZjUwMzAxODQ0ZjUzODdjNTJjMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgzMDg2NmNlMzFkYmNhYTdmODM2YjI1M2UwYmVhOGI3OTY1YWRhNzE0NWU3YzZhN2JmNGI2Nzg1YTA0YWQ3MDcifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L39-L55",
+          "version": "repo-lines-v1:sha256:5e6e0f4dcaed9bed5ed2bca9b2777ab34fff7dd3291468ce2cf2705f8fa5e8b4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkNjNkYzUzOWViMjZlMDUzM2Y3YTEyN2M2MmFmN2QyOWY2OTM1NDVlZTFmZDU5OGUwNjE0N2Y2NjY0NDRlMWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFmMzIzNjkxMjkzMjRjN2VmZWRiOWFhZTEyNmZhMDUwY2ViMTU0MDJhYzQzYzQ3NjEwNWZiYzczM2JmNDAxMGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjMjU3N2ViM2M5NmNkZmE5MjkxYjcyYzRkYmVhMDU0MTFmZjdkMmFmYTlmZjAwOGJiMTY3OTk4MWY2M2U0OTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b91c51cff6094882b277197b423daec5",
+      "statement": "Feature flags (emailRegistration, passwordReset, oauthLogin, oauthProviders, teamInvitations) in environment*.ts control route inclusion in app.routes.ts and UI element visibility. Flags must match the RESTHeart Cloud service's Sign-up Mgmt toggles or 403 errors occur.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.routes.ts#L21-L77",
+          "version": "repo-lines-v1:sha256:9f51fb39af05346457941240210f7c2e11d4e52ce47ddb7fe8b5264c29b6ee89:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0NjUzZmFjZmE0MjJhYTEwOGFjMzFhYTVhMDJhOTIwNzc5YTM2MDNiOTI4ZWJiNzAwMjRjOWVjYzU0YWE2NWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMTFlMDg5MDA4OGYzMThmZTMzMGFiOGE2MThlYjRlOTI5NmNhN2RkYzA4NDY0NzFmM2I2ZTVkZjc2MWI4N2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0ZDM4ZjQ3MjY5NjE1MDQxMDVhZDVlYzhjN2ZiOTQwODQ1YjZmNmIzMmNhNWIzMjY0NzkzNTk5ODQxYTUwMDgifQ"
+        },
+        {
+          "resource": "repo://src/environments/environment.dev.ts#L1-L22",
+          "version": "repo-lines-v1:sha256:63cb6dd570a403f69861e86c6583063a653ac922b04f0866aa4377f66ffb269f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjM4ZDEyYjRkZGZlOTg2NmI3N2M0ZTc4ZWU3NWI4Y2QzZjhlZmM2MjZiMTI2ZmY0NzM2OTU1NGZlY2NlOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/environments/environment.ts#L1-L19",
+          "version": "repo-lines-v1:sha256:9a9c1c9fa3634477ea3e660d7a343e259a9a9b8105da600b6d2b48c04532915c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjM4ZDEyYjRkZGZlOTg2NmI3N2M0ZTc4ZWU3NWI4Y2QzZjhlZmM2MjZiMTI2ZmY0NzM2OTU1NGZlY2NlOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9594094cb0724f7ba92a674c5d832419",
+      "statement": "The consents gate is a server-enforced acceptance requirement: a Guards rule returns HTTP 451 to authenticated requests from users whose latestConsents does not match current TOS/PP versions. The client catches 451 via consentsOnError and shows an overlay outside the router outlet.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L118-L160",
+          "version": "repo-lines-v1:sha256:8143dba70bb12cfe0653808865cd5ee1c3e44a20c90ecbf7422957cb518dab0c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2ZjVhODU2NTdiOGU4NTQwZjZmNWYyZWM3YjY2YjY2YWNiNzc3ZmJlNjQyY2E5M2I5N2QyNWU4NjBlZDM4YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMzhlZTljYzczYzlmMWYyYzhmOGM1NmQwMGJkMDBkZTViMDczNjlmMTJlMDgwYWJiZDc5YzhjNDM3NTZjMTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1MTM5YmE0ZDJjMmQ3MDhiZGE0MTA5ZmU3OGM2MWI0NjI3ZmExYTgxNTY1NGQxNmQzMTg0YmQxN2U0ZTRmODkifQ"
+        },
+        {
+          "resource": "repo://src/app/consents-gate.ts#L1-L60",
+          "version": "repo-lines-v1:sha256:311d127f42a8aea514827e2215efd00f86cfe55548a97204aff94cf329490a8e:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhZjMwNDE0NDViNjMzODcxN2RkNTNhNGZiYTVlZmQ4ZTRiNmI1OWI1NmYxNzkyNzMwMDE5ZTg3YTExMTEwZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/app/consents.ts#L1-L33",
+          "version": "repo-lines-v1:sha256:d2578d974d7952755edf8adc2ba70d1416415cbfd35b85c185baf1773fa80004:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwZDJlYzZlMTE2MTMyNWI1ODBjNTVjNjgzOTFmMDgzNWFiOWQ4ZDU2M2JmNTcxNjg4NmJmOTgwMDlhMDljNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_38987be48f24460d89d457968fe49974",
+      "statement": "The ConsentsGate component sits outside the router outlet in app.html because a blocked user has no session, authGuard fails and cancels navigation, and nothing inside the outlet ever renders.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.ts#L41-L46",
+          "version": "repo-lines-v1:sha256:f2f6af294be1622fffaba72e049c0080e462b603232563d1df2764fa2b6a3ed6:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODQ1MzdhZjBlNDQwYjMyNWQ2Nzk1ZTVjN2I2MmE2MTQwMmVlNGVlNDUzN2Y3MDRhZjE5ZTY1MWMwOTk3ZTI2ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjZjMDc0YWRhNzI4MTNlMjAzZjg2NDBiNzJmZTU1ZTQxMTc5OGE0MTkyNWM4NDczZWViMThhZTRiZDVlYmM2ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTZkZTA5YjMyOTc3Y2E0Mjk1MTUzODBlZmE0YzJlM2YwMWI5OGYzNmUxNDY5ZTY3MzJhZTQ2YjBiYTU5OThkMCJ9"
+        },
+        {
+          "resource": "repo://src/app/consents-gate.ts#L6-L15",
+          "version": "repo-lines-v1:sha256:ea650cbd49a4215c1b693ec8bad33eb3e3821b9d7a4af28463dcdd5dc8728cef:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiMTY3MWMyNmZkNDk1ZDc4NDkwMjRkZGVhMDU3NzcwMDdlZDQ0NjQ0YjFlOGJkZDM1NzBhOGZkOTVmOTFkNjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MmE0MjkzODJiMmUxNDcxOGUwZTM3YjA1NzBhOGExNzAyOTkxZmNkODQ5OGNkODQwNjBhOGJmNGYwNTAxN2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5MTgwZTk3NTViYWJmN2IzOTgxMTExMDY5NWVmM2I1ZmFmMDRmOWYxNDRjNGQ4OGE1NzcxZTdmYTk5MWU1MjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiOTAyNjI4YTRlNTU5YWM2YWJjYTEyOThiZDAyOWNiMzcxMjYyMTMzOTNhOGMxOGI1NmMzNjgzZTNhZjY3NjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a51f69ca0e03441fbc9514205402345c",
+      "statement": "The consents gate requires four server-side documents configured by rhc.setup.consents.ts: a user schema with latestConsents/consents fields, collection validation, a permission that stamps versions via mergeRequest, and a Guards rule that blocks non-compliant users with 451.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L167-L295",
+          "version": "repo-lines-v1:sha256:a8b1847f92472c78028e873c3e8825c6a676cb017bda1a2afacd966d73a24bb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxNWQ1NmUzNmRjYWUzZWNhNmY4MTE3MmY5MGVkMTg2MWQ5MmZjMGU5NjcwZTY4ZTg1MDc0ZGQxYWE4YWNiYzY3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxMTZhZDE5NDM5Mjg5NzM5NzczNzI3MGM4NDBlNmI4NTZlNDYyNzVmMGJlMThiNGExYjUxYjY0ZTRlNWEyNTI2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L83-L116",
+          "version": "repo-lines-v1:sha256:699a29c1d586c6146f19c931fc3b6c857702bb9239bf464639bbfd377700f4a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiM2IzMWZjM2FjZDY5Yzc0OGE5NmU5MTc3ZjBkZDU3N2NkMjJjMGU0MTNmYjllNTJlYjUyZDdlY2RjMmRhYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIwOWNlNWRiN2Q5ZjhhN2FlNjVjYjhhYmI5YTU2ZDQyOTdhZDFjNjE0MWJlZDViMjEyNWQzMzk0ZDUwYWFiOGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiMDc1OTlkMDQxOTk2M2E1ZDcyZDc4OTFiYzk1YzlmOTEwYWE3MzE0MTRiYmYwOTYwNGZjNTIwOTZjMDBmODcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_58660f2c254c41a0a5d1d5fb2ddd3d59",
+      "statement": "TOS and PP versions are defined as constants (TOS_VERSION, PP_VERSION) in rhc.setup.consents.ts. All four server documents derive from these values. Publishing new terms means bumping the constants and re-running rhc setup; every user meets the form again on their next request.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L259-L294",
+          "version": "repo-lines-v1:sha256:9b535e19987e90c7e2c237475d05c41042723f546f8c9d88fa935ab5285efafd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNmE0MTQ1MmIwMTVkNzk5Y2ExMDkwNTI5YWQwYTI2MTk1MjcwZDFlOTdiMjMwZDY5N2E3NGNjMzEzYzZhNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhOTEyMDI2Y2ZiMzRlYmI1ZDkzZWY2MGY1ZTVhOTdmN2NmOTE4YjU2ZWE1OGQwZjg5ZDg0MDNlYzYyZTRhYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1ZTI2Y2Q5MjM2NmY2MGQ4ZWQ5MmQwMjM5ZjA3ZmVmNzRjYWMxNGFhNjlhZGRmOWMyY2MwZDExZWIwMGE0NjMifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L50-L63",
+          "version": "repo-lines-v1:sha256:d8c391b1a13eb842a7755e8a2828e6f336443398843a3de272dac228ff99a3a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmZjBjY2Q2OTMyYzE5MWU4Yzc0Yjk2MzQzODk4ZWViZmJjMGFiMTdiNTcxMjJmNDE3ZjIyMDY2ZjZmYTgxYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwM2UzYWU1MGZlMDg1N2Y0OWRkNzE2MmQ1MzY4YzlmMWI5MDdhY2RlNmJjMTU4YzZhM2VlNWRlZTk3YTBmOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4ZWVlNWVlMzRjMTZjZDQ0YzdmZDMzODZjZDEwYmI5Njk0MDY5ODFhZGE4OTJmOTQ1YmY2YjI0ODJmYjZjYWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f7ad54d0dc424f7492591221632400bf",
+      "statement": "The setup adds latestConsents/tos and latestConsents/pp to the JWT's account-properties-claims. The Guards rule reads these from the token, not the database, so the gate works without a database round-trip per request.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L162-L162",
+          "version": "repo-lines-v1:sha256:4bb93358150cc115e30752b7ebea212679a6225d930d21c0222f812c6f849702:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJiOTMzNTgxNTBjYzExNWUzMDc1MmI3ZWJlYTIxMjY3OWE2MjI1ZDkzMGQyMWMwMjIyZjgxMmM2Zjg0OTcwMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJiOTMzNTgxNTBjYzExNWUzMDc1MmI3ZWJlYTIxMjY3OWE2MjI1ZDkzMGQyMWMwMjIyZjgxMmM2Zjg0OTcwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjc4ZmI2Y2U3NGEyMmU5MTJkZmE1ZjQ0ZGY3ZGJiOTRiN2IyOWZhNmJhZGYyZGI4NmM2NmNmM2U5NGQwOWI1NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E1OWQ0MTc2MWIwYzliN2QzOTcxOTAwZWYxZDA1YWYzZGJhNDk0NmRjM2Q5NDFkZDAyYzczOWVjMzIyYmRjZCJ9"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L225-L252",
+          "version": "repo-lines-v1:sha256:9d37d3e6a363b91d369e72b52f1ab716d1c3963465c87f873099c950c0eb02b0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyMzBhYjg1ZDg0ZDViNzI1N2RhMDQzYmFhMzIxZDQ2ZDYxZTM2MmVlMDA5MWM2NDVlMjExZmNkMDUwMjJiZWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NDliNTZkYWQ2OTczMWRlYWFhMzc3NDFiYWUzNWM1NWVlMjY5YWI0ZWI4ZTRhZDM1ODQ4YTYwNWFkYTViNjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjN2NmOGU1MTJhZDRkNjY3MWIxZTE4YWExYmI1MTM3ZTE0ZDdlZDYxOTYxNTk5ZGE4ZjYyMWMxOTIzZDUxOTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_75bb4c8bc4f74cc4a2217a4ec133ef22",
+      "statement": "consents.ts is a plain module (not a service) because onError is passed to provideRhAuth during injector construction before DI is available. consents-gate.ts has two checkbox signals gating the Accept button; on success it does a full page reload rather than router navigation.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.config.ts#L25-L25",
+          "version": "repo-lines-v1:sha256:4c78ca43499657839882a147f83ae3e682211992a94c0e0e18200eb0c1f1bc99:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGM3OGNhNDM0OTk2NTc4Mzk4ODJhMTQ3ZjgzYWUzZTY4MjIxMTk5MmE5NGMwZTBlMTgyMDBlYjBjMWYxYmM5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGM3OGNhNDM0OTk2NTc4Mzk4ODJhMTQ3ZjgzYWUzZTY4MjIxMTk5MmE5NGMwZTBlMTgyMDBlYjBjMWYxYmM5OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzczZGEwYWJhZDRkN2Q3OGM2NDRkNDliYjMzODhmYjYwMmU3NzMwNmNiZDVkYmQ1NmY1MGZhMzViZjEyM2IyOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODAwMTU5YTJiYzE4ZGMyNThiMGNlN2FmMGE1NzlhYzcxODk5NjE3ZGI0YzJhMjM5MDU5MGZmNGNjYWZlZmJkZSJ9"
+        },
+        {
+          "resource": "repo://src/app/consents-gate.ts#L29-L51",
+          "version": "repo-lines-v1:sha256:7cea3b2ec3b7e3b73a0e90343dc020b15b861df0e57c6309f09dae81396f8a83:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1YzQwZWQzMTZjYzIzOTMzNzc5OTUwYmM2MThkMzEzM2U4YzQxZjYzYjIzYmQyMTM4NjI4N2I2OGVmMWY2YjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNhMTY1NGVjMGJlMDEwZDg5OTQwNmVjMGUzMTc5OWZmZWNjNDUyNGYwMWExNTI5NTFlN2Y3NmU2Njc2OTU3NzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyMTgzYzY1ZjllYTk2YmQyNDZmMWU3Mjk3ZTQzYmUxOGEzYjYwODY5MDlkMzU4ZjU5ZGRjYzVlNWJjZjAwYTMifQ"
+        },
+        {
+          "resource": "repo://src/app/consents.ts#L17-L19",
+          "version": "repo-lines-v1:sha256:cfb9b74d8b70697ac88c683b33d0be3f2511989b93441397cfacc0d1fe4e443d:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI3NjI4MWY0Y2Q5NWUyMTlmMDIyYmMxNDRjYTRkZWNiMzE3MjJmYzU4NzgzNGI1Yzg5NTE4ZTg3NjZiOWVlMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjIyMGJiZjg2ZWFmNzY2M2U3MTNhMTYyZWYxMjZjYjdjZDBiOTIyOWQzODJiNTBhMGM0MzFmNzRiZWJiYTM2MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGFlYTZiMTRlMzNiNzhmZTBhNTE2MjkxMWVlNzkxNGUwMWJkMzk0NzNiOTRiYTdlOTRkNmM1ZmIxYzkwNWM2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmYyYzVjM2UzZDZhN2Y1NTA2ZmQ0YzNhMmZmMjk1MTc2MjBiNGZiNTg0NTg1OTk0Mjg2NTYyNTAzMmY3NjA0YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e16c7a706c744428bf317cae35a7c087",
+      "statement": "The consents gate is opt-in at the server level: if no Guards rule exists, no request is ever answered 451, and the acceptance dialog never appears. No client-side flag is needed to disable it.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L12-L15",
+          "version": "repo-lines-v1:sha256:ce53d61df56d7dc684a6a21e635cba4156f792589e7ea3d932fb47dab17ddb63:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjNhNWY0OTdkMGU2OGEyOWUyZmE1MmRiMWVhZDQzOTA5YjM3NjMwYWU4MGE2MGViYzdiYjlmZTg5OGQxNzRkOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTBmZmE5NjVhMTY2NmIwN2EzY2U2Yjg4MzJjZTY0NDJlNjA5NjNkNGE1YTAzNDQzZDg0NWVkOGUxMTEwNzE1YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2Y4NTdmY2ExOWEzNTllYjczYTRkMzQxMDg5ZDg5YWM2M2IyY2JmOGEzNTc2YzVjMjdmMDlhODJhZWIxOTc1NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2NmZmYyMjNkZGNhMTIxZmNhOTUwYjI2YWIwYzAzM2IzYmNlYmU2NzI5OTM4MGZlOGY4OGM1NzBiYjBlZWRlZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d3988d00c63140b19512b1d31689bfcd",
+      "statement": "Auth pages can be prerendered or client-rendered; the authenticated shell and inner pages are client-only because the bearer token is an in-memory signal unavailable during SSR.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.config.ts#L21-L21",
+          "version": "repo-lines-v1:sha256:92e4f5d693d1cd1ef40ed8622ff85ed93b39a4fcfb0ff0f726fcd63d415d03f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTJlNGY1ZDY5M2QxY2QxZWY0MGVkODYyMmZmODVlZDkzYjM5YTRmY2ZiMGZmMGY3MjZmY2Q2M2Q0MTVkMDNmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTJlNGY1ZDY5M2QxY2QxZWY0MGVkODYyMmZmODVlZDkzYjM5YTRmY2ZiMGZmMGY3MjZmY2Q2M2Q0MTVkMDNmMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWI5ZTkyMTg2ZDRiM2IzZDNjNjg4OTQwOTljZDEwODdkN2M5NDNhNjQwMDk3ZWU2OTgzYmY0MGQxNDc2NjEwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzczZGEwYWJhZDRkN2Q3OGM2NDRkNDliYjMzODhmYjYwMmU3NzMwNmNiZDVkYmQ1NmY1MGZhMzViZjEyM2IyOSJ9"
+        },
+        {
+          "resource": "repo://src/app/app.ts#L54-L69",
+          "version": "repo-lines-v1:sha256:839b906129f024f949972db449d8a6dab62199af8413424487f5ef58d5e35f78:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwZjAxYmM3ODk2YTAwNDVmMjI3N2JiMmQ3MGI4NzZhMmYxZTNiODA1ZDE4Y2M4MDBjN2M5MzQxYWJiZjc4YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNmODc2MzMwZDdiY2Q1YWRkMWJhMDcxZTM0NTE1ZjAyZjk0NmUwNjZjNmUzMzJkZGUyMmQzNDg4MTkzZDcwY2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmNzM5YTA2YzFjYmIxMjQ0ZTMzNjNkMzhiY2Y5ZmE1MGNlODRmZWQzOTljMjE5M2EzYzdmMDhkNTk5MThiMmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d8d0593faf8149279a8aace8534e79b4",
+      "statement": "The justSignedUp signal is set to true by consumeFragmentToken when ?flow=signup is in the URL, read once by Shell to show the welcome banner, then reset to false by Shell's constructor. It is never persisted and must not claim 'email verified' because OAuth signups also trigger it.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.ts#L27-L32",
+          "version": "repo-lines-v1:sha256:c8c51924a9d4a480240ef0a5463145afa055411f09681afbe57fbfca2bdf137c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTEwNTFjZmFkMGExMzdkZThlODIzNjExMDIwYzUzMGNhN2I0YTAxNmYzOGVmMzc0NzE2NjNkZWNkOTk1OTJjMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTdkODYzMmU1NGU5Mjk4YWJiOTU4NzI3ZTJkNTE0MDhhYmFmMTM2NjAzNTM3OTEwMTQwYWJmNjViMzBhYjYxMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGFkOTMxMTA5NDFmMDg4YmVlNzY4NzI5YjEwYTNlYTdlMWM0OWZkMTQxZmQ1MmJmYTIyODM0ZjE3N2ViN2UwYSJ9"
+        },
+        {
+          "resource": "repo://src/app/just-signed-up.ts#L1-L9",
+          "version": "repo-lines-v1:sha256:604c6d6522a49485fca8d9e5d69adf8f79555774bdc1483098ce370caf348d9c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjBkMmVjNmUxMTYxMzI1YjU4MGM1NWM2ODM5MWYwODM1YWI5ZDhkNTYzYmY1NzE2ODg2YmY5ODAwOWEwOWM2ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmE3MTZkZWQyMDhjMWY1YzA0MWU4MzYwZDEyN2Y2OWNmYmExNThkY2ZkMThmZmE4OTU5YjQxYTA0Mzc0YTA3NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/app/pages/shell/shell.ts#L29-L42",
+          "version": "repo-lines-v1:sha256:1b9ac4b04adb7e3a3d39ad1c824b62f4e25145a266cb0a8b9bb130baa345cb80:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzMDM2NmQzODNlNGYwMWM1MTNjYjU2MTlkYzAyMGY3M2FjZGM0YjQ4MTBjNzQyMzU3ZjMwMTA3YzNmNTM0NzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhlZmFjNTdiMGI1MTlmYzdjZDkzZDhmMzZmMDNmMzY1MmJiZTRmZTcyZThlOGY5YjY1NmI0NDg3Zjc0NTI0NjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxZWQ3ODBhNDA2NTE5ZGM2MTg4MTQxMmVhYTI5YTVhMDcwYzQ0ZmZkZDJiNTVhZWY4YTFkNGE0ZDA1YmNjZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0MTZmODliMzFlMGJlOTU3MDExNzkzZTBlNjA1YmI4YTBmNDExYWE4YTMwMGU0NTMxYzM2ODIyZmI2NjA5MDMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_01dc6506053f4c9bb7f77fff255732e8",
+      "statement": "src/styles.css section 1 defines CSS custom properties for colour (--color-bg, --color-surface, --color-primary amber, --color-link teal, --color-error), typography (--font-family system-ui, --font-mono, scale --text-xs to --text-2xl), space (--space-1 to --space-8), and shape (--radius-sm, --radius, --radius-lg, --border-width). Dark mode overrides tokens under :root.dark.",
+      "evidence": [
+        {
+          "resource": "repo://src/styles.css#L130-L158",
+          "version": "repo-lines-v1:sha256:e3ad3e1eea88f336cac5f91b1581249f40e3d2ad34851fbc2cb0893ee1f90661:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhZGFjZTY0N2Q1OWMzYTk0NDMxMzM1YWYyYjBlMjkwMzY5ZTc2Y2UyNTQyNDk5ODhhOThhNGQ4ODMyYmMwN2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM5YWM4NTA2N2M1MjMwMDM5ODMwNDc3YzcwNDlmMTUwOTg0NGIxNGE5NzE3NDAyYjFiZjYwYmQyY2YzN2YyY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmYjBlODY3ODYxMTdiOGMwYmI2YzEwNTMxNTUzMTRjOGJhZmY4MTZlODk4Y2RkZWQwYWVhZDg4NjQwMTM3YmQifQ"
+        },
+        {
+          "resource": "repo://src/styles.css#L42-L120",
+          "version": "repo-lines-v1:sha256:86423ea99730de3a1e201748386f795eb4cd43fd02ece47719d3828f2c98624d:eyJzZWxlY3RlZExpbmVDb3VudCI6NzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNlZWE1MDRiZjIwYjQxYzQ3MjlkM2NjZTQwYzIzODUxZDNhZTk1YjUwMTdlNmIwYTFhOGNhMzg1ZWIzMzU3YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiYzE3MDE4NDg1OTNiOTBhYTFiNjljZTIyNzEzNGI1MmQzMmIzYWVhNjAwMDZlMzNlOGQxYTUwYTkxOWQzM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljYzg1OTY4MWVhOTUyYzYxOTRhMzFjZWI4OTc0NGIwM2M2OWRjZjExNDc0YzUxYjc1MDYzODFkN2ViMWIxYjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cf65b45dae4f4600a5c5234744c641a6",
+      "statement": "ThemeService toggles the .dark class on document.documentElement and persists the choice to localStorage['rh-theme']. It guards against SSR with isPlatformBrowser.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/theme.service.ts#L1-L35",
+          "version": "repo-lines-v1:sha256:e907f354768a884fc62daea15ed4f4dfbc0a14a2c512974c57fbd7e005c9083a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmODc1MDVkM2YxMTBiMzFlN2Y5MGIzNGEwNTVkYTc0NmU2Y2M3NzEyZTViNGM2Mzg1OWYxODEwNjM1ZGRjMjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-28T16:45:54.291Z"
+  }
+}

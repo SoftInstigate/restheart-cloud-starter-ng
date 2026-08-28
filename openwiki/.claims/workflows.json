@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f22a1e0c71934002cfd73f32f2341a388ce20c0dc226ac1e925e5a4be036bd38",
+  "claims": [
+    {
+      "id": "claim_859950199b044a018e8dac3739bbb4d1",
+      "statement": "The signup flow calls auth.register with an auto-generated teamName (\"{firstName}'s Team\"), returns 202 without logging the user in, and requires email verification before authentication.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/auth/signup/signup.ts#L43-L56",
+          "version": "repo-lines-v1:sha256:660385cd23c7fd752e29fe25cc691f4909b3553524c90ff2310ce6347f63a5aa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkZjliMjhiNTEwMDBmNjc1MjVmMmE5ZWIwODk4NzMxMzMwMzNhMmY0NTk2MjVhYzMwZmQxYTBkNjM3N2ZmY2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDgwZGU0YTVlNjQ2YzYxMjFjZjRhMTg3ZWIwMmE5OGFhMzMzMGNhYjk4MjRjZTU1YjAyMzk3MWMxYjBhMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjYmE0ZWYwNDVlYjg5NzgyNWRjNzcwYjE2MWViYWZmZDY5OTNlZTQ4N2FiZDM2ZTE4ZDU2MTNlYTJkNDY4YzcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d97c1dfdc62f482483c19a4cdaa2c1c7",
+      "statement": "The Verify component reads email and token from query params, calls auth.verify which returns a redirect URL, then navigates the browser to that URL so the backend can redirect back with #access_token in the fragment.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/auth/verify/verify.ts#L24-L33",
+          "version": "repo-lines-v1:sha256:50894e5406cbc49ec7aa6d11dd4cdfe167d200137c59f48d3eae74b73cb3bf41:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1NGIzM2QwZjI1YmQ5NDQ3ZjQyNDVjZmI4MTFhNTY4YTc4ZDRlNGMzMWJhMTg4OGU0Y2UyNmMzMWM0ZjBiZjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMwYmNmNGM5M2EwM2I1NjhmY2U0NzI2NGU4NTY3NmM0MmI3NTAzMDgwY2JiZTEzYjZiNWJlNjY1NWU3MTg3MjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_327e441e77c946d3997e3a6d3f848fed",
+      "statement": "The consumeFragmentToken function in App reads #access_token from the URL hash, stores it via setToken, reads ?flow=signup to set the justSignedUp signal, and clears both from browser history via replaceState.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.ts#L16-L39",
+          "version": "repo-lines-v1:sha256:0b346056ea53486288503bc368b0b08662825c83edf531b57abba56e0cb99c25:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjN2Q0ODQ4ODQ3OWQ4MWQ1NTg5NzhmZDk5MWM1M2Y3MjdhZTJhMzlmMGIxYjFiZTMzYTk5Y2IxMWM0YjY3ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MjVlNDEzOTk5Y2VhMzIyMTgxYTQzNDIxY2VlN2Q0Mzk5ZmQxM2M5MmY1YTA3NWZjZWJiYzEyN2ExZTAwYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJjMzM5MjNiZTE4ZTdhMjhmODJjZDNiYTNkNWI4ZjI3YTdjMjBkOTk5MjRhM2YzMWZmMjUxYzZlYjhjNTgxYjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ecea6d6f20f34b008d40efa55a46fec9",
+      "statement": "The justSignedUp signal is a one-shot flag set only on the redirect after a fresh signup (email verification or OAuth), consumed once by the Shell for the welcome banner, and never persisted.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/just-signed-up.ts#L1-L9",
+          "version": "repo-lines-v1:sha256:604c6d6522a49485fca8d9e5d69adf8f79555774bdc1483098ce370caf348d9c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjBkMmVjNmUxMTYxMzI1YjU4MGM1NWM2ODM5MWYwODM1YWI5ZDhkNTYzYmY1NzE2ODg2YmY5ODAwOWEwOWM2ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmE3MTZkZWQyMDhjMWY1YzA0MWU4MzYwZDEyN2Y2OWNmYmExNThkY2ZkMThmZmE4OTU5YjQxYTA0Mzc0YTA3NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9f54b40b49c441e9ac13e2000f51b30a",
+      "statement": "The Login component calls auth.login which loads teams in the same round trip; on 401 it shows 'Invalid email or password'; the session token is stored in localStorage for persistence across hard refreshes.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/auth/login/login.ts#L50-L56",
+          "version": "repo-lines-v1:sha256:ea0b62d8ef0546c8408f38a14c742655fa6f248d5f438949eb4d5b9e3863341e:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTBkMWJlOTQyYjJmN2IwMDdhMmZiMjkwOGE3NjRhN2I1Nzk2N2IxMWFkZDEzMzgxZDJhYTIwOTI3ZTg5ZjlhZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjJkMTFjYWY0M2U5N2VmMzY5ZTZiZWVkMWEyNjhiZDA1ODM4ZjI5YjlkZDI1NGJmNjliYTY0ODg0MTQ3MjM0YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmMyZjhjNTFmNTIzMWVmMzZkZTBlYjg3MjUxNDI2NDJiNzk5MmQ4MzhhMDBhMzhjOWJmMWRhY2VlNGRiNGY5MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWNiYTRlZjA0NWViODk3ODI1ZGM3NzBiMTYxZWJhZmZkNjk5M2VlNDg3YWJkMzZlMThkNTYxM2VhMmQ0NjhjNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e642492787244b9d9193f47eaee3cfa7",
+      "statement": "OAuth buttons navigate to {apiUrl}/auth/oauth/authorize/{provider}?noauthchallenge, where the noauthchallenge param skips the auth challenge step and the backend handles the full OAuth flow.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/oauth-url.ts#L1-L6",
+          "version": "repo-lines-v1:sha256:74870dc384389ce453de2ca63f07b6661737953185cb0986d26176c57e622535:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzA3NjhlZDk3YWExM2RlNDdjMWUwZmQxYTNmZThkZjdjNTY2NjAzM2UxNjJjOGMwN2ExZTVlYTJlZTc4OGE4MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/app/pages/auth/oauth-buttons/oauth-buttons.ts#L1-L19",
+          "version": "repo-lines-v1:sha256:42aa482a7331b0ce86e7ad7d80c274cfa78207039c587bf56cb4d8e7f75cbc3d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwY2M2ZmIwYWRlNjhhMjNkOGJkZGE5ZGQ0Y2RmZWExZTUxNjg0MDM1N2YzNWVlZjRkNGU0OWZlMmM1M2E3ZTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a87adc265dc04587b809c9f28ca7d778",
+      "statement": "OAuth and email verification share the same fragment token capture mechanism: the backend redirects with #access_token in the URL hash, which consumeFragmentToken reads and stores.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.ts#L16-L39",
+          "version": "repo-lines-v1:sha256:0b346056ea53486288503bc368b0b08662825c83edf531b57abba56e0cb99c25:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjN2Q0ODQ4ODQ3OWQ4MWQ1NTg5NzhmZDk5MWM1M2Y3MjdhZTJhMzlmMGIxYjFiZTMzYTk5Y2IxMWM0YjY3ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MjVlNDEzOTk5Y2VhMzIyMTgxYTQzNDIxY2VlN2Q0Mzk5ZmQxM2M5MmY1YTA3NWZjZWJiYzEyN2ExZTAwYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJjMzM5MjNiZTE4ZTdhMjhmODJjZDNiYTNkNWI4ZjI3YTdjMjBkOTk5MjRhM2YzMWZmMjUxYzZlYjhjNTgxYjAifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/auth/verify/verify.ts#L26-L32",
+          "version": "repo-lines-v1:sha256:cb428d2f6d8501d1481d792f5edf24bb880920879b8b73b0fd150f16fa2c772f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzJkODkxNWE1M2EwNGFmZGIyZGRlY2U0MzEzMzEzZDc2YWY5Y2U5MTJmNGYwODNiMDA2ODdlMGVmNzU2Mjk5ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzNmMDQ5ZTA2ZGUwMjFmNmU0ZmRhNThiNjBjMmEyZjU3Mjg5YmVhM2M1NGY2NGI0MWQ0YzY3OTEzNWIzOWVkMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGY3MzlhMDZjMWNiYjEyNDRlMzM2M2QzOGJjZjlmYTUwY2U4NGZlZDM5OWMyMTkzYTNjN2YwOGQ1OTkxOGIyYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c21185242f9e4510854543867b97180f",
+      "statement": "Forgot password always shows the same confirmation regardless of whether the email exists (API returns 202 in both cases) to prevent email enumeration.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/auth/forgot-password/forgot-password.ts#L33-L38",
+          "version": "repo-lines-v1:sha256:ba1a7d9aba20e35787876e923d02321403cb53cf06eb3e1ff801549f43df0186:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjg5NmIwOGRlMzdiMDhiZmEyODlhYjBjZmQ1MzhmZDI5NzZhNzRhNTNlYWJjNTFiYjU4YzlhN2NmZGU0MWQyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjJkMTFjYWY0M2U5N2VmMzY5ZTZiZWVkMWEyNjhiZDA1ODM4ZjI5YjlkZDI1NGJmNjliYTY0ODg0MTQ3MjM0YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDE2NTFhZjA4ZTQ3OTA1ZmRkNDllZDRjZTViMDg5OGY2Y2FiM2UyNGUwODk2NTUyZGNiOTA5ZmU5NDVjYjJjNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGY3MzlhMDZjMWNiYjEyNDRlMzM2M2QzOGJjZjlmYTUwY2U4NGZlZDM5OWMyMTkzYTNjN2YwOGQ1OTkxOGIyYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_026356af0f514759a463e864bc017f33",
+      "statement": "Reset password uses bearer-mode delivery: PATCH /auth/reset-password?delivery=body returns access_token directly in the response body, logging the user in automatically without a follow-up POST /token.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/auth/reset-password/reset-password.ts#L42-L50",
+          "version": "repo-lines-v1:sha256:b97892972a06b5b3e381ac7cff19e2487a84a3839414e9c09c13304a0571b54e:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDQ4Y2JiYzQyZTRmMzM4OWQ1ZjFjMGE5OTI2OWRlMDdjOGRhYjVlMDE2NGNhMzRkYzlhOGJiYzJiMmJlZDlkNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzE3YWYxMTAxYzk3YjdjMmY1MjU0MDc4MmU2MzRjYzQ0NDBmMGU5NzAzNDFlNTJmOTc1MjMxMWQ3OGI3ZDdkMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjVjMzMwN2Q4MzdmMjE3ZmU5Y2U3MjZkZDgyMzY2M2M0ZDA2ZjExYWU2ZjhkMzRiZGZiZmZjYmY5MTQxNGQwYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWNiYTRlZjA0NWViODk3ODI1ZGM3NzBiMTYxZWJhZmZkNjk5M2VlNDg3YWJkMzZlMThkNTYxM2VhMmQ0NjhjNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0e7076924c564df5b1298774274a72b1",
+      "statement": "The invitation acceptance flow for new users calls auth.getInvitation on init, shows a set-password form when isNewUser is true, then calls auth.activate which uses bearer-mode delivery (PATCH /auth/activate?delivery=body) to return the access_token directly.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/invitations/accept/accept.ts#L39-L63",
+          "version": "repo-lines-v1:sha256:d2620ee786c8b817aecd795402b9f061e2536fb8864cb6352ce3719522499cb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1NGIzM2QwZjI1YmQ5NDQ3ZjQyNDVjZmI4MTFhNTY4YTc4ZDRlNGMzMWJhMTg4OGU0Y2UyNmMzMWM0ZjBiZjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNkMmI0ODhmYWE5ZTgzZjg0ZTI4ZmY3OThhNDIxZmE4NzQ0NDdhODE4MmMxOGE2YjgzZDJkZjRlMWIzNGJiNDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkZWYwNTAwNTE0M2RjYmVmMDk0OTg3NjZlYjZmZmFlYmQwYmNjMmE0M2NiZWM1Njk3M2JhY2NiZDcyZmI5NjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d02b0e2fe8248c4adc85fe7b7185bd9",
+      "statement": "For existing users accepting an invitation, if already logged in the component calls auth.acceptInvite directly; if not logged in it shows a login form, calls auth.login first, then auth.acceptInvite.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/invitations/accept/accept.ts#L66-L86",
+          "version": "repo-lines-v1:sha256:21cce83ba17daab540188b9fd0c54d23fb04678efa32adc884455886e8495a43:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2MTczMzRmMzhjNGZlMGUyZWVkNGEwZmE0Mzk2Yjc0YzMzMDdmNzEwNGFlOTkzYzQyOWQxYzRmNTNiZjhiZjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMTJiNjExODk0M2UzMGMwMDY4MzNlNzgxNjMwYTUzYjMyZjQxN2VmNWY5Nzk1YzNmMTJmMzMwODAyNGM1ZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkODUyMzgwYWVjOGI4MjhhYjFkZDI4ZjBhOGU3MjEwMzUxZDY1MTQ5ZGRjN2QwYzMxMDUxY2U5NDY3MjdiNmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d35a52d63f234d1ebd9be561381f6b84",
+      "statement": "Team switching calls auth.switchTeam which hits POST /auth/switch-team?delivery=body returning a new token, updating the session immediately without a page reload.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L228-L254",
+          "version": "repo-lines-v1:sha256:baa86b2226da2470375200bc4d81c649d0bf6c2aa054150ab63a68bcf8d2e4c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzNjFkNTJmOWUwODA5ZDVkNTgyMjc2N2IzZWZlYzc4OWY5ZWU2NTY1Y2Y3ZGQ0ODhlYzc1ODNhZmUzMzFkZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhOTg0ZGI0ZGE3ZWYxYjYwY2Y2OThkZWI2M2U5NzdjZmM5NjM3NzMzNjk0ZmM5YjY3NmU1NTY2ZGViZGQ1MmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4f115dbbc6904657b5ccd7e81822d1fd",
+      "statement": "The team detail page implements a 5-minute resend cooldown for invitations using a ticking now signal updated every 30 seconds, which keeps the countdown label accurate in zoneless Angular where Date.now() is not a reactive source.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L158-L188",
+          "version": "repo-lines-v1:sha256:a4d15686169da987145d2187dda0d88676c490998626ebdfca34c25661f6a387:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2MWQ1ZjY3YjZhMTkyYWRmNDEwM2JlZDM1ODQ2MjAwMTFkMzJlMTc0OWZmMTgyZGE4ZTFmZGQ0ZDg1ZjJiOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlMzU4ZDQ0MTNiODJlOWNhMTlkOTZjMjBmNjFhNDc3MTk5MjVhYjRmMTc0ZjUwMzAxODQ0ZjUzODdjNTJjMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgzMDg2NmNlMzFkYmNhYTdmODM2YjI1M2UwYmVhOGI3OTY1YWRhNzE0NWU3YzZhN2JmNGI2Nzg1YTA0YWQ3MDcifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L38-L55",
+          "version": "repo-lines-v1:sha256:94f483f3552acb5853da1ce0fd5ec454b7ec963907ccdc54bcbf7f8c8e66cd95:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwNDc5MjRlNTJhZjlmNmViYWQ4NTZlODI3NGI0MjY0ZTM1Yjg1YjIwMTdmOTgzZDkyMGRkMmYwNzQ0OGM1OTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU0NzI0ODJjNWQ5MTFiNjhlYTQ3OTQwYjVmYTFhNmMxOWMwMmUyZmM4ZmZjODJhMzkyOWUyNzdlMTRkYzM2NjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjMjU3N2ViM2M5NmNkZmE5MjkxYjcyYzRkYmVhMDU0MTFmZjdkMmFmYTlmZjAwOGJiMTY3OTk4MWY2M2U0OTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cbb34c16705e4410b2cda7adc258b970",
+      "statement": "Role changes and member removal in team management optimistically update the local member list; owners cannot remove themselves.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L143-L153",
+          "version": "repo-lines-v1:sha256:d403083c98025242cbbc57e60a2dd6c982382913f918a491e9afc5f7401c3283:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2ZTVkZDQzNjcxOTNlYjRiOTEzZjQyY2QwYTQ5OTMzMmUyNWI0MjRiZTBkOTU5NDFlYTM4MmMyMWZhOWM5ZjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMTJiNjExODk0M2UzMGMwMDY4MzNlNzgxNjMwYTUzYjMyZjQxN2VmNWY5Nzk1YzNmMTJmMzMwODAyNGM1ZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1ODE0NjZlOGQyODU5YTdhNDVjODMwMzkzNzYzYmNmNTJmMDM5NWZiNjg2NDc0ZmM2ZmM1NjA5MTU4MGExZjUifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L190-L202",
+          "version": "repo-lines-v1:sha256:bf8cb6d5504884ac0f6ec98997d890ca868d5106f416de26a6cfcfc9758a1a07:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllNTA4OTRiZmYyMmU5NjhiZDQ1YzBhODQxYTEwZWU3MWM4ZDU4MjU1MmM4ZThmM2RiNzNhYjEwYjE5YWUzYTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4NGYxMWEyYzdlNTdiOWZhMTBjNTdkMzBjNmY2NTdlNmQ1YTM2NWFmM2JlZjVhMDZkMjkwYTdjNDE3OWQzNjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5YTgxYmRmMTMyZWRmNzk1MjdlYTZkMzkyODJmMGE2N2YwODNiYWM0ZmFkY2QyOWNkODE5OTgxMzZmMDg5NTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2234dfa21df44252892ff6281f1ccaf6",
+      "statement": "Team deletion reloads the team list after success; if remaining teams exist but none is active, it auto-switches to the first remaining team before navigating to /teams.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L228-L254",
+          "version": "repo-lines-v1:sha256:baa86b2226da2470375200bc4d81c649d0bf6c2aa054150ab63a68bcf8d2e4c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzNjFkNTJmOWUwODA5ZDVkNTgyMjc2N2IzZWZlYzc4OWY5ZWU2NTY1Y2Y3ZGQ0ODhlYzc1ODNhZmUzMzFkZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhOTg0ZGI0ZGE3ZWYxYjYwY2Y2OThkZWI2M2U5NzdjZmM5NjM3NzMzNjk0ZmM5YjY3NmU1NTY2ZGViZGQ1MmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c8b5fa7ad3f44dc6beca7f242f99e1cc",
+      "statement": "The Account component loads the profile via auth.checkSession on init, then patches the form with firstName from profile.name and lastName from profile.surname; email is read-only.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/account/account.ts#L58-L73",
+          "version": "repo-lines-v1:sha256:7887db0a5b1fda3173c408912453afb168bac1c6cd0df26000045245e600d20b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1ZWMxYzZhZTI3YTQyMTI5NjRhYWY3MzRiYzJmMTFhM2MxYjBmY2FkNGVhNzFiYjlmZDA4MjM1Nzc2MzNjNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyZTc3OTk4Yzg1YzJjZDA2Njk2MjE5YjIzNTA4MTNjNTRlMTg5MTk5MDJmMDNjMDBkZjVmNThjOWRiNjE2YzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRiYjA2NTRjYzg2MTgxZmQyZWVjNzg5YmZhN2QxZDE2MWI3YjYyNTE3ODhhYmY0M2EyMDJlNWNjNTM4NGU0NmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_54116269459f4bf2bc0f6b61389b3e70",
+      "statement": "currentPassword is intentionally not required at the form level for password change because OAuth users may never have set one; the backend only verifies it when the account actually has a password.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/account/account.ts#L100-L123",
+          "version": "repo-lines-v1:sha256:ae291a6683c9a75adf63a26dc6c4737984ce77f364898e8f95435cec2dd79ed8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM2ZmYxMGYxM2I3NDA3ZDVhOWNmMWU5NzY0MWVjMzVkMDQxNTdkZTJkYzMxM2M3ODdkYzQwODQ4ZGNlZjZiN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMTJiNjExODk0M2UzMGMwMDY4MzNlNzgxNjMwYTUzYjMyZjQxN2VmNWY5Nzk1YzNmMTJmMzMwODAyNGM1ZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/account/account.ts#L37-L45",
+          "version": "repo-lines-v1:sha256:8a81c830e071a17b704589b364d93dcd3a7f15a4ee73dc83e712a05266d1e595:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODNhZTU3YTNmNDNjZDMxOWZkZGM1Y2Y2NWM3YWI1N2YxMTVkMjBkYjQwOTc0YTJmODQ1YWU4NjFkMTQ5YTc2OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWQzNjJkOTk5MmQ4ZDVkODcyMDI2MzFjODg0ZjUxNmI0OGU1OWU4NDMyMWRhMGRhMWQ4OWU0ZTQ4MWQwNjQwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDUwMTIxN2VjMThlYmQ1ODgyZjQyNDliMjM1M2U0MmE4NzIyNWJlOTc1OGY0MWI3NmVlOWRiZDdkYzc1MjU0ZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8698f1a74a4545e8892540936a5c2e74",
+      "statement": "The isOAuthUser computed signal checks the socialAuths array on the raw user response to determine whether to show the hint about leaving current password blank.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/pages/account/account.ts#L53-L56",
+          "version": "repo-lines-v1:sha256:22d787d0c68610b31d5e1943c29879e9a13698d0be3edd2dc23a76dee311e709:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDkzYzM1MWE4YjQxODEyYTIzNjY1NTFjYmZlMGM3ODRhNWI5ZTUxYjFiY2Y3MDZlNTYyMjcwNTg3M2RiYjUxZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzY2YmQ3MTU2ZDZjZjY1OTAxNmUyYTE2ZTU4ZDZmNWRlMWM3MWI4NjA1MGY5ZjBkNDJlMjEwZmRmMjU0OTA2YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjc0MTAyNzlmZjVlNDRjNzEwZTBjZDJiZTIzNzZiYmRjOGIxYmY2ZjgyNTNhYTMyOTIyM2FmOTdkOTZjZjI2YiJ9"
+        },
+        {
+          "resource": "repo://src/app/pages/account/account.ts#L7-L14",
+          "version": "repo-lines-v1:sha256:82188313d241907737f9dab2abef094a694a0151dbce6d9b81ccf3c65c12a145:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzgwMDQ2YjFhZTZkMWQyOTMxZGI4ZTc5MDEyYWVmY2QwODZjMTAxNTRkODM5Yjc2MmQyNTkzNDc4OWI2NDQ3ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWY3YTU0NDQyODdkNmQ5MmE2NTgwZjZkNWE0OTc2MzY0MDIwYjllZjQ4Yzg3NzM1ZDAxMzM2OGY1MmY4ZjBlNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmU2NjJhMTU2OTUyNGIwNWNhNWUxN2EwNWEwNGEyYzhjMTJlODgxM2E4ZDBhYmI3MTEyZjQ2ZTk5NDg1N2IzMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_745682a8c67442a9bab13f33bff7d000",
+      "statement": "The consents gate is triggered when a server-side Guards rule responds with HTTP 451 to any request including /users/me during session restoration.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/consents.ts#L1-L33",
+          "version": "repo-lines-v1:sha256:d2578d974d7952755edf8adc2ba70d1416415cbfd35b85c185baf1773fa80004:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwZDJlYzZlMTE2MTMyNWI1ODBjNTVjNjgzOTFmMDgzNWFiOWQ4ZDU2M2JmNTcxNjg4NmJmOTgwMDlhMDljNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c26a4d490785451aabc3c927b6f75428",
+      "statement": "consentsOnError is registered with provideRhAuth as the onError callback in app.config.ts, so it sees every API failure including session restoration — this is how the app distinguishes 'blocked by consents' from 'signed out'.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.config.ts#L25-L25",
+          "version": "repo-lines-v1:sha256:4c78ca43499657839882a147f83ae3e682211992a94c0e0e18200eb0c1f1bc99:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGM3OGNhNDM0OTk2NTc4Mzk4ODJhMTQ3ZjgzYWUzZTY4MjIxMTk5MmE5NGMwZTBlMTgyMDBlYjBjMWYxYmM5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGM3OGNhNDM0OTk2NTc4Mzk4ODJhMTQ3ZjgzYWUzZTY4MjIxMTk5MmE5NGMwZTBlMTgyMDBlYjBjMWYxYmM5OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzczZGEwYWJhZDRkN2Q3OGM2NDRkNDliYjMzODhmYjYwMmU3NzMwNmNiZDVkYmQ1NmY1MGZhMzViZjEyM2IyOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODAwMTU5YTJiYzE4ZGMyNThiMGNlN2FmMGE1NzlhYzcxODk5NjE3ZGI0YzJhMjM5MDU5MGZmNGNjYWZlZmJkZSJ9"
+        },
+        {
+          "resource": "repo://src/app/consents.ts#L24-L33",
+          "version": "repo-lines-v1:sha256:efc60618391271e0060a1cebd2ec8d0fd8051a7c3a6b3603eb5864868fcbe692:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlMWNlOTIxOGY1N2E2ODA1MTM5ZDQ0MDMwY2E4YTYyZjlkZDE4NjIwZjMxZThmY2ZiZjU1ZDQ3N2QwOTMwYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxYjZmMGI5ZDRlOTFhMjM1NWM0OGYwZjlmOWYzNjQzZjBkOTBjNGU5MmNkMjhhOWY2ODE0MzI0MDBkN2RjZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ea08d79bf6d04a1cb857727d84698925",
+      "statement": "The ConsentsGate component sits in app.html outside the router-outlet, which is essential because authGuard cancels navigation when session restore fails, so nothing inside the outlet would render.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.html#L1-L1",
+          "version": "repo-lines-v1:sha256:a16b4bcf1128780accd30e131807e4326f74b0991e076b37f432cd489091cc39:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTE2YjRiY2YxMTI4NzgwYWNjZDMwZTEzMTgwN2U0MzI2Zjc0YjA5OTFlMDc2YjM3ZjQzMmNkNDg5MDkxY2MzOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTE2YjRiY2YxMTI4NzgwYWNjZDMwZTEzMTgwN2U0MzI2Zjc0YjA5OTFlMDc2YjM3ZjQzMmNkNDg5MDkxY2MzOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTUyODZiZWM1MTMxYmY3ZGZmOWM1ZWRkZTQxMDU4MmY4ODdkOTNhZDgwOTY0ZTNhOGEzMWRmOGEyMjZkOTQyMCJ9"
+        },
+        {
+          "resource": "repo://src/app/consents-gate.ts#L6-L15",
+          "version": "repo-lines-v1:sha256:ea650cbd49a4215c1b693ec8bad33eb3e3821b9d7a4af28463dcdd5dc8728cef:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiMTY3MWMyNmZkNDk1ZDc4NDkwMjRkZGVhMDU3NzcwMDdlZDQ0NjQ0YjFlOGJkZDM1NzBhOGZkOTVmOTFkNjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MmE0MjkzODJiMmUxNDcxOGUwZTM3YjA1NzBhOGExNzAyOTkxZmNkODQ5OGNkODQwNjBhOGJmNGYwNTAxN2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5MTgwZTk3NTViYWJmN2IzOTgxMTExMDY5NWVmM2I1ZmFmMDRmOWYxNDRjNGQ4OGE1NzcxZTdmYTk5MWU1MjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiOTAyNjI4YTRlNTU5YWM2YWJjYTEyOThiZDAyOWNiMzcxMjYyMTMzOTNhOGMxOGI1NmMzNjgzZTNhZjY3NjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_439171add6254cd29f0068c66ec1e1cc",
+      "statement": "The consents gate overlay shows two checkboxes (Terms of Service and Privacy Policy) that both must be checked to enable the accept button; the request carries no versions — the server's permission mergeRequest stamps both document versions and the timestamp.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/consents-gate.html#L7-L41",
+          "version": "repo-lines-v1:sha256:f1c28b43a599ebcb27a9797a96a30798a8a5445d4a98913913fb850bc5693bb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MGZlN2VjYTE3MjhhYWU2MjdiYmI5MTc4MTcyMWQ0ZTIxMjg2ZGIzYjM5NDljOWY4MTY3OTc0ZTYzMTRiZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxNjRlYzE0ODM4OWQyZDUyNmJiNDVlNTc4N2UwOTM5MTI2NWYxMjMxY2EyNWNiOWJkMzQ0N2QyNDczODY0NjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBkNWExNDVmMzZkNDViNjUyNTAyMDM3OTNmNWVmODVkZjM3ZDVhNTE3NWNiNWQyOGU0MTQzYmQ2MzQ0MTc4NGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI0MzI2NzU5MDVjYjY1MzU3MDMxYTViNmQ0MDJhNjAxNzNiNjE4ZjJhOGUyOWM2YTQyMDkxNWJjYWY2NDBjYTkifQ"
+        },
+        {
+          "resource": "repo://src/app/consents-gate.ts#L27-L31",
+          "version": "repo-lines-v1:sha256:abfb5eb1812aafdb04ec7119304241272361aa0585336f65a52bff108b54d5df:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzdiYjMxYTJkZDVkMDMyNjg0NjRmMmRjZjhiMmE5ZDk1OGQ1OTgwYzUwY2NlMDczYmJjZmQ3NjA5MjhhZGVlZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjE2N2YyZmFmYjljZDIxY2ExYjY2YjJlZjQ3ZDE5NjVlM2ZjNGQ3MmQ0NTNlNjIwNTQxYjQ2MDYzYTAxZDRlOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWFjMjNkZDBkNjA3YWNmYTc0YjZmMTE4NTA4NDk0ZDc4OTc4NDA0NzA5OTdiNTU0MWRlYjk4YjdmNGQxMWQ4YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0738fb066313406cbaa9f65997a38d01",
+      "statement": "On successful consents acceptance, the gate performs a full page reload via window.location.assign('/') rather than router navigation, because the guard already cancelled the original navigation.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/consents-gate.ts#L40-L46",
+          "version": "repo-lines-v1:sha256:cf2c14ec90ccd2680cbf7bba3c5849cb7cbc151d2af96324051e718bf64bc496:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmQ3YmU1YWQyYzg0MDJkM2ZkYWE2ZGQwNGFkNzEyOWUwODU4MDBkYzhmMGVhZjE4OGNkYWUzN2RhMDM2MDNkNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjk3OGUyNTAzYjhjZjM3YTA2ZjdkNmYwYTNhNmI2ZmUzNTY5MWZiY2FiNTBiODc3NWNhYjZmYWJjNzFjNTkyYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTIwMDliY2YyOGFmNGVhMDFiN2M0MjI0OTAxMTI5NjYyMTQ3NjMzYzU2NTI4NjA0ZjI0MmFhY2U3MmY3MmRhNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjU3YTI5ZWY5Zjg1NjFkNDE5ZTQ4ZTNjM2M1ZGY1ODcyZmVjMjBmYzQ4MzI1NDA0NmFkYTcxMDI3YTFlOGQxOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4a537e520a74310a78eba985bd78178",
+      "statement": "The sign-out action in the consents gate clears the consentsBlocked signal before calling auth.logout, so the next user to sign in on the same tab does not immediately see the overlay.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/consents-gate.ts#L54-L59",
+          "version": "repo-lines-v1:sha256:a6d8b50cb56f033c3d7fedc998c3bab9861ebb6db2bd5d61bf4e1da937db7875:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjZkYjgwNWRkNDkzMTJjN2UwODllYjUyY2IzNmRlZGZlYjhkZWU4ZWFiNWMzZjAyZmE3NzQ5MjJiODdjZDM5MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWUxMmI2MTE4OTQzZTMwYzAwNjgzM2U3ODE2MzBhNTNiMzJmNDE3ZWY1Zjk3OTVjM2YxMmYzMzA4MDI0YzVkOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4fba2b4d30484e68bf3de9f981ca7fc9",
+      "statement": "The consentsBlocked signal is a plain module-level signal (not a service) because consentsOnError is passed to provideRhAuth while the injector is still being built.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/consents.ts#L17-L21",
+          "version": "repo-lines-v1:sha256:0fecce812ec74c244877a485e5b49236c2bbb3910f6781d5f5a50da53d5279a2:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI3NjI4MWY0Y2Q5NWUyMTlmMDIyYmMxNDRjYTRkZWNiMzE3MjJmYzU4NzgzNGI1Yzg5NTE4ZTg3NjZiOWVlMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmE1ZDBmY2Q3ZWU2NGY1YjIyNzZiNzVhNGJkMDM3MTJlNGU5MTRiNDI4ZWVmNzI4NWQ5MDU1N2RiMTNmMmM4ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGFlYTZiMTRlMzNiNzhmZTBhNTE2MjkxMWVlNzkxNGUwMWJkMzk0NzNiOTRiYTdlOTRkNmM1ZmIxYzkwNWM2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDM4M2ViNjZiODllN2EzODY3ZjljNGFiN2I3MmFjYmMxYWYyM2RmMDFmOTUxNmQxM2I4MTRlMDFjNjYzZjdhNyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-28T16:45:54.291Z"
+  }
+}

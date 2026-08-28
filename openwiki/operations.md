@@ -1,9 +1,38 @@
 ---
 type: Operations
 title: Operations & Runbook
-description: Build, serve, SSR deployment, environment configuration, CSS theming, and porting guidance for restheart-cloud-starter-ng.
-tags: [operations, build, deploy, theming, porting]
+description: Build, serve, SSR deployment, environment configuration, CSS theming, porting guidance, and rhc setup tooling for restheart-cloud-starter-ng.
+tags: [operations, build, deploy, theming, porting, rhc-setup, environment, ssr]
 resource: /angular.json
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-28T16:45:54.291Z
+sources:
+  - id: openwiki-source-73378d4ee3f791429188ddb5
+    resource: repo://angular.json
+  - id: openwiki-source-5b54a58d1b51cd490b0e7162
+    resource: repo://package.json
+  - id: openwiki-source-0d11ea3a28bf7372369b0bc9
+    resource: repo://PORTING.md
+  - id: openwiki-source-23775c3de52f3ab95a13cb8b
+    resource: repo://README.md
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
+    resource: repo://rhc.setup.ts
+  - id: openwiki-source-d3086358408fd7acf5360013
+    resource: repo://src/app/app.html
+  - id: openwiki-source-4dcb96c57cd6fc12d9eb28a5
+    resource: repo://src/app/app.routes.server.ts
+  - id: openwiki-source-8d236ec39d0e441a38b5d676
+    resource: repo://src/environments/environment.dev.ts
+  - id: openwiki-source-eaae96b81373abab97667f4f
+    resource: repo://src/environments/environment.ts
+  - id: openwiki-source-d9b845a7425932c3767a237e
+    resource: repo://src/server.ts
+  - id: openwiki-source-146419bb9b2415894a6bd677
+    resource: repo://src/styles.css
+generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
 ---
 
 # Operations & Runbook
@@ -43,6 +72,63 @@ Two environment files:
 3. Match `features` flags to your service's **Sign-up Mgmt → Features** toggles
 
 **If `apiUrl` is empty or not a `*.restheart.com` URL:** the app shows a "Connect your service" screen instead of the full app. This is intentional — see [`app.html`](../src/app/app.html).
+
+## rhc setup tooling
+
+The repository includes two setup files that configure a RESTHeart Cloud service to match the starter's requirements:
+
+| File | Purpose |
+|---|---|
+| `rhc.setup.ts` | Configures the accounts plugin (registration, verification, password reset, OAuth, team invitations) and CORS origin allowlist |
+| `rhc.setup.consents.ts` | Extends `rhc.setup.ts` with a consents gate (Terms of Service and Privacy Policy acceptance) |
+
+### Check/apply pattern
+
+Each setup step follows a **check/apply** pattern:
+- **Check**: Verifies if the service already has the required configuration
+- **Apply**: Makes the necessary changes only if the check fails
+
+This ensures idempotent runs — re-running against an already-configured service writes nothing.
+
+### Usage
+
+```bash
+# Install the CLI
+npm i -D @restheart-cloud/cli
+
+# Login to your RESTHeart Cloud account
+rhc login
+
+# Preview what's missing (dry run)
+rhc setup --srv <srvId> --dry-run
+
+# Apply the configuration
+rhc setup --srv <srvId>
+
+# For consents gate setup
+rhc setup --srv <srvId> --file rhc.setup.consents.ts
+```
+
+### Feature flag derivation
+
+The setup tooling **imports the same environment the app uses** (`environment.dev.ts`) and derives the server's configuration from it. This eliminates the problem of two lists that must agree but are kept in step by hand:
+
+- `emailRegistration` → enables both `registration` and `verification` on the server
+- `passwordReset` → enables `password-reset` on the server
+- `teamInvitations` → enables `invitations` on the server
+- `oauthLogin` → enables `oauth` on the server (only if `oauthProviders` includes `'google'`)
+
+**Key benefit:** Turning a feature off in the app and re-running the setup turns it off on the service too, because there is no second place to forget.
+
+### Consents gate
+
+The consents gate (`rhc.setup.consents.ts`) adds:
+1. A user schema that validates consent fields (`latestConsents`, `consents`)
+2. A permission allowing users to PATCH their own consents
+3. JWT claims for `latestConsents/tos` and `latestConsents/pp`
+4. A guard rule that blocks users who haven't accepted the current versions
+
+**Version management:** The `TOS_VERSION` and `PP_VERSION` constants in the file control which versions are required. Bump these when publishing new documents and re-run the setup.
 
 ## SSR deployment
 
@@ -89,6 +175,7 @@ The SSR server ([`src/server.ts`](../src/server.ts)):
 
 ### B. Adopt a UI framework (Material, Spartan, Tailwind)
 1. Delete sections 3–5 of `styles.css`
+<!-- openwiki: broken internal link [../README.md#swap-map] heading anchor "swap-map" does not exist in "../README.md". Fix the href or restore the target, then delete this comment. -->
 2. Reskin templates using the [swap map in README.md](../README.md#swap-map)
 3. See [`TEMPLATE_API.md`](../TEMPLATE_API.md) for what each template binds to
 

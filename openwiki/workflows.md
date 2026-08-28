@@ -1,9 +1,47 @@
 ---
 type: Workflow
 title: Key User Workflows
-description: Step-by-step flows for signup, login, OAuth, email verification, password reset, team invitations, and team management.
-tags: [workflows, auth, teams, invitations]
-resource: /src/app/pages/
+description: Step-by-step flows for signup, login, OAuth, email verification, password reset, team invitations, team management, account management, and the consents gate acceptance flow.
+tags: [workflows, auth, teams, invitations, consents]
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-28T16:45:54.291Z
+sources:
+  - id: openwiki-source-1b6b17b8afa47babcf26380f
+    resource: repo://src/app/app.config.ts
+  - id: openwiki-source-d3086358408fd7acf5360013
+    resource: repo://src/app/app.html
+  - id: openwiki-source-533e7761316e2fac327194b8
+    resource: repo://src/app/app.ts
+  - id: openwiki-source-4ccad2ecb9cb8ac59e327578
+    resource: repo://src/app/consents-gate.html
+  - id: openwiki-source-76b992238575041d25a8d7ba
+    resource: repo://src/app/consents-gate.ts
+  - id: openwiki-source-3629f9e95f35cf558c779f38
+    resource: repo://src/app/consents.ts
+  - id: openwiki-source-04a212cd84ffc1653fb72e76
+    resource: repo://src/app/just-signed-up.ts
+  - id: openwiki-source-70c667e2c44ccbc805a4be66
+    resource: repo://src/app/oauth-url.ts
+  - id: openwiki-source-18e26fe2b93aaf5a2892ec49
+    resource: repo://src/app/pages/account/account.ts
+  - id: openwiki-source-c848f08590912d99d95967d9
+    resource: repo://src/app/pages/auth/forgot-password/forgot-password.ts
+  - id: openwiki-source-136a04e418a9969c28b1c30f
+    resource: repo://src/app/pages/auth/login/login.ts
+  - id: openwiki-source-1153b336967cba65b87d1df6
+    resource: repo://src/app/pages/auth/oauth-buttons/oauth-buttons.ts
+  - id: openwiki-source-de882d521845822887c56b3b
+    resource: repo://src/app/pages/auth/reset-password/reset-password.ts
+  - id: openwiki-source-cc2a121090704e17ef477a1b
+    resource: repo://src/app/pages/auth/signup/signup.ts
+  - id: openwiki-source-3815a7c2c47aef567cc71dbc
+    resource: repo://src/app/pages/auth/verify/verify.ts
+  - id: openwiki-source-0c503ef6a22fe483e758a9db
+    resource: repo://src/app/pages/invitations/accept/accept.ts
+  - id: openwiki-source-a0abfed3f48fb645e980c9ea
+    resource: repo://src/app/pages/teams/detail/team-detail.ts
+generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
 ---
 
 # Key User Workflows
@@ -18,28 +56,28 @@ sequenceDiagram
     participant Backend as RESTHeart Backend
     participant Verify as Verify Component
     participant App as App Component
-    
+
     User->>Signup: Fill form name email password
     Signup->>Auth: register teamName firstName lastName email password
     Auth->>Backend: POST auth register
     Backend-->>Auth: 202 Accepted
     Auth-->>Signup: Registration successful
     Signup-->>User: Show Check your email confirmation
-    
+
     Note over User: User clicks verification link in email
-    
+
     User->>Verify: auth verify email token
     Verify->>Auth: verify email token
     Auth->>Backend: POST auth verify
     Backend-->>Auth: Redirect URL with access_token
     Verify->>User: Browser redirects to app with access_token
-    
+
     User->>App: Page load with URL hash
     App->>App: consumeFragmentToken
     App->>Auth: setToken access_token
     App->>App: Read flow signup set justSignedUp signal
     App->>App: Clear URL via history replaceState
-    
+
     App->>App: authGuard runs checkSession
     App->>Auth: Load user and teams
     Auth-->>App: User authenticated
@@ -83,20 +121,20 @@ sequenceDiagram
     participant Provider as Google GitHub
     participant Backend as RESTHeart Backend
     participant App as App Component
-    
+
     User->>OAuth: Click Continue with Google GitHub
     OAuth->>User: Navigate to apiUrl auth oauth authorize provider noauthchallenge
-    
+
     User->>Provider: OAuth consent flow
     Provider->>Backend: Redirect with auth code
     Backend->>Backend: Exchange code for user info
     Backend->>User: Redirect to app with access_token
-    
+
     User->>App: Page load with URL hash
     App->>App: consumeFragmentToken
     App->>App: setToken access_token
     App->>App: Clear URL via history replaceState
-    
+
     Note over App: New user gets account and team created automatically
 ```
 
@@ -128,6 +166,27 @@ sequenceDiagram
 9. User is logged in automatically, redirected to home
 
 ## Team invitations — new user
+
+```mermaid
+sequenceDiagram
+    participant User as User
+    participant Accept as Accept Component
+    participant Auth as RhAuthService
+    participant Backend as RESTHeart Backend
+
+    User->>Accept: Open invitation link with email and token
+    Accept->>Auth: getInvitation email token
+    Auth->>Backend: GET invitation
+    Backend-->>Auth: Invitation with isNewUser true
+    Auth-->>Accept: Show set password form
+
+    User->>Accept: Enter new password
+    Accept->>Auth: activate email token password
+    Auth->>Backend: PATCH auth activate delivery body
+    Backend-->>Auth: access_token in response body
+    Auth-->>Accept: User logged in
+    Accept->>User: Redirect to home as team member
+```
 
 **Entry:** `/invitations/accept?email=...&token=...` (gated by `teamInvitations` flag)
 
@@ -190,6 +249,52 @@ sequenceDiagram
 - `auth.changePassword(currentPassword, newPassword)`
 - Hint shown for OAuth users: "Leave blank if you've never set a password"
 
+## Consents gate
+
+```mermaid
+sequenceDiagram
+    participant App as App Component
+    participant Auth as RhAuthService
+    participant Backend as RESTHeart Backend
+    participant Gate as ConsentsGate
+    participant User as User
+
+    App->>Auth: checkSession on app load
+    Auth->>Backend: GET users me
+    Backend-->>Auth: 451 Unavailable for Legal Reasons
+    Auth->>Auth: consentsOnError sets consentsBlocked true
+    Auth-->>App: Session restore failed
+
+    Note over Gate: Gate sits outside router outlet so it renders even when authGuard cancels navigation
+
+    Gate->>User: Show overlay with ToS and Privacy Policy checkboxes
+    User->>Gate: Check both boxes and click I accept
+    Gate->>Auth: acceptConsents
+    Auth->>Backend: POST consents accept
+    Backend-->>Auth: 200 OK
+    Gate->>User: Full page reload via window.location.assign
+    User->>App: Fresh load with readable user document
+    App->>Auth: checkSession succeeds
+    App-->>User: Normal app renders
+```
+
+**Trigger:** A server-side Guards rule blocks every request from a user who has not accepted the current Terms of Service and Privacy Policy, responding with HTTP 451. Because `/users/me` is one of those requests, session restoration is the first thing that trips the gate.
+
+**Entry:** automatic on session restore — no route or manual action required.
+
+1. `provideRhAuth` is configured with `onError: consentsOnError` in `app.config.ts`
+2. When any API call returns 451, `consentsOnError` sets the `consentsBlocked` signal to `true`
+3. [`ConsentsGate`](../src/app/consents-gate.ts) component sits in `app.html` **outside** the `<router-outlet>` — this placement is critical because `authGuard` cancels navigation when session restore fails, so nothing inside the outlet renders
+4. The overlay shows two checkboxes (Terms of Service, Privacy Policy) and an "I accept" button disabled until both are checked
+5. On accept: calls `auth.acceptConsents()` — the request carries no versions; the server's permission `mergeRequest` stamps both document versions and the timestamp
+6. On success: `window.location.assign('/')` triggers a full page reload rather than router navigation, because the guard already cancelled the original navigation
+7. On the fresh load the user document is readable, `authGuard` passes, and the normal app renders
+8. Alternative: "Sign out" button clears `consentsBlocked`, calls `auth.logout()`, and redirects to `/auth/login`
+
+**Key invariant:** the overlay is user experience, not enforcement. Removing it with dev tools changes nothing — every request still returns 451. The rule lives on the server. Bumping document versions in the Guards rule requires no client change or redeploy.
+
+**Change navigation:** When modifying the consents gate, edit `src/app/consents-gate.ts` for logic, `src/app/consents-gate.html` for the overlay template, and `src/app/consents.ts` for the signal and error handler. The `consentsOnError` function is registered in `src/app/app.config.ts` via `provideRhAuth`.
+
 ## Home page demo fetch
 
 **Entry:** `/home` (authenticated)
@@ -241,3 +346,8 @@ fetchData() {
 - **Check:** `src/app/app.ts` for fragment token handling (affects account creation)
 - **Test with:** Manual flows from TEST-CASES.md
 - **Validation:** Verify OAuth users can change password without current password
+
+### Consents gate changes
+- **Start with:** `src/app/consents-gate.ts` for overlay logic and `src/app/consents.ts` for the signal and error handler
+- **Check:** `src/app/app.config.ts` where `consentsOnError` is registered with `provideRhAuth`
+- **Test with:** Manual flows — trigger a 451 from the backend and verify the overlay appears, accept works, and sign-out clears the flag

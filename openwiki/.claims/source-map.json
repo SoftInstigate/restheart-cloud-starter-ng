@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:51e6dd50f47d6f4bfc48b90b1c5b265612d6853b830451c6c9ec178a4716fbb7",
+  "claims": [
+    {
+      "id": "claim_2c280c21ab08438e8b90ba869e38ee6f",
+      "statement": "The consents gate uses a global signal `consentsBlocked` in `src/app/consents.ts` that is raised on any `451` response from the service and passed to `provideRhAuth` as `config.onError` during bootstrap.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/consents.ts#L1-L33",
+          "version": "repo-lines-v1:sha256:d2578d974d7952755edf8adc2ba70d1416415cbfd35b85c185baf1773fa80004:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwZDJlYzZlMTE2MTMyNWI1ODBjNTVjNjgzOTFmMDgzNWFiOWQ4ZDU2M2JmNTcxNjg4NmJmOTgwMDlhMDljNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0cee71ee8c094a0ba280a0c6600c4e73",
+      "statement": "The `ConsentsGate` component in `src/app/consents-gate.ts` sits outside the router outlet so it renders even when `authGuard` blocks navigation, covers the app with an acceptance form while the API answers `451`, and calls `auth.acceptConsents()` then reloads the page.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/consents-gate.ts#L1-L60",
+          "version": "repo-lines-v1:sha256:311d127f42a8aea514827e2215efd00f86cfe55548a97204aff94cf329490a8e:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhZjMwNDE0NDViNjMzODcxN2RkNTNhNGZiYTVlZmQ4ZTRiNmI1OWI1NmYxNzkyNzMwMDE5ZTg3YTExMTEwZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bf9b2f0192834c23a57b67286fde71a7",
+      "statement": "The `rhc.setup.ts` script provides declarative setup for the accounts plugin: installs the plugin, configures feature flags derived from `environment.dev.ts`, sets Google OAuth credentials if enabled, and adds the app origin to the CORS allowlist.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts#L1-L184",
+          "version": "repo-lines-v1:sha256:c30b047316419d0743af58d9c3eb6e88708eb457443db1fb8092f697f4c8c9fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTg0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWYyMmNmMDczMjU5MmMyNDcxNDFjYmU2MWVmYTExMDEyNjEyZjVhMzEyMmI5YWY5YmJhZjUyZjU3MjRkMTk0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_6176e9d47fb740609e42fbd68753f3b8",
+      "statement": "The `rhc.setup.consents.ts` script extends `rhc.setup.ts` with the consents gate by importing the accounts steps and adding a user schema with `latestConsents`/`consents` fields, a permission allowing users to PATCH their own consents, JWT claims for the two version strings, and a Guards rule that blocks users who haven't accepted the current ToS/Privacy Policy with HTTP 451.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L1-L295",
+          "version": "repo-lines-v1:sha256:9e307ef91e62541e441ca54443242909604599ca316a36b4fc613033371ae843:eyJzZWxlY3RlZExpbmVDb3VudCI6Mjk1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWYyMmNmMDczMjU5MmMyNDcxNDFjYmU2MWVmYTExMDEyNjEyZjVhMzEyMmI5YWY5YmJhZjUyZjU3MjRkMTk0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_03d60f4fd6f94a3ea7deb417c0f5f1fc",
+      "statement": "The two setup files share one definition of the accounts steps: `rhc.setup.ts` exports them via `defineSetup`, and `rhc.setup.consents.ts` spreads them with `...accounts.steps`. The consents file centralizes `TOS_VERSION` and `PP_VERSION` so bumping them and re-running the setup is the only action needed to publish new terms.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L167-L171",
+          "version": "repo-lines-v1:sha256:5c92427d908f208393d9b7b0fefcfcc1a3321ea18333a8c004164812985de991:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTVkNTZlMzZkY2FlM2VjYTZmODExNzJmOTBlZDE4NjFkOTJmYzBlOTY3MGU2OGU4NTA3NGRkMWFhOGFjYmM2NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDhhZDczZDNmYjhlN2U4ZjljM2I2MzY1MmNiOGUyNjdmMDBjZDQwMmEyMjZiN2MwZWRkMmVjNzk0ZDU3YTVmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTE2YWQxOTQzOTI4OTczOTc3MzcyNzBjODQwZTZiODU2ZTQ2Mjc1ZjBiZTE4YjRhMWI1MWI2NGU0ZTVhMjUyNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTNlZTE0YTc4ZTQ3OTMzN2EzNDY4YTA2NzA5MDdmYmRlZTg1ZmFjNWQ3NGRkNzE1N2U5ZmZlMmJlOTg4Njk5MSJ9"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L48-L49",
+          "version": "repo-lines-v1:sha256:710414bc3ba1f7fa5e8f69b0f0352bb474422b7b76f0604ad7407200dc4d3a46:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDk5YmMyNWQ0YmQwMmU3ZTUxNmE0NDQzN2EyNWM4NzM0OWE1N2MwMmE1OWI1NmM4ZWYzOWVkODI1NDMwMzk5ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTkzYzQ0Y2IyYmE3N2E1ZTNhNzU0ODllYzQzYzdlNmI2MDFmZDQ1ODRkMzQ1MGNjM2JiODQ5ZWQwOTA0OGY3NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmQ1ZmMxYmZjZTg5NTI5N2Y2NDAyMGQ0NmEwOGYyMTRkZTU3YzFmYmI5YzMzMjc4NjQ2MDk0MjA4OWIxOTczNiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-28T16:45:54.291Z"
+  }
+}
