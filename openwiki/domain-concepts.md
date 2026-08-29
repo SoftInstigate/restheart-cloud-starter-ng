@@ -1,9 +1,41 @@
 ---
 type: Domain Concepts
 title: Domain Concepts
-description: RESTHeart Cloud auth model, teams, invitations, tokens, feature flags, and the SSR/CSR split.
-tags: [domain, auth, teams, tokens, feature-flags]
-resource: /src/environments/environment.ts
+description: RESTHeart Cloud auth model, teams, invitations, tokens, feature flags, the consents gate domain model, and the SSR/CSR boundary.
+tags: [domain, auth, teams, tokens, feature-flags, consents]
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-28T16:45:54.291Z
+sources:
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-1b6b17b8afa47babcf26380f
+    resource: repo://src/app/app.config.ts
+  - id: openwiki-source-407c70ba325b6f9e6aa4707e
+    resource: repo://src/app/app.routes.ts
+  - id: openwiki-source-533e7761316e2fac327194b8
+    resource: repo://src/app/app.ts
+  - id: openwiki-source-76b992238575041d25a8d7ba
+    resource: repo://src/app/consents-gate.ts
+  - id: openwiki-source-3629f9e95f35cf558c779f38
+    resource: repo://src/app/consents.ts
+  - id: openwiki-source-04a212cd84ffc1653fb72e76
+    resource: repo://src/app/just-signed-up.ts
+  - id: openwiki-source-0c503ef6a22fe483e758a9db
+    resource: repo://src/app/pages/invitations/accept/accept.ts
+  - id: openwiki-source-9fd5be7b4a86f1a62c53cab3
+    resource: repo://src/app/pages/shell/shell.ts
+  - id: openwiki-source-a0abfed3f48fb645e980c9ea
+    resource: repo://src/app/pages/teams/detail/team-detail.ts
+  - id: openwiki-source-8a0090a686412a9b27bc6be6
+    resource: repo://src/app/theme.service.ts
+  - id: openwiki-source-8d236ec39d0e441a38b5d676
+    resource: repo://src/environments/environment.dev.ts
+  - id: openwiki-source-eaae96b81373abab97667f4f
+    resource: repo://src/environments/environment.ts
+  - id: openwiki-source-146419bb9b2415894a6bd677
+    resource: repo://src/styles.css
+generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
 ---
 
 # Domain Concepts
@@ -46,7 +78,7 @@ A team has:
 
 **Team creation:** when a user signs up, a team is auto-created with `"{firstName}'s Team"` as the name. Additional teams can be created via `POST /auth/teams`.
 
-**Team deletion:** only possible when no other members remain. Backend enforces with an atomic `findOneAndDelete` + `$expr` size guard — returns 409 if other members exist.
+**Team deletion:** only possible when no other members remain. Backend enforces with an atomic `findOneAndDelete` + `$expr` size guard — returns 409 if other members exist. After deletion, if other teams remain but none is active, the app switches to the first remaining team.
 
 ## Invitations
 
@@ -86,6 +118,50 @@ features: {
 - `environment.ts` (production): all on except `oauthLogin`
 - `environment.dev.ts` (development): all on including `oauthLogin` with Google
 
+## Consents gate
+
+The consents gate is a server-enforced acceptance requirement for Terms of Service (TOS) and Privacy Policy (PP). It blocks all authenticated API requests from users who have not accepted the current document versions.
+
+### How it works
+
+1. A **Guards rule** on the RESTHeart Cloud service returns HTTP `451` (Unavailable For Legal Reasons) to any authenticated request from a user whose `latestConsents` does not match the current TOS and PP versions.
+2. The first request the app makes on load — `GET /users/me` to restore the session — is blocked, so the user never gets a session.
+3. The client-side `consentsOnError` callback (passed to `provideRhAuth` as `config.onError`) catches the `451` and sets the `consentsBlocked` signal to `true`.
+4. The `ConsentsGate` component sits **outside** the router outlet in `app.html`. When `consentsBlocked` is `true`, it covers the entire app with an acceptance form.
+5. The user checks two boxes (TOS and PP) and clicks Accept. The client calls `auth.acceptConsents()` — the request carries no versions; the server's permission stamps both.
+6. On success, the app does a full page reload (`window.location.assign('/')`). The next session restoration succeeds because the user's `latestConsents` now matches.
+
+### Why the gate lives outside the router
+
+A blocked user has no session — `authGuard` fails and cancels navigation. Nothing inside the `<router-outlet>` ever renders. The gate must be placed at the root component level, outside the outlet, to be visible.
+
+### Server-side setup
+
+The consents gate requires four server-side documents, configured by `rhc setup --srv <srvId> --file rhc.setup.consents.ts`:
+
+1. **User schema** (`userConsentsSchema`) — validates the `users` collection, adding `latestConsents` (object with `tos`, `pp`, `acceptedAt`) and `consents` (array history) fields.
+2. **Collection validation** — attaches the schema to `/users`.
+3. **Permission** (`userCanPatchOwnConsents`) — allows `PATCH /users/{userId}` only for the `consents` field. Its `mergeRequest` stamps the current versions and timestamp, and pushes to the `consents` history array.
+4. **Guards rule** (`consentsGate`) — blocks authenticated users whose `latestConsents` does not match current versions. Excludes `/auth/*`, `/token/*`, and the acceptance PATCH itself.
+
+### Version management
+
+TOS and PP versions are defined as constants (`TOS_VERSION`, `PP_VERSION`) in `rhc.setup.consents.ts`. All four server documents derive from these two values. To publish new terms:
+
+1. Bump the version constants
+2. Re-run `rhc setup`
+3. Every user meets the acceptance form on their next request; previous acceptances remain in the `consents` history
+
+### JWT claims
+
+The setup adds `latestConsents/tos` and `latestConsents/pp` to the JWT's `account-properties-claims`. The Guards rule reads these from the token, not the database, so the gate works without a database round-trip per request.
+
+### Client-side architecture
+
+- `consents.ts` — a plain module (not a service) exporting `consentsBlocked` signal and `consentsOnError` function. Plain module because `onError` is passed to `provideRhAuth` during injector construction, before DI is available.
+- `consents-gate.ts` — the overlay component. Two checkbox signals (`acceptedTos`, `acceptedPp`) gate the Accept button. On accept, calls `auth.acceptConsents()` then reloads. On sign-out, clears the blocked flag before redirecting.
+- The gate is opt-in at the server level: if no Guards rule exists, no request is ever answered `451`, and the acceptance dialog never appears. No client-side flag is needed.
+
 ## SSR / CSR boundary
 
 The render boundary is the authentication state:
@@ -102,7 +178,7 @@ This means:
 
 ## Welcome banner
 
-The `justSignedUp` signal (in [`just-signed-up.ts`](../src/app/just-signed-up.ts)) is:
+The `justSignedUp` signal (in `src/app/just-signed-up.ts`) is:
 - Set to `true` by `App.consumeFragmentToken()` when `?flow=signup` is in the URL
 - Read once by `Shell` to show the welcome banner
 - Reset to `false` by `Shell`'s constructor
@@ -145,3 +221,9 @@ Dark mode overrides these tokens under `html.dark`. The `ThemeService` toggles t
 - **Check:** `src/app/app.ts` for fragment token handling
 - **Test with:** Manual flows from TEST-CASES.md
 - **Validation:** Token refresh works at ~80% of 15-minute TTL
+
+### For consents gate changes
+- **Start with:** `rhc.setup.consents.ts` for server-side configuration
+- **Check:** `src/app/consents.ts` and `src/app/consents-gate.ts` for client-side logic
+- **Test with:** `rhc setup --srv <srvId> --dry-run` to verify server state
+- **Validation:** Bump versions → re-run setup → user sees acceptance form → accepts → reload succeeds

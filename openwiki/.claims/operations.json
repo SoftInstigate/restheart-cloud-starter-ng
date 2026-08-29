@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:71e26b1b3a7f9226e0523221b647e8d8ac1cb4017b9ed4254a573e7eb7a9b84b",
+  "claims": [
+    {
+      "id": "claim_6f1b662867fe42cd8fd78804832ebb59",
+      "statement": "The project uses npm for dependency management and Angular CLI for development commands: npm install, ng serve (dev server on localhost:4200), ng build (production build), ng build --watch --configuration development (watch mode), and ng test (run tests).",
+      "evidence": [
+        {
+          "resource": "repo://angular.json#L68-L79",
+          "version": "repo-lines-v1:sha256:d98afdba5861da55ba6d6fb436d91925375df707520c2d368356763b26f15d09:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3MWE1N2E1ZTk4MmE1ODk3YWM2MTI0ZDE5ODc4YWIyZTkwNDIxZDczNDk4NjlkNGI5OTQxODVkNWMwYTc3ODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlNjczYWJkNDU3YTk3ZWVhMTdhNjAwNjJlYjBmYWVhNmJkZjA5NDg2OGNjNmI4ZjhjMGViZGEyZjYxZWQ0MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzMmU2MTkwZThiZWMyMTViOWY4YTkyNmExY2UwYWM2Y2UxNjFlY2MyYzUzMDE0NzY0MzlmNWM1MWIzNmE2NTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4YjJjY2YzNWEyYzY5ZmUzODM4Mzg2MzI0MDE4Nzc1OGRmZjZiNzk0MmY3MTU1MzcwMjU1ZjhjMGYxNDhmZWMifQ"
+        },
+        {
+          "resource": "repo://package.json#L4-L10",
+          "version": "repo-lines-v1:sha256:37f11f124d548d9fad2ff2764edfdaf3e9f71170d8af870454c152fd5aa60ba7:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2JhODViZjgxY2UxNTQ4MDZiNjA1ZDVmOWFiMWUzZGU4MzgwZTdlNzI0NGQzYzI2M2ZlZGFiNDk3ZTRlNmQ4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjUwMTk0NDY4NDBjNTg5YTg0NWRkNTFhY2QyMzEyZTYwMGEzNDE4NTU3ZGY0ODNmZTgzNTkzMGE3NDE2MjRlMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDlkY2RhOWViNDgzODI1MDljNWU5NTE1NWFjYThmYjhmMWY3MjhlOWE2ZjZjZGUxZjA0OTVmODI1MjViNmJhMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c8bc56748ad748a3a715539a5c995a4a",
+      "statement": "Two environment files control API configuration: environment.dev.ts for local development (ng serve) and environment.ts for production builds (ng build). The apiUrl must be a *.restheart.com URL or the app shows a 'Connect your service' screen. Feature flags must match the RESTHeart Cloud service's Sign-up Mgmt → Features toggles to avoid 403 errors.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.html#L3-L62",
+          "version": "repo-lines-v1:sha256:bb1d80bfb07b0ff0b76f7dbc422cd753d7ebabb4c586c66df42283baa6645a33:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/environments/environment.dev.ts",
+          "version": "repo-file-v1:sha256:63cb6dd570a403f69861e86c6583063a653ac922b04f0866aa4377f66ffb269f"
+        },
+        {
+          "resource": "repo://src/environments/environment.ts",
+          "version": "repo-file-v1:sha256:9a9c1c9fa3634477ea3e660d7a343e259a9a9b8105da600b6d2b48c04532915c"
+        }
+      ]
+    },
+    {
+      "id": "claim_d16ceb94045a457197636ee520354cf6",
+      "statement": "The rhc setup tooling consists of two files: rhc.setup.ts configures the accounts plugin (registration, verification, password reset, OAuth, team invitations) and CORS origin allowlist, while rhc.setup.consents.ts extends it with a consents gate for Terms of Service and Privacy Policy acceptance.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts",
+          "version": "repo-file-v1:sha256:9e307ef91e62541e441ca54443242909604599ca316a36b4fc613033371ae843"
+        },
+        {
+          "resource": "repo://rhc.setup.ts",
+          "version": "repo-file-v1:sha256:c30b047316419d0743af58d9c3eb6e88708eb457443db1fb8092f697f4c8c9fa"
+        }
+      ]
+    },
+    {
+      "id": "claim_eb2dc768dd47409facd82713be23e22f",
+      "statement": "Each rhc setup step follows a check/apply pattern: check verifies if the service already has the required configuration, and apply makes changes only if the check fails. This ensures idempotent runs against already-configured services.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L6-L9",
+          "version": "repo-lines-v1:sha256:1770c76ae797e17defed4568a81fd8d70333217173f89f5b5dc38126e349d1c3:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWNkYzNmYjlkMGFhODE3NzdlNjMxMzA0ZTY4YTY4OGUyYmIzNTY2YjExNzJkMDc0YTgzODAzM2E3ZDhiNjZlYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNThkYzNlMWYwMjdiNTI3OWJlZDg1OWQ1YWJlNzY1M2M1NjA4ZjBmNWIxZWJkNWFhNjRlZTIxOWRiM2Y5YTllNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzhjNjY4NzYwM2MxNWIyN2QxMDVkNTZkNGU3OTUwYjY5MmY2YWFiYTEyODg4Y2NmNGZhMGNiYjQ1YTVhNzFmMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTc2NTk0M2Y5NjA5MTc2ZDc4ZGY1ZWRmMTI3MTViNDI0ZmQ2ZTc3NDI0ZDQ1ZjZiMTc3MTVjNDA4NGE0MmZiYyJ9"
+        },
+        {
+          "resource": "repo://rhc.setup.ts#L8-L12",
+          "version": "repo-lines-v1:sha256:5d860e39173f205f20d4f615583c0320728a67db3d4847af331e9e5167765c21:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjIzY2I0YzEzZDY3NzU5ZDU0Zjc2NzFkNDQwMzQ5NzJkMDkwM2EzOWQwOGFmYWU3M2JiOTgxZWI5YWIwZGNmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWFiOGYzMDYzMTc2YWE4OTc5YmQxOWQzOTBkODY2MDFmNzBiMGJkMGE1ZDMyMTYzODQ2MDhhYjZiMmE0NzliYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjBkYmQ4NzQ3ZTM0MzQ1NzFhZWNhYTUzNmI2OWIzZjIzZGY0ZTI1N2UyZTI4M2YzNTZlODBmZTFiYmExZDFmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmY0YmU4NzNmNjY2M2ZkOTVkZWJiMzBhZWNjNTMxZjViOTg2Y2M5ZWNmZDk3MWUyZGY3ODE4N2I0ZGJkM2VmYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d66a1d1e210e4e0996df9cb0d738ab49",
+      "statement": "The rhc setup tooling imports the same environment.dev.ts the app uses and derives server configuration from it, eliminating the problem of two lists that must agree but are kept in step by hand. Feature flags like emailRegistration, passwordReset, teamInvitations, and oauthLogin are mapped to corresponding server-side features.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts#L14-L28",
+          "version": "repo-lines-v1:sha256:68d8e868e260c4cc3fbca5ddc744e5cc2926d2f70172aa34ad761cc5fb970de8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzNGJiNzg0ODhjYTcyYTRkM2Y2YzQ3ODAxOGY2MmI2YjNlNmMwMzdiMmM4ODZlMzNjOGIyNzUxNzk3NTA1OWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4NzY2OTk2YWM5ZDkyZjdkMjlkNzQxZGViYzA1ZDZiMDA5NmU1YjViZWY3OWJmZDgzYmVjYTQ5Yjg3YmIyNGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1MTgzN2JjZDIzMDMwOTU3ODA3YTI0ODdjYTMyMzc4Nzc0OTg2ZWRmMmQ1OWE1ZmVmNzRjNWUwMzU0NmVkMzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NzAxOTlkZDExNTU1ODljMDQ0YzgzNzhkMWM3MWRkZmEzNGI1NjQ2N2QwNTMxYmRkYTI3NWMwMjNiYzczMzkifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.ts#L57-L63",
+          "version": "repo-lines-v1:sha256:685bf55d5cec1e11a0d85675b9f565d6cda8136fbbf7e0adaf0efd9c168f9e6b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTQ4MmE4YTU3Mzk5ZjI1NjVkMzNmZWUwNjE1NmE1OTI4ZmRmMGMyNjQzNTMyZDg5ZDdjYTJjMTBhMWQ0MGJlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmUwYjdjNjAyNTliNDVlOWZlOGZlNDczZDA0ZDM2OWY0MjU3NmQ4MTkyYWEyOGY5YWZhNDM1MTk4OGM3YmE3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjAyNjFhODEzOGZkNDRjZDQxZmE4ZTkwY2ZhMzIwZGFhZjE5MjEyZmExMzIzZDVhY2Q2YWUzN2FkMWIyOTRlYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_355e8ecd91564cb083e4e1578f4b06e1",
+      "statement": "The consents gate (rhc.setup.consents.ts) adds a user schema validating consent fields, a permission for users to PATCH their own consents, JWT claims for latestConsents/tos and latestConsents/pp, and a guard rule blocking users who haven't accepted current versions. Version management uses TOS_VERSION and PP_VERSION constants.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L134-L160",
+          "version": "repo-lines-v1:sha256:152607e653da37f5f18e11d56b3e53c87e63a611c2dfc3bc59005995c4e38be8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5NTQ3N2VkYWI3MTU2NTFlZjNmZDBhOGE1ZjgzYzYwMTM1YTIwYjNhMmI3N2MxYTc5N2EwZjZjODM1MmFkYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2ZjVhODU2NTdiOGU4NTQwZjZmNWYyZWM3YjY2YjY2YWNiNzc3ZmJlNjQyY2E5M2I5N2QyNWU4NjBlZDM4YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmNjI4MGZjMDFmYzc1OWFhZGY4ODgwY2RmM2E4M2Q1YmIxYzZkNmNiYTJkNjdiZWEzOTRlZDUyMDI1ZWEzZWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1MTM5YmE0ZDJjMmQ3MDhiZGE0MTA5ZmU3OGM2MWI0NjI3ZmExYTgxNTY1NGQxNmQzMTg0YmQxN2U0ZTRmODkifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L259-L294",
+          "version": "repo-lines-v1:sha256:9b535e19987e90c7e2c237475d05c41042723f546f8c9d88fa935ab5285efafd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNmE0MTQ1MmIwMTVkNzk5Y2ExMDkwNTI5YWQwYTI2MTk1MjcwZDFlOTdiMjMwZDY5N2E3NGNjMzEzYzZhNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhOTEyMDI2Y2ZiMzRlYmI1ZDkzZWY2MGY1ZTVhOTdmN2NmOTE4YjU2ZWE1OGQwZjg5ZDg0MDNlYzYyZTRhYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1ZTI2Y2Q5MjM2NmY2MGQ4ZWQ5MmQwMjM5ZjA3ZmVmNzRjYWMxNGFhNjlhZGRmOWMyY2MwZDExZWIwMGE0NjMifQ"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L50-L56",
+          "version": "repo-lines-v1:sha256:5a2086888fea6dc7697f484b9c638309e080a006ae0f96d560bcc45f29483df8:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWFmMjJjZjA3MzI1OTJjMjQ3MTQxY2JlNjFlZmExMTAxMjYxMmY1YTMxMjJiOWFmOWJiYWY1MmY1NzI0ZDE5NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDgzNWM2NTg1YWEwYjEwNjE1ODI1MzMzN2RhNDdjZjZiNmIzZjJjODZhZjJlMmUzOTkzZGRiMjIwNWRiNGMyYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTAzZTNhZTUwZmUwODU3ZjQ5ZGQ3MTYyZDUzNjhjOWYxYjkwN2FjZGU2YmMxNThjNmEzZWU1ZGVlOTdhMGY5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjNiZmNkOWYwOWMzYzU5ZDEwNGE2YjFiZGIwODM1OTMxNzUxZjRkY2UzYjNiNGYxNzEyM2JkMWRhMTAzNDk1NCJ9"
+        },
+        {
+          "resource": "repo://rhc.setup.consents.ts#L83-L116",
+          "version": "repo-lines-v1:sha256:699a29c1d586c6146f19c931fc3b6c857702bb9239bf464639bbfd377700f4a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiM2IzMWZjM2FjZDY5Yzc0OGE5NmU5MTc3ZjBkZDU3N2NkMjJjMGU0MTNmYjllNTJlYjUyZDdlY2RjMmRhYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIwOWNlNWRiN2Q5ZjhhN2FlNjVjYjhhYmI5YTU2ZDQyOTdhZDFjNjE0MWJlZDViMjEyNWQzMzk0ZDUwYWFiOGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiMDc1OTlkMDQxOTk2M2E1ZDcyZDc4OTFiYzk1YzlmOTEwYWE3MzE0MTRiYmYwOTYwNGZjNTIwOTZjMDBmODcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a5608e1515e44a37880d7a649b38f0eb",
+      "statement": "The production build outputs to dist/restheart-cloud-starter-ng/ with browser/ for client assets and server/ for the SSR server bundle. The Express server in src/server.ts serves static files with 1-year cache, delegates other requests to AngularNodeAppEngine, and listens on PORT env var or defaults to 4000.",
+      "evidence": [
+        {
+          "resource": "repo://angular.json#L28-L36",
+          "version": "repo-lines-v1:sha256:a1f8c929e691a1cc03c5c3d2ec143939617a841dda5e9042335e4a9694af88aa:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjRmZDRjNTVhM2JjOTFlZWMxYmM2NzU1ODY5NWVkMWZkMzhhNjIxYjY4ZDE2MGY1N2M4ODhkZmFiOGQwYmRkNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyMmM0MmNkMTljNmQwM2Q4MDhjNDUyNzIwNTUyODI1YjdlYTFjNWI0OTFiMjE4NTExY2FjNzQxNWNmOWQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmZlMDM3YjVhNzIxOThlZWFkMDYxZTIzMTViODQ5ODU5ZDc2ZmY0MWFiMTI5ZGZlM2ZjN2I3OGI1N2Y0OTQwOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjMyMjRhNzZiYjE3MGY3Y2RjZTI5M2I5NzQ5NTgxNjk2ZGI3NWYyOGE5ODI1Y2RhYWUyNWIzZDE0YWQxNTdjYyJ9"
+        },
+        {
+          "resource": "repo://src/server.ts",
+          "version": "repo-file-v1:sha256:bd5c8bf370c151cc709145d6409433381f2cc6a1f3388bc3a4e1001326851ac7"
+        }
+      ]
+    },
+    {
+      "id": "claim_7fe2f18eb7cd4852ab8b8daf61195452",
+      "statement": "SSR render modes are defined in app.routes.server.ts: auth pages (login, signup, forgot/reset password) use Prerender for static HTML, while verify, invitations, and all authenticated routes use Client mode rendered in browser only.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.routes.server.ts",
+          "version": "repo-file-v1:sha256:7f2e8af4c12002a5dca807757cb23798a4cda41447b25cf290787696cb7d33f1"
+        }
+      ]
+    },
+    {
+      "id": "claim_5292fea02b284e0aa5a295ad1c7e5696",
+      "statement": "src/styles.css is structured in 5 sections: 1) Design tokens (CSS custom properties in :root and html.dark overrides), 2) Dark mode overrides, 3) Base resets (box-sizing, body, typography), 4) Shared primitives (.card, .btn-*, .form-field, .form-error, .success-msg, .muted, .badge), and 5) Auth page layout (.auth-page, .auth-card, .config-page).",
+      "evidence": [
+        {
+          "resource": "repo://src/styles.css",
+          "version": "repo-file-v1:sha256:fcf0491a5b5a1bbf83677140e3cb6ab699330fd4766ad885816b22721e5ba675"
+        }
+      ]
+    },
+    {
+      "id": "claim_8c4691255fd749e4a8dbfe6a0ea177af",
+      "statement": "Two restyling paths exist: A) Tweak the skin by changing design tokens in section 1 and adjusting skin classes in sections 3-5 (~1 hour), or B) Adopt a UI framework by deleting sections 3-5 and reskinning templates using semantic class hooks (.card, .btn-primary, .form-field, .form-error, .success-msg, .muted, .badge).",
+      "evidence": [
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:cee3bd36f8b89b69193666847d562e766fd97e30cff21da582e4e7ab79199763"
+        },
+        {
+          "resource": "repo://src/styles.css#L1-L34",
+          "version": "repo-lines-v1:sha256:7fd339309d860d416ec23432711f867f01cfb2d51f7b725fcf7e00fe6c8e81b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViMzAzZjcwZTI1MWE0MjZmNzZjMzVlYzdhM2M0OGM0YjRlNzVjYTNlZTEyMjI1MGMxYTEyMWFkZjQ1NzUxM2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmZjk4ZjRkZmEyNjcxNzJmYjcwMGUwYzdlM2IwYmM1MGQyNjU3NDQ5NDNjNTBmN2E4MTQ4ZTA3ZDRkMjZjNDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFiZWMzNDA2NmVmODUxOTU0ZmNkNmU3YTY3MjZiYTBiYWIwMDdjYWM0MTQ1NzU5YjI0N2FlZTNkODViNzlmYzMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_57e71360098b42e6aa30b7f1dc64f957",
+      "statement": "PORTING.md is the authoritative guide for porting to other frameworks. The @restheart-cloud/kit and styles.css are 100% portable, templates need syntax adaptation but keep semantic class hooks, while kit-ng, routing, guards, and SSR must be rebuilt. Two easy-to-miss behaviors: checkSession() also loads teams, and login() loads teams in the same round trip.",
+      "evidence": [
+        {
+          "resource": "repo://PORTING.md",
+          "version": "repo-file-v1:sha256:641a5fbfef6e56b14a2ae8f84943794cf13ab22ad59ee664b1fbcede08d4c266"
+        }
+      ]
+    },
+    {
+      "id": "claim_70b8bc0b905349888761de99a3f60f4f",
+      "statement": "Angular.json defines build budgets: initial bundle has 500kB warning and 1MB error limits, component styles have 4kB warning and 8kB error limits.",
+      "evidence": [
+        {
+          "resource": "repo://angular.json#L39-L51",
+          "version": "repo-lines-v1:sha256:f442bd9afbdd2b19329e1920edd5b0ae8a2c2a58fefc1258bd3d679e8b90caf7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiZTMwOTczNTE0YzViMzliY2VkOTA2MWY1NGE5YWU1NjNjZGFkNzBkOWU5MjFhNTE5NzczOTc0YTQzM2Y4ODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwYzVjYjg2NzEzMGYxZGY2ZDM5MTRjYjVlMjM2MjhmZWY2ZDkzOWMzZjUxNjE5OGZiZWZkOWI3ZmM4YWFjOTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTJiYTY1ZGQ0N2M0ZTFiZDQ2NjUwNmIzN2MzNDk3M2Q3ZjEwZmViMTRhNWMxMTMyYTRlMTAwZDI2MTc2ZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiMmQ0YjEwNGZkYWJiZjBkMGQ5NTAwYmJhNWFmYmZiYzNlMzc4ZmIzNTUyYjhlNzA1ZDIzNGUyODliYzhmODYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_53fbec8bb9df46d184425e8ff1594701",
+      "statement": "Common issues include: 'Connect your service' screen when apiUrl is empty or not *.restheart.com, 403 errors when feature flags don't match server toggles, empty team UI when checkSession()/login() don't load teams, token expiry with 15-minute TTL and silent refresh at ~80%, and SSR breaks with ThemeService due to localStorage/document access.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.html",
+          "version": "repo-file-v1:sha256:fcfb3fcef9b8b22fdb94ff89645d9de42c8ccb5faffee45156940d9a022ac189"
+        },
+        {
+          "resource": "repo://src/environments/environment.dev.ts",
+          "version": "repo-file-v1:sha256:63cb6dd570a403f69861e86c6583063a653ac922b04f0866aa4377f66ffb269f"
+        },
+        {
+          "resource": "repo://src/environments/environment.ts",
+          "version": "repo-file-v1:sha256:9a9c1c9fa3634477ea3e660d7a343e259a9a9b8105da600b6d2b48c04532915c"
+        }
+      ]
+    },
+    {
+      "id": "claim_9cb3dd798cb34ed5850702fb3b9070f7",
+      "statement": "Change navigation guidance covers: environment changes (start with environment.ts files, check app.routes.ts for feature flags), SSR changes (start with server.ts, check app.routes.server.ts), CSS theming changes (start with styles.css, check page-specific CSS), and build/deployment changes (start with package.json and angular.json, check build budgets).",
+      "evidence": [
+        {
+          "resource": "repo://angular.json",
+          "version": "repo-file-v1:sha256:56c8e065a9541cef2344859ff3a78dec5f0df4188e5f34e291e859c8e185312d"
+        },
+        {
+          "resource": "repo://package.json",
+          "version": "repo-file-v1:sha256:36943c5f3f3cada848f5a256cbb0633331b784b4647f3cefdb17ee3a9f6e1491"
+        },
+        {
+          "resource": "repo://src/app/app.routes.server.ts",
+          "version": "repo-file-v1:sha256:7f2e8af4c12002a5dca807757cb23798a4cda41447b25cf290787696cb7d33f1"
+        },
+        {
+          "resource": "repo://src/environments/environment.dev.ts",
+          "version": "repo-file-v1:sha256:63cb6dd570a403f69861e86c6583063a653ac922b04f0866aa4377f66ffb269f"
+        },
+        {
+          "resource": "repo://src/environments/environment.ts",
+          "version": "repo-file-v1:sha256:9a9c1c9fa3634477ea3e660d7a343e259a9a9b8105da600b6d2b48c04532915c"
+        },
+        {
+          "resource": "repo://src/server.ts",
+          "version": "repo-file-v1:sha256:bd5c8bf370c151cc709145d6409433381f2cc6a1f3388bc3a4e1001326851ac7"
+        },
+        {
+          "resource": "repo://src/styles.css",
+          "version": "repo-file-v1:sha256:fcf0491a5b5a1bbf83677140e3cb6ab699330fd4766ad885816b22721e5ba675"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-28T16:45:54.291Z"
+  }
+}

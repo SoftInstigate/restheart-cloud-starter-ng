@@ -1,9 +1,55 @@
 ---
 type: Testing
 title: Testing Guidance
-description: Manual test checklist, automated test status, and what to test when changing key areas of restheart-cloud-starter-ng.
-tags: [testing, qa, manual, checklist]
-resource: /TEST-CASES.md
+description: Manual test checklist, automated test status, what to test when changing key areas, and Browser DevTools verification guidance for restheart-cloud-starter-ng.
+tags: [testing, qa, manual, checklist, devtools, vitest]
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-28T16:45:54.291Z
+sources:
+  - id: openwiki-source-73378d4ee3f791429188ddb5
+    resource: repo://angular.json
+  - id: openwiki-source-5b54a58d1b51cd490b0e7162
+    resource: repo://package.json
+  - id: openwiki-source-4dcb96c57cd6fc12d9eb28a5
+    resource: repo://src/app/app.routes.server.ts
+  - id: openwiki-source-407c70ba325b6f9e6aa4707e
+    resource: repo://src/app/app.routes.ts
+  - id: openwiki-source-46765014c454f37f94d95d13
+    resource: repo://src/app/app.spec.ts
+  - id: openwiki-source-9e59c2fa2727aea99ec881eb
+    resource: repo://src/app/pages/account/account.spec.ts
+  - id: openwiki-source-c848f08590912d99d95967d9
+    resource: repo://src/app/pages/auth/forgot-password/forgot-password.ts
+  - id: openwiki-source-6be6d52bb1ede5616ee2e308
+    resource: repo://src/app/pages/auth/login/login.spec.ts
+  - id: openwiki-source-136a04e418a9969c28b1c30f
+    resource: repo://src/app/pages/auth/login/login.ts
+  - id: openwiki-source-1153b336967cba65b87d1df6
+    resource: repo://src/app/pages/auth/oauth-buttons/oauth-buttons.ts
+  - id: openwiki-source-de882d521845822887c56b3b
+    resource: repo://src/app/pages/auth/reset-password/reset-password.ts
+  - id: openwiki-source-cc2a121090704e17ef477a1b
+    resource: repo://src/app/pages/auth/signup/signup.ts
+  - id: openwiki-source-3815a7c2c47aef567cc71dbc
+    resource: repo://src/app/pages/auth/verify/verify.ts
+  - id: openwiki-source-4ee5b369bfab7a3e360fd7bd
+    resource: repo://src/app/pages/invitations/accept/accept.spec.ts
+  - id: openwiki-source-0c503ef6a22fe483e758a9db
+    resource: repo://src/app/pages/invitations/accept/accept.ts
+  - id: openwiki-source-e39dc4acde9bdf438bfa59ab
+    resource: repo://src/app/pages/shell/shell.spec.ts
+  - id: openwiki-source-a0abfed3f48fb645e980c9ea
+    resource: repo://src/app/pages/teams/detail/team-detail.ts
+  - id: openwiki-source-eaae96b81373abab97667f4f
+    resource: repo://src/environments/environment.ts
+  - id: openwiki-source-d9b845a7425932c3767a237e
+    resource: repo://src/server.ts
+  - id: openwiki-source-ff8f527e585bb7a131d1ff75
+    resource: repo://TEST-CASES.md
+  - id: openwiki-source-cfec35e61a853579c60d6d5d
+    resource: repo://tsconfig.spec.json
+generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
 ---
 
 # Testing Guidance
@@ -12,9 +58,30 @@ resource: /TEST-CASES.md
 
 **No automated E2E suite exists.** All flows are verified by hand using the checklist in [`TEST-CASES.md`](../TEST-CASES.md).
 
-**Unit tests:** minimal — all spec files (`app.spec.ts`, `login.spec.ts`, `signup.spec.ts`, `verify.spec.ts`, `forgot-password.spec.ts`, `reset-password.spec.ts`, `oauth-buttons.spec.ts`, `accept.spec.ts`, `account.spec.ts`, `shell.spec.ts`) only verify component creation. No behavioral tests.
+**Unit tests:** minimal — all spec files only verify component creation. No behavioral tests exist. The 10 spec files are:
 
-**Test runner:** Vitest (configured in `package.json`), run via `ng test`.
+| Spec file | Component |
+|---|---|
+| `src/app/app.spec.ts` | `App` |
+| `src/app/pages/auth/login/login.spec.ts` | `Login` |
+| `src/app/pages/auth/signup/signup.spec.ts` | `Signup` |
+| `src/app/pages/auth/verify/verify.spec.ts` | `Verify` |
+| `src/app/pages/auth/forgot-password/forgot-password.spec.ts` | `ForgotPassword` |
+| `src/app/pages/auth/reset-password/reset-password.spec.ts` | `ResetPassword` |
+| `src/app/pages/auth/oauth-buttons/oauth-buttons.spec.ts` | `OauthButtons` |
+| `src/app/pages/invitations/accept/accept.spec.ts` | `Accept` |
+| `src/app/pages/account/account.spec.ts` | `Account` |
+| `src/app/pages/shell/shell.spec.ts` | `Shell` |
+
+Each spec follows the same pattern: configure `TestBed` with `provideRouter([])` and a mock `RH_AUTH_CONFIG`, then assert `expect(component).toBeTruthy()`. No form submission, navigation, guard, or HTTP behavior is tested.
+
+**Test runner:** Vitest via `@angular/build:unit-test` builder (configured in `angular.json`). Run with:
+
+```bash
+ng test
+```
+
+The `tsconfig.spec.json` includes `vitest/globals` types, so Vitest matchers and lifecycle hooks are available without explicit imports.
 
 ## Manual testing checklist
 

@@ -4,6 +4,19 @@ title: Source Map
 description: File-by-file guide to the restheart-cloud-starter-ng repository, organized by domain area.
 tags: [source-map, navigation, files]
 resource: /src/
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-28T16:45:54.291Z
+sources:
+  - id: openwiki-source-cec027055a927c253ba22cff
+    resource: repo://rhc.setup.consents.ts
+  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
+    resource: repo://rhc.setup.ts
+  - id: openwiki-source-76b992238575041d25a8d7ba
+    resource: repo://src/app/consents-gate.ts
+  - id: openwiki-source-3629f9e95f35cf558c779f38
+    resource: repo://src/app/consents.ts
+generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
 ---
 
 # Source Map
@@ -105,6 +118,23 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 | File | Purpose |
 |---|---|
 | [`src/app/pages/home/home.ts`](../src/app/pages/home/home.ts) | **Placeholder showcase** — displays feature list driven by `environment.features`, plus a "Fetch your data" demo section showing how to use `auth.api()` for authenticated API calls. Replace with your app's landing content. |
+
+## Consents gate
+
+| File | Purpose |
+|---|---|
+| [`src/app/consents.ts`](../src/app/consents.ts) | Global signal `consentsBlocked` — raised on any `451` response from the service. Passed to `provideRhAuth` as `config.onError` during bootstrap. |
+| [`src/app/consents-gate.ts`](../src/app/consents-gate.ts) | Overlay component — covers the app with an acceptance form while the API answers `451`. Sits outside the router outlet so it renders even when `authGuard` blocks navigation. Calls `auth.acceptConsents()` then reloads. |
+| [`src/app/consents-gate.html`](../src/app/consents-gate.html) | Template with two checkboxes (ToS + Privacy Policy) gating the accept button. |
+
+## Setup scripts
+
+| File | Purpose |
+|---|---|
+| [`rhc.setup.ts`](../rhc.setup.ts) | Declarative setup for the accounts plugin — installs the plugin, configures feature flags (derived from `environment.dev.ts`), sets Google OAuth credentials if enabled, and adds the app origin to the CORS allowlist. Run with `rhc setup --srv <srvId>`. |
+| [`rhc.setup.consents.ts`](../rhc.setup.consents.ts) | Extends `rhc.setup.ts` with the consents gate — imports the accounts steps, then adds a user schema with `latestConsents`/`consents` fields, a permission allowing users to PATCH their own consents, JWT claims for the two version strings, and a Guards rule that blocks users who haven't accepted the current ToS/Privacy Policy with HTTP 451. |
+
+The two setup files share one definition of the accounts steps (`rhc.setup.ts` exports them; `rhc.setup.consents.ts` spreads them). The consents file centralizes `TOS_VERSION` and `PP_VERSION` so bumping them and re-running the setup is the only action needed to publish new terms — the server stamps the versions and the client never knows what they are.
 
 ## Specs and documentation
 

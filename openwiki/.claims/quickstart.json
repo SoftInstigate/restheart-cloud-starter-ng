@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f7b15133c0d39e6e2942c0c0c76634f8fb44863b57b6468c973dfa20602a76da",
+  "claims": [
+    {
+      "id": "claim_b2e21d58823c4fc7be8063a4812231ef",
+      "statement": "The app is built on @restheart-cloud/kit-ng, which provides RhAuthService (reactive wrapper), authGuard/publicGuard, and an HTTP interceptor that attaches the bearer token and clears the session on 401/expiry.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L23-L23",
+          "version": "repo-lines-v1:sha256:dacee1f5ae5187a243fb1ace45d2defaba85eb0978531e1846e7ca1eb352aba4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGFjZWUxZjVhZTUxODdhMjQzZmIxYWNlNDVkMmRlZmFiYTg1ZWIwOTc4NTMxZTE4NDZlN2NhMWViMzUyYWJhNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGFjZWUxZjVhZTUxODdhMjQzZmIxYWNlNDVkMmRlZmFiYTg1ZWIwOTc4NTMxZTE4NDZlN2NhMWViMzUyYWJhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2JiMGMwNmQwMzJmZmE1NTNlZGJmZDUxOGEwNGExYzZjODljYmQ4N2I2ZDE1YTExZTlhMzdlMjJlNzIxYTM4YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZThlOWI5NWM3NGQ1MTM4MjQwOTVkYmNiZTU3NzUzN2I0Yjc0ZDJjNDg1ZGI0ZmU1MTkyNGU1NmU1Y2EwNTMxNCJ9"
+        },
+        {
+          "resource": "repo://src/app/app.config.ts#L3-L3",
+          "version": "repo-lines-v1:sha256:ba5ab5096269d4ca157eb3375d3bd5e3628f51f9008c3cfaaf18b18fc30e3f5e:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmE1YWI1MDk2MjY5ZDRjYTE1N2ViMzM3NWQzYmQ1ZTM2MjhmNTFmOTAwOGMzY2ZhYWYxOGIxOGZjMzBlM2Y1ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmE1YWI1MDk2MjY5ZDRjYTE1N2ViMzM3NWQzYmQ1ZTM2MjhmNTFmOTAwOGMzY2ZhYWYxOGIxOGZjMzBlM2Y1ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWVkYTdjNjA2MGJjYjdiZWY5ZjA4MTQyMjYzMDlkMTNkNmE1MmU1MmFjZDc5MWY5NmNlNzNhNTY5MmUwMzFlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzY1NmYyZmJjZDNkOGU2NWVkMDgyOTJmNmE3MzIyZThmZGM5ZmI4YTk5NmYyZGVhZmZjMDg0YmZkYWMwODI0NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b5917a32c424392befeee416c69c790",
+      "statement": "The starter includes signup/login/logout (email/password and OAuth), email verification, password reset, team invitations with three-way branching, team switcher, authenticated shell, SSR for public routes, account management, consents gate, 'Connect your service' screen, dark/light mode, and a demo fetch feature.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.html#L3-L62",
+          "version": "repo-lines-v1:sha256:bb1d80bfb07b0ff0b76f7dbc422cd753d7ebabb4c586c66df42283baa6645a33:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/app/consents-gate.ts",
+          "version": "repo-file-v1:sha256:311d127f42a8aea514827e2215efd00f86cfe55548a97204aff94cf329490a8e"
+        },
+        {
+          "resource": "repo://src/app/pages/auth/login/login.ts",
+          "version": "repo-file-v1:sha256:6549b2f883e98f53f5dbcf0df1ed615616e687b8881f7893520d7b382776d3a1"
+        },
+        {
+          "resource": "repo://src/app/pages/auth/signup/signup.ts",
+          "version": "repo-file-v1:sha256:64e1cebe65dbf0e843d99d1fd94c8b5fb504eb4fe57d6c33454ee56ec016fec0"
+        },
+        {
+          "resource": "repo://src/app/pages/home/home.ts#L42-L60",
+          "version": "repo-lines-v1:sha256:2f50feb3c2acddda9f944ab8c9fbfcaf929973c5be39489f268d5d9df25c1c75:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyMWYyNWE0ZmYxMzBlYTU5MTBmNWZmYThiMTM4YWQ0M2VmZmUyYzExOWQ1MjhhZmVjN2NkZTQ4NDdmM2M0ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjNDdkMTUzMDNkMGY4MmZjZTE3YmJiZTFiZmE2MzM2YTdjYTQxNWExNzQwOWNjYjRjZTFlOWJlYjAyNWZlYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkNjEzOTYwYzk5ZjIyN2M5NmZlMDhmZmM4OTRmNzU1ZDc0YmNhZjgyM2MyOGM4NzQ0Y2RkMjEyZTc5MzBjMzkifQ"
+        },
+        {
+          "resource": "repo://src/app/pages/invitations/accept/accept.ts",
+          "version": "repo-file-v1:sha256:ed28347efa2de0e5632518d4c737b94e865f6e8fc4f16220d43b18fcd5c8ddb0"
+        }
+      ]
+    },
+    {
+      "id": "claim_ea28cc4ffc6c4109bbb11bf78aae473e",
+      "statement": "Quick setup requires Node.js 18+, a RESTHeart Cloud service, and Angular CLI. The four steps are: clone and install, point to service (edit environment.dev.ts), run rhc setup to configure the service, and start with ng serve.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L12-L78",
+          "version": "repo-lines-v1:sha256:c202c4575a784cd31dd698299747dedfea1d701e005c383eda5e0f13f6ffb465:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDVhZDY1YTljMWJhZjBlM2VkMGE2NTM5MThhMDQxZWI4NmEwYjA1ZWIwODZlMDAxNGFmZGZiYWQwNmE3NTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiOTBkZGNiZTJiZTEwMjIwNTVhMGVjNzBkZTViNzNiNDVlOTJiMDJlZjFjOGNkNmMwY2ViOWJkNTc3OWVjNTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiZmU3ZTE3ODc1MGI3NzJjMTEyNzk5MDc5M2JmMDJjNTI1NmMzMWU5MDNjYzc0ZWUyYWQ3YjY2YmZkNzZiZDEifQ"
+        },
+        {
+          "resource": "repo://package.json#L1-L11",
+          "version": "repo-lines-v1:sha256:6736e0b9423054353ab5ae0fb3a5053e6e281c5e61cfa292877432f730d772d3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2ZmFkMTkyZmY0M2I5NDBmMjY1OWM1N2Y1YzJkNjJlNDQxMjNmYTVmNzQzOWQxMWNiNjBmMjNkZGIxYjA2YjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bcd5ae7fb5d34c7b82a5f5ede1a8aeb7",
+      "statement": "The rhc setup tooling (rhc.setup.ts) installs the accounts plugin, configures feature flags derived from environment.dev.ts, sets OAuth credentials if enabled, and adds the app origin to the CORS allowlist. It follows a check/apply pattern for idempotent runs.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts#L1-L100",
+          "version": "repo-lines-v1:sha256:5e418de68e2aaa9a3e0f44538e488129b13f194fdab8a99023311cffa74ab410:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWYyMmNmMDczMjU5MmMyNDcxNDFjYmU2MWVmYTExMDEyNjEyZjVhMzEyMmI5YWY5YmJhZjUyZjU3MjRkMTk0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIxNjFiNmQ5OTViNWY5MmRmYjI3YTljMWMwMTM2NmM1Y2ZhMGJkY2QwZDg5YWQ1ODgyOGNiM2JhZTUxMzFkZjNkIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4ZmU1Mzc1Yjk2ZWNjM2EwYjJkYzUxOTE2NWI0NjQzYjU3NDUzYWRkNzA3NTI5YjU3ZTY5MTkyY2RiYzRiNWIyIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_43d42ca7225344f0b28b6a429ec11dbf",
+      "statement": "The consents gate can be enabled with an alternate setup file (rhc.setup.consents.ts) that extends the base setup with a user schema, permission for users to PATCH their own consents, JWT claims for version strings, and a Guards rule that blocks users who haven't accepted current ToS/Privacy Policy with HTTP 451.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.consents.ts#L1-L100",
+          "version": "repo-lines-v1:sha256:d95e7ee7bfe1673c7882c1da768719a0a16eb9c8b9491c2b4785713fd72e4050:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWYyMmNmMDczMjU5MmMyNDcxNDFjYmU2MWVmYTExMDEyNjEyZjVhMzEyMmI5YWY5YmJhZjUyZjU3MjRkMTk0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJiOTc4ZTI1MDNiOGNmMzdhMDZmN2Q2ZjBhM2E2YjZmZTM1NjkxZmJjYWI1MGI4Nzc1Y2FiNmZhYmM3MWM1OTJiIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI3OWM5Njg2N2M3OTBmZGFhMDM4YTdiNGU3MjA4MTBlNGE5MjVhYjg0ZTkxZThkMmE4Njg5YmZkMDg3MjE2ODFkIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_63f9d3b3b26d4770beaf3dd45e469ed6",
+      "statement": "The app detects whether apiUrl points to a valid *.restheart.com service. If not, it shows a 'Connect your service' screen instead of the full app. This prevents route guards from running against a non-existent backend.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.config.ts#L15-L15",
+          "version": "repo-lines-v1:sha256:698acaa488ef0acd71f0cedf3bf6b4dbf28eff5b7715a2c36aaa54e1ea7957e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjk4YWNhYTQ4OGVmMGFjZDcxZjBjZWRmM2JmNmI0ZGJmMjhlZmY1Yjc3MTVhMmMzNmFhYTU0ZTFlYTc5NTdlOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjk4YWNhYTQ4OGVmMGFjZDcxZjBjZWRmM2JmNmI0ZGJmMjhlZmY1Yjc3MTVhMmMzNmFhYTU0ZTFlYTc5NTdlOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzdlMzg3MDI1NTUzM2EwYWIzNzI1NDhhY2M4YTk1YzFiYmJmYjgyODZhZmQxZTE1OTc2MzEzZjVkZTk5ZmVlNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODZlODEwNDQyYTU5NjhlYTRmYTIyMjZiZDA2ZDNlMjUxOTYyYWU3MTJhNzBkYmNkZGI0NDFkNGY0ZmJkNjU2YSJ9"
+        },
+        {
+          "resource": "repo://src/app/app.html#L3-L62",
+          "version": "repo-lines-v1:sha256:bb1d80bfb07b0ff0b76f7dbc422cd753d7ebabb4c586c66df42283baa6645a33:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/app/app.ts#L48-L48",
+          "version": "repo-lines-v1:sha256:eb13795f45becdb686c85330629788912d3167258e545cc276c089bbefe5f749:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWIxMzc5NWY0NWJlY2RiNjg2Yzg1MzMwNjI5Nzg4OTEyZDMxNjcyNThlNTQ1Y2MyNzZjMDg5YmJlZmU1Zjc0OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWIxMzc5NWY0NWJlY2RiNjg2Yzg1MzMwNjI5Nzg4OTEyZDMxNjcyNThlNTQ1Y2MyNzZjMDg5YmJlZmU1Zjc0OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjczZjQ2M2Q0MjhmZGU3ZTgxMWNiYzM5YTBlMDU4ZDViNTBkYzMxOGRlYTdkMjA1NjlkYjcxMmFlOTAwOWM1OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWY5ZmVkY2EwNjQ5NTFhNzgzYzUwYTZiMmYyMDQ3OTYzOTc1YmIzODdhZTAwNTcyZWUxYzkzNGY5NzAxNWM1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e6372ebf46134772869598f512b3ef71",
+      "statement": "The route guard system uses authGuard (protects authenticated routes, redirects to /auth/login if no session), publicGuard (protects auth pages, redirects into app if already signed in), and /invitations/accept is deliberately unguarded to work for signed-out invitees, signed-in users, and new accounts.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.routes.ts#L23-L112",
+          "version": "repo-lines-v1:sha256:3fe08fab97120923ce8e39ce2975f2e76c596193fa1827dc0dce898edd453c33:eyJzZWxlY3RlZExpbmVDb3VudCI6OTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiZTNhZTkzMmQ2OThmOGVhODlmZmI4NzA2NDI3MTNhZGNkNTAwYjVlMjk3NmU3ZWRhOGMwZTEzYzZlYzhiYzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwMmQyYzBkNmRjNWU3NGQ5MmZhMTRiOTFkYmVhMjY0MDkwYmViMzVmZGI5MTg4ZDliMzQxMTgxZGNlOWY0Y2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4ZDhiNjIxNGYzNzBiYTI2MzRjYWU1ODEwMWRjYTk5YTkzN2EzYjg4ODc1OTExYWI0YWM0M2YyNWZkMWZmNjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_12878d1240e142d58a44dd408e6b3057",
+      "statement": "Feature flags in environment*.ts must match the service's Sign-up Mgmt → Features toggles. A flag that's off removes both the route and the UI that links to it. The rhc setup tooling reads these flags and configures the service to match.",
+      "evidence": [
+        {
+          "resource": "repo://rhc.setup.ts#L57-L63",
+          "version": "repo-lines-v1:sha256:685bf55d5cec1e11a0d85675b9f565d6cda8136fbbf7e0adaf0efd9c168f9e6b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTQ4MmE4YTU3Mzk5ZjI1NjVkMzNmZWUwNjE1NmE1OTI4ZmRmMGMyNjQzNTMyZDg5ZDdjYTJjMTBhMWQ0MGJlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmUwYjdjNjAyNTliNDVlOWZlOGZlNDczZDA0ZDM2OWY0MjU3NmQ4MTkyYWEyOGY5YWZhNDM1MTk4OGM3YmE3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjAyNjFhODEzOGZkNDRjZDQxZmE4ZTkwY2ZhMzIwZGFhZjE5MjEyZmExMzIzZDVhY2Q2YWUzN2FkMWIyOTRlYiJ9"
+        },
+        {
+          "resource": "repo://src/app/app.routes.ts#L21-L21",
+          "version": "repo-lines-v1:sha256:94653facfa422aa108ac31aa5a02a920779a3603b928ebb70024c9ecc54aa65a:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTQ2NTNmYWNmYTQyMmFhMTA4YWMzMWFhNWEwMmE5MjA3NzlhMzYwM2I5MjhlYmI3MDAyNGM5ZWNjNTRhYTY1YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTQ2NTNmYWNmYTQyMmFhMTA4YWMzMWFhNWEwMmE5MjA3NzlhMzYwM2I5MjhlYmI3MDAyNGM5ZWNjNTRhYTY1YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjRiMTJmZDg2NmUxMDliZTU3YzY0ZmRkMDBkYzkwZmZkMTU5MzQxMGI3YmYzMTBmYmVkNjc4N2U1ZjM5MGUzMyJ9"
+        },
+        {
+          "resource": "repo://src/environments/environment.dev.ts#L11-L21",
+          "version": "repo-lines-v1:sha256:1e64f419ca73ce0eab8024be3005625567a7b0da776af84fa86a7e3d5d0977a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViYzUyZDFhNDY2OGFkMTg1NTU3YThhZDRhZmZjNTM4ODU3ZWU5ODZiNDljMjhkMmIxY2RkYjM5NDliZDcwMTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmMjE5NGI3YWUxOTdmMThhOWMxNmMxY2MxNTliMGJkNTAyZGVhNTkxMzlhMGY3ZDNhNmFjNzExNTliYWE3MzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2370d7f25f4c4137a35bb0cbb9897496",
+      "statement": "Existing documentation includes README.md (setup, structure, swap map), TEMPLATE_API.md (template bindings), PORTING.md (framework-neutral behaviour spec), TEST-CASES.md (manual testing checklist), and specs/done/ (completed specs).",
+      "evidence": [
+        {
+          "resource": "repo://PORTING.md",
+          "version": "repo-file-v1:sha256:641a5fbfef6e56b14a2ae8f84943794cf13ab22ad59ee664b1fbcede08d4c266"
+        },
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:cee3bd36f8b89b69193666847d562e766fd97e30cff21da582e4e7ab79199763"
+        },
+        {
+          "resource": "repo://TEMPLATE_API.md",
+          "version": "repo-file-v1:sha256:a087d4874d1267240807d7012c665e85e8e6ec10d796cd1a59a9e207aa5a30f8"
+        },
+        {
+          "resource": "repo://TEST-CASES.md",
+          "version": "repo-file-v1:sha256:c2f514e9bd8b95e5d3674bf21b54f3c7b551b1259532d6e2cce81cb3ff6d9ac6"
+        },
+        {
+          "resource": "repo://specs/done/account-team-management.md",
+          "version": "repo-file-v1:sha256:1b567e6ef38612d1c4bb69ce48c59c74a7ef45c710036217d967deb489325318"
+        },
+        {
+          "resource": "repo://specs/done/ux-improvements.md",
+          "version": "repo-file-v1:sha256:b8f360dc3b56f97ee97ff46a5f8d7f6e11d6f4abb5ead89b18476c4bf02779af"
+        }
+      ]
+    },
+    {
+      "id": "claim_6096413fe8ab453285f8eb3d092fd25d",
+      "statement": "Key dependencies are @restheart-cloud/kit (TypeScript auth logic), @restheart-cloud/kit-ng (Angular adapter), @restheart-cloud/cli (dev tooling for rhc setup), @angular/core ^21.2, @angular/ssr ^21.2, and express ^5.1.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L14-L27",
+          "version": "repo-lines-v1:sha256:30b3e0b45a0ea0b682f7678718513f778c22d3423eaf2429da449049dc0c8b48:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhM2I0NjlkOWUwOTc1NzIyNDY2NjczNGM5ZWY3YjI1NGQ4ODUzNGY1ZDViYjcwOTg5NjA4MDVjNTUzZGMzMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5ZGNkYTllYjQ4MzgyNTA5YzVlOTUxNTVhY2E4ZmI4ZjFmNzI4ZTlhNmY2Y2RlMWYwNDk1ZjgyNTI1YjZiYTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhkNzUzYjZiY2ZkMjUxZTUwMmFjZDA1YjI0NGZkYTdkYTBjOThlYzdkODJjOGU0ZTg2ZmY1MWUxZWIxMGQxMjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7c884126ba0b43dfb7fcfe79aebdadf7",
+      "statement": "The task routing table maps 15 change areas (auth flows, team management, account management, routing/guards, SSR/CSR split, feature flags, environment config, consents gate, CSS theming, component styling, build/deploy, dependencies, testing, new API endpoints, service setup, porting) to relevant wiki pages, source entry points, important symbols, focused tests, and minimal validation commands.",
+      "evidence": [
+        {
+          "resource": "repo://src/app/app.routes.ts",
+          "version": "repo-file-v1:sha256:0c9af819259911b358a6a3eeb17b7887798d9d81f547f7c0cd5f4335d58bfd06"
+        },
+        {
+          "resource": "repo://src/app/consents-gate.ts",
+          "version": "repo-file-v1:sha256:311d127f42a8aea514827e2215efd00f86cfe55548a97204aff94cf329490a8e"
+        },
+        {
+          "resource": "repo://src/app/pages/account/account.ts",
+          "version": "repo-file-v1:sha256:472766dc318cc49850804c08d4add17428c1d1cb72c49bdba188095126e8abba"
+        },
+        {
+          "resource": "repo://src/app/pages/auth/login/login.ts",
+          "version": "repo-file-v1:sha256:6549b2f883e98f53f5dbcf0df1ed615616e687b8881f7893520d7b382776d3a1"
+        },
+        {
+          "resource": "repo://src/app/pages/teams/teams.ts",
+          "version": "repo-file-v1:sha256:7177206335b8fee5c6099d0eb15c77fffb8d08b41d07d66d1ae7b74a5d5ca6f6"
+        },
+        {
+          "resource": "repo://src/styles.css",
+          "version": "repo-file-v1:sha256:fcf0491a5b5a1bbf83677140e3cb6ab699330fd4766ad885816b22721e5ba675"
+        }
+      ]
+    },
+    {
+      "id": "claim_87a6295798504b83abfd7ffd095db0b1",
+      "statement": "The backlog includes automated E2E tests (currently manual only) and team list refresh after create (auth.createTeam() doesn't update auth.teams() yet).",
+      "evidence": [
+        {
+          "resource": "repo://TEST-CASES.md",
+          "version": "repo-file-v1:sha256:c2f514e9bd8b95e5d3674bf21b54f3c7b551b1259532d6e2cce81cb3ff6d9ac6"
+        },
+        {
+          "resource": "repo://src/app/pages/teams/new/new-team.ts#L34-L34",
+          "version": "repo-lines-v1:sha256:c5b2bdd830bb68846895e2657f4107287b4c50b39c8a225e8d653300fb386bad:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzViMmJkZDgzMGJiNjg4NDY4OTVlMjY1N2Y0MTA3Mjg3YjRjNTBiMzljOGEyMjVlOGQ2NTMzMDBmYjM4NmJhZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzViMmJkZDgzMGJiNjg4NDY4OTVlMjY1N2Y0MTA3Mjg3YjRjNTBiMzljOGEyMjVlOGQ2NTMzMDBmYjM4NmJhZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjU4MWRhZDNhOTM3ZjUzMThjMWQ3MGQyZmQzMDE3NDhmNDNmNWFhNzcwZTFkMzZhYzJhYTI0NDg3NTAyNmQ1YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzBmMmJlMmI3OWViYmM1NmFhZGQ5YmIzOWIzYzZiMWE1YzVmODNkMjk2NTFhYzU3YWNlMGU5ZjBmZGZlM2Q1MCJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-28T16:45:54.291Z"
+  }
+}

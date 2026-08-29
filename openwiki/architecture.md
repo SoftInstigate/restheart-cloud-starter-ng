@@ -1,9 +1,43 @@
 ---
 type: Architecture
 title: Architecture Overview
-description: Angular SSR architecture, dependency layers, routing/guards, auth flow, and fragment token handling for restheart-cloud-starter-ng.
-tags: [architecture, angular, ssr, auth, routing]
-resource: /src/app/app.config.ts
+description: Angular SSR architecture, dependency layers, routing/guards, auth flow, fragment token handling, and the consents gate mechanism for restheart-cloud-starter-ng.
+tags: [architecture, angular, ssr, auth, routing, consents]
+verified:
+  - by: openwiki/0.4.3
+    at: 2026-08-28T16:45:54.291Z
+sources:
+  - id: openwiki-source-53b198bca9fa0abbe11c24a6
+    resource: repo://src/app/app.config.server.ts
+  - id: openwiki-source-1b6b17b8afa47babcf26380f
+    resource: repo://src/app/app.config.ts
+  - id: openwiki-source-d3086358408fd7acf5360013
+    resource: repo://src/app/app.html
+  - id: openwiki-source-4dcb96c57cd6fc12d9eb28a5
+    resource: repo://src/app/app.routes.server.ts
+  - id: openwiki-source-407c70ba325b6f9e6aa4707e
+    resource: repo://src/app/app.routes.ts
+  - id: openwiki-source-533e7761316e2fac327194b8
+    resource: repo://src/app/app.ts
+  - id: openwiki-source-76b992238575041d25a8d7ba
+    resource: repo://src/app/consents-gate.ts
+  - id: openwiki-source-3629f9e95f35cf558c779f38
+    resource: repo://src/app/consents.ts
+  - id: openwiki-source-04a212cd84ffc1653fb72e76
+    resource: repo://src/app/just-signed-up.ts
+  - id: openwiki-source-0980df84d522a6755217a044
+    resource: repo://src/app/pages/shell/shell.html
+  - id: openwiki-source-9fd5be7b4a86f1a62c53cab3
+    resource: repo://src/app/pages/shell/shell.ts
+  - id: openwiki-source-eaae96b81373abab97667f4f
+    resource: repo://src/environments/environment.ts
+  - id: openwiki-source-f799c5ed3f26adca6b411253
+    resource: repo://src/main.server.ts
+  - id: openwiki-source-d4189bbeecb62806cb297b5a
+    resource: repo://src/main.ts
+  - id: openwiki-source-d9b845a7425932c3767a237e
+    resource: repo://src/server.ts
+generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
 ---
 
 # Architecture Overview
@@ -50,14 +84,16 @@ flowchart TD
     K --> N["API routes, other"]
 ```
 
-The app uses Angular 21's hybrid SSR model. Routes declare their render mode in [`src/app/app.routes.server.ts`](../src/app/app.routes.server.ts):
+The app uses Angular 21's hybrid SSR model. Routes declare their render mode in `src/app/app.routes.server.ts`:
 
 | Render mode | Routes | Why |
 |---|---|---|
 | `Prerender` | `/auth/login`, `/auth/signup`, `/auth/forgot-password`, `/auth/reset-password` | Static HTML — no live data needed |
 | `Client` | `/auth/verify`, `/invitations/accept`, all authenticated routes (`/home`, `/teams/*`, `/account`) | Require live API calls or in-memory token |
 
-The SSR entry point is [`src/server.ts`](../src/server.ts) — an Express 5 app that serves static files from `/browser` and delegates all other requests to `AngularNodeAppEngine`. The server listens on `PORT` or defaults to 4000.
+The SSR entry point is `src/server.ts` — an Express 5 app that serves static files from `/browser` and delegates all other requests to `AngularNodeAppEngine`. The server listens on `PORT` or defaults to 4000.
+
+The server bootstrap is `src/main.server.ts`, which calls `bootstrapApplication(App, config, context)` using a merged config (`src/app/app.config.server.ts`) that layers `provideServerRendering(withRoutes(serverRoutes))` on top of the client `appConfig`.
 
 **Key constraint:** authenticated routes cannot be server-rendered because the bearer token lives in an in-memory signal, not in a cookie. SSR renders the public auth pages; CSR takes over once the user is authenticated.
 
@@ -96,24 +132,24 @@ sequenceDiagram
     end
 ```
 
-1. [`src/main.ts`](../src/main.ts) bootstraps `App` with [`appConfig`](../src/app/app.config.ts)
-2. `appConfig` calls `provideRhAuth({ apiBaseUrl })` — this configures the HTTP interceptor and auth service
+1. `src/main.ts` bootstraps `App` with `appConfig`
+2. `appConfig` calls `provideRhAuth({ apiBaseUrl, onError: consentsOnError })` — this configures the HTTP interceptor, auth service, and the consents error handler
 3. If `apiUrl` is not a valid `*.restheart.com` URL, no routes are provided — the app shows the "Connect your service" screen
-4. On browser load, [`App`](../src/app/app.ts) calls `consumeFragmentToken()` to capture any `#access_token=...` from the URL (returned by email verification or OAuth redirects)
+4. On browser load, `App` calls `consumeFragmentToken()` to capture any `#access_token=...` from the URL (returned by email verification or OAuth redirects)
 5. Route guards run: `authGuard` calls `checkSession()` (which also loads teams), `publicGuard` redirects signed-in users away from auth pages
 
 **Change navigation:** When modifying the bootstrap flow, start with `src/app/app.ts` for fragment token handling, then `src/app/app.config.ts` for provider configuration. Test with `ng serve` and verify the "Connect your service" screen appears for invalid URLs. For auth guard changes, check `src/app/app.routes.ts` and test with `ng test`.
 
 ## Routing and guards
 
-Defined in [`src/app/app.routes.ts`](../src/app/app.routes.ts). Two guards from `@restheart-cloud/kit-ng`:
+Defined in `src/app/app.routes.ts`. Two guards from `@restheart-cloud/kit-ng`:
 
 - **`authGuard`** — runs `checkSession()`; if no user, redirects to `/auth/login`. Also loads teams as a side effect.
 - **`publicGuard`** — inverse: if user exists, redirects into the app.
 
 `/invitations/accept` is deliberately **unguarded** — it must work for signed-out invitees, signed-in users, and people without an account.
 
-Routes are conditionally included based on feature flags from `environment.features`. A flag that's off removes the route entirely.
+Routes are conditionally included based on feature flags from `environment.features`. A flag that's off removes the route entirely. The flags are `emailRegistration`, `passwordReset`, `oauthLogin`, and `teamInvitations`; they must match the corresponding toggles on the RESTHeart Cloud service.
 
 Per-route titles use a custom `AppTitleStrategy` that appends `· RESTHeart Cloud Starter` to every title. See [Domain Concepts](domain-concepts.md#feature-flags) for the flag model.
 
@@ -153,6 +189,7 @@ stateDiagram-v2
 - `login(email, password)` — authenticates and loads teams in the same round trip.
 - `loadTeams()` — explicitly refreshes teams and updates the `teams()` signal.
 - `switchTeam(teamId)` — reissues the JWT with a new active team — no page reload needed.
+- `acceptConsents()` — records the user's acceptance of Terms of Service and Privacy Policy. Used by the consents gate.
 
 **Critical behavior:**
 - `checkSession()` also loads teams. It short-circuits to `null` with empty teams when there's no stored token (no HTTP call), otherwise fetches user then teams.
@@ -192,7 +229,7 @@ After email verification and after OAuth, the backend 302-redirects with the tok
 https://your-app/#access_token=…&token_type=Bearer&expires_in=900
 ```
 
-`consumeFragmentToken()` in [`src/app/app.ts`](../src/app/app.ts):
+`consumeFragmentToken()` in `src/app/app.ts`:
 1. Reads `#access_token=...` from the hash → calls `setToken()` + `scheduleRefresh()`
 2. Reads `?flow=signup` query param → sets the `justSignedUp` signal (one-shot, for welcome banner)
 3. Clears both from the URL bar via `history.replaceState()`
@@ -208,9 +245,52 @@ This runs once on browser load, before route guards execute.
 - The HTTP interceptor attaches the token to all API calls
 - On 401/expiry, the interceptor clears the session
 
+## Consents gate
+
+```mermaid
+sequenceDiagram
+    participant App as App Component
+    participant Auth as RhAuthService
+    participant API as RESTHeart API
+    participant Gate as ConsentsGate
+    participant User as User
+    
+    App->>Auth: checkSession on load
+    Auth->>API: GET /users/me
+    API-->>Auth: 451 Unavailable for Legal Reasons
+    Auth->>Auth: consentsOnError fires
+    Note over Auth: consentsBlocked signal set to true
+    Auth-->>App: Session restoration fails
+    Gate->>Gate: blocked signal is true
+    Gate->>User: Show overlay with ToS and Privacy checkboxes
+    User->>Gate: Accept both documents
+    Gate->>Auth: acceptConsents
+    Auth->>API: POST consents acceptance
+    API-->>Auth: Success
+    Gate->>App: Full page reload to /
+```
+
+A server-side Guards rule blocks every API request from a user who has not accepted the current Terms of Service and Privacy Policy, returning HTTP `451 Unavailable for Legal Reasons`. Because `/users/me` is among the blocked requests, the very first thing the app does on load — restoring the session — is what trips the gate.
+
+The mechanism has three parts:
+
+1. **`src/app/consents.ts`** — a plain module (not a service, because `onError` is handed to `provideRhAuth` before the injector is built) that exports a `consentsBlocked` signal and a `consentsOnError` function. The function sets the signal to `true` on any `451` status from the API.
+
+2. **`src/app/consents-gate.ts`** — a component placed in `app.html` **outside and before** `<router-outlet>`. This placement is critical: a blocked user has no session, so `authGuard` fails and navigation is cancelled — nothing inside the outlet ever renders. The gate shows a modal overlay with two checkboxes (Terms of Service and Privacy Policy), an "I accept" button, and a "Sign out" button. On acceptance it calls `auth.acceptConsents()` and does a full page reload (`window.location.assign('/')`) rather than a router navigation, because the guard already cancelled the original navigation and re-entering with a fresh token is simpler than replaying a failed one.
+
+3. **`src/app/app.config.ts`** — wires `consentsOnError` into `provideRhAuth({ onError: consentsOnError })`. The kit calls `onError` for every failure, including session restoration ones that no caller is waiting on — this is the only place that can distinguish "blocked by consents" from "simply signed out."
+
+**Key invariants:**
+- The overlay is user experience, not enforcement. Remove it with dev tools and every request still returns `451`. The rule lives on the server.
+- The client does not know which document versions are current. The server's Guards rule decides what is being accepted; bumping versions requires no change and no redeploy on the client side.
+- The `consentsBlocked` signal is a plain module-level signal, not persisted. A sign-out clears it so the next user on the same tab does not see the overlay before making a single request.
+- The "Sign out" button clears the signal and calls `auth.logout()` before redirecting to `/auth/login`.
+
+**Change navigation:** When modifying the consents gate, start with `src/app/consents.ts` for the error handler and signal, then `src/app/consents-gate.ts` for the overlay component. The template is `src/app/consents-gate.html`. Test by simulating a `451` response from the API and verifying the overlay appears, acceptance works, and sign-out clears the state.
+
 ## Page title strategy
 
-[`AppTitleStrategy`](../src/app/app.routes.ts) in `app.routes.ts` extends Angular's `TitleStrategy`. Each route declares a `title` property; the strategy prepends it with `· RESTHeart Cloud Starter`.
+`AppTitleStrategy` in `src/app/app.routes.ts` extends Angular's `TitleStrategy`. Each route declares a `title` property; the strategy prepends it with `· RESTHeart Cloud Starter`. If no title is set, just the suffix is used.
 
 ## Navigation progress
 
@@ -243,3 +323,9 @@ When making changes to the architecture, follow this guidance:
 - **Check:** `src/app/app.config.ts` for provider configuration
 - **Test with:** `ng serve` and verify "Connect your service" screen appears for invalid URLs
 - **Validation:** `ng build` succeeds, SSR server starts without errors
+
+### For consents gate changes
+- **Start with:** `src/app/consents.ts` for the error handler and signal
+- **Check:** `src/app/consents-gate.ts` and `src/app/consents-gate.html` for the overlay
+- **Test with:** Simulated `451` responses from the API
+- **Validation:** Overlay appears on `451`, acceptance reloads the page, sign-out clears the blocked signal
