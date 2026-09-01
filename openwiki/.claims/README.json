@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:a9563f92bc63f03ce1068ad63ee0fbc184d10c44d64c4836eacfdf4958ab1b95",
+  "claims": [
+    {
+      "id": "claim_b812ebe42cef4e7b898dabd9d1d7849c",
+      "statement": "The NOTES.md file contains a section titled 'OpenWiki documentation' that points to quickstart.md as the entry point for recurring project documentation.",
+      "evidence": [
+        {
+          "resource": "repo://NOTES.md#L6-L21",
+          "version": "repo-lines-v1:sha256:4a11dc36274f916c8e8e3260400e19609a1819d151c416dce43578ed9831a5c2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmNGJmOTcyY2EwMmRjYTFjNTNlOTQyNGEyMzQxNWIyZTMwYTFkMGRmMjk5ZmE2MzE3YjdhYWViZDFlMzU2Y2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhZjEwMjYwNTgzZDQzNzYxOGQzNWJmZDMyOWIxOTNjOWQxY2U2ZmJhNzExYjFlNDFhZWMxZGYwNjk2MjBiYTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYwZjZhN2JjM2M3MTRmMmMzYTE4Nzc4MjEzMDNjN2RmNjM4YTNkMjZiMWYxZDk2MDg3ZGFiZWM3YjRhOTc5N2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJlMzIyNTVkZjhmYzMwMjJlNjI1NDQ2MDA1YzNkODM2OGEyMzUyNGUzMzYwZmRjN2M4NmE0ZjMwOWNjZmQ3MzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ba9834c641ab4f388cb4e2c10e290aa2",
+      "statement": "The OpenWiki documentation system includes seven major topic pages: architecture, domain-concepts, workflows, operations, integrations, testing, and source-map.",
+      "evidence": [
+        {
+          "resource": "repo://NOTES.md#L13-L21",
+          "version": "repo-lines-v1:sha256:e7abbff32950fc636aa6ba3e2b9c00bb1b696c3dce9d38b26196d1a5b4967aa7:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2E1ZjRiODljZDkzMjMyNTdlNGY3MjljMDY3M2E2ODBiZDgyYWZjYmM2NTZiZDYxMjNmNjM3NDZiZDhhMjhhMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWFmMTAyNjA1ODNkNDM3NjE4ZDM1YmZkMzI5YjE5M2M5ZDFjZTZmYmE3MTFiMWU0MWFlYzFkZjA2OTYyMGJhNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjZjNTVjY2JiYmMyNDQ2MjdlZTYyNDEzMTFmNTg5MzE3MTIwOGZlMTBmYTcxZjU3ZjJjN2I2ZjRiNzBhNzg3ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmUzMjI1NWRmOGZjMzAyMmU2MjU0NDYwMDVjM2Q4MzY4YTIzNTI0ZTMzNjBmZGM3Yzg2YTRmMzA5Y2NmZDczMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_dec0f26f150b4d2d9be9e5f49fdbd89a",
+      "statement": "The quickstart.md file serves as the primary navigation guide, routing readers through the wiki hierarchy based on their task.",
+      "evidence": [
+        {
+          "resource": "repo://NOTES.md#L8-L11",
+          "version": "repo-lines-v1:sha256:2e7da4f8c78e2f66118bc500e64c43b39391cb79612d6ad8ed0fa28e9649ffa5:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjVkZTBlZGZhZGMyNjIyYmU5ZjBkZWM1NGUwMmY1MmY0MDc0ZTZlZWZmNDM5ZmE2MWI2YzBkZDRjZTBjNzVhNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJhZWI5MzYxZjRiOWJjMmMxYzNlZmMxOGRlZWFiMGNhY2FhMWJlMTk3YjljNDk4YTI4ZjI3NmZkNzk0MjdhMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWE1NDgwNDljN2ViZmQ1ZGY1NzEzZWQ1MmMzOTJkZDA5NTRlNTM0ZWY2ZTExNGE3MGU0MDQyODhkZjAxNjc4OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzMxYjFiMjU5MzM5NzIyZDBmODU0MzVjNzJkNmEyNzdiYTVjNDliYzNkMTZlMGI1YzMzNDcwZjY2YWJhODEwMSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-09-01T09:29:31.932Z"
+  }
+}

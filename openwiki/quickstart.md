@@ -3,9 +3,6 @@ type: Quickstart
 title: RESTHeart Cloud Starter — Angular
 description: Concise entrypoint for the restheart-cloud-starter-ng repository. Routes readers through the wiki hierarchy based on their task (exploring, building a feature, porting, restyling, testing). Includes quick setup, documentation map, task routing table, and key dependencies.
 tags: [quickstart, angular, restheart-cloud, starter]
-verified:
-  - by: openwiki/0.4.3
-    at: 2026-08-28T16:45:54.291Z
 sources:
   - id: openwiki-source-5b54a58d1b51cd490b0e7162
     resource: repo://package.json
