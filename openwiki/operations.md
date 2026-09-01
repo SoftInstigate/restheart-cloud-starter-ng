@@ -4,9 +4,6 @@ title: Operations & Runbook
 description: Build, serve, SSR deployment, environment configuration, CSS theming, porting guidance, and rhc setup tooling for restheart-cloud-starter-ng.
 tags: [operations, build, deploy, theming, porting, rhc-setup, environment, ssr]
 resource: /angular.json
-verified:
-  - by: openwiki/0.4.3
-    at: 2026-08-28T16:45:54.291Z
 sources:
   - id: openwiki-source-73378d4ee3f791429188ddb5
     resource: repo://angular.json
