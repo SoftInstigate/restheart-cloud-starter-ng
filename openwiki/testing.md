@@ -4,8 +4,8 @@ title: Testing Guidance
 description: Manual test checklist, automated test status, what to test when changing key areas, and Browser DevTools verification guidance for restheart-cloud-starter-ng.
 tags: [testing, qa, manual, checklist, devtools, vitest]
 verified:
-  - by: openwiki/0.4.3
-    at: 2026-08-28T16:45:54.291Z
+  - by: openwiki/0.5.0
+    at: 2026-09-04T08:55:25.232Z
 sources:
   - id: openwiki-source-73378d4ee3f791429188ddb5
     resource: repo://angular.json
@@ -25,6 +25,8 @@ sources:
     resource: repo://src/app/pages/auth/login/login.spec.ts
   - id: openwiki-source-136a04e418a9969c28b1c30f
     resource: repo://src/app/pages/auth/login/login.ts
+  - id: openwiki-source-9619f15bc5f12e7384c12a51
+    resource: repo://src/app/pages/auth/oauth-buttons/oauth-buttons.spec.ts
   - id: openwiki-source-1153b336967cba65b87d1df6
     resource: repo://src/app/pages/auth/oauth-buttons/oauth-buttons.ts
   - id: openwiki-source-de882d521845822887c56b3b
@@ -49,7 +51,7 @@ sources:
     resource: repo://TEST-CASES.md
   - id: openwiki-source-cfec35e61a853579c60d6d5d
     resource: repo://tsconfig.spec.json
-generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
+generated: { by: "openwiki/0.5.0", at: "2026-09-04T08:55:25.232Z" }
 ---
 
 # Testing Guidance
@@ -73,7 +75,7 @@ generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
 | `src/app/pages/account/account.spec.ts` | `Account` |
 | `src/app/pages/shell/shell.spec.ts` | `Shell` |
 
-Each spec follows the same pattern: configure `TestBed` with `provideRouter([])` and a mock `RH_AUTH_CONFIG`, then assert `expect(component).toBeTruthy()`. No form submission, navigation, guard, or HTTP behavior is tested.
+Most specs follow the same pattern: configure `TestBed` with `provideRouter([])` and a mock `RH_AUTH_CONFIG`, then assert `expect(component).toBeTruthy()`. The `OauthButtons` spec omits both the router and `RH_AUTH_CONFIG` (the component has no router dependency) and instead sets its `providers` input via `setInput()`. No form submission, navigation, guard, or HTTP behavior is tested.
 
 **Test runner:** Vitest via `@angular/build:unit-test` builder (configured in `angular.json`). Run with:
 
