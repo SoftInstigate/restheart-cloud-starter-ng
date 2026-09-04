@@ -3,9 +3,6 @@ type: Integration
 title: Integrations & Dependencies
 description: "restheart-cloud/kit, kit-ng, RESTHeart Cloud service, OAuth providers, the rhc CLI tool, and OpenWiki CI integration."
 tags: [integrations, kit, restheart-cloud, oauth, ci, cli]
-verified:
-  - by: openwiki/0.4.3
-    at: 2026-08-28T16:45:54.291Z
 sources:
   - id: openwiki-source-6d4b4e707b8d60b6ccfa3425
     resource: repo://.github/workflows/openwiki-update.yml

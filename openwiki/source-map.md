@@ -1,12 +1,10 @@
 ---
-type: Source Map
-title: Source Map
-description: File-by-file guide to the restheart-cloud-starter-ng repository, organized by domain area.
-tags: [source-map, navigation, files]
-resource: /src/
+type: "Reference"
+title: "Source Map"
+openwiki_generated: true
 verified:
-  - by: openwiki/0.4.3
-    at: 2026-08-28T16:45:54.291Z
+  - by: openwiki/0.5.0
+    at: 2026-09-04T08:55:25.232Z
 sources:
   - id: openwiki-source-cec027055a927c253ba22cff
     resource: repo://rhc.setup.consents.ts
@@ -16,8 +14,9 @@ sources:
     resource: repo://src/app/consents-gate.ts
   - id: openwiki-source-3629f9e95f35cf558c779f38
     resource: repo://src/app/consents.ts
-generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
+generated: { by: "openwiki/0.5.0", at: "2026-09-04T08:55:25.232Z" }
 ---
+
 
 # Source Map
 
@@ -63,6 +62,7 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 | [`src/app/app.config.server.ts`](../src/app/app.config.server.ts) | Merges client config with `provideServerRendering()` |
 | [`src/app/app.routes.ts`](../src/app/app.routes.ts) | Route map with lazy-loaded components, feature-flag gating, `AppTitleStrategy` |
 | [`src/app/app.routes.server.ts`](../src/app/app.routes.server.ts) | SSR render modes per route (Prerender vs Client) |
+| [`src/app/app.spec.ts`](../src/app/app.spec.ts) | Unit test — verifies `App` creates correctly with mocked auth config |
 | [`src/app/just-signed-up.ts`](../src/app/just-signed-up.ts) | Global signal — `true` for one page load after fresh signup (email or OAuth) |
 | [`src/app/oauth-url.ts`](../src/app/oauth-url.ts) | Builds redirect URL for `GET /auth/oauth/authorize/{provider}` |
 
@@ -91,6 +91,7 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 |---|---|
 | [`src/app/pages/invitations/accept/accept.ts`](../src/app/pages/invitations/accept/accept.ts) | Three-way branching: new user (set password → `activate`), logged-in user (accept directly), existing user (login then accept). Reads `email`+`token` from query params. |
 | [`src/app/pages/invitations/accept/accept.html`](../src/app/pages/invitations/accept/accept.html) | Template with `isNewUser`, `isAuthenticated`, and login branches. |
+| [`src/app/pages/invitations/accept/accept.spec.ts`](../src/app/pages/invitations/accept/accept.spec.ts) | Unit test — verifies `Accept` creates correctly with mocked auth config |
 
 ## Team management
 
@@ -105,6 +106,7 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 | File | Purpose |
 |---|---|
 | [`src/app/pages/account/account.ts`](../src/app/pages/account/account.ts) | Profile edit (first/last name) + change password. `currentPassword` is optional for OAuth users. |
+| [`src/app/pages/account/account.spec.ts`](../src/app/pages/account/account.spec.ts) | Unit test — verifies `Account` creates correctly with mocked auth config |
 
 ## Shell
 
@@ -112,6 +114,7 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 |---|---|
 | [`src/app/pages/shell/shell.ts`](../src/app/pages/shell/shell.ts) | Authenticated frame — header, nav, user menu, welcome banner, router outlet. Subscribes to router events for progress bar. |
 | [`src/app/pages/shell/shell.html`](../src/app/pages/shell/shell.html) | Layout with skip link, header (logo, nav, theme toggle, avatar menu), welcome banner, main content area. |
+| [`src/app/pages/shell/shell.spec.ts`](../src/app/pages/shell/shell.spec.ts) | Unit test — verifies `Shell` creates correctly with mocked auth config |
 
 ## Home (placeholder)
 
@@ -136,6 +139,14 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 
 The two setup files share one definition of the accounts steps (`rhc.setup.ts` exports them; `rhc.setup.consents.ts` spreads them). The consents file centralizes `TOS_VERSION` and `PP_VERSION` so bumping them and re-running the setup is the only action needed to publish new terms — the server stamps the versions and the client never knows what they are.
 
+## Static assets
+
+| File | Purpose |
+|---|---|
+| [`public/favicon.png`](../public/favicon.png) | App favicon |
+| [`public/terms.html`](../public/terms.html) | Terms of Service page — placeholder content. Served as static HTML; linked from the consents gate. |
+| [`public/privacy.html`](../public/privacy.html) | Privacy Policy page — placeholder content. Served as static HTML; linked from the consents gate. |
+
 ## Specs and documentation
 
 | File | Purpose |
@@ -145,3 +156,5 @@ The two setup files share one definition of the accounts steps (`rhc.setup.ts` e
 | [`TEST-CASES.md`](../TEST-CASES.md) | Manual testing checklist for all auth/team flows |
 | [`PORTING.md`](../PORTING.md) | Framework-neutral behaviour spec for React/Vue ports |
 | [`TEMPLATE_API.md`](../TEMPLATE_API.md) | Component surface documentation — what each template binds to |
+| [`README.md`](../README.md) | Project overview, quickstart instructions, troubleshooting |
+| [`NOTES.md`](../NOTES.md) | Detailed implementation notes — route map, class hooks, consents gate internals |

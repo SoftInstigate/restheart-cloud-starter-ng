@@ -4,8 +4,8 @@ title: Domain Concepts
 description: RESTHeart Cloud auth model, teams, invitations, tokens, feature flags, the consents gate domain model, and the SSR/CSR boundary.
 tags: [domain, auth, teams, tokens, feature-flags, consents]
 verified:
-  - by: openwiki/0.4.3
-    at: 2026-08-28T16:45:54.291Z
+  - by: openwiki/0.5.0
+    at: 2026-09-04T08:55:25.232Z
 sources:
   - id: openwiki-source-cec027055a927c253ba22cff
     resource: repo://rhc.setup.consents.ts
@@ -35,7 +35,7 @@ sources:
     resource: repo://src/environments/environment.ts
   - id: openwiki-source-146419bb9b2415894a6bd677
     resource: repo://src/styles.css
-generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
+generated: { by: "openwiki/0.5.0", at: "2026-09-04T08:55:25.232Z" }
 ---
 
 # Domain Concepts
@@ -194,7 +194,7 @@ The `justSignedUp` signal (in `src/app/just-signed-up.ts`) is:
 - **Space:** `--space-1` through `--space-8`
 - **Shape:** `--radius-sm`, `--radius`, `--radius-lg`, `--border-width`
 
-Dark mode overrides these tokens under `html.dark`. The `ThemeService` toggles the `.dark` class on `<html>` and persists to `localStorage['rh-theme']`.
+Dark mode overrides these tokens under `:root.dark`. The `ThemeService` toggles the `.dark` class on `<html>` and persists to `localStorage['rh-theme']`.
 
 ## Change navigation for domain concepts
 
