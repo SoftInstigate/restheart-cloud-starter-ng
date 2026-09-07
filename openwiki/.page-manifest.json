@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/README.md": {
+      "pageVersion": "sha256:cf536f1eaba17a1b7a6291bce4e9dd110dbf55d9550b41d796708f618cdc64b7",
+      "completedBy": "openwiki/0.5.0",
+      "completedRunId": "319e5883-a39f-4aa3-b0b2-c63256d3ed59",
+      "gitHead": "6f57d8cb94cada95e33bd3f9da8800e8a74e1eb2",
+      "sourceFingerprint": "sha256:ebfc000d6863fa071a884169dd6a309537915101bf7714341679fcd513c4eb51"
+    },
+    "/openwiki/architecture.md": {
+      "pageVersion": "sha256:e48289b8b07e0b519c732ad40132cd270b17df3ba5cbf9e566702bf8a9508b54",
+      "completedBy": "openwiki/0.5.0",
+      "completedRunId": "319e5883-a39f-4aa3-b0b2-c63256d3ed59",
+      "gitHead": "6f57d8cb94cada95e33bd3f9da8800e8a74e1eb2",
+      "sourceFingerprint": "sha256:ebfc000d6863fa071a884169dd6a309537915101bf7714341679fcd513c4eb51"
+    },
+    "/openwiki/domain-concepts.md": {
+      "pageVersion": "sha256:e381acdac6ea358038a865abfd72fe53ecb085a26b8145ac3b9a234e0ed913f9",
+      "completedBy": "openwiki/0.5.0",
+      "completedRunId": "319e5883-a39f-4aa3-b0b2-c63256d3ed59",
+      "gitHead": "6f57d8cb94cada95e33bd3f9da8800e8a74e1eb2",
+      "sourceFingerprint": "sha256:ebfc000d6863fa071a884169dd6a309537915101bf7714341679fcd513c4eb51"
+    },
+    "/openwiki/source-map.md": {
+      "pageVersion": "sha256:d1c48d1de719f36a5a5b675b1bc3dec082498f70483a9e76f0e6d66a2439ffb1",
+      "completedBy": "openwiki/0.5.0",
+      "completedRunId": "319e5883-a39f-4aa3-b0b2-c63256d3ed59",
+      "gitHead": "6f57d8cb94cada95e33bd3f9da8800e8a74e1eb2",
+      "sourceFingerprint": "sha256:ebfc000d6863fa071a884169dd6a309537915101bf7714341679fcd513c4eb51"
+    },
+    "/openwiki/testing.md": {
+      "pageVersion": "sha256:10cbd0476537d3cc882e1d807b8968663eb9d4ecb1de6cbbce577b42d56f6fe7",
+      "completedBy": "openwiki/0.5.0",
+      "completedRunId": "319e5883-a39f-4aa3-b0b2-c63256d3ed59",
+      "gitHead": "6f57d8cb94cada95e33bd3f9da8800e8a74e1eb2",
+      "sourceFingerprint": "sha256:ebfc000d6863fa071a884169dd6a309537915101bf7714341679fcd513c4eb51"
+    }
+  }
+}

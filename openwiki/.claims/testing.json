@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2040aa3c6788c8167b2cde7162371d20ecb44938e06416dc9f619f576cc20f9d",
+  "pageVersion": "sha256:10cbd0476537d3cc882e1d807b8968663eb9d4ecb1de6cbbce577b42d56f6fe7",
   "claims": [
     {
       "id": "claim_d44f8364cc8f4615b72545baeba0b9a0",
@@ -18,7 +18,7 @@
     },
     {
       "id": "claim_e2a49bee195f4834b2b41b6809abdee6",
-      "statement": "Unit tests are minimal: all 10 spec files only verify component creation via `expect(component).toBeTruthy()` with no behavioral, form submission, navigation, guard, or HTTP tests.",
+      "statement": "Unit tests are minimal: all 10 spec files only verify component creation via `expect(component).toBeTruthy()` with no behavioral, form submission, navigation, guard, or HTTP tests. Most specs configure TestBed with `provideRouter([])` and a mock `RH_AUTH_CONFIG`; the OauthButtons spec omits both and instead sets its `providers` input via `setInput()`.",
       "evidence": [
         {
           "resource": "repo://src/app/app.spec.ts#L19-L23",
@@ -31,6 +31,10 @@
         {
           "resource": "repo://src/app/pages/auth/login/login.spec.ts#L25-L27",
           "version": "repo-lines-v1:sha256:ad5cfb68508aaab158bb09be9a1959f504fdac7944c17735d3c123039302701b:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTAyZTI1ZjhiYTc5OTQzYzllMDdmYzgzZGY1YmQwZGEyNDVkNmFhMjI1ZTE4YzM2ZGIwNmFkZGE3NGE4YTIxZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjJkY2FkNmY0ZDQyYjE4MzczMTcyMzU1MTcxNjFkMTc5MWE0OGNlZGZkYzE4NzYxN2U1YTcwNWM0MWFlNTE4NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiJ9"
+        },
+        {
+          "resource": "repo://src/app/pages/auth/oauth-buttons/oauth-buttons.spec.ts#L9-L22",
+          "version": "repo-lines-v1:sha256:df8acd846f7cdf8db1b581f11d2082b6b963042425a137efcff9bb4efbc03a81:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3NWFhYjEwMmZlYThiYzY1MWViODlkMDg2M2Y0MTMyYjc3YjA2MTQ4OTE2MmVmYzhjNDBiNmY1ZWVlNGJjNzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0NmJjNWI3ZGYxYjczZWExNGJmMmFhOWM3NWM2ZmM1ZDJhNDgyYzljY2VjNDQ4OGQ2OWVhNjI0MGVkMDJmNjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
         },
         {
           "resource": "repo://src/app/pages/invitations/accept/accept.spec.ts#L25-L27",
@@ -210,7 +214,7 @@
     }
   ],
   "verification": {
-    "by": "openwiki/0.4.3",
-    "at": "2026-08-28T16:45:54.291Z"
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-04T08:55:25.232Z"
   }
 }

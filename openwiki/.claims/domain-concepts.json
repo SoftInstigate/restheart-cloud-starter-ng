@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:efd570fb4b0d54d45af8547e8dc0f8a9e0c360fbada5651eff50c81218c032f1",
+  "pageVersion": "sha256:e381acdac6ea358038a865abfd72fe53ecb085a26b8145ac3b9a234e0ed913f9",
   "claims": [
     {
       "id": "claim_d1629cfaa9c04935b09eea9372ed4b3f",
@@ -250,7 +250,7 @@
     }
   ],
   "verification": {
-    "by": "openwiki/0.4.3",
-    "at": "2026-08-28T16:45:54.291Z"
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-04T08:55:25.232Z"
   }
 }

@@ -3,9 +3,6 @@ type: Workflow
 title: Key User Workflows
 description: Step-by-step flows for signup, login, OAuth, email verification, password reset, team invitations, team management, account management, and the consents gate acceptance flow.
 tags: [workflows, auth, teams, invitations, consents]
-verified:
-  - by: openwiki/0.4.3
-    at: 2026-08-28T16:45:54.291Z
 sources:
   - id: openwiki-source-1b6b17b8afa47babcf26380f
     resource: repo://src/app/app.config.ts

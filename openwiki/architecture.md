@@ -4,8 +4,8 @@ title: Architecture Overview
 description: Angular SSR architecture, dependency layers, routing/guards, auth flow, fragment token handling, and the consents gate mechanism for restheart-cloud-starter-ng.
 tags: [architecture, angular, ssr, auth, routing, consents]
 verified:
-  - by: openwiki/0.4.3
-    at: 2026-08-28T16:45:54.291Z
+  - by: openwiki/0.5.0
+    at: 2026-09-04T08:55:25.232Z
 sources:
   - id: openwiki-source-53b198bca9fa0abbe11c24a6
     resource: repo://src/app/app.config.server.ts
@@ -37,7 +37,7 @@ sources:
     resource: repo://src/main.ts
   - id: openwiki-source-d9b845a7425932c3767a237e
     resource: repo://src/server.ts
-generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
+generated: { by: "openwiki/0.5.0", at: "2026-09-04T08:55:25.232Z" }
 ---
 
 # Architecture Overview

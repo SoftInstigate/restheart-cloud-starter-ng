@@ -1,11 +1,11 @@
 ---
 type: Documentation
 title: OpenWiki Documentation
-description: Entry point for the OpenWiki documentation system, pointing to the quickstart guide and other topic pages.
+description: Entry point for the OpenWiki documentation directory. Points to the quickstart guide and provides the documentation map linking to all topic pages.
 tags: [documentation, openwiki, quickstart, architecture, workflows]
 verified:
-  - by: openwiki/0.4.3
-    at: 2026-09-01T09:29:31.932Z
+  - by: openwiki/0.5.0
+    at: 2026-09-04T08:55:25.232Z
 sources:
   - id: openwiki-source-4e7cd7f381c92e8c5d89f5c1
     resource: repo://NOTES.md
