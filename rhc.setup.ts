@@ -29,7 +29,7 @@
  */
 import { defineSetup, step, fromEnv, isRedacted } from '@restheart-cloud/cli';
 import { isApiError } from '@restheart-cloud/cli';
-import type { AdminClient, PluginConfig } from '@restheart-cloud/cli';
+import type { AdminClient, FeatureConfig } from '@restheart-cloud/cli';
 import { environment } from './src/environments/environment.dev.ts';
 
 /** Where the app is served from, no trailing slash. */
@@ -44,8 +44,8 @@ const f = environment.features;
 const configured = (value: unknown) =>
   isRedacted(value) || (typeof value === 'string' && value.length > 0);
 
-const section = (config: PluginConfig, key: string): PluginConfig =>
-  (config[key] as PluginConfig | undefined) ?? {};
+const section = (config: FeatureConfig, key: string): FeatureConfig =>
+  (config[key] as FeatureConfig | undefined) ?? {};
 
 /**
  * The server's toggles, derived from the app's.
@@ -63,30 +63,30 @@ const features = {
 };
 
 /**
- * Install a plugin, treating "already installed" as the success it is.
+ * Install a feature, treating "already installed" as the success it is.
  *
- * The step's desired state is that the plugin is there. `409 Plugin already
+ * The step's desired state is that the feature is there. `409 Plugin already
  * installed` says it is, so failing on it reports a problem that does not
  * exist — which is exactly what a forced run does, since the apply then runs
  * against a service where the check would have said yes.
  */
-const install = async (admin: AdminClient, srvId: string, pluginId: string) => {
+const install = async (admin: AdminClient, srvId: string, featureId: string) => {
   try {
-    await admin.installPlugin(srvId, pluginId);
+    await admin.installFeature(srvId, featureId);
   } catch (err) {
     if (!isApiError(err) || err.status !== 409) throw err;
   }
 };
 
 export default defineSetup('Angular starter', [
-  step('accounts plugin installed', {
-    check: ({ admin, srvId }) => admin.isPluginInstalled(srvId, 'accounts'),
+  step('accounts feature installed', {
+    check: ({ admin, srvId }) => admin.isFeatureInstalled(srvId, 'accounts'),
     apply: ({ admin, srvId }) => install(admin, srvId, 'accounts'),
   }),
 
   step('accounts configured to match the app', {
     async check({ admin, srvId }) {
-      const config = await admin.getPluginConfig(srvId, 'accounts');
+      const config = await admin.getFeatureConfig(srvId, 'accounts');
       const current = section(config, 'features');
       return (
         config['app-name'] === APP_NAME &&
@@ -95,12 +95,12 @@ export default defineSetup('Angular starter', [
       );
     },
     async apply({ admin, srvId }) {
-      const current = await admin.getPluginConfig(srvId, 'accounts');
+      const current = await admin.getFeatureConfig(srvId, 'accounts');
       // Read-modify-write with the redaction placeholders passed straight back:
       // the server replaces the whole document and restores the stored value
       // for any field still holding one. Diffing or stripping "empty-looking"
       // fields here would write bullets over a real secret.
-      await admin.updatePluginConfig(srvId, 'accounts', {
+      await admin.updateFeatureConfig(srvId, 'accounts', {
         ...current,
         'app-name': APP_NAME,
         // Where the links in verification, reset and invitation emails point.
@@ -119,8 +119,8 @@ export default defineSetup('Angular starter', [
     ? [
         step('google oauth credentials', {
           async check({ admin, srvId }) {
-            const oauth = section(await admin.getPluginConfig(srvId, 'accounts'), 'oauth');
-            const google = (oauth['google'] as PluginConfig | undefined) ?? {};
+            const oauth = section(await admin.getFeatureConfig(srvId, 'accounts'), 'oauth');
+            const google = (oauth['google'] as FeatureConfig | undefined) ?? {};
             return (
               google['enabled'] === true &&
               configured(google['client-id']) &&
@@ -128,10 +128,10 @@ export default defineSetup('Angular starter', [
             );
           },
           async apply({ admin, srvId }) {
-            const current = await admin.getPluginConfig(srvId, 'accounts');
+            const current = await admin.getFeatureConfig(srvId, 'accounts');
             const oauth = section(current, 'oauth');
-            const google = (oauth['google'] as PluginConfig | undefined) ?? {};
-            await admin.updatePluginConfig(srvId, 'accounts', {
+            const google = (oauth['google'] as FeatureConfig | undefined) ?? {};
+            await admin.updateFeatureConfig(srvId, 'accounts', {
               ...current,
               oauth: {
                 ...oauth,
@@ -162,20 +162,20 @@ export default defineSetup('Angular starter', [
     // exactly the step that gets skipped, because nothing fails until the day
     // it matters.
     check: async ({ admin, srvId }) => {
-      if (!(await admin.isPluginInstalled(srvId, 'origin-allowlist'))) return false;
-      const config = await admin.getPluginConfig(srvId, 'origin-allowlist');
+      if (!(await admin.isFeatureInstalled(srvId, 'origin-allowlist'))) return false;
+      const config = await admin.getFeatureConfig(srvId, 'origin-allowlist');
       const origins = (config['allowed-origins'] as string[] | undefined) ?? [];
       return origins.includes(APP_URL);
     },
     apply: async ({ admin, srvId }) => {
-      if (!(await admin.isPluginInstalled(srvId, 'origin-allowlist'))) {
+      if (!(await admin.isFeatureInstalled(srvId, 'origin-allowlist'))) {
         await install(admin, srvId, 'origin-allowlist');
       }
-      const config = await admin.getPluginConfig(srvId, 'origin-allowlist');
+      const config = await admin.getFeatureConfig(srvId, 'origin-allowlist');
       const origins = (config['allowed-origins'] as string[] | undefined) ?? [];
       // Added, never replaced: a service reached from more than one origin —
       // localhost and the deployed app — must keep both.
-      await admin.updatePluginConfig(srvId, 'origin-allowlist', {
+      await admin.updateFeatureConfig(srvId, 'origin-allowlist', {
         ...config,
         'allowed-origins': [...new Set([...origins, APP_URL])],
       });

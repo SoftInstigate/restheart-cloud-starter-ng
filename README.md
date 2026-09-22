@@ -43,7 +43,7 @@ git update-index --assume-unchanged src/environments/environment.dev.ts
 
 ### 3. Set the service up
 
-The app needs things of its service: the accounts plugin installed, sign-up and password reset
+The app needs things of its service: the accounts feature installed, sign-up and password reset
 switched on, your origin allowed to call it. `rhc` puts them there from a file in this repo, so
 there is no console checklist to follow.
 

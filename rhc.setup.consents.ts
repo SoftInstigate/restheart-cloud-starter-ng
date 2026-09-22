@@ -44,7 +44,7 @@
  * they are yours. It only decides which *versions* the service demands.
  */
 import { defineSetup, step } from '@restheart-cloud/cli';
-import type { PluginConfig } from '@restheart-cloud/cli';
+import type { FeatureConfig } from '@restheart-cloud/cli';
 import accounts from './rhc.setup.ts';
 
 /**
@@ -161,13 +161,13 @@ const CONDITION = [
 
 const CLAIMS = ['latestConsents/tos', 'latestConsents/pp'];
 
-const rules = (config: PluginConfig): unknown[] =>
+const rules = (config: FeatureConfig): unknown[] =>
   (config['rules'] as unknown[] | undefined) ?? [];
 
 export default defineSetup('Angular starter with consents gate', [
   // Accounts first, and not as a matter of taste: a gate that blocks users the
   // service cannot yet create has nothing to block, and the permission below
-  // is written against the `users` collection the accounts plugin owns.
+  // is written against the `users` collection the accounts feature owns.
   ...accounts.steps,
 
   step('user schema stored', {
@@ -251,17 +251,17 @@ export default defineSetup('Angular starter with consents gate', [
     },
   }),
 
-  step('guards plugin installed', {
-    check: ({ admin, srvId }) => admin.isPluginInstalled(srvId, 'guards'),
-    apply: ({ admin, srvId }) => admin.installPlugin(srvId, 'guards'),
+  step('guards feature installed', {
+    check: ({ admin, srvId }) => admin.isFeatureInstalled(srvId, 'guards'),
+    apply: ({ admin, srvId }) => admin.installFeature(srvId, 'guards'),
   }),
 
   step('the gate blocks users who have not accepted', {
     async check({ admin, srvId }) {
-      // Asked first, because reading the config of a plugin that is not
+      // Asked first, because reading the config of a feature that is not
       // installed is a 404 — and a check must answer the question, not throw.
-      if (!(await admin.isPluginInstalled(srvId, 'guards'))) return false;
-      const config = await admin.getPluginConfig(srvId, 'guards');
+      if (!(await admin.isFeatureInstalled(srvId, 'guards'))) return false;
+      const config = await admin.getFeatureConfig(srvId, 'guards');
       const rule = rules(config).find(r => (r as { id?: string }).id === RULE_ID) as
         | { condition?: string; status_code?: number }
         | undefined;
@@ -270,9 +270,9 @@ export default defineSetup('Angular starter with consents gate', [
       return rule?.condition === CONDITION && rule.status_code === 451;
     },
     async apply({ admin, srvId }) {
-      const config = await admin.getPluginConfig(srvId, 'guards');
+      const config = await admin.getFeatureConfig(srvId, 'guards');
       const others = rules(config).filter(r => (r as { id?: string }).id !== RULE_ID);
-      await admin.updatePluginConfig(srvId, 'guards', {
+      await admin.updateFeatureConfig(srvId, 'guards', {
         ...config,
         rules: [
           ...others,
