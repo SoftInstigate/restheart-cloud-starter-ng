@@ -2,8 +2,6 @@ name: OpenWiki Update
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "29 4 */3 * *"
 
 permissions:
   contents: write
