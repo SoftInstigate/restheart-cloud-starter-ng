@@ -10,7 +10,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { RhAuthService } from '@restheart-cloud/kit-ng';
+import { RhAuthService } from '@ulabase/kit-ng';
 import { justSignedUp as justSignedUpFlag } from '../../just-signed-up';
 import { ThemeService } from '../../theme.service';
 
@@ -72,7 +72,7 @@ export class Shell {
     return user._id;
   }
 
-  /** The account's email — RESTHeart Cloud uses it as the user id. */
+  /** The account's email — Ulabase uses it as the user id. */
   protected email(): string {
     return this.auth.user()?._id ?? '';
   }

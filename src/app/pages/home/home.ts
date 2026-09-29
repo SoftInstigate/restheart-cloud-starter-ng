@@ -11,7 +11,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { RhAuthService } from '@restheart-cloud/kit-ng';
+import { RhAuthService } from '@ulabase/kit-ng';
 import { environment } from '../../../environments/environment';
 
 /** One row in the "what's already working" list. */

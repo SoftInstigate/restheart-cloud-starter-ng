@@ -1,10 +1,10 @@
 /**
- * What this starter needs from its RESTHeart Cloud service.
+ * What this starter needs from its Ulabase service.
  *
- *   npm i -D @restheart-cloud/cli
- *   rhc login
- *   rhc setup --srv <srvId> --dry-run    # what is missing
- *   rhc setup --srv <srvId>              # make it so
+ *   npm i -D @ulabase/cli
+ *   ulabase login
+ *   ulabase setup --srv <srvId> --dry-run    # what is missing
+ *   ulabase setup --srv <srvId>              # make it so
  *
  * Every step is a `check` and an `apply`: run it against a service already
  * configured and it writes nothing and reports each step satisfied. `--dry-run`
@@ -15,7 +15,7 @@
  *
  * `environment.dev.ts` used to carry this instruction:
  *
- * > Match these to the "Features" toggles of your RESTHeart Cloud service. A
+ * > Match these to the "Features" toggles of your Ulabase service. A
  * > feature that's off on the server returns 403 to unauthenticated users.
  *
  * Two lists that must agree, kept in step by hand, in different repositories.
@@ -27,16 +27,16 @@
  * `passwordReset` off in the app and re-running the setup turns it off on the
  * service too, because there is no second place to forget.
  */
-import { defineSetup, step, fromEnv, isRedacted } from '@restheart-cloud/cli';
-import { isApiError } from '@restheart-cloud/cli';
-import type { AdminClient, FeatureConfig } from '@restheart-cloud/cli';
+import { defineSetup, step, fromEnv, isRedacted } from '@ulabase/cli';
+import { isApiError } from '@ulabase/cli';
+import type { AdminClient, FeatureConfig } from '@ulabase/cli';
 import { environment } from './src/environments/environment.dev.ts';
 
 /** Where the app is served from, no trailing slash. */
 const APP_URL = (process.env.APP_URL ?? 'http://localhost:4200').replace(/\/$/, '');
 
 /** Shown in verification, reset and invitation emails. */
-const APP_NAME = process.env.APP_NAME ?? 'RESTHeart Cloud Starter';
+const APP_NAME = process.env.APP_NAME ?? 'Ulabase Starter';
 
 const f = environment.features;
 

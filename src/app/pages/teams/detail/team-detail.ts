@@ -4,8 +4,8 @@ import { interval } from 'rxjs';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RhAuthService } from '@restheart-cloud/kit-ng';
-import type { TeamMembership, TeamMember, PendingInvitation } from '@restheart-cloud/kit-ng';
+import { RhAuthService } from '@ulabase/kit-ng';
+import type { TeamMembership, TeamMember, PendingInvitation } from '@ulabase/kit-ng';
 import { environment } from '../../../../environments/environment';
 import { Alert } from '../../../ui/alert/alert';
 

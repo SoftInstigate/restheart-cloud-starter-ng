@@ -1,7 +1,7 @@
 import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { isValidApiBaseUrl, setToken, scheduleRefresh } from '@restheart-cloud/kit-ng';
+import { isValidApiBaseUrl, setToken, scheduleRefresh } from '@ulabase/kit-ng';
 import { environment } from '../environments/environment';
 import { justSignedUp } from './just-signed-up';
 import { ConsentsGate } from './consents-gate';
@@ -56,7 +56,7 @@ export class App {
   constructor() {
     if (!this.apiConfigured) {
       console.error(
-        `[app] apiUrl must point to a RESTHeart Cloud service (*.restheart.com), got "${environment.apiUrl}". ` +
+        `[app] apiUrl must point to a Ulabase service (an https:// URL), got "${environment.apiUrl}". ` +
           'Set it in src/environments/environment.dev.ts for `ng serve`, and in environment.ts for production builds.'
       );
       return;

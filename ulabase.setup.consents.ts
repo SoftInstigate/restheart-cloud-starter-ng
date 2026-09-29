@@ -1,25 +1,25 @@
 /**
  * The starter's service, **plus** the consents gate.
  *
- *   rhc setup --srv <srvId> --file rhc.setup.consents.ts
+ *   ulabase setup --srv <srvId> --file ulabase.setup.consents.ts
  *
- * Two setup files, one application. `rhc.setup.ts` configures the accounts side
+ * Two setup files, one application. `ulabase.setup.ts` configures the accounts side
  * and nothing else; this one is that same setup with the gate's four documents
  * appended, which is why it imports it rather than restating it — the accounts
  * steps have one definition, and adding one there reaches both files.
  *
  * The app carries the gate's client code either way. Set a service up with
- * `rhc.setup.ts` and no rule exists, so no request is ever answered `451`, so
+ * `ulabase.setup.ts` and no rule exists, so no request is ever answered `451`, so
  * the acceptance dialog never opens and the user is never asked. Nothing to
  * switch off in the app: an unasked question is the absence of a rule on the
  * server, not a flag here.
  *
- * ## What the gate needs from its RESTHeart Cloud service.
+ * ## What the gate needs from its Ulabase service.
  *
- *   npm i -D @restheart-cloud/cli
- *   rhc login
- *   rhc setup --srv <srvId> --dry-run    # what is missing
- *   rhc setup --srv <srvId>              # make it so
+ *   npm i -D @ulabase/cli
+ *   ulabase login
+ *   ulabase setup --srv <srvId> --dry-run    # what is missing
+ *   ulabase setup --srv <srvId>              # make it so
  *
  * This is Part 1 of
  * https://cloud.restheart.com/blog/require-terms-and-privacy-acceptance — four
@@ -43,9 +43,9 @@
  * It does not write the Terms or the Privacy Policy — those are `public/`, and
  * they are yours. It only decides which *versions* the service demands.
  */
-import { defineSetup, step } from '@restheart-cloud/cli';
-import type { FeatureConfig } from '@restheart-cloud/cli';
-import accounts from './rhc.setup.ts';
+import { defineSetup, step } from '@ulabase/cli';
+import type { FeatureConfig } from '@ulabase/cli';
+import accounts from './ulabase.setup.ts';
 
 /**
  * Bump these when you publish new documents, and re-run the setup. Every user

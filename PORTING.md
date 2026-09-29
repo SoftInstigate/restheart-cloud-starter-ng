@@ -17,16 +17,16 @@ rewritten.
 
 | Layer | Portable? | What to do |
 |---|---|---|
-| `@restheart-cloud/kit` — auth, teams, invitations, profile, password | ✅ **100%** | Depend on it directly. It is plain TypeScript with a Promise-based API and no framework coupling. **Do not reimplement any auth logic, HTTP call, or token handling.** |
+| `@ulabase/kit` — auth, teams, invitations, profile, password | ✅ **100%** | Depend on it directly. It is plain TypeScript with a Promise-based API and no framework coupling. **Do not reimplement any auth logic, HTTP call, or token handling.** |
 | `src/styles.css` — tokens + default skin | ✅ **100%** | **Copy it verbatim.** It is plain CSS with no framework coupling, so copying it byte-for-byte is what guarantees visual parity. |
 | Templates (`*.html`) | ◑ structure yes, syntax no | Port the markup, keeping the **same semantic class hooks**. Control flow (`@if`/`@for`) becomes JSX/`v-if`. |
 | Page-specific CSS (`pages/**/*.css`) | ✅ content, ◑ scoping | Copy the rules; swap Angular's emulated encapsulation for CSS Modules (React) or `<style scoped>` (Vue). Keep class names identical. |
-| `@restheart-cloud/kit-ng` — reactive wrapper, guards, interceptor | ❌ | Angular-specific. Rebuild the equivalent for your framework — see §2. |
+| `@ulabase/kit-ng` — reactive wrapper, guards, interceptor | ❌ | Angular-specific. Rebuild the equivalent for your framework — see §2. |
 | Routing, guards, titles, SSR config | ❌ | Framework-specific. Reproduce the *contract* in §3–§4. |
 | Component classes (`*.ts`) | ❌ syntax, ✅ behaviour | Rebuild using `TEMPLATE_API.md` as the specification. |
 
 **Rule of thumb:** if a file talks to the network or computes a token, you should be
-calling `@restheart-cloud/kit` instead of writing it. If a file describes what a screen
+calling `@ulabase/kit` instead of writing it. If a file describes what a screen
 looks like, copy it. Only the glue between them is genuinely new work.
 
 ---
@@ -40,7 +40,7 @@ composable, a context provider, whatever is idiomatic. It must expose:
 
 | Name | Type | Notes |
 |---|---|---|
-| `user` | `UserInfo \| null` | `user._id` **is the email** — RESTHeart Cloud uses email as the user id. Profile name/surname live at `user.profile.name` / `.surname`. |
+| `user` | `UserInfo \| null` | `user._id` **is the email** — Ulabase uses email as the user id. Profile name/surname live at `user.profile.name` / `.surname`. |
 | `teams` | `TeamMembership[]` | Each has `id.$oid`, `name`, `description`, `role`, `active`. |
 | `isAuthenticated` | `boolean` | Derived from `user`. |
 | `hasMultipleTeams` | `boolean` | Derived from `teams.length > 1`. |
@@ -80,7 +80,7 @@ Two guards:
 signed-in users, and people who do not have an account yet.
 
 Route table, titles and feature-flag gating: see the routing section at the end of
-`TEMPLATE_API.md`. Page titles are `"<Route title> · RESTHeart Cloud Starter"`.
+`TEMPLATE_API.md`. Page titles are `"<Route title> · Ulabase Starter"`.
 
 ---
 
@@ -116,7 +116,7 @@ must not claim an email was verified. (Getting this wrong was a real bug here.)
 
 ### 4.2 No routes when the backend is unconfigured
 
-When `apiUrl` is missing or is not a valid RESTHeart Cloud URL
+When `apiUrl` is missing or is not a valid Ulabase URL
 (`isValidApiBaseUrl()` from the kit), the app registers an **empty route table** and
 renders the "connect your service" screen instead of the router.
 
@@ -244,7 +244,7 @@ serve all of them.
 
 Structure and setup
 
-- [ ] Depends on `@restheart-cloud/kit`; no auth logic, HTTP call or token handling reimplemented.
+- [ ] Depends on `@ulabase/kit`; no auth logic, HTTP call or token handling reimplemented.
 - [ ] `src/styles.css` copied verbatim; no hardcoded colours introduced outside `:root`.
 - [ ] Same file layout and component names; same semantic class hooks in templates.
 - [ ] Feature flags gate client routes, SSR routes, *and* the UI that links to them.

@@ -1,12 +1,12 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RhAuthService } from '@restheart-cloud/kit-ng';
+import { RhAuthService } from '@ulabase/kit-ng';
 import { Alert } from '../../ui/alert/alert';
 
 /**
  * `socialAuths` is present in the raw `/users/me` response (restheart-cloud-server's
  * AmISignedIn strips `password`/`otp`/tokens but not this) — it's just not declared on
- * `@restheart-cloud/kit`'s `UserInfo` type. Augmented locally here instead of changing
+ * `@ulabase/kit`'s `UserInfo` type. Augmented locally here instead of changing
  * the shared kit package for a single field used by only this page.
  */
 interface UserWithSocialAuths {

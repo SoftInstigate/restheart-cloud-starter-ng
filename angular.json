@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "restheart-cloud-starter-ng": {
+    "ulabase-starter-ng": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -69,10 +69,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "restheart-cloud-starter-ng:build:production"
+              "buildTarget": "ulabase-starter-ng:build:production"
             },
             "development": {
-              "buildTarget": "restheart-cloud-starter-ng:build:development"
+              "buildTarget": "ulabase-starter-ng:build:development"
             }
           },
           "defaultConfiguration": "development"

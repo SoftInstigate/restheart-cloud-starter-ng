@@ -1,24 +1,24 @@
-# RESTHeart Cloud Starter — Angular
+# Ulabase Starter — Angular
 
 An Angular app with sign-up, login, Google and GitHub sign-in, email verification, password reset,
 teams and invitations — working, not sketched. Clone it, point it at a free service, and you have
 the boring half of an application already done.
 
-It is an Angular app plus a [RESTHeart Cloud](https://cloud.restheart.com) service. There is no
+It is an Angular app plus a [Ulabase](https://cloud.restheart.com) service. There is no
 server of yours to write, deploy or pay for.
 
-![RESTHeart Cloud Starter Home Page](./starter-home-page.png)
+![Ulabase Starter Home Page](./starter-home-page.png)
 
 ## Get it running
 
-**You need:** [Node.js](https://nodejs.org) 18 or later and a free RESTHeart Cloud service.
+**You need:** [Node.js](https://nodejs.org) 18 or later and a free Ulabase service.
 Signing up is free.
 
 ### 1. Clone it
 
 ```bash
-git clone https://github.com/SoftInstigate/restheart-cloud-starter-ng.git
-cd restheart-cloud-starter-ng
+git clone https://github.com/ulabase/starter-ng.git
+cd ulabase-starter-ng
 npm install
 ```
 
@@ -44,13 +44,13 @@ git update-index --assume-unchanged src/environments/environment.dev.ts
 ### 3. Set the service up
 
 The app needs things of its service: the accounts feature installed, sign-up and password reset
-switched on, your origin allowed to call it. `rhc` puts them there from a file in this repo, so
+switched on, your origin allowed to call it. `ulabase` puts them there from a file in this repo, so
 there is no console checklist to follow.
 
 ```bash
-npm install -g @restheart-cloud/cli
-rhc login                              # paste a token from cloud.restheart.com
-rhc setup --srv <srvId>
+npm install -g ulabase
+ulabase login                              # paste a token from cloud.restheart.com
+ulabase setup --srv <srvId>
 ```
 
 `<srvId>` is the six-character id of your service — the first label of its URL. Every step is a
@@ -60,7 +60,7 @@ missing without touching it.
 **Want users to accept Terms and a Privacy Policy first?** Use the other setup file instead:
 
 ```bash
-rhc setup --srv <srvId> --file rhc.setup.consents.ts
+ulabase setup --srv <srvId> --file ulabase.setup.consents.ts
 ```
 
 Same setup with four more documents, and the app then blocks anyone who has not accepted the
@@ -90,21 +90,21 @@ attached, and how the consents gate works inside, see [NOTES.md](./NOTES.md).
 ## Something not working?
 
 **Everything fails, and the console says the origin is not allowed.** The service only answers
-pages it has been told about. Re-run `rhc setup` after changing where the app is served from, or
+pages it has been told about. Re-run `ulabase setup` after changing where the app is served from, or
 add the origin under *Service → Origin Allowlist*.
 
 **A page is missing and its link is gone.** The feature flags in `environment.dev.ts` must match
-the service's *Sign-up Mgmt → Features* toggles. `rhc setup` reads the flags from that same file
+the service's *Sign-up Mgmt → Features* toggles. `ulabase setup` reads the flags from that same file
 and sets the service to match, so re-running it is usually the fix.
 
 **`401` on a request you wrote yourself.** A plain `fetch` carries no session. Use `auth.api()`,
 which attaches it — see [NOTES.md](./NOTES.md#reading-your-own-data).
 
-**`rhc` runs something about OpenShift.** A different, retired tool of the same name is first in
-your `PATH`. `type -a rhc` shows both.
+**`ulabase` runs something about OpenShift.** A different, retired tool of the same name is first in
+your `PATH`. `type -a ulabase` shows both.
 
 ## More
 
-- [RESTHeart Cloud documentation](https://restheart.org/docs/cloud/)
-- [`@restheart-cloud/kit-ng`](https://restheart.org/docs/cloud/kit) — the library this is built on
-- [The `rhc` CLI](https://restheart.org/docs/cloud/cli)
+- [Ulabase documentation](https://restheart.org/docs/cloud/)
+- [`@ulabase/kit-ng`](https://restheart.org/docs/cloud/kit) — the library this is built on
+- [The `ulabase` CLI](https://restheart.org/docs/cloud/cli)

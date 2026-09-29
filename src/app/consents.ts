@@ -1,5 +1,5 @@
 import { signal } from '@angular/core';
-import type { ApiError } from '@restheart-cloud/kit-ng';
+import type { ApiError } from '@ulabase/kit-ng';
 
 /**
  * The consents gate, client side.

@@ -1,5 +1,5 @@
 {
-  "name": "restheart-cloud-starter-ng",
+  "name": "ulabase-starter-ng",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:restheart-cloud-starter-ng": "node dist/restheart-cloud-starter-ng/server/server.mjs"
+    "serve:ssr:ulabase-starter-ng": "node dist/ulabase-starter-ng/server/server.mjs"
   },
   "private": true,
   "packageManager": "npm@11.18.0",
@@ -20,7 +20,7 @@
     "@angular/platform-server": "^21.2.0",
     "@angular/router": "^21.2.0",
     "@angular/ssr": "^21.2.7",
-    "@restheart-cloud/kit-ng": "^0.9.0",
+    "@ulabase/kit-ng": "^0.12.0",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
@@ -29,12 +29,19 @@
     "@angular/build": "^21.2.7",
     "@angular/cli": "^21.2.7",
     "@angular/compiler-cli": "^21.2.0",
-    "@restheart-cloud/cli": "^0.11.0",
+    "@ulabase/cli": "^0.12.0",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.5.6": true,
+    "esbuild@0.28.1": true,
+    "fsevents@2.3.3": true,
+    "lmdb@3.5.1": true,
+    "msgpackr-extract@3.0.4": true
   }
 }

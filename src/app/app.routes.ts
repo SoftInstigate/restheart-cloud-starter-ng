@@ -1,10 +1,10 @@
 import { Routes, TitleStrategy } from '@angular/router';
-import { authGuard, publicGuard } from '@restheart-cloud/kit-ng';
+import { authGuard, publicGuard } from '@ulabase/kit-ng';
 import { Title } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 
-const APP_TITLE_SUFFIX = 'RESTHeart Cloud Starter';
+const APP_TITLE_SUFFIX = 'Ulabase Starter';
 
 @Injectable({ providedIn: 'root' })
 export class AppTitleStrategy extends TitleStrategy {

@@ -67,7 +67,7 @@ links to it.
 
 `src/styles.css` holds two things: **design tokens** (section 1) and a **disposable
 default skin** (sections 3–5). The look is deliberately a *mockup* — cohesive and
-intentional, but obviously a scaffold. `@restheart-cloud/kit-ng` ships no UI at all, so
+intentional, but obviously a scaffold. `@ulabase/kit-ng` ships no UI at all, so
 the templates and this one stylesheet are the only places styling lives.
 
 Two ways forward. Pick one:
@@ -224,9 +224,9 @@ while the server records another.
 
 The [README](./README.md#3-set-the-service-up) says which file to apply. What it puts there:
 
-[`rhc.setup.consents.ts`](./rhc.setup.consents.ts) is [`rhc.setup.ts`](./rhc.setup.ts) with four
+[`ulabase.setup.consents.ts`](./ulabase.setup.consents.ts) is [`ulabase.setup.ts`](./ulabase.setup.ts) with four
 documents appended — it imports it, so the accounts steps have one definition and cannot drift.
-Applying it to a service already set up with `rhc.setup.ts` adds the gate and touches nothing
+Applying it to a service already set up with `ulabase.setup.ts` adds the gate and touches nothing
 else.
 
 **The versions live in one place.** In the article the two version strings appear four times —
@@ -259,5 +259,5 @@ renders.
 
 ## Packages used
 
-- [`@restheart-cloud/kit`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit) — TypeScript auth logic
-- [`@restheart-cloud/kit-ng`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit-ng) — Angular adapter
+- [`@ulabase/kit`](https://github.com/ulabase/kit/tree/main/packages/kit) — TypeScript auth logic
+- [`@ulabase/kit-ng`](https://github.com/ulabase/kit/tree/main/packages/kit-ng) — Angular adapter

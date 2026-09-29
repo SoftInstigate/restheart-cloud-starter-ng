@@ -1,7 +1,7 @@
 # Testing checklist
 
 No automated E2E suite yet — these flows are verified by hand, typically after bumping
-`@restheart-cloud/kit`/`@restheart-cloud/kit-ng` or touching anything under `pages/auth/` or
+`@ulabase/kit`/`@ulabase/kit-ng` or touching anything under `pages/auth/` or
 `pages/invitations/`. Use the browser's Network tab where noted — bearer mode should never make an
 extra `POST /token` call after `activate`/`reset-password`/`switch-team`; the token comes back
 directly in that same request's response.

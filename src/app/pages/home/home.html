@@ -4,7 +4,7 @@
      ═════════════════════════════════════════════════════════════════════════ -->
 
 <section class="card hero">
-  <p class="eyebrow">RESTHeart Cloud Starter</p>
+  <p class="eyebrow">Ulabase Starter</p>
   <h1>
     @if (firstName()) {
       Welcome, {{ firstName() }}.
@@ -41,7 +41,7 @@
 
   <p class="muted feature-note">
     Toggle these in <code>src/environments/environment.ts</code> to match the
-    Features settings of your RESTHeart Cloud service.
+    Features settings of your Ulabase service.
   </p>
 </section>
 
@@ -54,7 +54,7 @@
     <li class="step step-done">
       <span class="step-mark" aria-hidden="true">✓</span>
       <div class="step-body">
-        <span class="step-title">Point the app at your RESTHeart Cloud service</span>
+        <span class="step-title">Point the app at your Ulabase service</span>
         <p class="muted">
           Done — you're signed in. Configured in
           <code>src/environments/environment.ts</code>.
@@ -124,7 +124,7 @@
 
   <h3>1. Create the <code>demo</code> collection</h3>
   <p class="muted">
-    In your RESTHeart Cloud dashboard, create a collection called <code>demo</code>
+    In your Ulabase dashboard, create a collection called <code>demo</code>
     and add a permission so the signed-in user can read it:
   </p>
   <pre class="code-block">path(/demo) and method(GET)</pre>
@@ -132,7 +132,7 @@
   <h3>2. Fetch from your component</h3>
   <pre class="code-block">import &#123; Component, inject, signal &#125; from '@angular/core';
 import &#123; switchMap, map &#125; from 'rxjs';
-import &#123; RhAuthService &#125; from '@restheart-cloud/kit-ng';
+import &#123; RhAuthService &#125; from '@ulabase/kit-ng';
 
 @Component(&#123; /* ... */ &#125;)
 export class DemoComponent &#123;

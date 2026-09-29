@@ -1,5 +1,5 @@
 /* ============================================================================
-   RESTHeart Cloud Starter — global stylesheet
+   Ulabase Starter — global stylesheet
    ============================================================================
 
    THIS IS A DISPOSABLE DEFAULT SKIN.
@@ -50,12 +50,12 @@
   --color-text: #14171c;
   --color-text-muted: #656d7a;
 
-  /* RESTHeart Cloud amber — the one accent. Paired with dark text. */
+  /* Ulabase amber — the one accent. Paired with dark text. */
   --color-primary: #f8a839;
   --color-primary-hover: #e0942b;
   --color-on-primary: #14171c;
 
-  /* RESTHeart Cloud's teal-green, darkened for readable text-link contrast
+  /* Ulabase's teal-green, darkened for readable text-link contrast
      on white (also part of the same brand palette). Doubles as "success". */
   --color-link: #1f6f54;
   --color-success: #1f6f54;
@@ -758,7 +758,7 @@ code {
 }
 
 /* Reports what apiUrl currently holds — distinguishes "not set yet" from
-   "set, but not a RESTHeart Cloud URL". */
+   "set, but not a Ulabase URL". */
 .config-status {
   margin: 0 0 var(--space-5);
   padding: var(--space-3);

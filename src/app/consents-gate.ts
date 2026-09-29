@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { RhAuthService } from '@restheart-cloud/kit-ng';
+import { RhAuthService } from '@ulabase/kit-ng';
 import { consentsBlocked } from './consents';
 
 /**

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { RH_AUTH_CONFIG } from '@restheart-cloud/kit-ng';
+import { RH_AUTH_CONFIG } from '@ulabase/kit-ng';
 import { App } from './app';
 
 describe('App', () => {

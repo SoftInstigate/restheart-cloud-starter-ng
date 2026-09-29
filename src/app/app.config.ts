@@ -1,13 +1,13 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, TitleStrategy } from '@angular/router';
-import { provideRhAuth, isValidApiBaseUrl } from '@restheart-cloud/kit-ng';
+import { provideRhAuth, isValidApiBaseUrl } from '@ulabase/kit-ng';
 
 import { routes, AppTitleStrategy } from './app.routes';
 import { consentsOnError } from './consents';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 
-// If apiUrl isn't set (or isn't a valid RESTHeart Cloud URL), provide no
+// If apiUrl isn't set (or isn't a valid Ulabase URL), provide no
 // routes at all — this prevents the router's initial navigation from
 // running route guards (e.g. authGuard's checkSession()) against a
 // non-existent or invalid backend. See app.html for the "configure your

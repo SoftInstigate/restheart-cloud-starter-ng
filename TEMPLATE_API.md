@@ -93,7 +93,7 @@ one-shot `?flow=signup` marker, then clears both from the URL.
 |---|---|---|
 | `initials()` | `string` | Profile initials, falling back to the first char of the email, else `?`. Uppercased. |
 | `displayName()` | `string` | `"name surname"`, falling back to the email (`user._id`). |
-| `email()` | `string` | `auth.user()?._id` — RESTHeart Cloud uses email as the user id. |
+| `email()` | `string` | `auth.user()?._id` — Ulabase uses email as the user id. |
 | `activeTeamName()` | `string` | Name of the team with `active: true`, else `''`. |
 | `toggleMenu()` | `void` | Opens/closes; on open, moves focus to `#firstMenuItem`. |
 | `closeMenu()` | `void` | Closes and returns focus to `#avatarBtn`. |
@@ -399,7 +399,7 @@ child of the `Shell`.
 | ` └ account` | Account | inherited | always |
 | `**` | — | — | redirects to `` |
 
-`AppTitleStrategy` appends `· RESTHeart Cloud Starter` to every title.
+`AppTitleStrategy` appends `· Ulabase Starter` to every title.
 
 `invitations/accept` is deliberately **unguarded** — it must work for signed-out invitees,
 signed-in users, and people without an account yet.
