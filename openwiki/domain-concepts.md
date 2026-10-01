@@ -1,14 +1,12 @@
 ---
 type: Domain Concepts
 title: Domain Concepts
-description: RESTHeart Cloud auth model, teams, invitations, tokens, feature flags, the consents gate domain model, and the SSR/CSR boundary.
+description: Ulabase auth model, teams, invitations, tokens, feature flags, the consents gate domain model, and the SSR/CSR boundary.
 tags: [domain, auth, teams, tokens, feature-flags, consents]
 verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-04T08:55:25.232Z
+  - by: openwiki/0.6.1
+    at: 2026-10-01T10:27:04.869Z
 sources:
-  - id: openwiki-source-cec027055a927c253ba22cff
-    resource: repo://rhc.setup.consents.ts
   - id: openwiki-source-1b6b17b8afa47babcf26380f
     resource: repo://src/app/app.config.ts
   - id: openwiki-source-407c70ba325b6f9e6aa4707e
@@ -35,14 +33,16 @@ sources:
     resource: repo://src/environments/environment.ts
   - id: openwiki-source-146419bb9b2415894a6bd677
     resource: repo://src/styles.css
-generated: { by: "openwiki/0.5.0", at: "2026-09-04T08:55:25.232Z" }
+  - id: openwiki-source-c1d5327fe44e08cda82fcf83
+    resource: repo://ulabase.setup.consents.ts
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
 ---
 
 # Domain Concepts
 
-## RESTHeart Cloud auth model
+## Ulabase auth model
 
-The starter is a frontend for [RESTHeart Cloud](https://cloud.restheart.com), a hosted backend service. The auth model:
+The starter is a frontend for [Ulabase](https://cloud.restheart.com), a hosted backend service. The auth model:
 
 - **Users** are identified by email (`user._id` is the email address)
 - **Profile** data lives at `user.profile.name` / `user.profile.surname`
@@ -52,12 +52,12 @@ The starter is a frontend for [RESTHeart Cloud](https://cloud.restheart.com), a 
 
 ## Authentication flow
 
-RESTHeart Cloud uses **bearer token authentication**:
+Ulabase uses **bearer token authentication**:
 
 1. Token is obtained via `POST /token` (login) or returned directly by activate/reset-password/switch-team endpoints (`?delivery=body`)
 2. Token has a **15-minute TTL**
 3. `scheduleRefresh()` silently renews at ~80% (~12 minutes) via `GET /token?renew`
-4. The HTTP interceptor from `kit-ng` attaches the token to all API calls
+4. The HTTP interceptor from `@ulabase/kit-ng` attaches the token to all API calls
 5. On 401/expiry, the interceptor clears the session — next `checkSession()` returns null
 
 **Bearer mode:** the starter uses bearer tokens (not cookies). This means:
@@ -65,7 +65,7 @@ RESTHeart Cloud uses **bearer token authentication**:
 - SSR cannot access the token — authenticated routes must be client-rendered
 - Token is passed in the `Authorization: Bearer ...` header
 
-**Authenticated API calls:** use `auth.api(endpoint)` for custom API calls to your RESTHeart Cloud service. This method automatically attaches the bearer token and handles authentication errors. See [Integrations](integrations.md#restheart-cloudkit-ng) for details and examples.
+**Authenticated API calls:** use `auth.api(endpoint)` for custom API calls to your Ulabase service. This method automatically attaches the bearer token and handles authentication errors. See [Integrations](integrations.md#ulabasekit-ng) for details and examples.
 
 ## Teams
 
@@ -112,7 +112,7 @@ features: {
 1. Routes are conditionally included in `app.routes.ts` based on flags
 2. UI elements (links, buttons) check flags to decide visibility
 3. A flag that's off removes both the route AND the UI that links to it
-4. Flags must match your RESTHeart Cloud service's **Sign-up Mgmt → Features** toggles — a mismatch causes 403 errors
+4. Flags must match your Ulabase service's **Sign-up Mgmt → Features** toggles — a mismatch causes 403 errors
 
 **Default configs:**
 - `environment.ts` (production): all on except `oauthLogin`
@@ -124,7 +124,25 @@ The consents gate is a server-enforced acceptance requirement for Terms of Servi
 
 ### How it works
 
-1. A **Guards rule** on the RESTHeart Cloud service returns HTTP `451` (Unavailable For Legal Reasons) to any authenticated request from a user whose `latestConsents` does not match the current TOS and PP versions.
+```mermaid
+sequenceDiagram
+    participant App as Angular App
+    participant Kit as @ulabase/kit-ng
+    participant Svc as Ulabase Service
+
+    Note over App: App bootstraps, calls provideRhAuth
+    Kit->>Svc: GET /users/me (session restore)
+    Svc-->>Kit: 451 Unavailable For Legal Reasons
+    Kit->>App: consentsOnError(451)
+    App->>App: consentsBlocked = true
+    Note over App: ConsentsGate overlay covers the app
+    App->>Svc: PATCH /users/{userId} (accept consents)
+    Svc-->>App: 200 OK
+    App->>App: window.location.assign("/")
+    Note over App: Full reload, session restore now succeeds
+```
+
+1. A **Guards rule** on the Ulabase service returns HTTP `451` (Unavailable For Legal Reasons) to any authenticated request from a user whose `latestConsents` does not match the current TOS and PP versions.
 2. The first request the app makes on load — `GET /users/me` to restore the session — is blocked, so the user never gets a session.
 3. The client-side `consentsOnError` callback (passed to `provideRhAuth` as `config.onError`) catches the `451` and sets the `consentsBlocked` signal to `true`.
 4. The `ConsentsGate` component sits **outside** the router outlet in `app.html`. When `consentsBlocked` is `true`, it covers the entire app with an acceptance form.
@@ -137,7 +155,7 @@ A blocked user has no session — `authGuard` fails and cancels navigation. Noth
 
 ### Server-side setup
 
-The consents gate requires four server-side documents, configured by `rhc setup --srv <srvId> --file rhc.setup.consents.ts`:
+The consents gate requires four server-side documents, configured by `ulabase setup --srv <srvId> --file ulabase.setup.consents.ts`:
 
 1. **User schema** (`userConsentsSchema`) — validates the `users` collection, adding `latestConsents` (object with `tos`, `pp`, `acceptedAt`) and `consents` (array history) fields.
 2. **Collection validation** — attaches the schema to `/users`.
@@ -146,10 +164,10 @@ The consents gate requires four server-side documents, configured by `rhc setup 
 
 ### Version management
 
-TOS and PP versions are defined as constants (`TOS_VERSION`, `PP_VERSION`) in `rhc.setup.consents.ts`. All four server documents derive from these two values. To publish new terms:
+TOS and PP versions are defined as constants (`TOS_VERSION`, `PP_VERSION`) in `ulabase.setup.consents.ts`. All four server documents derive from these two values. To publish new terms:
 
 1. Bump the version constants
-2. Re-run `rhc setup`
+2. Re-run `ulabase setup`
 3. Every user meets the acceptance form on their next request; previous acceptances remain in the `consents` history
 
 ### JWT claims
@@ -179,7 +197,7 @@ This means:
 ## Welcome banner
 
 The `justSignedUp` signal (in `src/app/just-signed-up.ts`) is:
-- Set to `true` by `App.consumeFragmentToken()` when `?flow=signup` is in the URL
+- Set to `true` by `consumeFragmentToken()` when `?flow=signup` is in the URL
 - Read once by `Shell` to show the welcome banner
 - Reset to `false` by `Shell`'s constructor
 - Never persisted — can't reappear on later logins
@@ -189,7 +207,7 @@ The `justSignedUp` signal (in `src/app/just-signed-up.ts`) is:
 ## Design token system
 
 `src/styles.css` section 1 defines CSS custom properties:
-- **Colour:** `--color-bg`, `--color-surface`, `--color-primary` (RESTHeart amber), `--color-link` (teal), `--color-error`
+- **Colour:** `--color-bg`, `--color-surface`, `--color-primary` (Ulabase amber), `--color-link` (teal), `--color-error`
 - **Typography:** `--font-family` (system-ui), `--font-mono` (for chrome labels), scale from `--text-xs` to `--text-2xl`
 - **Space:** `--space-1` through `--space-8`
 - **Shape:** `--radius-sm`, `--radius`, `--radius-lg`, `--border-width`
@@ -199,13 +217,13 @@ Dark mode overrides these tokens under `:root.dark`. The `ThemeService` toggles 
 ## Change navigation for domain concepts
 
 ### For auth model changes
-- **Start with:** `@restheart-cloud/kit` for core auth logic
+- **Start with:** `@ulabase/kit-ng` for core auth logic
 - **Check:** `src/app/pages/auth/` for UI implementations
 - **Test with:** Manual flows from TEST-CASES.md
 - **Validation:** Auth flows work correctly, no 403 errors
 
 ### For team model changes
-- **Start with:** `@restheart-cloud/kit` for team functions
+- **Start with:** `@ulabase/kit-ng` for team functions
 - **Check:** `src/app/pages/teams/` for team management UI
 - **Test with:** Manual flows from TEST-CASES.md
 - **Validation:** Team switching works, team list updates correctly
@@ -214,16 +232,16 @@ Dark mode overrides these tokens under `:root.dark`. The `ThemeService` toggles 
 - **Start with:** `src/environments/environment.ts` and `src/environments/environment.dev.ts`
 - **Check:** `src/app/app.routes.ts` for route gating
 - **Test with:** `ng serve` and verify routes/UI appear/disappear
-- **Validation:** Flags match your RESTHeart Cloud service's **Sign-up Mgmt → Features** toggles
+- **Validation:** Flags match your Ulabase service's **Sign-up Mgmt → Features** toggles
 
 ### For token lifecycle changes
-- **Start with:** `@restheart-cloud/kit` for token management
+- **Start with:** `@ulabase/kit-ng` for token management
 - **Check:** `src/app/app.ts` for fragment token handling
 - **Test with:** Manual flows from TEST-CASES.md
 - **Validation:** Token refresh works at ~80% of 15-minute TTL
 
 ### For consents gate changes
-- **Start with:** `rhc.setup.consents.ts` for server-side configuration
+- **Start with:** `ulabase.setup.consents.ts` for server-side configuration
 - **Check:** `src/app/consents.ts` and `src/app/consents-gate.ts` for client-side logic
-- **Test with:** `rhc setup --srv <srvId> --dry-run` to verify server state
+- **Test with:** `ulabase setup --srv <srvId> --dry-run` to verify server state
 - **Validation:** Bump versions → re-run setup → user sees acceptance form → accepts → reload succeeds

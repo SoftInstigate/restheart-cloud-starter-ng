@@ -1,11 +1,8 @@
 ---
 type: Testing
 title: Testing Guidance
-description: Manual test checklist, automated test status, what to test when changing key areas, and Browser DevTools verification guidance for restheart-cloud-starter-ng.
+description: Manual test checklist, automated test status, what to test when changing key areas, and Browser DevTools verification guidance for ulabase-starter-ng.
 tags: [testing, qa, manual, checklist, devtools, vitest]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-04T08:55:25.232Z
 sources:
   - id: openwiki-source-73378d4ee3f791429188ddb5
     resource: repo://angular.json
@@ -51,7 +48,10 @@ sources:
     resource: repo://TEST-CASES.md
   - id: openwiki-source-cfec35e61a853579c60d6d5d
     resource: repo://tsconfig.spec.json
-generated: { by: "openwiki/0.5.0", at: "2026-09-04T08:55:25.232Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+verified:
+  - by: openwiki/0.6.1
+    at: 2026-10-01T10:27:04.869Z
 ---
 
 # Testing Guidance
@@ -190,7 +190,7 @@ Priority areas for future E2E tests:
 - **Important files:** `src/app/pages/teams/**/*.ts`, `src/app/pages/invitations/**/*.ts`
 
 ### When modifying SSR/CSR behavior
-- **Run:** `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs`
+- **Run:** `ng build && node dist/ulabase-starter-ng/server/server.mjs`
 - **Check:** View source on auth pages shows HTML (prerendered), authenticated routes are client-rendered only
 - **Validation:** No SSR errors from browser APIs (localStorage, document)
 - **Important files:** `src/app/app.routes.server.ts`, `src/server.ts`

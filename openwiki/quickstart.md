@@ -1,8 +1,8 @@
 ---
 type: Quickstart
-title: RESTHeart Cloud Starter — Angular
-description: Concise entrypoint for the restheart-cloud-starter-ng repository. Routes readers through the wiki hierarchy based on their task (exploring, building a feature, porting, restyling, testing). Includes quick setup, documentation map, task routing table, and key dependencies.
-tags: [quickstart, angular, restheart-cloud, starter]
+title: Ulabase Starter — Angular
+description: Concise entrypoint for the ulabase-starter-ng repository. Routes readers through the wiki hierarchy based on their task (exploring, building a feature, porting, restyling, testing). Includes quick setup, documentation map, task routing table, and key dependencies.
+tags: [quickstart, angular, ulabase, starter]
 sources:
   - id: openwiki-source-5b54a58d1b51cd490b0e7162
     resource: repo://package.json
@@ -10,10 +10,6 @@ sources:
     resource: repo://PORTING.md
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
-  - id: openwiki-source-cec027055a927c253ba22cff
-    resource: repo://rhc.setup.consents.ts
-  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
-    resource: repo://rhc.setup.ts
   - id: openwiki-source-d0cca70daf23ae76d9eafbb8
     resource: repo://specs/done/account-team-management.md
   - id: openwiki-source-1bb4f997bf7534ca73d1beae
@@ -50,12 +46,19 @@ sources:
     resource: repo://TEMPLATE_API.md
   - id: openwiki-source-ff8f527e585bb7a131d1ff75
     resource: repo://TEST-CASES.md
-generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
+  - id: openwiki-source-c1d5327fe44e08cda82fcf83
+    resource: repo://ulabase.setup.consents.ts
+  - id: openwiki-source-34f568b222540eb11aa44859
+    resource: repo://ulabase.setup.ts
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+verified:
+  - by: openwiki/0.6.1
+    at: 2026-10-01T10:27:04.869Z
 ---
 
-# RESTHeart Cloud Starter — Angular
+# Ulabase Starter — Angular
 
-An Angular 21 starter application built on [`@restheart-cloud/kit-ng`](https://github.com/SoftInstigate/restheart-cloud-kit/tree/main/packages/kit-ng). It implements all RESTHeart Cloud authentication and multi-tenancy flows out of the box — fork it, point it at your RESTHeart Cloud service, and start building.
+An Angular 21 starter application built on [`@ulabase/kit-ng`](https://github.com/ulabase/kit/tree/main/packages/kit-ng). It implements all Ulabase authentication and multi-tenancy flows out of the box — fork it, point it at your Ulabase service, and start building.
 
 Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth only).
 
@@ -71,36 +74,36 @@ Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth 
 - **Consents gate** — optional server-enforced Terms of Service and Privacy Policy acceptance (blocks all API requests until accepted)
 - **"Connect your service" screen** — shown when `apiUrl` is empty or not a valid `*.restheart.com` URL, guiding setup
 - **Dark/light mode** — persisted to localStorage
-- **Demo fetch feature** — shows how to use `auth.api()` for authenticated API calls to your RESTHeart Cloud service
+- **Demo fetch feature** — shows how to use `auth.api()` for authenticated API calls to your Ulabase service
 
 ## Quick setup
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/SoftInstigate/restheart-cloud-starter-ng.git
-cd restheart-cloud-starter-ng
+git clone https://github.com/ulabase/starter-ng.git
+cd ulabase-starter-ng
 npm install
 
-# 2. Point to your RESTHeart Cloud service
+# 2. Point to your Ulabase service
 # Edit src/environments/environment.dev.ts — set apiUrl to your service URL
 # Then tell git to ignore local changes:
 git update-index --assume-unchanged src/environments/environment.dev.ts
 
 # 3. Set the service up (installs accounts plugin, configures features & CORS)
-npm install -g @restheart-cloud/cli
-rhc login                              # paste a token from cloud.restheart.com
-rhc setup --srv <srvId>                # <srvId> is the six-char id from your service URL
+npm install -g ulabase
+ulabase login                              # paste a token from cloud.restheart.com
+ulabase setup --srv <srvId>                # <srvId> is the six-char id from your service URL
 
 # 4. Start
 ng serve
 ```
 
-**Prerequisites:** Node.js 18+, a RESTHeart Cloud service ([create one at cloud.restheart.com](https://cloud.restheart.com)), and Angular CLI.
+**Prerequisites:** Node.js 18+, a Ulabase service ([create one at cloud.restheart.com](https://cloud.restheart.com)), and Angular CLI.
 
 **Want the consents gate?** Use the alternate setup file to add Terms of Service and Privacy Policy acceptance:
 
 ```bash
-rhc setup --srv <srvId> --file rhc.setup.consents.ts
+ulabase setup --srv <srvId> --file ulabase.setup.consents.ts
 ```
 
 Replace `public/terms.html` and `public/privacy.html` — they are placeholders.
@@ -113,7 +116,7 @@ The app detects whether `apiUrl` points to a valid `*.restheart.com` service. If
 - **`publicGuard`** protects auth pages — redirects into the app if already signed in
 - **`/invitations/accept`** is deliberately unguarded — works for signed-out invitees, signed-in users, and new accounts
 
-Feature flags in `src/environments/environment*.ts` must match your service's **Sign-up Mgmt → Features** toggles. A flag that's off removes both the route and the UI that links to it. The `rhc setup` tooling reads these flags and configures the service to match, eliminating the two-lists-that-must-agree problem.
+Feature flags in `src/environments/environment*.ts` must match your service's **Sign-up Mgmt → Features** toggles. A flag that's off removes both the route and the UI that links to it. The `ulabase setup` tooling reads these flags and configures the service to match, eliminating the two-lists-that-must-agree problem.
 
 ## Documentation map
 
@@ -122,16 +125,16 @@ Feature flags in `src/environments/environment*.ts` must match your service's **
 | [Architecture](architecture.md) | Angular SSR setup, dependency layers, routing, guards, auth flow, consents gate mechanism |
 | [Source Map](source-map.md) | File-by-file guide organized by domain |
 | [Workflows](workflows.md) | Key user flows: signup, login, OAuth, invitations, team management, consents acceptance |
-| [Domain Concepts](domain-concepts.md) | RESTHeart Cloud auth model, teams, tokens, feature flags, consents gate domain model |
-| [Operations](operations.md) | Build, serve, SSR deploy, environment config, CSS theming, porting, rhc setup tooling |
+| [Domain Concepts](domain-concepts.md) | Ulabase auth model, teams, tokens, feature flags, consents gate domain model |
+| [Operations](operations.md) | Build, serve, SSR deploy, environment config, CSS theming, porting, ulabase setup tooling |
 | [Testing](testing.md) | Manual test checklist, automated test status, what to test when changing what |
-| [Integrations](integrations.md) | @restheart-cloud/kit, kit-ng, RESTHeart Cloud service, OAuth, rhc CLI, CI |
+| [Integrations](integrations.md) | @ulabase/kit, kit-ng, Ulabase service, OAuth, ulabase CLI, CI |
 
 ## Existing documentation
 
 | File | Purpose |
 |---|---|
-| [`README.md`](../README.md) | Setup, structure, swap map, documentation map |
+| [`README.md`](../README.md) | Setup, structure, "Making it yours" theming guide |
 | [`TEMPLATE_API.md`](../TEMPLATE_API.md) | What each template binds to: signals, methods, inputs, form controls |
 | [`PORTING.md`](../PORTING.md) | Framework-neutral behaviour spec for React/Vue ports |
 | [`TEST-CASES.md`](../TEST-CASES.md) | Manual testing checklist for all auth/team flows |
@@ -141,9 +144,9 @@ Feature flags in `src/environments/environment*.ts` must match your service's **
 
 | Package | Role |
 |---|---|
-| `@restheart-cloud/kit` | TypeScript auth logic — plain Promise-based API, no framework coupling |
-| `@restheart-cloud/kit-ng` | Angular adapter — reactive wrapper (`RhAuthService`), guards, HTTP interceptor |
-| `@restheart-cloud/cli` | Dev tooling — `rhc setup` configures your service from `environment.dev.ts` flags |
+| `@ulabase/kit` | TypeScript auth logic — plain Promise-based API, no framework coupling |
+| `@ulabase/kit-ng` | Angular adapter — reactive wrapper (`RhAuthService`), guards, HTTP interceptor |
+| `ulabase` | Dev CLI — `ulabase setup` configures your service from `environment.dev.ts` flags |
 | `@angular/core` ^21.2 | Angular framework |
 | `@angular/ssr` ^21.2 | Server-side rendering |
 | `express` ^5.1 | SSR server |
@@ -153,8 +156,7 @@ Feature flags in `src/environments/environment*.ts` must match your service's **
 1. **Just exploring?** Read this page, then [Architecture](architecture.md) for the big picture.
 2. **Building a feature?** Check [Workflows](workflows.md) for existing flows, then [Source Map](source-map.md) for where to look.
 3. **Porting to React/Vue?** Read [`PORTING.md`](../PORTING.md) first — it covers what's portable and what you must rebuild.
-<!-- openwiki: broken internal link [../README.md#swap-map] heading anchor "swap-map" does not exist in "../README.md". Fix the href or restore the target, then delete this comment. -->
-4. **Restyling?** The [swap map in README.md](../README.md#swap-map) maps every semantic class hook to framework equivalents. [`TEMPLATE_API.md`](../TEMPLATE_API.md) documents what each template binds to.
+4. **Restyling?** The CSS comment block at the top of [`styles.css`](../src/styles.css) maps every semantic class hook (`.card`, `.btn-primary`, `.form-field`, …) to what it represents. [`TEMPLATE_API.md`](../TEMPLATE_API.md) documents what each template binds to.
 5. **Running tests?** See [Testing](testing.md) for the manual checklist and automated test status.
 
 ## Task routing table
@@ -167,17 +169,17 @@ Use this table to find the right starting point for common changes:
 | **Team management** (invitations, switching, members, settings) | [Workflows](workflows.md) | `src/app/pages/teams/*`, `src/app/pages/invitations/accept/` | `Teams`, `TeamDetail`, `NewTeam`, `Accept` | `accept.spec.ts`, `shell.spec.ts` | `ng test` |
 | **Account management** (profile, password change) | [Workflows](workflows.md) | `src/app/pages/account/account.ts` | `Account` | `account.spec.ts` | `ng test` |
 | **Routing and guards** | [Architecture](architecture.md) | `src/app/app.routes.ts` | `authGuard`, `publicGuard`, `AppTitleStrategy` | `app.spec.ts` | `ng test` |
-| **SSR/CSR split** | [Architecture](architecture.md) | `src/app/app.routes.server.ts`, `src/server.ts` | `Prerender`, `Client` render modes | Manual SSR test | `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs` |
+| **SSR/CSR split** | [Architecture](architecture.md) | `src/app/app.routes.server.ts`, `src/server.ts` | `Prerender`, `Client` render modes | Manual SSR test | `ng build && node dist/ulabase-starter-ng/server/server.mjs` |
 | **Feature flags** | [Domain Concepts](domain-concepts.md) | `src/environments/environment*.ts` | `environment.features` | Manual flag toggle test | `ng serve` and verify routes/UI |
 | **Environment configuration** | [Operations](operations.md) | `src/environments/environment.ts`, `src/environments/environment.dev.ts` | `apiUrl`, `features` | Manual config test | `ng serve` and check "Connect your service" screen |
-| **Consents gate** (ToS/Privacy Policy acceptance) | [Domain Concepts](domain-concepts.md), [Operations](operations.md) | `src/app/consents.ts`, `src/app/consents-gate.ts`, `rhc.setup.consents.ts` | `consentsBlocked`, `ConsentsGate`, `consentsOnError` | Manual 451 test | `rhc setup --srv <srvId> --file rhc.setup.consents.ts` then test blocked user |
+| **Consents gate** (ToS/Privacy Policy acceptance) | [Domain Concepts](domain-concepts.md), [Operations](operations.md) | `src/app/consents.ts`, `src/app/consents-gate.ts`, `ulabase.setup.consents.ts` | `consentsBlocked`, `ConsentsGate`, `consentsOnError` | Manual 451 test | `ulabase setup --srv <srvId> --file ulabase.setup.consents.ts` then test blocked user |
 | **CSS theming** | [Operations](operations.md) | `src/styles.css` | CSS custom properties, `.dark` class | Visual inspection | `ng serve` and toggle theme |
 | **Component styling** | [Operations](operations.md) | `src/app/pages/**/*.css` | Page-specific CSS classes | Visual inspection | `ng serve` |
 | **Build and deployment** | [Operations](operations.md) | `package.json`, `angular.json` | Build scripts, SSR server | Build success | `ng build` |
-| **Dependencies** | [Integrations](integrations.md) | `package.json` | `@restheart-cloud/kit`, `@restheart-cloud/kit-ng` | Dependency audit | `npm audit` |
+| **Dependencies** | [Integrations](integrations.md) | `package.json` | `@ulabase/kit`, `@ulabase/kit-ng` | Dependency audit | `npm audit` |
 | **Testing** | [Testing](testing.md) | `src/app/**/*.spec.ts`, `TEST-CASES.md` | Vitest configuration, test cases | Test execution | `ng test` |
-| **New API endpoints** | [Integrations](integrations.md) | `@restheart-cloud/kit`, `@restheart-cloud/kit-ng` | `RhAuthService`, `auth.api()`, kit functions | Manual API test | `ng serve` and test API calls |
-| **Service setup** (rhc CLI) | [Operations](operations.md) | `rhc.setup.ts`, `rhc.setup.consents.ts` | `defineSetup`, `step`, feature flag derivation | `rhc setup --dry-run` | `rhc setup --srv <srvId> --dry-run` |
+| **New API endpoints** | [Integrations](integrations.md) | `@ulabase/kit`, `@ulabase/kit-ng` | `RhAuthService`, `auth.api()`, kit functions | Manual API test | `ng serve` and test API calls |
+| **Service setup** (ulabase CLI) | [Operations](operations.md) | `ulabase.setup.ts`, `ulabase.setup.consents.ts` | `defineSetup`, `step`, feature flag derivation | `ulabase setup --dry-run` | `ulabase setup --srv <srvId> --dry-run` |
 | **Porting to other frameworks** | [Operations](operations.md) | `PORTING.md`, `TEMPLATE_API.md` | Portable layers, reactive auth layer | Manual parity test | Compare with Angular original |
 
 ## Backlog
