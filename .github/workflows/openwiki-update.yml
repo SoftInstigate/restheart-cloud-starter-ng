@@ -9,6 +9,11 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
+    inputs:
+      message:
+        description: "What to tell OpenWiki for this run (e.g. a rename to apply throughout the wiki)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -55,8 +60,13 @@ jobs:
 
       - name: Run OpenWiki
         if: steps.changes.outputs.run == 'true'
-        run: openwiki code --update --print
+        # --init the first time, when there is no wiki yet; the message, when given by hand, is an
+        # instruction for this run, like a rename that the incremental update would not apply by itself
+        run: |
+          mode=--update; [ -d openwiki ] || mode=--init
+          if [ -n "$MESSAGE" ]; then openwiki code "$mode" --print "$MESSAGE"; else openwiki code "$mode" --print; fi
         env:
+          MESSAGE: ${{ inputs.message }}
           OPENWIKI_PROVIDER: openrouter
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           OPENWIKI_MODEL_ID: xiaomi/mimo-v2.5-pro
