@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:fee868f6a9115f3ea8cb43be988c77ca03edc1aaed453e5c9b6a32caca7b6115",
+  "pageVersion": "sha256:881f82bd8a31b42c59b34b9361d41efa7153a9de310674937cd5c6501dce7633",
   "claims": [
     {
       "id": "claim_e330a82359b141a9b3c79a1b803d13df",
@@ -98,7 +98,7 @@
     },
     {
       "id": "claim_9123c80d082a4c539d5f8d5f27e6b853",
-      "statement": "If apiUrl is not a valid *.restheart.com URL, appConfig provides no routes (empty array), preventing the router's initial navigation from running route guards against a non-existent backend, and the app shows a 'Connect your service' screen.",
+      "statement": "If apiUrl is not a valid Ulabase service URL, appConfig provides no routes (empty array), preventing the router's initial navigation from running route guards against a non-existent backend, and the app shows a 'Connect your service' screen.",
       "evidence": [
         {
           "resource": "repo://src/app/app.config.ts#L15-L15",
@@ -291,6 +291,6 @@
   ],
   "verification": {
     "by": "openwiki/0.6.1",
-    "at": "2026-10-01T10:27:04.869Z"
+    "at": "2026-10-01T12:12:05.121Z"
   }
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:05f22cadeda6be10000276e37b6c8651a1050e1ea50b68d2706bc1835e6c89cd",
+  "pageVersion": "sha256:0473b905aab6ffb19b02d317dccdc994d2c332da6010bf82c636fa12fdf9e5a5",
   "claims": [
     {
       "id": "claim_6f1b662867fe42cd8fd78804832ebb59",
@@ -22,15 +22,15 @@
       "evidence": [
         {
           "resource": "repo://src/app/app.html#L3-L62",
-          "version": "repo-lines-v1:sha256:d9afca085066664376eba654f1cfb1093a90542705625e3af2b9fc716bc9dc8a:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:57ba3a569e2855f3592045fef1fc0a3c5865601f671252af8b4ad74e3275b00e:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/environments/environment.dev.ts",
-          "version": "repo-file-v1:sha256:63cb6dd570a403f69861e86c6583063a653ac922b04f0866aa4377f66ffb269f"
+          "version": "repo-file-v1:sha256:401f178c3b8d794420a4f7a08ac99476be36de98746f76bfc7ba7d45d17051f2"
         },
         {
           "resource": "repo://src/environments/environment.ts",
-          "version": "repo-file-v1:sha256:884e9d33c3c42ff7f1d356ccff87738d109a18761ce555715d0e3794b737536d"
+          "version": "repo-file-v1:sha256:3fa6fa5c8aa620e4b80300a5d088d0ebf978d33712dab10195841d9d2c7b1a41"
         }
       ]
     },
@@ -40,11 +40,11 @@
       "evidence": [
         {
           "resource": "repo://ulabase.setup.consents.ts",
-          "version": "repo-file-v1:sha256:933d5de1f38437a962e7d5082eea74fb669520451a10f091920d9e02061ecdf2"
+          "version": "repo-file-v1:sha256:1c30bcdb21e01641a8a89e5dbdbba4b2d2f7dfd1ca944c6f97e2960447905376"
         },
         {
           "resource": "repo://ulabase.setup.ts",
-          "version": "repo-file-v1:sha256:a52bbd6661f5008268a8b344e5e324da9f5d5c36a6f1943bb8d85f617492fd04"
+          "version": "repo-file-v1:sha256:a24af163abf447ccc8028e6d2113a8c6a0eee32a0fdb3f2448c4068f8d4bc437"
         }
       ]
     },
@@ -138,7 +138,7 @@
       "evidence": [
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:9efff3f606ce657f64f97786f57062810912096b199a5df85cc581891ad501a7"
+          "version": "repo-file-v1:sha256:190f8c97122e563d70813ffda65c3236bdc8dfba4e2e080916204aea91403ca8"
         },
         {
           "resource": "repo://src/styles.css#L1-L34",
@@ -152,7 +152,7 @@
       "evidence": [
         {
           "resource": "repo://PORTING.md",
-          "version": "repo-file-v1:sha256:4ce18ebbae8d0bc09607c7cf04817c4b2343eef518099ee5c85c466f5dd38a5c"
+          "version": "repo-file-v1:sha256:575632873496ccdacc73a6b3792fe0afe72a91c937c55dacb987860fb52cdf8c"
         }
       ]
     },
@@ -172,15 +172,15 @@
       "evidence": [
         {
           "resource": "repo://src/app/app.html",
-          "version": "repo-file-v1:sha256:e478bac6f2bb34ec2e39a05bcc9af07572b4cb93918258e8b1f8f871ad99cd0d"
+          "version": "repo-file-v1:sha256:c2cd0a915c9212664454359496fefd0feceba0b81c354f2e1856456db39669d0"
         },
         {
           "resource": "repo://src/environments/environment.dev.ts",
-          "version": "repo-file-v1:sha256:63cb6dd570a403f69861e86c6583063a653ac922b04f0866aa4377f66ffb269f"
+          "version": "repo-file-v1:sha256:401f178c3b8d794420a4f7a08ac99476be36de98746f76bfc7ba7d45d17051f2"
         },
         {
           "resource": "repo://src/environments/environment.ts",
-          "version": "repo-file-v1:sha256:884e9d33c3c42ff7f1d356ccff87738d109a18761ce555715d0e3794b737536d"
+          "version": "repo-file-v1:sha256:3fa6fa5c8aa620e4b80300a5d088d0ebf978d33712dab10195841d9d2c7b1a41"
         }
       ]
     },
@@ -202,11 +202,11 @@
         },
         {
           "resource": "repo://src/environments/environment.dev.ts",
-          "version": "repo-file-v1:sha256:63cb6dd570a403f69861e86c6583063a653ac922b04f0866aa4377f66ffb269f"
+          "version": "repo-file-v1:sha256:401f178c3b8d794420a4f7a08ac99476be36de98746f76bfc7ba7d45d17051f2"
         },
         {
           "resource": "repo://src/environments/environment.ts",
-          "version": "repo-file-v1:sha256:884e9d33c3c42ff7f1d356ccff87738d109a18761ce555715d0e3794b737536d"
+          "version": "repo-file-v1:sha256:3fa6fa5c8aa620e4b80300a5d088d0ebf978d33712dab10195841d9d2c7b1a41"
         },
         {
           "resource": "repo://src/server.ts",
@@ -221,6 +221,6 @@
   ],
   "verification": {
     "by": "openwiki/0.6.1",
-    "at": "2026-10-01T10:27:04.869Z"
+    "at": "2026-10-01T12:12:05.121Z"
   }
 }

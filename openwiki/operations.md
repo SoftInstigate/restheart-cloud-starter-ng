@@ -29,10 +29,10 @@ sources:
     resource: repo://ulabase.setup.consents.ts
   - id: openwiki-source-34f568b222540eb11aa44859
     resource: repo://ulabase.setup.ts
-generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T12:12:05.121Z" }
 verified:
   - by: openwiki/0.6.1
-    at: 2026-10-01T10:27:04.869Z
+    at: 2026-10-01T12:12:05.121Z
 ---
 
 # Operations & Runbook
@@ -67,7 +67,7 @@ Two environment files:
 | `src/environments/environment.ts` | `ng build` (production) | Production — point at a shared (or higher) service |
 
 **Setup:**
-1. Edit `environment.dev.ts` — set `apiUrl` to your service URL (e.g. `https://<srvid>.eu-central-1-free-1.restheart.com`)
+1. Edit `environment.dev.ts` — set `apiUrl` to your service URL (e.g. `https://<id>.ulabase.app`)
 2. Tell git to ignore local changes: `git update-index --assume-unchanged src/environments/environment.dev.ts`
 3. Match `features` flags to your service's **Sign-up Mgmt → Features** toggles
 

@@ -40,10 +40,10 @@ sources:
     resource: repo://ulabase.setup.consents.ts
   - id: openwiki-source-34f568b222540eb11aa44859
     resource: repo://ulabase.setup.ts
-generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T12:12:05.121Z" }
 verified:
   - by: openwiki/0.6.1
-    at: 2026-10-01T10:27:04.869Z
+    at: 2026-10-01T12:12:05.121Z
 ---
 
 # Integrations & Dependencies
@@ -109,7 +109,7 @@ this.auth.api('/demo').pipe(
 
 ## Ulabase service
 
-The starter is a frontend for [Ulabase](https://cloud.restheart.com) services. Each service provides:
+The starter is a frontend for [Ulabase](https://ulabase.com) services. Each service provides:
 
 - **Auth endpoints** — `/auth/*` (register, verify, login, invite, etc.)
 - **Token endpoint** — `/token` (login, renew)
@@ -120,7 +120,7 @@ The starter is a frontend for [Ulabase](https://cloud.restheart.com) services. E
 - **Free** — for development only
 - **Shared** (or higher) — for production
 
-**API base URL format:** `https://<srvid>.<region>-<tier>.restheart.com`
+**API base URL format:** `https://<id>.ulabase.app`
 
 ## OAuth providers
 
@@ -201,7 +201,7 @@ flowchart TD
 
 The repository has an OpenWiki GitHub Actions workflow at [`.github/workflows/openwiki-update.yml`](../.github/workflows/openwiki-update.yml):
 
-- **Schedule:** manual via `workflow_dispatch` only (no cron schedule)
+- **Schedule:** cron `0 3 * * *` (nightly at 03:00 UTC), push of version tags (`[0-9]+.[0-9]+.[0-9]+`), and manual `workflow_dispatch`
 - **Action:** runs `openwiki code --update --print`, creates a PR with documentation updates
 - **Model:** `xiaomi/mimo-v2.5-pro` via OpenRouter
 - **Tracing:** disabled
@@ -240,7 +240,7 @@ When Ulabase adds new endpoints:
 2. **Kit-ng** — add a method to `RhAuthService` in `@ulabase/kit-ng`
 3. **Starter** — wire the new method into the appropriate component
 
-See [`specs/done/account-team-management.md`](../specs/done/account-team-management.md) for an example of this process (9 new endpoints added for restheart 9.6.0).
+See [`specs/done/account-team-management.md`](../specs/done/account-team-management.md) for an example of this process (9 new endpoints added for RESTHeart 9.6.0, now part of the Ulabase service).
 
 ## Change navigation for integrations
 
@@ -270,6 +270,6 @@ See [`specs/done/account-team-management.md`](../specs/done/account-team-managem
 
 ### For CI/CD changes
 - **Start with:** `.github/workflows/openwiki-update.yml` for OpenWiki workflow
-- **Check:** Workflow schedule and model configuration
-- **Test with:** Manual workflow dispatch
+- **Check:** Workflow schedule (cron, tag push, manual dispatch) and model configuration
+- **Test with:** Manual workflow dispatch or push a version tag
 - **Validation:** PR is created with documentation updates

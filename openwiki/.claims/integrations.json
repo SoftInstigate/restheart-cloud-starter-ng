@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:254aab99a7d0c31866c2d0d9b201fb8fe195aac068f26bf657829e97fb13a429",
+  "pageVersion": "sha256:1ad8fad4eabd9828503112218b3a066e1eb88c9c60cdb203ba01be2bb0e22991",
   "claims": [
     {
       "id": "claim_13e3495b41994c06acd94d3cafbb05a8",
@@ -112,11 +112,11 @@
         },
         {
           "resource": "repo://src/environments/environment.dev.ts#L1-L22",
-          "version": "repo-lines-v1:sha256:63cb6dd570a403f69861e86c6583063a653ac922b04f0866aa4377f66ffb269f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjM4ZDEyYjRkZGZlOTg2NmI3N2M0ZTc4ZWU3NWI4Y2QzZjhlZmM2MjZiMTI2ZmY0NzM2OTU1NGZlY2NlOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:401f178c3b8d794420a4f7a08ac99476be36de98746f76bfc7ba7d45d17051f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjM4ZDEyYjRkZGZlOTg2NmI3N2M0ZTc4ZWU3NWI4Y2QzZjhlZmM2MjZiMTI2ZmY0NzM2OTU1NGZlY2NlOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/environments/environment.ts#L1-L19",
-          "version": "repo-lines-v1:sha256:884e9d33c3c42ff7f1d356ccff87738d109a18761ce555715d0e3794b737536d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjM4ZDEyYjRkZGZlOTg2NmI3N2M0ZTc4ZWU3NWI4Y2QzZjhlZmM2MjZiMTI2ZmY0NzM2OTU1NGZlY2NlOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:3fa6fa5c8aa620e4b80300a5d088d0ebf978d33712dab10195841d9d2c7b1a41:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjM4ZDEyYjRkZGZlOTg2NmI3N2M0ZTc4ZWU3NWI4Y2QzZjhlZmM2MjZiMTI2ZmY0NzM2OTU1NGZlY2NlOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -134,7 +134,7 @@
         },
         {
           "resource": "repo://src/environments/environment.dev.ts#L18-L19",
-          "version": "repo-lines-v1:sha256:68244dda8f6e59eb5b836a65600312dc193379aa7d4eeadd3ee0c8b3d0cdbfe0:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGY0MWNhNTJkYjM4MDMxNGRlYTE4NTNiOGVjMGVlMDk3NDZjM2E4NzdhNzg3ZGI4NTk5NGRkNTczNDZhMDE0ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWY4MTQxZDAwM2FkMWY1MDYzNDAzNTE3YTIxNTllMzM3NjUwNmE1ZDEyZGQ0YzFhY2Y3ZDhlN2JjOGJiYjFmOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzI0OGY3NTM1NTNiNDdlMjVhMWFjYzEzZjA4NjgwNTAxYjFlOTM1YzFlYWI3Y2FiMjZlYjE3MjU5YzI2NjFiMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDA0Zjk4YWU5YjVjM2Q4OTgxZGY0ZTcwOWY5ZmRjYTk1OTlkMGM1M2YzYTQ0MTcyODU3NmYwOGU5YTk3ODQ0NyJ9"
+          "version": "repo-lines-v1:sha256:d11d79d2fdb4d7c8a9daa02f2b0e96925612f32813ae40b5ac3b1b1e961a1e3b:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTYwZDE3NjQ0NGY1MTYzYWM4NTUyZGViNzFkOGI4ODcyOGI3NjAwMjZhZWE1ZDc4Y2EyYTg4NTVhMGMxMTkxOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWY4MTQxZDAwM2FkMWY1MDYzNDAzNTE3YTIxNTllMzM3NjUwNmE1ZDEyZGQ0YzFhY2Y3ZDhlN2JjOGJiYjFmOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzI0OGY3NTM1NTNiNDdlMjVhMWFjYzEzZjA4NjgwNTAxYjFlOTM1YzFlYWI3Y2FiMjZlYjE3MjU5YzI2NjFiMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDA0Zjk4YWU5YjVjM2Q4OTgxZGY0ZTcwOWY5ZmRjYTk1OTlkMGM1M2YzYTQ0MTcyODU3NmYwOGU5YTk3ODQ0NyJ9"
         }
       ]
     },
@@ -155,8 +155,8 @@
           "version": "repo-lines-v1:sha256:b56e1c09603e6ea191ddd048dedc71c619699e56ea7f3cdbe7aabfe8540543dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGM1MjUyMzk5ODdhNzQ2MDQ0ZDMyM2I0NzlkNjg3ZGZhNDE4NGM0N2E0ZjdkZTgyYjcwM2IxOGQ4MjM5YjM5MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTcyMWUxNWYzODYxN2NjMWQwMGU3NjE3MGQ5MmJmYTc5YWQ5NjBiNjBlZTFiMGY5NDA4NzFiOWM4ZDg2M2Q2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmJiOTRkYjg3ZDlkMjA1NjY0OWU3MTQ3NDBmYTRjZTZjZmEyY2MzMzg0YjUyZDI4YTFiYjczY2M2ZmVmYzIwMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzFmNDI4OTc3NmY0NjE2Zjg5MTJjMzE3OWNjZjgyYWJlNWEyNzhkZDMyODA5Y2E0OThmMTVhMmY1NDJkMTY0ZSJ9"
         },
         {
-          "resource": "repo://ulabase.setup.ts#L81-L184",
-          "version": "repo-lines-v1:sha256:77f81a9892613b159a229a3f1035b25ed55a066ba3b09b7b7d156370523fb7ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJjYzBmYWE4MDFkODMxZTk2ZWYzYzgyODdlODQ0MmQ5OGYwZDZiMGNlODdlZWIzZWEzNDEyOTM0ODAxMjFkMTU3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI3MjEyOWMyNzM1MmI0OTU1NDhiMDcxYWUzNGFiOTA4MTE3Mjg3MzQyOGY2Zjg3ZjU0YjU4MGU1MTUzYzlhYTAyIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://ulabase.setup.ts#L81-L188",
+          "version": "repo-lines-v1:sha256:e6c9d960828ef39a479407cdfadb561856b638070b94f7e7e470064308d123c4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJjYzBmYWE4MDFkODMxZTk2ZWYzYzgyODdlODQ0MmQ5OGYwZDZiMGNlODdlZWIzZWEzNDEyOTM0ODAxMjFkMTU3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI3MjEyOWMyNzM1MmI0OTU1NDhiMDcxYWUzNGFiOTA4MTE3Mjg3MzQyOGY2Zjg3ZjU0YjU4MGU1MTUzYzlhYTAyIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         }
       ]
     },
@@ -166,7 +166,7 @@
       "evidence": [
         {
           "resource": "repo://ulabase.setup.consents.ts#L1-L48",
-          "version": "repo-lines-v1:sha256:d3707a955a08bf0cd89fe91f7114baa61d07efc87c1d6a497f77ae40b163eea0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3YjYyYThhZWNkZWFiY2M4ZjNiNjUwZGM1MWJhMjU4ZDU2MWYzZDkyMjFmZjQ2ZmZiNDMwODAwMDE3OTEzNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjM2Q3MmUwZmRhOWQ5ODkwMTQxNWUwZmFhODViYTU1Njg1ZWQ4OTQ1ZjYxZGU2ZjRiOTE1YWE1NDUwN2IxMjYifQ"
+          "version": "repo-lines-v1:sha256:a3ddac18131ecf9d13391cc3bf8f754da5dfd977999ac503aace0fbc74b23588:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3YjYyYThhZWNkZWFiY2M4ZjNiNjUwZGM1MWJhMjU4ZDU2MWYzZDkyMjFmZjQ2ZmZiNDMwODAwMDE3OTEzNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjM2Q3MmUwZmRhOWQ5ODkwMTQxNWUwZmFhODViYTU1Njg1ZWQ4OTQ1ZjYxZGU2ZjRiOTE1YWE1NDUwN2IxMjYifQ"
         },
         {
           "resource": "repo://ulabase.setup.consents.ts#L167-L167",
@@ -184,17 +184,17 @@
     },
     {
       "id": "claim_2fdd7216bf484cc5a457fb99df0ac736",
-      "statement": "The OpenWiki GitHub Actions workflow runs via manual dispatch only (no cron schedule), uses xiaomi/mimo-v2.5-pro via OpenRouter, and creates a PR on branch openwiki/update updating paths under openwiki/, AGENTS.md, and CLAUDE.md.",
+      "statement": "The OpenWiki GitHub Actions workflow runs on a nightly cron schedule (0 3 * * *), on push of version tags matching [0-9]+.[0-9]+.[0-9]+, and on manual workflow_dispatch; it uses xiaomi/mimo-v2.5-pro via OpenRouter, checks whether source files changed since the last wiki update before spending API credits on scheduled runs, and creates a PR on branch openwiki/update updating paths under openwiki/, AGENTS.md, and CLAUDE.md.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L46",
-          "version": "repo-lines-v1:sha256:dbbb487794bb5258a79367038207f8c0221aa1ed650d62c31bacd40e73de3515:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0Nzc5NmQzMTczMmZiY2U4OTk4YTJmN2U3YjFiYjk3NTVjMjNlNTg1MDMyMGI5MDkzN2Q4MmMzZmQwZTYyYTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L100",
+          "version": "repo-lines-v1:sha256:05c4e07137aeb79ba19ed7a8ed8d8e94115adcd587c0d4e0be268c98310bc6c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwNjAyNzg3YWY2ZGNjMDgzNGRlMTIxY2JiMWNiOTVmOTQ1OWI3MjFlYWIwMzQ5ZjEwNTAxYjk5NmMxYzc3ZmZmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1Y2U4YjgyZTM4MDVhM2ExODAwM2YyZmU0NWQ0ZjVkYmI0N2FmZGU4YzJkZGY1NTljZWQyYjRmZGM0ZjQwNjM5IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MiwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJkOTM0MmY1YTIyNTQ4YjIwZWU5OTE3ZWMyMTJiYTVmMzM5Zjc3OGZjOWQ3YmQ2ODJlMGViZDJiODcwMWRhNGE4In0"
         }
       ]
     },
     {
       "id": "claim_6a6bc8d846124c359fa1c7797e51a27a",
-      "statement": "Adding new RESTHeart Cloud API endpoints follows a three-layer process: add a wrapper function in @restheart-cloud/kit, add a method to RhAuthService in @restheart-cloud/kit-ng, then wire the method into the appropriate starter component.",
+      "statement": "Adding new Ulabase API endpoints follows a three-layer process: add a wrapper function in @ulabase/kit (formerly @restheart-cloud/kit), add a method to RhAuthService in @ulabase/kit-ng (formerly @restheart-cloud/kit-ng), then wire the method into the appropriate starter component.",
       "evidence": [
         {
           "resource": "repo://specs/done/account-team-management.md#L36-L72",
@@ -227,6 +227,6 @@
   ],
   "verification": {
     "by": "openwiki/0.6.1",
-    "at": "2026-10-01T10:27:04.869Z"
+    "at": "2026-10-01T12:12:05.121Z"
   }
 }

@@ -34,10 +34,10 @@ sources:
     resource: repo://src/main.ts
   - id: openwiki-source-d9b845a7425932c3767a237e
     resource: repo://src/server.ts
-generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T12:12:05.121Z" }
 verified:
   - by: openwiki/0.6.1
-    at: 2026-10-01T10:27:04.869Z
+    at: 2026-10-01T12:12:05.121Z
 ---
 
 # Architecture Overview
@@ -115,7 +115,7 @@ sequenceDiagram
     Note over Auth: Configure HTTP interceptor and auth service
     
     App->>App: Check apiUrl validity
-    alt apiUrl not valid restheart.com URL
+    alt apiUrl not valid Ulabase service URL
         App->>App: Show Connect your service screen
     else apiUrl valid
         App->>App: consumeFragmentToken
