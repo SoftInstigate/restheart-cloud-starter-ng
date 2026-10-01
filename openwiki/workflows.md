@@ -38,10 +38,10 @@ sources:
     resource: repo://src/app/pages/invitations/accept/accept.ts
   - id: openwiki-source-a0abfed3f48fb645e980c9ea
     resource: repo://src/app/pages/teams/detail/team-detail.ts
-generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T12:12:05.121Z" }
 verified:
   - by: openwiki/0.6.1
-    at: 2026-10-01T10:27:04.869Z
+    at: 2026-10-01T12:12:05.121Z
 ---
 
 # Key User Workflows
@@ -325,7 +325,7 @@ fetchData() {
 }
 ```
 
-**Change navigation:** When modifying the home page demo, edit `src/app/pages/home/home.ts` for the fetch logic and `src/app/pages/home/home.html` for the template. Test with `ng serve` and verify the demo button works when connected to a RESTHeart Cloud service with a `/demo` collection.
+**Change navigation:** When modifying the home page demo, edit `src/app/pages/home/home.ts` for the fetch logic and `src/app/pages/home/home.html` for the template. Test with `ng serve` and verify the demo button works when connected to a Ulabase service with a `/demo` collection.
 
 ## Change navigation for workflows
 

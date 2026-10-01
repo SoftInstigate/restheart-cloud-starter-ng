@@ -50,10 +50,10 @@ sources:
     resource: repo://ulabase.setup.consents.ts
   - id: openwiki-source-34f568b222540eb11aa44859
     resource: repo://ulabase.setup.ts
-generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T12:12:05.121Z" }
 verified:
   - by: openwiki/0.6.1
-    at: 2026-10-01T10:27:04.869Z
+    at: 2026-10-01T12:12:05.121Z
 ---
 
 # Ulabase Starter — Angular
@@ -72,7 +72,7 @@ Works for multi-tenant SaaS (invitations, team switcher) and simpler apps (auth 
 - **SSR for public routes**, CSR for the authenticated shell
 - **Account management** — profile editing and password change
 - **Consents gate** — optional server-enforced Terms of Service and Privacy Policy acceptance (blocks all API requests until accepted)
-- **"Connect your service" screen** — shown when `apiUrl` is empty or not a valid `*.restheart.com` URL, guiding setup
+- **"Connect your service" screen** — shown when `apiUrl` is empty or not a valid Ulabase service URL (e.g. `https://<srvId>.ulabase.app`), guiding setup
 - **Dark/light mode** — persisted to localStorage
 - **Demo fetch feature** — shows how to use `auth.api()` for authenticated API calls to your Ulabase service
 
@@ -91,14 +91,14 @@ git update-index --assume-unchanged src/environments/environment.dev.ts
 
 # 3. Set the service up (installs accounts plugin, configures features & CORS)
 npm install -g ulabase
-ulabase login                              # paste a token from cloud.restheart.com
+ulabase login                              # paste a token from ulabase.com
 ulabase setup --srv <srvId>                # <srvId> is the six-char id from your service URL
 
 # 4. Start
 ng serve
 ```
 
-**Prerequisites:** Node.js 18+, a Ulabase service ([create one at cloud.restheart.com](https://cloud.restheart.com)), and Angular CLI.
+**Prerequisites:** Node.js 18+, a Ulabase service ([create one at ulabase.com](https://ulabase.com)), and Angular CLI.
 
 **Want the consents gate?** Use the alternate setup file to add Terms of Service and Privacy Policy acceptance:
 
@@ -110,7 +110,7 @@ Replace `public/terms.html` and `public/privacy.html` — they are placeholders.
 
 ## How it works
 
-The app detects whether `apiUrl` points to a valid `*.restheart.com` service. If not, it shows a "Connect your service" screen instead of the full app. Once configured, the route guard system drives everything:
+The app detects whether `apiUrl` points to a valid Ulabase service URL (e.g. `https://<srvId>.ulabase.app`). If not, it shows a "Connect your service" screen instead of the full app. Once configured, the route guard system drives everything:
 
 - **`authGuard`** protects authenticated routes — redirects to `/auth/login` if no session
 - **`publicGuard`** protects auth pages — redirects into the app if already signed in

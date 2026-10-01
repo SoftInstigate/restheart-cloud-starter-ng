@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:78308eaa27befb3ad095b4813039f1b3064a1eb6f4f71f3e2cadaf53e4cd38fb",
+  "pageVersion": "sha256:d2b8f9a8dfe581d8a7bc9f932d92262de7ff431ec3435658f7be6d2afca3801f",
   "claims": [
     {
       "id": "claim_b2e21d58823c4fc7be8063a4812231ef",
@@ -22,7 +22,7 @@
       "evidence": [
         {
           "resource": "repo://src/app/app.html#L3-L62",
-          "version": "repo-lines-v1:sha256:d9afca085066664376eba654f1cfb1093a90542705625e3af2b9fc716bc9dc8a:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:57ba3a569e2855f3592045fef1fc0a3c5865601f671252af8b4ad74e3275b00e:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/app/consents-gate.ts",
@@ -48,11 +48,11 @@
     },
     {
       "id": "claim_ea28cc4ffc6c4109bbb11bf78aae473e",
-      "statement": "Quick setup requires Node.js 18+, a Ulabase service (create one at cloud.restheart.com), and Angular CLI. The four steps are: clone and install, point to service (edit environment.dev.ts), run ulabase setup to configure the service, and start with ng serve.",
+      "statement": "Quick setup requires Node.js 18+, a Ulabase service (create one at ulabase.com), and Angular CLI. The four steps are: clone and install, point to service (edit environment.dev.ts), run ulabase setup to configure the service, and start with ng serve.",
       "evidence": [
         {
-          "resource": "repo://README.md#L12-L79",
-          "version": "repo-lines-v1:sha256:c2e32c686dba65eb01438b84ff7c651b7a3b3017e4c58af26ff98032206a8f90:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDVhZDY1YTljMWJhZjBlM2VkMGE2NTM5MThhMDQxZWI4NmEwYjA1ZWIwODZlMDAxNGFmZGZiYWQwNmE3NTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5MmEzZmYxMjdiMDYwYjgwYzNiMDljOTdjOTBiODFlZjNjNGVmNmI4N2M1ZDA1MGFhMzYxMjAxNzRjYTVkNWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwN2Y1OGI0NWM4NGEzNmUxZGE0ZWM4MmIxYjNjN2M4ZjFjN2M3YmYwOTQ5YTNiZmM5MGNmZTBkNDRmZWJlZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk1ZjM3OWYwOTBmYjM5NjM3ZmEyZWFhNGVjMWM5MzQ3NDVkMzQ5ZmZlZTc0OGQyYzExM2NlZjc0YTk2ZTQ0NTkifQ"
+          "resource": "repo://README.md#L12-L91",
+          "version": "repo-lines-v1:sha256:e71a8b8bd7c7db8caf245a28c9b57e6ee15241edec0bccb06635646180496749:eyJzZWxlY3RlZExpbmVDb3VudCI6ODAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhMDVhZDY1YTljMWJhZjBlM2VkMGE2NTM5MThhMDQxZWI4NmEwYjA1ZWIwODZlMDAxNGFmZGZiYWQwNmE3NTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5MmEzZmYxMjdiMDYwYjgwYzNiMDljOTdjOTBiODFlZjNjNGVmNmI4N2M1ZDA1MGFhMzYxMjAxNzRjYTVkNWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwN2Y1OGI0NWM4NGEzNmUxZGE0ZWM4MmIxYjNjN2M4ZjFjN2M3YmYwOTQ5YTNiZmM5MGNmZTBkNDRmZWJlZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk1ZjM3OWYwOTBmYjM5NjM3ZmEyZWFhNGVjMWM5MzQ3NDVkMzQ5ZmZlZTc0OGQyYzExM2NlZjc0YTk2ZTQ0NTkifQ"
         },
         {
           "resource": "repo://package.json#L1-L11",
@@ -65,8 +65,8 @@
       "statement": "The ulabase setup tooling (ulabase.setup.ts) installs the accounts plugin, configures feature flags derived from environment.dev.ts, sets OAuth credentials if enabled, and adds the app origin to the CORS allowlist. It follows a check/apply pattern for idempotent runs.",
       "evidence": [
         {
-          "resource": "repo://ulabase.setup.ts#L1-L100",
-          "version": "repo-lines-v1:sha256:d2b7d8a87f381e10753f02e0dfd0c705f74459cdf6e2d3884fb6275fe9ab6616:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWYyMmNmMDczMjU5MmMyNDcxNDFjYmU2MWVmYTExMDEyNjEyZjVhMzEyMmI5YWY5YmJhZjUyZjU3MjRkMTk0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIxNjFiNmQ5OTViNWY5MmRmYjI3YTljMWMwMTM2NmM1Y2ZhMGJkY2QwZDg5YWQ1ODgyOGNiM2JhZTUxMzFkZjNkIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI2NTgwY2UyOTFiYjQ0ZTU2ZWQwNTJjNjkyNDNiMDBiNzJlYTFjYWMxYmEzMWUxNzcwMjUxM2RjZDhmMGRjNzEzIn0"
+          "resource": "repo://ulabase.setup.ts#L1-L101",
+          "version": "repo-lines-v1:sha256:758eb767522833ddef31ef0e5092050b71cbfa2ab03e9a7acbd1dcb82b0d1e78:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWYyMmNmMDczMjU5MmMyNDcxNDFjYmU2MWVmYTExMDEyNjEyZjVhMzEyMmI5YWY5YmJhZjUyZjU3MjRkMTk0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIxNjFiNmQ5OTViNWY5MmRmYjI3YTljMWMwMTM2NmM1Y2ZhMGJkY2QwZDg5YWQ1ODgyOGNiM2JhZTUxMzFkZjNkIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI2NTgwY2UyOTFiYjQ0ZTU2ZWQwNTJjNjkyNDNiMDBiNzJlYTFjYWMxYmEzMWUxNzcwMjUxM2RjZDhmMGRjNzEzIn0"
         }
       ]
     },
@@ -76,13 +76,13 @@
       "evidence": [
         {
           "resource": "repo://ulabase.setup.consents.ts#L1-L100",
-          "version": "repo-lines-v1:sha256:a69a59f82013384fa21f38959480029c30953205ebf7be60fe8e3360f4139974:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWYyMmNmMDczMjU5MmMyNDcxNDFjYmU2MWVmYTExMDEyNjEyZjVhMzEyMmI5YWY5YmJhZjUyZjU3MjRkMTk0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJiOTc4ZTI1MDNiOGNmMzdhMDZmN2Q2ZjBhM2E2YjZmZTM1NjkxZmJjYWI1MGI4Nzc1Y2FiNmZhYmM3MWM1OTJiIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI3OWM5Njg2N2M3OTBmZGFhMDM4YTdiNGU3MjA4MTBlNGE5MjVhYjg0ZTkxZThkMmE4Njg5YmZkMDg3MjE2ODFkIn0"
+          "version": "repo-lines-v1:sha256:35337a1304233c483e7bec427753586e82ec2a312876c01f1e2f5961f19bb3be:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWYyMmNmMDczMjU5MmMyNDcxNDFjYmU2MWVmYTExMDEyNjEyZjVhMzEyMmI5YWY5YmJhZjUyZjU3MjRkMTk0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJiOTc4ZTI1MDNiOGNmMzdhMDZmN2Q2ZjBhM2E2YjZmZTM1NjkxZmJjYWI1MGI4Nzc1Y2FiNmZhYmM3MWM1OTJiIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI3OWM5Njg2N2M3OTBmZGFhMDM4YTdiNGU3MjA4MTBlNGE5MjVhYjg0ZTkxZThkMmE4Njg5YmZkMDg3MjE2ODFkIn0"
         }
       ]
     },
     {
       "id": "claim_63f9d3b3b26d4770beaf3dd45e469ed6",
-      "statement": "The app detects whether apiUrl points to a valid *.restheart.com service. If not, it shows a 'Connect your service' screen instead of the full app. This prevents route guards from running against a non-existent backend.",
+      "statement": "The app detects whether apiUrl points to a valid Ulabase service URL (validated by isValidApiBaseUrl). If not, it shows a 'Connect your service' screen instead of the full app. This prevents route guards from running against a non-existent backend.",
       "evidence": [
         {
           "resource": "repo://src/app/app.config.ts#L15-L15",
@@ -90,7 +90,7 @@
         },
         {
           "resource": "repo://src/app/app.html#L3-L62",
-          "version": "repo-lines-v1:sha256:d9afca085066664376eba654f1cfb1093a90542705625e3af2b9fc716bc9dc8a:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:57ba3a569e2855f3592045fef1fc0a3c5865601f671252af8b4ad74e3275b00e:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMzY3ZDJlMGRkZTA4YjA2NmJlNzM4NzRlM2FkMGQ1N2MwYjQxYmFmM2Y0NzU2MzgwNGM5N2Y3MDc1NmM3YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0M2Q2OWRiOTIxNDI5ZmYzZDVkMDQ2MTIzZmJlZmM0NDNmMTZhNjI0MWVmNmVjZWZkYjIxNTFiYzVlMTFjNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/app/app.ts#L48-L48",
@@ -118,7 +118,7 @@
         },
         {
           "resource": "repo://src/environments/environment.dev.ts#L11-L21",
-          "version": "repo-lines-v1:sha256:1e64f419ca73ce0eab8024be3005625567a7b0da776af84fa86a7e3d5d0977a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViYzUyZDFhNDY2OGFkMTg1NTU3YThhZDRhZmZjNTM4ODU3ZWU5ODZiNDljMjhkMmIxY2RkYjM5NDliZDcwMTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmMjE5NGI3YWUxOTdmMThhOWMxNmMxY2MxNTliMGJkNTAyZGVhNTkxMzlhMGY3ZDNhNmFjNzExNTliYWE3MzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAifQ"
+          "version": "repo-lines-v1:sha256:99672ba01d7631e64c8a71dd8399e95d754a06263bf34223c14346a340d5237c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViYzUyZDFhNDY2OGFkMTg1NTU3YThhZDRhZmZjNTM4ODU3ZWU5ODZiNDljMjhkMmIxY2RkYjM5NDliZDcwMTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmMjE5NGI3YWUxOTdmMThhOWMxNmMxY2MxNTliMGJkNTAyZGVhNTkxMzlhMGY3ZDNhNmFjNzExNTliYWE3MzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAifQ"
         },
         {
           "resource": "repo://ulabase.setup.ts#L57-L63",
@@ -132,11 +132,11 @@
       "evidence": [
         {
           "resource": "repo://PORTING.md",
-          "version": "repo-file-v1:sha256:4ce18ebbae8d0bc09607c7cf04817c4b2343eef518099ee5c85c466f5dd38a5c"
+          "version": "repo-file-v1:sha256:575632873496ccdacc73a6b3792fe0afe72a91c937c55dacb987860fb52cdf8c"
         },
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:9efff3f606ce657f64f97786f57062810912096b199a5df85cc581891ad501a7"
+          "version": "repo-file-v1:sha256:190f8c97122e563d70813ffda65c3236bdc8dfba4e2e080916204aea91403ca8"
         },
         {
           "resource": "repo://TEMPLATE_API.md",
@@ -213,6 +213,6 @@
   ],
   "verification": {
     "by": "openwiki/0.6.1",
-    "at": "2026-10-01T10:27:04.869Z"
+    "at": "2026-10-01T12:12:05.121Z"
   }
 }

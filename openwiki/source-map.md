@@ -3,9 +3,6 @@ type: "Reference"
 title: "Source Map"
 description: "File-by-file guide organized by domain, covering root configuration, app bootstrap, auth pages, consents gate, setup scripts, and static assets."
 tags: ["source-map", "reference", "angular", "ulabase", "consents"]
-verified:
-  - by: openwiki/0.6.1
-    at: 2026-10-01T10:27:04.869Z
 sources:
   - id: openwiki-source-76b992238575041d25a8d7ba
     resource: repo://src/app/consents-gate.ts
@@ -15,7 +12,10 @@ sources:
     resource: repo://ulabase.setup.consents.ts
   - id: openwiki-source-34f568b222540eb11aa44859
     resource: repo://ulabase.setup.ts
-generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T12:12:05.121Z" }
+verified:
+  - by: openwiki/0.6.1
+    at: 2026-10-01T12:12:05.121Z
 ---
 
 
@@ -136,7 +136,7 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 | File | Purpose |
 |---|---|
 | [`ulabase.setup.ts`](../ulabase.setup.ts) | Declarative setup for the accounts plugin — installs the plugin, configures feature flags (derived from `environment.dev.ts`), sets Google OAuth credentials if enabled, and adds the app origin to the CORS allowlist. Run with `ulabase setup --srv <srvId>`. |
-| [`ulabase.setup.consents.ts`](../ulabase.setup.consents.ts) | Extends `ulabase.setup.ts` with the consents gate — imports the accounts steps, then adds a user schema with `latestConsents`/`consents` fields, a permission allowing users to PATCH their own consents, JWT claims for the two version strings, and a Guards rule that blocks users who haven't accepted the current ToS/Privacy Policy with HTTP 451. |
+| [`ulabase.setup.consents.ts`](../ulabase.setup.consents.ts) | Extends `ulabase.setup.ts` with the consents gate — imports the accounts steps, then adds a user schema with `latestConsents`/`consents` fields, a permission allowing users to PATCH their own consents, JWT claims for the two version strings, and a Guards rule that blocks users who haven't accepted the current ToS/Privacy Policy with HTTP 451. Run with `ulabase setup --srv <srvId> --file ulabase.setup.consents.ts`. |
 
 The two setup files share one definition of the accounts steps (`ulabase.setup.ts` exports them via `defineSetup`; `ulabase.setup.consents.ts` spreads them with `...accounts.steps`). The consents file centralizes `TOS_VERSION` and `PP_VERSION` so bumping them and re-running the setup is the only action needed to publish new terms — the server stamps the versions and the client never knows what they are.
 

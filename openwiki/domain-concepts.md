@@ -3,9 +3,6 @@ type: Domain Concepts
 title: Domain Concepts
 description: Ulabase auth model, teams, invitations, tokens, feature flags, the consents gate domain model, and the SSR/CSR boundary.
 tags: [domain, auth, teams, tokens, feature-flags, consents]
-verified:
-  - by: openwiki/0.6.1
-    at: 2026-10-01T10:27:04.869Z
 sources:
   - id: openwiki-source-1b6b17b8afa47babcf26380f
     resource: repo://src/app/app.config.ts
@@ -35,14 +32,17 @@ sources:
     resource: repo://src/styles.css
   - id: openwiki-source-c1d5327fe44e08cda82fcf83
     resource: repo://ulabase.setup.consents.ts
-generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T12:12:05.121Z" }
+verified:
+  - by: openwiki/0.6.1
+    at: 2026-10-01T12:12:05.121Z
 ---
 
 # Domain Concepts
 
 ## Ulabase auth model
 
-The starter is a frontend for [Ulabase](https://cloud.restheart.com), a hosted backend service. The auth model:
+The starter is a frontend for [Ulabase](https://ulabase.com), a hosted backend service. The auth model:
 
 - **Users** are identified by email (`user._id` is the email address)
 - **Profile** data lives at `user.profile.name` / `user.profile.surname`
