@@ -27,9 +27,12 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
+      # main, also when a release tag starts the run: on the tag the checkout is a detached HEAD,
+      # from which no pull request can be opened, and the wiki describes main anyway
       - name: Check out repository
         uses: actions/checkout@v5
         with:
+          ref: main
           fetch-depth: 0
 
       # The model costs money: a night with no change to the code since the wiki's last update
