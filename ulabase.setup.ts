@@ -91,6 +91,7 @@ export default defineSetup('Angular starter', [
       return (
         config['app-name'] === APP_NAME &&
         config['frontend-url'] === APP_URL &&
+        config['frontend-app-url'] === APP_URL &&
         Object.entries(features).every(([k, v]) => current[k] === v)
       );
     },
@@ -107,6 +108,9 @@ export default defineSetup('Angular starter', [
         // Wrong, and every one of those emails is a dead end — which is the
         // kind of failure nobody sees until a real user hits it.
         'frontend-url': APP_URL,
+        // where a verified or signed-in user lands, the token in the URL fragment: the app itself.
+        // Left unset, accounts sends them to its default, http://localhost:4200/app
+        'frontend-app-url': APP_URL,
         features: { ...section(current, 'features'), ...features },
       });
     },

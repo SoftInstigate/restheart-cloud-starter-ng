@@ -15,7 +15,7 @@ export const environment = {
   features: {
     emailRegistration: true, // Registration & Verification
     passwordReset: true, // Password Reset
-    oauthLogin: true, // OAuth Social Login
+    oauthLogin: false, // Google sign-in: off until you create its OAuth client (README, "Google sign-in")
     oauthProviders: ['google'] as const, // must match what's configured server-side
     teamInvitations: true, // Team Invitations
   },
