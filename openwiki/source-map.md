@@ -1,20 +1,21 @@
 ---
 type: "Reference"
 title: "Source Map"
-openwiki_generated: true
+description: "File-by-file guide organized by domain, covering root configuration, app bootstrap, auth pages, consents gate, setup scripts, and static assets."
+tags: ["source-map", "reference", "angular", "ulabase", "consents"]
 verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-04T08:55:25.232Z
+  - by: openwiki/0.6.1
+    at: 2026-10-01T10:27:04.869Z
 sources:
-  - id: openwiki-source-cec027055a927c253ba22cff
-    resource: repo://rhc.setup.consents.ts
-  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
-    resource: repo://rhc.setup.ts
   - id: openwiki-source-76b992238575041d25a8d7ba
     resource: repo://src/app/consents-gate.ts
   - id: openwiki-source-3629f9e95f35cf558c779f38
     resource: repo://src/app/consents.ts
-generated: { by: "openwiki/0.5.0", at: "2026-09-04T08:55:25.232Z" }
+  - id: openwiki-source-c1d5327fe44e08cda82fcf83
+    resource: repo://ulabase.setup.consents.ts
+  - id: openwiki-source-34f568b222540eb11aa44859
+    resource: repo://ulabase.setup.ts
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
 ---
 
 
@@ -134,10 +135,10 @@ Both export `{ apiUrl, features }`. The `features` object controls which auth/te
 
 | File | Purpose |
 |---|---|
-| [`rhc.setup.ts`](../rhc.setup.ts) | Declarative setup for the accounts plugin — installs the plugin, configures feature flags (derived from `environment.dev.ts`), sets Google OAuth credentials if enabled, and adds the app origin to the CORS allowlist. Run with `rhc setup --srv <srvId>`. |
-| [`rhc.setup.consents.ts`](../rhc.setup.consents.ts) | Extends `rhc.setup.ts` with the consents gate — imports the accounts steps, then adds a user schema with `latestConsents`/`consents` fields, a permission allowing users to PATCH their own consents, JWT claims for the two version strings, and a Guards rule that blocks users who haven't accepted the current ToS/Privacy Policy with HTTP 451. |
+| [`ulabase.setup.ts`](../ulabase.setup.ts) | Declarative setup for the accounts plugin — installs the plugin, configures feature flags (derived from `environment.dev.ts`), sets Google OAuth credentials if enabled, and adds the app origin to the CORS allowlist. Run with `ulabase setup --srv <srvId>`. |
+| [`ulabase.setup.consents.ts`](../ulabase.setup.consents.ts) | Extends `ulabase.setup.ts` with the consents gate — imports the accounts steps, then adds a user schema with `latestConsents`/`consents` fields, a permission allowing users to PATCH their own consents, JWT claims for the two version strings, and a Guards rule that blocks users who haven't accepted the current ToS/Privacy Policy with HTTP 451. |
 
-The two setup files share one definition of the accounts steps (`rhc.setup.ts` exports them; `rhc.setup.consents.ts` spreads them). The consents file centralizes `TOS_VERSION` and `PP_VERSION` so bumping them and re-running the setup is the only action needed to publish new terms — the server stamps the versions and the client never knows what they are.
+The two setup files share one definition of the accounts steps (`ulabase.setup.ts` exports them via `defineSetup`; `ulabase.setup.consents.ts` spreads them with `...accounts.steps`). The consents file centralizes `TOS_VERSION` and `PP_VERSION` so bumping them and re-running the setup is the only action needed to publish new terms — the server stamps the versions and the client never knows what they are.
 
 ## Static assets
 

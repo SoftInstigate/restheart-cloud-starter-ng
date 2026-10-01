@@ -38,7 +38,10 @@ sources:
     resource: repo://src/app/pages/invitations/accept/accept.ts
   - id: openwiki-source-a0abfed3f48fb645e980c9ea
     resource: repo://src/app/pages/teams/detail/team-detail.ts
-generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+verified:
+  - by: openwiki/0.6.1
+    at: 2026-10-01T10:27:04.869Z
 ---
 
 # Key User Workflows
@@ -50,7 +53,7 @@ sequenceDiagram
     participant User as User
     participant Signup as Signup Component
     participant Auth as RhAuthService
-    participant Backend as RESTHeart Backend
+    participant Backend as Ulabase Backend
     participant Verify as Verify Component
     participant App as App Component
 
@@ -85,7 +88,7 @@ sequenceDiagram
 
 1. User fills first name, last name, email, password (min 8 chars)
 2. Component calls `auth.register({ teamName, firstName, lastName, email, password })`
-3. Team name is auto-generated as `"{firstName}'s Team"` — no UI field
+3. Team name is auto-generated as `"{firstName}'s Team"` (or `"{emailPrefix}'s Team"` when first name is empty) — no UI field
 4. On success: shows "Check your email" confirmation. User is **not** logged in yet.
 5. User clicks verification link → backend redirects to `/auth/verify?email=...&token=...`
 6. [`Verify`](../src/app/pages/auth/verify/verify.ts) component calls `auth.verify(email, token)` which returns a redirect URL
@@ -116,7 +119,7 @@ sequenceDiagram
     participant User as User
     participant OAuth as OAuth Buttons
     participant Provider as Google GitHub
-    participant Backend as RESTHeart Backend
+    participant Backend as Ulabase Backend
     participant App as App Component
 
     User->>OAuth: Click Continue with Google GitHub
@@ -169,7 +172,7 @@ sequenceDiagram
     participant User as User
     participant Accept as Accept Component
     participant Auth as RhAuthService
-    participant Backend as RESTHeart Backend
+    participant Backend as Ulabase Backend
 
     User->>Accept: Open invitation link with email and token
     Accept->>Auth: getInvitation email token
@@ -252,7 +255,7 @@ sequenceDiagram
 sequenceDiagram
     participant App as App Component
     participant Auth as RhAuthService
-    participant Backend as RESTHeart Backend
+    participant Backend as Ulabase Backend
     participant Gate as ConsentsGate
     participant User as User
 
@@ -311,7 +314,7 @@ The home page includes a "Fetch your data" section that demonstrates how to use 
 
 **To use this pattern in your own components:**
 ```typescript
-import { RhAuthService } from '@restheart-cloud/kit-ng';
+import { RhAuthService } from '@ulabase/kit-ng';
 
 private readonly auth = inject(RhAuthService);
 

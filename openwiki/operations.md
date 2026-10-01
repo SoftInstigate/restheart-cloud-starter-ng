@@ -1,8 +1,8 @@
 ---
 type: Operations
 title: Operations & Runbook
-description: Build, serve, SSR deployment, environment configuration, CSS theming, porting guidance, and rhc setup tooling for restheart-cloud-starter-ng.
-tags: [operations, build, deploy, theming, porting, rhc-setup, environment, ssr]
+description: Build, serve, SSR deployment, environment configuration, CSS theming, porting guidance, and ulabase setup tooling for ulabase-starter-ng.
+tags: [operations, build, deploy, theming, porting, ulabase-setup, environment, ssr]
 resource: /angular.json
 sources:
   - id: openwiki-source-73378d4ee3f791429188ddb5
@@ -13,10 +13,6 @@ sources:
     resource: repo://PORTING.md
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
-  - id: openwiki-source-cec027055a927c253ba22cff
-    resource: repo://rhc.setup.consents.ts
-  - id: openwiki-source-61cc9cbff8e3e2bb34c724a6
-    resource: repo://rhc.setup.ts
   - id: openwiki-source-d3086358408fd7acf5360013
     resource: repo://src/app/app.html
   - id: openwiki-source-4dcb96c57cd6fc12d9eb28a5
@@ -29,7 +25,14 @@ sources:
     resource: repo://src/server.ts
   - id: openwiki-source-146419bb9b2415894a6bd677
     resource: repo://src/styles.css
-generated: { by: "openwiki/0.4.3", at: "2026-08-28T16:45:54.291Z" }
+  - id: openwiki-source-c1d5327fe44e08cda82fcf83
+    resource: repo://ulabase.setup.consents.ts
+  - id: openwiki-source-34f568b222540eb11aa44859
+    resource: repo://ulabase.setup.ts
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+verified:
+  - by: openwiki/0.6.1
+    at: 2026-10-01T10:27:04.869Z
 ---
 
 # Operations & Runbook
@@ -60,7 +63,7 @@ Two environment files:
 
 | File | Used by | Purpose |
 |---|---|---|
-| `src/environments/environment.dev.ts` | `ng serve` | Local development — point at a free RESTHeart Cloud service |
+| `src/environments/environment.dev.ts` | `ng serve` | Local development — point at a free Ulabase service |
 | `src/environments/environment.ts` | `ng build` (production) | Production — point at a shared (or higher) service |
 
 **Setup:**
@@ -68,16 +71,16 @@ Two environment files:
 2. Tell git to ignore local changes: `git update-index --assume-unchanged src/environments/environment.dev.ts`
 3. Match `features` flags to your service's **Sign-up Mgmt → Features** toggles
 
-**If `apiUrl` is empty or not a `*.restheart.com` URL:** the app shows a "Connect your service" screen instead of the full app. This is intentional — see [`app.html`](../src/app/app.html).
+**If `apiUrl` is empty or not a valid Ulabase service URL:** the app shows a "Connect your service" screen instead of the full app. This is intentional — see [`app.html`](../src/app/app.html).
 
-## rhc setup tooling
+## ulabase setup tooling
 
-The repository includes two setup files that configure a RESTHeart Cloud service to match the starter's requirements:
+The repository includes two setup files that configure a Ulabase service to match the starter's requirements:
 
 | File | Purpose |
 |---|---|
-| `rhc.setup.ts` | Configures the accounts plugin (registration, verification, password reset, OAuth, team invitations) and CORS origin allowlist |
-| `rhc.setup.consents.ts` | Extends `rhc.setup.ts` with a consents gate (Terms of Service and Privacy Policy acceptance) |
+| `ulabase.setup.ts` | Configures the accounts plugin (registration, verification, password reset, OAuth, team invitations) and CORS origin allowlist |
+| `ulabase.setup.consents.ts` | Extends `ulabase.setup.ts` with a consents gate (Terms of Service and Privacy Policy acceptance) |
 
 ### Check/apply pattern
 
@@ -91,19 +94,19 @@ This ensures idempotent runs — re-running against an already-configured servic
 
 ```bash
 # Install the CLI
-npm i -D @restheart-cloud/cli
+npm i -D @ulabase/cli
 
-# Login to your RESTHeart Cloud account
-rhc login
+# Login to your Ulabase account
+ulabase login
 
 # Preview what's missing (dry run)
-rhc setup --srv <srvId> --dry-run
+ulabase setup --srv <srvId> --dry-run
 
 # Apply the configuration
-rhc setup --srv <srvId>
+ulabase setup --srv <srvId>
 
 # For consents gate setup
-rhc setup --srv <srvId> --file rhc.setup.consents.ts
+ulabase setup --srv <srvId> --file ulabase.setup.consents.ts
 ```
 
 ### Feature flag derivation
@@ -119,7 +122,7 @@ The setup tooling **imports the same environment the app uses** (`environment.de
 
 ### Consents gate
 
-The consents gate (`rhc.setup.consents.ts`) adds:
+The consents gate (`ulabase.setup.consents.ts`) adds:
 1. A user schema that validates consent fields (`latestConsents`, `consents`)
 2. A permission allowing users to PATCH their own consents
 3. JWT claims for `latestConsents/tos` and `latestConsents/pp`
@@ -130,8 +133,8 @@ The consents gate (`rhc.setup.consents.ts`) adds:
 ## SSR deployment
 
 The production build outputs:
-- `dist/restheart-cloud-starter-ng/browser/` — client assets
-- `dist/restheart-cloud-starter-ng/server/` — SSR server bundle
+- `dist/ulabase-starter-ng/browser/` — client assets
+- `dist/ulabase-starter-ng/server/` — SSR server bundle
 
 **Run the SSR server:**
 
@@ -140,7 +143,7 @@ The production build outputs:
 ng build
 
 # Start the Express server
-node dist/restheart-cloud-starter-ng/server/server.mjs
+node dist/ulabase-starter-ng/server/server.mjs
 # → http://localhost:4000 (or PORT env var)
 ```
 
@@ -157,11 +160,11 @@ The SSR server ([`src/server.ts`](../src/server.ts)):
 
 `src/styles.css` is structured in 5 sections:
 
-1. **Design tokens** — CSS custom properties (`:root` + `html.dark` overrides). Change these to re-theme.
-2. **Dark mode** — overrides section 1 tokens under `html.dark`.
-3. **Base resets** — box-sizing, body, typography.
-4. **Shared primitives** — `.card`, `.btn-*`, `.form-field`, `.form-error`, `.success-msg`, `.muted`, `.badge`, etc.
-5. **Auth page layout** — `.auth-page`, `.auth-card`, `.config-page`.
+1. **Design tokens** — CSS custom properties in `:root`. Change these to re-theme.
+2. **Dark mode** — overrides section 1 tokens under `:root.dark`.
+3. **Default skin** — shared primitives (`.card`, `.btn-*`, `.form-field`, `.form-error`, `.success-msg`, `.muted`, `.badge`, etc.) plus base resets (box-sizing, body, typography).
+4. **Auth pages** — login, signup, forgot/reset password, verify, accept-invite layout.
+5. **Config page** — `.config-page` and `.config-card` shown when `environment.apiUrl` is not set.
 
 **Two restyling paths:**
 
@@ -172,8 +175,7 @@ The SSR server ([`src/server.ts`](../src/server.ts)):
 
 ### B. Adopt a UI framework (Material, Spartan, Tailwind)
 1. Delete sections 3–5 of `styles.css`
-<!-- openwiki: broken internal link [../README.md#swap-map] heading anchor "swap-map" does not exist in "../README.md". Fix the href or restore the target, then delete this comment. -->
-2. Reskin templates using the [swap map in README.md](../README.md#swap-map)
+2. Reskin templates using the [semantic class hooks](../README.md#making-it-yours)
 3. See [`TEMPLATE_API.md`](../TEMPLATE_API.md) for what each template binds to
 
 **Key principle:** the default skin is a disposable mockup — a "deliberate, high-craft placeholder." Templates use a small, stable vocabulary of semantic class hooks (`.card`, `.btn-primary`, `.form-field`, `.form-error`, `.success-msg`, `.muted`, `.badge`). A reskin is a mechanical find-and-replace.
@@ -186,7 +188,7 @@ The one shared feedback component — [`Alert`](../src/app/ui/alert/alert.ts) �
 
 | Layer | Portable? | What to do |
 |---|---|---|
-| `@restheart-cloud/kit` | 100% | Depend on it directly. Do not reimplement auth logic. |
+| `@ulabase/kit` | 100% | Depend on it directly. Do not reimplement auth logic. |
 | `styles.css` tokens + skin | 100% | Copy verbatim for visual parity. |
 | Templates (HTML) | Structure yes, syntax no | Port markup, keep semantic class hooks. |
 | Page CSS | Content yes, scoping no | Copy rules, swap scoping mechanism. |
@@ -213,7 +215,7 @@ From [`angular.json`](../angular.json):
 ## Common issues
 
 ### "Connect your service" screen appears
-`apiUrl` is empty or not a `*.restheart.com` URL. Edit the environment file and restart.
+`apiUrl` is empty or not a valid Ulabase service URL. Edit the environment file and restart.
 
 ### 403 errors on auth endpoints
 Feature flags in `environment*.ts` don't match your service's **Sign-up Mgmt → Features** toggles. A feature that's enabled in the frontend but disabled server-side returns 403.
@@ -229,13 +231,13 @@ ThemeService touches `localStorage` and `document` — safe only in client-rende
 
 ### Demo fetch feature not working
 The home page's "Fetch your data" demo requires:
-1. A RESTHeart Cloud service with a `/demo` collection
+1. A Ulabase service with a `/demo` collection
 2. A permission allowing the signed-in user to read it: `path(/demo) and method(GET)`
 3. The user must be authenticated (the demo uses `auth.api()` which requires a valid session)
 
 If the demo button shows an error, check:
 - Network tab for the `/demo` request — verify it's being sent with the bearer token
-- RESTHeart Cloud dashboard — verify the `/demo` collection exists and has the correct permission
+- Ulabase dashboard — verify the `/demo` collection exists and has the correct permission
 - Console for any CORS or authentication errors
 
 ## Change navigation for operations
@@ -244,12 +246,12 @@ If the demo button shows an error, check:
 - **Start with:** `src/environments/environment.ts` and `src/environments/environment.dev.ts`
 - **Check:** `src/app/app.routes.ts` for feature flag usage
 - **Test with:** `ng serve` and verify "Connect your service" screen appears for invalid URLs
-- **Validation:** Feature flags match your RESTHeart Cloud service's **Sign-up Mgmt → Features** toggles
+- **Validation:** Feature flags match your Ulabase service's **Sign-up Mgmt → Features** toggles
 
 ### For SSR deployment changes
 - **Start with:** `src/server.ts` for Express server configuration
 - **Check:** `src/app/app.routes.server.ts` for render mode assignments
-- **Test with:** `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs`
+- **Test with:** `ng build && node dist/ulabase-starter-ng/server/server.mjs`
 - **Validation:** Server starts on PORT or defaults to 4000, auth pages are prerendered
 
 ### For CSS theming changes

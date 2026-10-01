@@ -1,11 +1,8 @@
 ---
 type: Architecture
 title: Architecture Overview
-description: Angular SSR architecture, dependency layers, routing/guards, auth flow, fragment token handling, and the consents gate mechanism for restheart-cloud-starter-ng.
+description: Angular SSR architecture, dependency layers, routing/guards, auth flow, fragment token handling, and the consents gate mechanism for ulabase-starter-ng.
 tags: [architecture, angular, ssr, auth, routing, consents]
-verified:
-  - by: openwiki/0.5.0
-    at: 2026-09-04T08:55:25.232Z
 sources:
   - id: openwiki-source-53b198bca9fa0abbe11c24a6
     resource: repo://src/app/app.config.server.ts
@@ -37,7 +34,10 @@ sources:
     resource: repo://src/main.ts
   - id: openwiki-source-d9b845a7425932c3767a237e
     resource: repo://src/server.ts
-generated: { by: "openwiki/0.5.0", at: "2026-09-04T08:55:25.232Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-01T10:27:04.869Z" }
+verified:
+  - by: openwiki/0.6.1
+    at: 2026-10-01T10:27:04.869Z
 ---
 
 # Architecture Overview
@@ -52,15 +52,15 @@ The application has three distinct layers:
 ├─────────────────────────────────────────────┤
 │  Component classes (Angular signals/forms)   │  ← Glue — framework-specific
 ├─────────────────────────────────────────────┤
-│  @restheart-cloud/kit (plain TypeScript)     │  ← Portable — do not reimplement
+│  @ulabase/kit (plain TypeScript)             │  ← Portable — do not reimplement
 └─────────────────────────────────────────────┘
 ```
 
 - **Templates** — semantic HTML with class hooks (`.card`, `.btn-primary`, `.form-field`). The default CSS skin in `src/styles.css` is deliberately disposable; see [Operations](operations.md#css-theming) for restyling.
 - **Components** — Angular signal-based state, reactive forms, `RhAuthService` injection. Framework-specific glue.
-- **`@restheart-cloud/kit`** — plain TypeScript with a Promise-based API. Handles all HTTP calls, token storage, and session logic. **Do not reimplement auth logic, HTTP calls, or token handling** — depend on kit directly.
+- **`@ulabase/kit`** — plain TypeScript with a Promise-based API. Handles all HTTP calls, token storage, and session logic. **Do not reimplement auth logic, HTTP calls, or token handling** — depend on kit directly.
 
-The `@restheart-cloud/kit-ng` package bridges kit and Angular: it provides `RhAuthService` (reactive state), `authGuard`/`publicGuard`, and an HTTP interceptor that attaches the bearer token and clears the session on 401/expiry.
+The `@ulabase/kit-ng` package bridges kit and Angular: it provides `RhAuthService` (reactive state), `authGuard`/`publicGuard`, and an HTTP interceptor that attaches the bearer token and clears the session on 401/expiry.
 
 ## SSR / CSR split
 
@@ -97,7 +97,7 @@ The server bootstrap is `src/main.server.ts`, which calls `bootstrapApplication(
 
 **Key constraint:** authenticated routes cannot be server-rendered because the bearer token lives in an in-memory signal, not in a cookie. SSR renders the public auth pages; CSR takes over once the user is authenticated.
 
-**Change navigation:** When modifying SSR/CSR behavior, check `src/app/app.routes.server.ts` for render mode assignments and `src/server.ts` for the Express server configuration. Test with `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs` and verify auth pages are prerendered (view source shows HTML) while authenticated routes are client-rendered only.
+**Change navigation:** When modifying SSR/CSR behavior, check `src/app/app.routes.server.ts` for render mode assignments and `src/server.ts` for the Express server configuration. Test with `ng build && node dist/ulabase-starter-ng/server/server.mjs` and verify auth pages are prerendered (view source shows HTML) while authenticated routes are client-rendered only.
 
 ## Bootstrap flow
 
@@ -134,7 +134,7 @@ sequenceDiagram
 
 1. `src/main.ts` bootstraps `App` with `appConfig`
 2. `appConfig` calls `provideRhAuth({ apiBaseUrl, onError: consentsOnError })` — this configures the HTTP interceptor, auth service, and the consents error handler
-3. If `apiUrl` is not a valid `*.restheart.com` URL, no routes are provided — the app shows the "Connect your service" screen
+3. If `apiUrl` is not a valid Ulabase service URL, no routes are provided — the app shows the "Connect your service" screen
 4. On browser load, `App` calls `consumeFragmentToken()` to capture any `#access_token=...` from the URL (returned by email verification or OAuth redirects)
 5. Route guards run: `authGuard` calls `checkSession()` (which also loads teams), `publicGuard` redirects signed-in users away from auth pages
 
@@ -142,16 +142,16 @@ sequenceDiagram
 
 ## Routing and guards
 
-Defined in `src/app/app.routes.ts`. Two guards from `@restheart-cloud/kit-ng`:
+Defined in `src/app/app.routes.ts`. Two guards from `@ulabase/kit-ng`:
 
 - **`authGuard`** — runs `checkSession()`; if no user, redirects to `/auth/login`. Also loads teams as a side effect.
 - **`publicGuard`** — inverse: if user exists, redirects into the app.
 
 `/invitations/accept` is deliberately **unguarded** — it must work for signed-out invitees, signed-in users, and people without an account.
 
-Routes are conditionally included based on feature flags from `environment.features`. A flag that's off removes the route entirely. The flags are `emailRegistration`, `passwordReset`, `oauthLogin`, and `teamInvitations`; they must match the corresponding toggles on the RESTHeart Cloud service.
+Routes are conditionally included based on feature flags from `environment.features`. A flag that's off removes the route entirely. The flags are `emailRegistration`, `passwordReset`, `oauthLogin`, and `teamInvitations`; they must match the corresponding toggles on the Ulabase service.
 
-Per-route titles use a custom `AppTitleStrategy` that appends `· RESTHeart Cloud Starter` to every title. See [Domain Concepts](domain-concepts.md#feature-flags) for the flag model.
+Per-route titles use a custom `AppTitleStrategy` that appends `· Ulabase Starter` to every title. See [Domain Concepts](domain-concepts.md#feature-flags) for the flag model.
 
 ## Auth state model
 
@@ -184,7 +184,7 @@ stateDiagram-v2
 | `isAuthenticated()` | `boolean` | Derived from `user` |
 
 **Key methods:**
-- `auth.api(endpoint)` — authenticated `fetch` wrapper that attaches the bearer token. Returns `Observable<Response>`. Use for custom API calls to your RESTHeart Cloud service.
+- `auth.api(endpoint)` — authenticated `fetch` wrapper that attaches the bearer token. Returns `Observable<Response>`. Use for custom API calls to your Ulabase service.
 - `checkSession()` — loads user and teams. Short-circuits to `null` with empty teams when there's no stored token.
 - `login(email, password)` — authenticates and loads teams in the same round trip.
 - `loadTeams()` — explicitly refreshes teams and updates the `teams()` signal.
@@ -199,13 +199,13 @@ stateDiagram-v2
 
 Get these wrong and team-dependent UI is intermittently empty.
 
-**Change navigation:** When modifying auth state behavior, start with `@restheart-cloud/kit-ng` package for `RhAuthService` implementation. Test with `ng test` and verify team-dependent UI works correctly. For token lifecycle changes, check `src/app/app.ts` for fragment token handling and test with manual flows from TEST-CASES.md.
+**Change navigation:** When modifying auth state behavior, start with `@ulabase/kit-ng` package for `RhAuthService` implementation. Test with `ng test` and verify team-dependent UI works correctly. For token lifecycle changes, check `src/app/app.ts` for fragment token handling and test with manual flows from TEST-CASES.md.
 
 ## Fragment token capture
 
 ```mermaid
 sequenceDiagram
-    participant Backend as RESTHeart Backend
+    participant Backend as Ulabase Backend
     participant Browser as Browser
     participant App as App Component
     participant Auth as RhAuthService
@@ -251,7 +251,7 @@ This runs once on browser load, before route guards execute.
 sequenceDiagram
     participant App as App Component
     participant Auth as RhAuthService
-    participant API as RESTHeart API
+    participant API as Ulabase API
     participant Gate as ConsentsGate
     participant User as User
     
@@ -290,7 +290,7 @@ The mechanism has three parts:
 
 ## Page title strategy
 
-`AppTitleStrategy` in `src/app/app.routes.ts` extends Angular's `TitleStrategy`. Each route declares a `title` property; the strategy prepends it with `· RESTHeart Cloud Starter`. If no title is set, just the suffix is used.
+`AppTitleStrategy` in `src/app/app.routes.ts` extends Angular's `TitleStrategy`. Each route declares a `title` property; the strategy prepends it with `· Ulabase Starter`. If no title is set, just the suffix is used.
 
 ## Navigation progress
 
@@ -309,11 +309,11 @@ When making changes to the architecture, follow this guidance:
 ### For SSR/CSR changes
 - **Start with:** `src/app/app.routes.server.ts` for render mode assignments
 - **Check:** `src/server.ts` for Express server configuration
-- **Test with:** `ng build && node dist/restheart-cloud-starter-ng/server/server.mjs`
+- **Test with:** `ng build && node dist/ulabase-starter-ng/server/server.mjs`
 - **Validation:** Auth pages should be prerendered (view source shows HTML), authenticated routes client-rendered only
 
 ### For auth state changes
-- **Start with:** `@restheart-cloud/kit-ng` package for `RhAuthService` implementation
+- **Start with:** `@ulabase/kit-ng` package for `RhAuthService` implementation
 - **Check:** `src/app/app.ts` for fragment token handling
 - **Test with:** Manual flows from TEST-CASES.md
 - **Important signals:** `user()`, `teams()`, `isAuthenticated()`

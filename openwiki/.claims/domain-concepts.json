@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:e381acdac6ea358038a865abfd72fe53ecb085a26b8145ac3b9a234e0ed913f9",
+  "pageVersion": "sha256:43059b544b6f50b842b8bdf3e778433aa9d08dc248d01eed40842a8fa0ad63dc",
   "claims": [
     {
       "id": "claim_d1629cfaa9c04935b09eea9372ed4b3f",
-      "statement": "RESTHeart Cloud identifies users by email (user._id), stores profile at user.profile.name/surname, organizes users into teams with owner/member roles, and embeds the active team in the JWT's team claim.",
+      "statement": "Ulabase identifies users by email (user._id), stores profile at user.profile.name/surname, organizes users into teams with owner/member roles, and embeds the active team in the JWT's team claim.",
       "evidence": [
         {
           "resource": "repo://src/app/pages/shell/shell.ts#L57-L78",
-          "version": "repo-lines-v1:sha256:2361841ba3608206d0ab04ca4126d2cb1158b09259c7b20d7cfd6e98bd06221c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjNWM3ZDU3YTkzZGUxOTQzZDE3NDE5NGE3OTVjNzJlOTQ4MzMwYzE4MmQ2NGE3YWNhMjNhYTcyY2FkOTQ5NDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMTJiNjExODk0M2UzMGMwMDY4MzNlNzgxNjMwYTUzYjMyZjQxN2VmNWY5Nzk1YzNmMTJmMzMwODAyNGM1ZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4ZDhjYjgyNTk1ZTNmMDZlNmVlZTRiMDY1YzM5ZWQyNTcwYTAwMWEyNGQ2NGM0YzZkMzgzODg0OWE5OGQ2NjQifQ"
+          "version": "repo-lines-v1:sha256:c9900a59eec8bf71ffe175d2b02def764f2d5c838f7ce9df8b42051c910cca0f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjNWM3ZDU3YTkzZGUxOTQzZDE3NDE5NGE3OTVjNzJlOTQ4MzMwYzE4MmQ2NGE3YWNhMjNhYTcyY2FkOTQ5NDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMTJiNjExODk0M2UzMGMwMDY4MzNlNzgxNjMwYTUzYjMyZjQxN2VmNWY5Nzk1YzNmMTJmMzMwODAyNGM1ZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4ZDhjYjgyNTk1ZTNmMDZlNmVlZTRiMDY1YzM5ZWQyNTcwYTAwMWEyNGQ2NGM0YzZkMzgzODg0OWE5OGQ2NjQifQ"
         },
         {
           "resource": "repo://src/app/pages/teams/detail/team-detail.ts#L28-L28",
@@ -74,7 +74,7 @@
     },
     {
       "id": "claim_b91c51cff6094882b277197b423daec5",
-      "statement": "Feature flags (emailRegistration, passwordReset, oauthLogin, oauthProviders, teamInvitations) in environment*.ts control route inclusion in app.routes.ts and UI element visibility. Flags must match the RESTHeart Cloud service's Sign-up Mgmt toggles or 403 errors occur.",
+      "statement": "Feature flags (emailRegistration, passwordReset, oauthLogin, oauthProviders, teamInvitations) in environment*.ts control route inclusion in app.routes.ts and UI element visibility. Flags must match the Ulabase service's Sign-up Mgmt toggles or 403 errors occur.",
       "evidence": [
         {
           "resource": "repo://src/app/app.routes.ts#L21-L77",
@@ -86,7 +86,7 @@
         },
         {
           "resource": "repo://src/environments/environment.ts#L1-L19",
-          "version": "repo-lines-v1:sha256:9a9c1c9fa3634477ea3e660d7a343e259a9a9b8105da600b6d2b48c04532915c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjM4ZDEyYjRkZGZlOTg2NmI3N2M0ZTc4ZWU3NWI4Y2QzZjhlZmM2MjZiMTI2ZmY0NzM2OTU1NGZlY2NlOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:884e9d33c3c42ff7f1d356ccff87738d109a18761ce555715d0e3794b737536d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjM4ZDEyYjRkZGZlOTg2NmI3N2M0ZTc4ZWU3NWI4Y2QzZjhlZmM2MjZiMTI2ZmY0NzM2OTU1NGZlY2NlOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -95,16 +95,16 @@
       "statement": "The consents gate is a server-enforced acceptance requirement: a Guards rule returns HTTP 451 to authenticated requests from users whose latestConsents does not match current TOS/PP versions. The client catches 451 via consentsOnError and shows an overlay outside the router outlet.",
       "evidence": [
         {
-          "resource": "repo://rhc.setup.consents.ts#L118-L160",
-          "version": "repo-lines-v1:sha256:8143dba70bb12cfe0653808865cd5ee1c3e44a20c90ecbf7422957cb518dab0c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2ZjVhODU2NTdiOGU4NTQwZjZmNWYyZWM3YjY2YjY2YWNiNzc3ZmJlNjQyY2E5M2I5N2QyNWU4NjBlZDM4YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMzhlZTljYzczYzlmMWYyYzhmOGM1NmQwMGJkMDBkZTViMDczNjlmMTJlMDgwYWJiZDc5YzhjNDM3NTZjMTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1MTM5YmE0ZDJjMmQ3MDhiZGE0MTA5ZmU3OGM2MWI0NjI3ZmExYTgxNTY1NGQxNmQzMTg0YmQxN2U0ZTRmODkifQ"
-        },
-        {
           "resource": "repo://src/app/consents-gate.ts#L1-L60",
-          "version": "repo-lines-v1:sha256:311d127f42a8aea514827e2215efd00f86cfe55548a97204aff94cf329490a8e:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhZjMwNDE0NDViNjMzODcxN2RkNTNhNGZiYTVlZmQ4ZTRiNmI1OWI1NmYxNzkyNzMwMDE5ZTg3YTExMTEwZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:f72485098353e5f6e7058ed493d87c3fd7454476c1484b3a1ddea7bb015b2057:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhZjMwNDE0NDViNjMzODcxN2RkNTNhNGZiYTVlZmQ4ZTRiNmI1OWI1NmYxNzkyNzMwMDE5ZTg3YTExMTEwZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://src/app/consents.ts#L1-L33",
-          "version": "repo-lines-v1:sha256:d2578d974d7952755edf8adc2ba70d1416415cbfd35b85c185baf1773fa80004:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwZDJlYzZlMTE2MTMyNWI1ODBjNTVjNjgzOTFmMDgzNWFiOWQ4ZDU2M2JmNTcxNjg4NmJmOTgwMDlhMDljNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:df0bfabef71ecaef18eb9195ee5d27883ff6b11d68e83e4375226b5d932ed338:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwZDJlYzZlMTE2MTMyNWI1ODBjNTVjNjgzOTFmMDgzNWFiOWQ4ZDU2M2JmNTcxNjg4NmJmOTgwMDlhMDljNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://ulabase.setup.consents.ts#L118-L160",
+          "version": "repo-lines-v1:sha256:8143dba70bb12cfe0653808865cd5ee1c3e44a20c90ecbf7422957cb518dab0c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2ZjVhODU2NTdiOGU4NTQwZjZmNWYyZWM3YjY2YjY2YWNiNzc3ZmJlNjQyY2E5M2I5N2QyNWU4NjBlZDM4YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMzhlZTljYzczYzlmMWYyYzhmOGM1NmQwMGJkMDBkZTViMDczNjlmMTJlMDgwYWJiZDc5YzhjNDM3NTZjMTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1MTM5YmE0ZDJjMmQ3MDhiZGE0MTA5ZmU3OGM2MWI0NjI3ZmExYTgxNTY1NGQxNmQzMTg0YmQxN2U0ZTRmODkifQ"
         }
       ]
     },
@@ -124,29 +124,29 @@
     },
     {
       "id": "claim_a51f69ca0e03441fbc9514205402345c",
-      "statement": "The consents gate requires four server-side documents configured by rhc.setup.consents.ts: a user schema with latestConsents/consents fields, collection validation, a permission that stamps versions via mergeRequest, and a Guards rule that blocks non-compliant users with 451.",
+      "statement": "The consents gate requires four server-side documents configured by ulabase.setup.consents.ts: a user schema with latestConsents/consents fields, collection validation, a permission that stamps versions via mergeRequest, and a Guards rule that blocks non-compliant users with 451.",
       "evidence": [
         {
-          "resource": "repo://rhc.setup.consents.ts#L167-L295",
-          "version": "repo-lines-v1:sha256:a8b1847f92472c78028e873c3e8825c6a676cb017bda1a2afacd966d73a24bb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxNWQ1NmUzNmRjYWUzZWNhNmY4MTE3MmY5MGVkMTg2MWQ5MmZjMGU5NjcwZTY4ZTg1MDc0ZGQxYWE4YWNiYzY3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxMTZhZDE5NDM5Mjg5NzM5NzczNzI3MGM4NDBlNmI4NTZlNDYyNzVmMGJlMThiNGExYjUxYjY0ZTRlNWEyNTI2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://ulabase.setup.consents.ts#L167-L295",
+          "version": "repo-lines-v1:sha256:955a11ac0f9491e21b69ba6b5639412a9ecb2ba625fce28eff3859940345fac6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxNWQ1NmUzNmRjYWUzZWNhNmY4MTE3MmY5MGVkMTg2MWQ5MmZjMGU5NjcwZTY4ZTg1MDc0ZGQxYWE4YWNiYzY3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1NWUyNmNkOTIzNjZmNjBkOGVkOTJkMDIzOWYwN2ZlZjc0Y2FjMTRhYTY5YWRkZjljMmNjMGQxMWViMDBhNDYzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0YzJjNzYxYzBhMjIyMWFhNzljNzA1OTY2NWQ1ZGMyNzg1MWNkOTNiYWY1ODg3ZDBmM2M2NzAyYjZiZmZhYjFhIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         },
         {
-          "resource": "repo://rhc.setup.consents.ts#L83-L116",
+          "resource": "repo://ulabase.setup.consents.ts#L83-L116",
           "version": "repo-lines-v1:sha256:699a29c1d586c6146f19c931fc3b6c857702bb9239bf464639bbfd377700f4a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiM2IzMWZjM2FjZDY5Yzc0OGE5NmU5MTc3ZjBkZDU3N2NkMjJjMGU0MTNmYjllNTJlYjUyZDdlY2RjMmRhYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIwOWNlNWRiN2Q5ZjhhN2FlNjVjYjhhYmI5YTU2ZDQyOTdhZDFjNjE0MWJlZDViMjEyNWQzMzk0ZDUwYWFiOGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiMDc1OTlkMDQxOTk2M2E1ZDcyZDc4OTFiYzk1YzlmOTEwYWE3MzE0MTRiYmYwOTYwNGZjNTIwOTZjMDBmODcifQ"
         }
       ]
     },
     {
       "id": "claim_58660f2c254c41a0a5d1d5fb2ddd3d59",
-      "statement": "TOS and PP versions are defined as constants (TOS_VERSION, PP_VERSION) in rhc.setup.consents.ts. All four server documents derive from these values. Publishing new terms means bumping the constants and re-running rhc setup; every user meets the form again on their next request.",
+      "statement": "TOS and PP versions are defined as constants (TOS_VERSION, PP_VERSION) in ulabase.setup.consents.ts. All four server documents derive from these values. Publishing new terms means bumping the constants and re-running ulabase setup; every user meets the form again on their next request.",
       "evidence": [
         {
-          "resource": "repo://rhc.setup.consents.ts#L259-L294",
-          "version": "repo-lines-v1:sha256:9b535e19987e90c7e2c237475d05c41042723f546f8c9d88fa935ab5285efafd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNmE0MTQ1MmIwMTVkNzk5Y2ExMDkwNTI5YWQwYTI2MTk1MjcwZDFlOTdiMjMwZDY5N2E3NGNjMzEzYzZhNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhOTEyMDI2Y2ZiMzRlYmI1ZDkzZWY2MGY1ZTVhOTdmN2NmOTE4YjU2ZWE1OGQwZjg5ZDg0MDNlYzYyZTRhYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1ZTI2Y2Q5MjM2NmY2MGQ4ZWQ5MmQwMjM5ZjA3ZmVmNzRjYWMxNGFhNjlhZGRmOWMyY2MwZDExZWIwMGE0NjMifQ"
+          "resource": "repo://ulabase.setup.consents.ts#L259-L294",
+          "version": "repo-lines-v1:sha256:61bb3204eef5b835755b0b6f6ddeb8cd77fc51636fd8e642903f24bd6671900f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNmE0MTQ1MmIwMTVkNzk5Y2ExMDkwNTI5YWQwYTI2MTk1MjcwZDFlOTdiMjMwZDY5N2E3NGNjMzEzYzZhNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmZjA4YjUzZGJiNWUzN2MzNTIxMDllODQzOGQxMmYyNzVmNWYwYTJkZjZiZWVhMWExYjYyNDYyNDI1N2ZiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1ZTI2Y2Q5MjM2NmY2MGQ4ZWQ5MmQwMjM5ZjA3ZmVmNzRjYWMxNGFhNjlhZGRmOWMyY2MwZDExZWIwMGE0NjMifQ"
         },
         {
-          "resource": "repo://rhc.setup.consents.ts#L50-L63",
-          "version": "repo-lines-v1:sha256:d8c391b1a13eb842a7755e8a2828e6f336443398843a3de272dac228ff99a3a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmZjBjY2Q2OTMyYzE5MWU4Yzc0Yjk2MzQzODk4ZWViZmJjMGFiMTdiNTcxMjJmNDE3ZjIyMDY2ZjZmYTgxYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwM2UzYWU1MGZlMDg1N2Y0OWRkNzE2MmQ1MzY4YzlmMWI5MDdhY2RlNmJjMTU4YzZhM2VlNWRlZTk3YTBmOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4ZWVlNWVlMzRjMTZjZDQ0YzdmZDMzODZjZDEwYmI5Njk0MDY5ODFhZGE4OTJmOTQ1YmY2YjI0ODJmYjZjYWIifQ"
+          "resource": "repo://ulabase.setup.consents.ts#L50-L63",
+          "version": "repo-lines-v1:sha256:d8c391b1a13eb842a7755e8a2828e6f336443398843a3de272dac228ff99a3a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmZjBjY2Q2OTMyYzE5MWU4Yzc0Yjk2MzQzODk4ZWViZmJjMGFiMTdiNTcxMjJmNDE3ZjIyMDY2ZjZmYTgxYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNlNzE3MTliYzRhMGYyY2NmNzQ2MmM3MGVmZDI5NmY2MDM4MDljODA3ZDQ5Nzg5NDBmNTNlOGY3Y2M1YzFiNmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4ZWVlNWVlMzRjMTZjZDQ0YzdmZDMzODZjZDEwYmI5Njk0MDY5ODFhZGE4OTJmOTQ1YmY2YjI0ODJmYjZjYWIifQ"
         }
       ]
     },
@@ -155,12 +155,12 @@
       "statement": "The setup adds latestConsents/tos and latestConsents/pp to the JWT's account-properties-claims. The Guards rule reads these from the token, not the database, so the gate works without a database round-trip per request.",
       "evidence": [
         {
-          "resource": "repo://rhc.setup.consents.ts#L162-L162",
-          "version": "repo-lines-v1:sha256:4bb93358150cc115e30752b7ebea212679a6225d930d21c0222f812c6f849702:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJiOTMzNTgxNTBjYzExNWUzMDc1MmI3ZWJlYTIxMjY3OWE2MjI1ZDkzMGQyMWMwMjIyZjgxMmM2Zjg0OTcwMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJiOTMzNTgxNTBjYzExNWUzMDc1MmI3ZWJlYTIxMjY3OWE2MjI1ZDkzMGQyMWMwMjIyZjgxMmM2Zjg0OTcwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjc4ZmI2Y2U3NGEyMmU5MTJkZmE1ZjQ0ZGY3ZGJiOTRiN2IyOWZhNmJhZGYyZGI4NmM2NmNmM2U5NGQwOWI1NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E1OWQ0MTc2MWIwYzliN2QzOTcxOTAwZWYxZDA1YWYzZGJhNDk0NmRjM2Q5NDFkZDAyYzczOWVjMzIyYmRjZCJ9"
+          "resource": "repo://ulabase.setup.consents.ts#L162-L162",
+          "version": "repo-lines-v1:sha256:4bb93358150cc115e30752b7ebea212679a6225d930d21c0222f812c6f849702:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJiOTMzNTgxNTBjYzExNWUzMDc1MmI3ZWJlYTIxMjY3OWE2MjI1ZDkzMGQyMWMwMjIyZjgxMmM2Zjg0OTcwMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJiOTMzNTgxNTBjYzExNWUzMDc1MmI3ZWJlYTIxMjY3OWE2MjI1ZDkzMGQyMWMwMjIyZjgxMmM2Zjg0OTcwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjc4ZmI2Y2U3NGEyMmU5MTJkZmE1ZjQ0ZGY3ZGJiOTRiN2IyOWZhNmJhZGYyZGI4NmM2NmNmM2U5NGQwOWI1NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjhjMzEwZDc3OGQ4MWNiOTY5NmQxZjA0MDY1OTQ1NTliYjMwMWVlNTY2MDc1MGFjOTg4ZDk1MWU3MmQ2YWU4NiJ9"
         },
         {
-          "resource": "repo://rhc.setup.consents.ts#L225-L252",
-          "version": "repo-lines-v1:sha256:9d37d3e6a363b91d369e72b52f1ab716d1c3963465c87f873099c950c0eb02b0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyMzBhYjg1ZDg0ZDViNzI1N2RhMDQzYmFhMzIxZDQ2ZDYxZTM2MmVlMDA5MWM2NDVlMjExZmNkMDUwMjJiZWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NDliNTZkYWQ2OTczMWRlYWFhMzc3NDFiYWUzNWM1NWVlMjY5YWI0ZWI4ZTRhZDM1ODQ4YTYwNWFkYTViNjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjN2NmOGU1MTJhZDRkNjY3MWIxZTE4YWExYmI1MTM3ZTE0ZDdlZDYxOTYxNTk5ZGE4ZjYyMWMxOTIzZDUxOTAifQ"
+          "resource": "repo://ulabase.setup.consents.ts#L225-L252",
+          "version": "repo-lines-v1:sha256:9d37d3e6a363b91d369e72b52f1ab716d1c3963465c87f873099c950c0eb02b0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyMzBhYjg1ZDg0ZDViNzI1N2RhMDQzYmFhMzIxZDQ2ZDYxZTM2MmVlMDA5MWM2NDVlMjExZmNkMDUwMjJiZWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0NDliNTZkYWQ2OTczMWRlYWFhMzc3NDFiYWUzNWM1NWVlMjY5YWI0ZWI4ZTRhZDM1ODQ4YTYwNWFkYTViNjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIyMDQ3ZmQzNjk2Zjc1ZTVkNjA4Zjc0Y2M2OGFhNmQ5OGZmZGJlMjUzMWZhMDYxMzNiOGEyMzE5NGJmMjZjOWEifQ"
         }
       ]
     },
@@ -187,8 +187,8 @@
       "statement": "The consents gate is opt-in at the server level: if no Guards rule exists, no request is ever answered 451, and the acceptance dialog never appears. No client-side flag is needed to disable it.",
       "evidence": [
         {
-          "resource": "repo://rhc.setup.consents.ts#L12-L15",
-          "version": "repo-lines-v1:sha256:ce53d61df56d7dc684a6a21e635cba4156f792589e7ea3d932fb47dab17ddb63:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjNhNWY0OTdkMGU2OGEyOWUyZmE1MmRiMWVhZDQzOTA5YjM3NjMwYWU4MGE2MGViYzdiYjlmZTg5OGQxNzRkOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTBmZmE5NjVhMTY2NmIwN2EzY2U2Yjg4MzJjZTY0NDJlNjA5NjNkNGE1YTAzNDQzZDg0NWVkOGUxMTEwNzE1YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2Y4NTdmY2ExOWEzNTllYjczYTRkMzQxMDg5ZDg5YWM2M2IyY2JmOGEzNTc2YzVjMjdmMDlhODJhZWIxOTc1NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2NmZmYyMjNkZGNhMTIxZmNhOTUwYjI2YWIwYzAzM2IzYmNlYmU2NzI5OTM4MGZlOGY4OGM1NzBiYjBlZWRlZSJ9"
+          "resource": "repo://ulabase.setup.consents.ts#L12-L15",
+          "version": "repo-lines-v1:sha256:cf2174f9d9d6bf75f2cd65e1926f04be2e3a0fc26591c5da925a46248a72a1e7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDU2MTYyYTVlZTM5ODkzZDg5N2NlMjhhMTQ0MWM5NGQ4OTMzYTRkYjg5NTE5ZTZhZmM2YjYyNjEyZjkyZmU5ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTBmZmE5NjVhMTY2NmIwN2EzY2U2Yjg4MzJjZTY0NDJlNjA5NjNkNGE1YTAzNDQzZDg0NWVkOGUxMTEwNzE1YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2Y4NTdmY2ExOWEzNTllYjczYTRkMzQxMDg5ZDg5YWM2M2IyY2JmOGEzNTc2YzVjMjdmMDlhODJhZWIxOTc1NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjE3MTYzMTUzMTUwZjBjMDRiOGIzZmQyMTFjMTVjMTA0ZTQ3N2I5ODQxMGVjNjk5MjU0YTk4YWZlMjRjZjYxMCJ9"
         }
       ]
     },
@@ -202,7 +202,7 @@
         },
         {
           "resource": "repo://src/app/app.ts#L54-L69",
-          "version": "repo-lines-v1:sha256:839b906129f024f949972db449d8a6dab62199af8413424487f5ef58d5e35f78:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwZjAxYmM3ODk2YTAwNDVmMjI3N2JiMmQ3MGI4NzZhMmYxZTNiODA1ZDE4Y2M4MDBjN2M5MzQxYWJiZjc4YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNmODc2MzMwZDdiY2Q1YWRkMWJhMDcxZTM0NTE1ZjAyZjk0NmUwNjZjNmUzMzJkZGUyMmQzNDg4MTkzZDcwY2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmNzM5YTA2YzFjYmIxMjQ0ZTMzNjNkMzhiY2Y5ZmE1MGNlODRmZWQzOTljMjE5M2EzYzdmMDhkNTk5MThiMmEifQ"
+          "version": "repo-lines-v1:sha256:dd32d2498800e16ab4301f3402d2053ffc546f9b61d360edfcce389ff6e6da1b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwZjAxYmM3ODk2YTAwNDVmMjI3N2JiMmQ3MGI4NzZhMmYxZTNiODA1ZDE4Y2M4MDBjN2M5MzQxYWJiZjc4YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNmODc2MzMwZDdiY2Q1YWRkMWJhMDcxZTM0NTE1ZjAyZjk0NmUwNjZjNmUzMzJkZGUyMmQzNDg4MTkzZDcwY2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmNzM5YTA2YzFjYmIxMjQ0ZTMzNjNkMzhiY2Y5ZmE1MGNlODRmZWQzOTljMjE5M2EzYzdmMDhkNTk5MThiMmEifQ"
         }
       ]
     },
@@ -226,7 +226,7 @@
     },
     {
       "id": "claim_01dc6506053f4c9bb7f77fff255732e8",
-      "statement": "src/styles.css section 1 defines CSS custom properties for colour (--color-bg, --color-surface, --color-primary amber, --color-link teal, --color-error), typography (--font-family system-ui, --font-mono, scale --text-xs to --text-2xl), space (--space-1 to --space-8), and shape (--radius-sm, --radius, --radius-lg, --border-width). Dark mode overrides tokens under :root.dark.",
+      "statement": "src/styles.css section 1 defines CSS custom properties for colour (--color-bg, --color-surface, --color-primary Ulabase amber, --color-link teal, --color-error), typography (--font-family system-ui, --font-mono, scale --text-xs to --text-2xl), space (--space-1 to --space-8), and shape (--radius-sm, --radius, --radius-lg, --border-width). Dark mode overrides tokens under :root.dark.",
       "evidence": [
         {
           "resource": "repo://src/styles.css#L130-L158",
@@ -234,7 +234,7 @@
         },
         {
           "resource": "repo://src/styles.css#L42-L120",
-          "version": "repo-lines-v1:sha256:86423ea99730de3a1e201748386f795eb4cd43fd02ece47719d3828f2c98624d:eyJzZWxlY3RlZExpbmVDb3VudCI6NzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNlZWE1MDRiZjIwYjQxYzQ3MjlkM2NjZTQwYzIzODUxZDNhZTk1YjUwMTdlNmIwYTFhOGNhMzg1ZWIzMzU3YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiYzE3MDE4NDg1OTNiOTBhYTFiNjljZTIyNzEzNGI1MmQzMmIzYWVhNjAwMDZlMzNlOGQxYTUwYTkxOWQzM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljYzg1OTY4MWVhOTUyYzYxOTRhMzFjZWI4OTc0NGIwM2M2OWRjZjExNDc0YzUxYjc1MDYzODFkN2ViMWIxYjUifQ"
+          "version": "repo-lines-v1:sha256:82d4a90be194dd1fd02c885c42a098799f1cb5cc6702caf290bd32b4b9a64394:eyJzZWxlY3RlZExpbmVDb3VudCI6NzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNlZWE1MDRiZjIwYjQxYzQ3MjlkM2NjZTQwYzIzODUxZDNhZTk1YjUwMTdlNmIwYTFhOGNhMzg1ZWIzMzU3YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiYzE3MDE4NDg1OTNiOTBhYTFiNjljZTIyNzEzNGI1MmQzMmIzYWVhNjAwMDZlMzNlOGQxYTUwYTkxOWQzM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljYzg1OTY4MWVhOTUyYzYxOTRhMzFjZWI4OTc0NGIwM2M2OWRjZjExNDc0YzUxYjc1MDYzODFkN2ViMWIxYjUifQ"
         }
       ]
     },
@@ -250,7 +250,7 @@
     }
   ],
   "verification": {
-    "by": "openwiki/0.5.0",
-    "at": "2026-09-04T08:55:25.232Z"
+    "by": "openwiki/0.6.1",
+    "at": "2026-10-01T10:27:04.869Z"
   }
 }
