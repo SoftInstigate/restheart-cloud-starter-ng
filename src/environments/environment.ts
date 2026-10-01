@@ -1,6 +1,6 @@
 export const environment = {
   // Production build — point this at a shared (or higher) Ulabase
-  // service, e.g. 'https://<srvid>.eu-central-1-shared-1.restheart.com'. A free
+  // service, e.g. 'https://<srvid>.ulabase.app'. A free
   // service is meant for development only (see environment.dev.ts).
   // Leave empty to show the "configure your service" screen instead of the app.
   apiUrl: '',

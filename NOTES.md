@@ -239,8 +239,8 @@ line in `public/` is the third place, and the only one left to keep in step by h
 <summary>What the four documents are, if you would rather create them by hand</summary>
 
 Enable the **Guards** plugin from *Service → Guards*, then create them in the console. Full
-walkthrough: [Add Terms and Privacy Policy Acceptance](https://cloud.restheart.com/blog/require-terms-and-privacy-acceptance)
-and the [Guards documentation](https://restheart.org/docs/cloud/guards#_example_gating_on_consents).
+walkthrough: [Add Terms and Privacy Policy Acceptance](https://ulabase.com/blog/require-terms-and-privacy-acceptance)
+and the [Guards documentation](https://ulabase.com/docs/guards#_example_gating_on_consents).
 
 1. **A schema** (`userConsentsSchema`) allowing `latestConsents` and `consents` on the user
    document — with neither in `required`, since registration does not write them.

@@ -4,7 +4,7 @@ An Angular app with sign-up, login, Google and GitHub sign-in, email verificatio
 teams and invitations — working, not sketched. Clone it, point it at a free service, and you have
 the boring half of an application already done.
 
-It is an Angular app plus a [Ulabase](https://cloud.restheart.com) service. There is no
+It is an Angular app plus a [Ulabase](https://ulabase.com) service. There is no
 server of yours to write, deploy or pay for.
 
 ![Ulabase Starter Home Page](./starter-home-page.png)
@@ -24,16 +24,16 @@ npm install
 
 ### 2. Point it at your service
 
-Create a **free service** at [cloud.restheart.com](https://cloud.restheart.com) and copy its URL
+Create a **free service** at [ulabase.com](https://ulabase.com) and copy its URL
 from the service's *Connect* page. Put it in `src/environments/environment.dev.ts` — the file
 `ng serve` actually uses:
 
 ```ts
-apiUrl: 'https://xxxxxx.eu-central-1-free-1.restheart.com',
+apiUrl: 'https://xxxxxx.ulabase.app',
 ```
 
-> Use the URL of **your service**, not `cloud-api.restheart.com`. That second one is RESTHeart
-> Cloud's own control panel, and pointing the app at it makes every request fail.
+> Use the URL of **your service**, not `api.ulabase.com`. That second one is Ulabase's
+> own control panel, and pointing the app at it makes every request fail.
 
 To keep that edit out of `git status`:
 
@@ -49,7 +49,7 @@ there is no console checklist to follow.
 
 ```bash
 npm install -g ulabase
-ulabase login                              # paste a token from cloud.restheart.com
+ulabase login                              # paste a token from ulabase.com
 ulabase setup --srv <srvId>
 ```
 
@@ -105,6 +105,6 @@ your `PATH`. `type -a ulabase` shows both.
 
 ## More
 
-- [Ulabase documentation](https://restheart.org/docs/cloud/)
-- [`@ulabase/kit-ng`](https://restheart.org/docs/cloud/kit) — the library this is built on
-- [The `ulabase` CLI](https://restheart.org/docs/cloud/cli)
+- [Ulabase documentation](https://ulabase.com/docs/)
+- [`@ulabase/kit-ng`](https://ulabase.com/docs/kit) — the library this is built on
+- [The `ulabase` CLI](https://ulabase.com/docs/cli)

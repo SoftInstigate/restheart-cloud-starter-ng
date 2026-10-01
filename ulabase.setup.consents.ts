@@ -22,7 +22,7 @@
  *   ulabase setup --srv <srvId>              # make it so
  *
  * This is Part 1 of
- * https://cloud.restheart.com/blog/require-terms-and-privacy-acceptance — four
+ * https://ulabase.com/blog/require-terms-and-privacy-acceptance — four
  * server-side documents, there configured by hand in the console, here stated
  * as code.
  *

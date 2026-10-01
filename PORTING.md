@@ -125,7 +125,7 @@ This is not cosmetic: it prevents the initial navigation from running `authGuard
 network error on first run.
 
 That screen should distinguish **"`apiUrl` is not set"** from **"`apiUrl` is set but is not
-a `.restheart.com` address"**, and must name the environment file the *dev server* actually
+a `.ulabase.app` address"**, and must name the environment file the *dev server* actually
 uses — pointing users at the production env file when they are running a dev server is a
 trap this starter originally fell into.
 
