@@ -40,10 +40,10 @@ sources:
     resource: repo://ulabase.setup.consents.ts
   - id: openwiki-source-34f568b222540eb11aa44859
     resource: repo://ulabase.setup.ts
-generated: { by: "openwiki/0.6.1", at: "2026-10-01T12:12:05.121Z" }
+generated: { by: "openwiki/0.6.1", at: "2026-10-02T09:13:34.458Z" }
 verified:
   - by: openwiki/0.6.1
-    at: 2026-10-01T12:12:05.121Z
+    at: 2026-10-02T09:13:34.458Z
 ---
 
 # Integrations & Dependencies
@@ -202,11 +202,12 @@ flowchart TD
 The repository has an OpenWiki GitHub Actions workflow at [`.github/workflows/openwiki-update.yml`](../.github/workflows/openwiki-update.yml):
 
 - **Schedule:** cron `0 3 * * *` (nightly at 03:00 UTC), push of version tags (`[0-9]+.[0-9]+.[0-9]+`), and manual `workflow_dispatch`
-- **Action:** runs `openwiki code --update --print`, creates a PR with documentation updates
+- **Change detection:** on scheduled runs the workflow compares the repo since the last `openwiki/` commit and skips the run when nothing changed, avoiding unnecessary API cost; release-tag and manual runs always proceed
+- **Action:** runs `openwiki code --update --print` (or `--init` on the first run when no wiki exists), creates a PR with documentation updates
 - **Model:** `xiaomi/mimo-v2.5-pro` via OpenRouter
 - **Tracing:** disabled
 
-The workflow commits to branch `openwiki/update` and creates a PR via `peter-evans/create-pull-request`. It updates paths under `openwiki/`, `AGENTS.md`, and `CLAUDE.md`.
+The workflow commits to branch `openwiki/update` and creates a PR via `peter-evans/create-pull-request`. It updates paths under `openwiki/`, `AGENTS.md`, and `CLAUDE.md`. The PR is auto-merged (squash, delete branch) so the wiki stays current without manual intervention.
 
 ## Angular ecosystem
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:1ad8fad4eabd9828503112218b3a066e1eb88c9c60cdb203ba01be2bb0e22991",
+  "pageVersion": "sha256:aeeef1e21bd2ab90ed66666f35cdf5e087af1df82a658f2862fc27bafb438774",
   "claims": [
     {
       "id": "claim_13e3495b41994c06acd94d3cafbb05a8",
@@ -184,11 +184,11 @@
     },
     {
       "id": "claim_2fdd7216bf484cc5a457fb99df0ac736",
-      "statement": "The OpenWiki GitHub Actions workflow runs on a nightly cron schedule (0 3 * * *), on push of version tags matching [0-9]+.[0-9]+.[0-9]+, and on manual workflow_dispatch; it uses xiaomi/mimo-v2.5-pro via OpenRouter, checks whether source files changed since the last wiki update before spending API credits on scheduled runs, and creates a PR on branch openwiki/update updating paths under openwiki/, AGENTS.md, and CLAUDE.md.",
+      "statement": "The OpenWiki GitHub Actions workflow runs on a nightly cron schedule (0 3 * * *), on push of version tags matching [0-9]+.[0-9]+.[0-9]+, and on manual workflow_dispatch; it uses xiaomi/mimo-v2.5-pro via OpenRouter, checks whether source files changed since the last wiki update before spending API credits on scheduled runs, and creates a PR on branch openwiki/update updating paths under openwiki/, AGENTS.md, and CLAUDE.md; the PR is auto-merged (squash, delete branch).",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L100",
-          "version": "repo-lines-v1:sha256:05c4e07137aeb79ba19ed7a8ed8d8e94115adcd587c0d4e0be268c98310bc6c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwNjAyNzg3YWY2ZGNjMDgzNGRlMTIxY2JiMWNiOTVmOTQ1OWI3MjFlYWIwMzQ5ZjEwNTAxYjk5NmMxYzc3ZmZmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1Y2U4YjgyZTM4MDVhM2ExODAwM2YyZmU0NWQ0ZjVkYmI0N2FmZGU4YzJkZGY1NTljZWQyYjRmZGM0ZjQwNjM5IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MiwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJkOTM0MmY1YTIyNTQ4YjIwZWU5OTE3ZWMyMTJiYTVmMzM5Zjc3OGZjOWQ3YmQ2ODJlMGViZDJiODcwMWRhNGE4In0"
+          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L105",
+          "version": "repo-lines-v1:sha256:50e64f7f44d5b5d5c6db179b0d1dee682c7b2d1b81d09aff1e33d02ab82b1533:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwNjAyNzg3YWY2ZGNjMDgzNGRlMTIxY2JiMWNiOTVmOTQ1OWI3MjFlYWIwMzQ5ZjEwNTAxYjk5NmMxYzc3ZmZmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJlZjNkMWIxYjMwMjhmMGE0OTUzNGMwZjE3MmI5MWNlZmEwMWZkNzIzMmZmNjQzNGU1NzVlY2Q1MzllMzBjNjA3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         }
       ]
     },
@@ -227,6 +227,6 @@
   ],
   "verification": {
     "by": "openwiki/0.6.1",
-    "at": "2026-10-01T12:12:05.121Z"
+    "at": "2026-10-02T09:13:34.458Z"
   }
 }
