@@ -11,14 +11,14 @@ server of yours to write, deploy or pay for.
 
 ## Get it running
 
-**You need:** [Node.js](https://nodejs.org) 18 or later and a free Ulabase service.
+**You need:** [Node.js](https://nodejs.org) 22.18 or later (it runs the TypeScript setup file) and a free Ulabase service.
 Signing up is free.
 
 ### 1. Clone it
 
 ```bash
 git clone https://github.com/ulabase/starter-ng.git
-cd ulabase-starter-ng
+cd starter-ng
 npm install
 ```
 
